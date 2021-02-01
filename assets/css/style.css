@@ -111,7 +111,7 @@ h6 {
 /* ----------------------------feed--------------------------------- */
 
 .feed-body-section {
-    background: url(../img/banner3.jpg);
+    background: url(../img/banner.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -138,6 +138,31 @@ h6 {
 .post-card {
     max-width: 100%;
     text-align: left;
+}
+
+
+/* -------------------------------profile--------------------------------- */
+
+.profile-jumbotron {
+    background: #feedd5;
+}
+
+.profile-section {
+    display: flex;
+    padding: 60px 20px;
+}
+
+.profile-img {
+    width: 300px;
+    background: red;
+}
+
+.profile-img img {
+    max-width: 100%;
+}
+
+.profile-details {
+    padding: 10px;
 }
 
 
@@ -238,7 +263,7 @@ h6 {
 }
 
 
-/* media queries  */
+/* -------------------------------media queries--------------------  */
 
 @media(max-width:600px) {
     .banner {
