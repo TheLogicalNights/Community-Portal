@@ -13,3 +13,9 @@
     align-items: center;
     font-size: 1.2em;
 }
+
+.carousel-inner {
+    max-height: 500px;
+}
+
+.carousel-item {}
