@@ -9,6 +9,10 @@ body {
     overflow-x: hidden;
 }
 
+main {
+    min-height: 70vh;
+}
+
 h1,
 h2,
 h3,
@@ -79,14 +83,42 @@ h6 {
 }
 
 .card img {
-    max-width: 100px;
+    max-width: 80px;
+}
+
+.story-section {
+    background: url(https://images.pexels.com/photos/691919/pexels-photo-691919.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.story-section h1 {
+    font-size: 4em;
+}
+
+
+/* ----------------------------feed--------------------------------- */
+
+.post-img {
+    display: flex;
+}
+
+.post-img img {
+    width: 100%;
+}
+
+.feed-body-section .container {
+    display: flex;
+    justify-content: center;
 }
 
 
 /* ----------------------------footer---------------------------------- */
 
 .footer-distributed {
-    background-color: #292c2f;
+    background-color: #212529;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
     box-sizing: border-box;
     width: 100%;
@@ -185,5 +217,9 @@ h6 {
 @media(max-width:600px) {
     .banner {
         padding: 100px 20px;
+    }
+    .story-section h1 {
+        font-size: 3em;
+        text-align: center;
     }
 }
