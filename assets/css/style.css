@@ -1,7 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap');
 * {
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+}
+
+html,
+body {
+    overflow-x: hidden;
 }
 
 h1,
@@ -10,7 +15,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-weight: 900;
+    font-weight: 800;
 }
 
 .navbar {
@@ -22,8 +27,6 @@ h6 {
     align-items: center;
     font-size: 1.2em;
 }
-
-.carousel-inner {}
 
 .slick-go {
     /* border: 2px solid goldenrod; */
@@ -38,6 +41,49 @@ h6 {
 .hero-text p {
     color: white;
 }
+
+.hero-text p {
+    text-align: justify;
+}
+
+.usp-section {
+    padding: 60px 0;
+    background: #dddddd;
+}
+
+.cards-section {
+    display: flex;
+    padding: 40px 10px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: rgb(255, 235, 232);
+    display: flex;
+    margin: 10px 5px;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 350px;
+    align-items: center;
+    text-align: center;
+    -webkit-box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.6);
+    box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.6);
+}
+
+.card:hover {
+    -webkit-box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.77);
+    -moz-box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.77);
+    box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.77);
+}
+
+.card img {
+    max-width: 100px;
+}
+
+
+/* media queries  */
 
 @media(max-width:600px) {
     .banner {
