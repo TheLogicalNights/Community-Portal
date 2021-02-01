@@ -4,6 +4,15 @@
     font-family: 'Poppins', sans-serif;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 900;
+}
+
 .navbar {
     padding: 10px 10px;
 }
@@ -14,8 +23,24 @@
     font-size: 1.2em;
 }
 
-.carousel-inner {
-    max-height: 500px;
+.carousel-inner {}
+
+.slick-go {
+    /* border: 2px solid goldenrod; */
 }
 
-.carousel-item {}
+.banner {
+    min-height: 400px;
+    padding: 100px 80px;
+}
+
+.hero-text h1,
+.hero-text p {
+    color: white;
+}
+
+@media(max-width:600px) {
+    .banner {
+        padding: 100px 20px;
+    }
+}
