@@ -22,6 +22,11 @@ h6 {
     font-weight: 800;
 }
 
+.btn {
+    background: rgb(253, 89, 30) !important;
+    border: none;
+}
+
 .navbar {
     padding: 10px 10px;
 }
@@ -38,7 +43,7 @@ h6 {
 
 .banner {
     min-height: 400px;
-    padding: 100px 80px;
+    padding: 180px 80px;
 }
 
 .hero-text h1,
@@ -52,7 +57,11 @@ h6 {
 
 .usp-section {
     padding: 60px 0;
-    background: #dddddd;
+    /* background: #dddddd; */
+    background: url(../img/banner.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .cards-section {
@@ -100,6 +109,13 @@ h6 {
 
 
 /* ----------------------------feed--------------------------------- */
+
+.feed-body-section {
+    background: url(../img/banner3.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
 
 .post-img {
     display: flex;
