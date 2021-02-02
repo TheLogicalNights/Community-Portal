@@ -154,7 +154,6 @@ h6 {
 
 .profile-img {
     width: 300px;
-    background: red;
 }
 
 .profile-img img {
@@ -271,6 +270,12 @@ h6 {
     }
     .story-section h1 {
         font-size: 3em;
+        text-align: center;
+    }
+    .profile-section {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         text-align: center;
     }
 }
