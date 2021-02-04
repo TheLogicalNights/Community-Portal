@@ -88,7 +88,7 @@
                 swal("Congratulations..!", "'.$_SESSION['RegisterationSuccess'].'", "success");
             </script>
             ';
-            unset($_SESSION['RegisterFailure']);
+            unset($_SESSION['RegisterationSuccess']);
         }
     ?>
         <div class="slick-go">

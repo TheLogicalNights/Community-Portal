@@ -129,6 +129,7 @@ h6 {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    text-overflow: ellipsis;
 }
 
 .feed-cards .card img {
@@ -136,7 +137,8 @@ h6 {
 }
 
 .post-card {
-    max-width: 100%;
+    max-width: 45   0px !important;
+    min-width: 420px !important;
     text-align: left;
 }
 

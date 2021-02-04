@@ -39,16 +39,16 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/Febina/Members-Portal/index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="feed.php">Feed</a>
+                        <a class="nav-link" href="/Febina/Members-Portal/feed">Feed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="addpost.php">Add Post</a>
+                        <a class="nav-link" href="#">Add Post</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.php">Profile</a>
+                        <a class="nav-link" href="/Febina/Members-Portal/profile">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary" href="#">Sign In</a>
@@ -78,7 +78,7 @@
                 {
                     while ($row = mysqli_fetch_assoc($res))
                     {
-                        echo '
+                        $post = '
                         <div class="card mb-3 post-card">
                             <div class="row g-0">
                                 <div class="post-img col-md-4">
@@ -87,13 +87,35 @@
                                 <div class="col-md-8">
                                     <div class="card-body">
                                         <h5 class="card-title">'.$row['posttitle'].'</h5>
-                                        <p class="card-text">'.$row['post'].'</p>
+                                        <p class="card-text">';
+                            $p = "";
+                            if (strlen($row['post'])>= 80)
+                            {
+                                for ($i = 0; $i < 80; $i++)
+                                {
+                                    $p .= $row['post'][$i];
+                                }
+                                $p .= ".....";
+                            }
+                            else
+                            {
+                                for ($i = 0; $i < strlen($row['post']); $i++)
+                                {
+                                    $p .= $row['post'][$i];
+                                }
+                                for ($i = 80 - strlen($row['post']); $i > 0; $i--)
+                                {
+                                    $p .= "";
+                                }
+                            }
+                            $post .= $p.'</p>
                                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                                     </div>
                                 </div>
                             </div>
                         </div>            
                         ';
+                        echo $post;
                     }
                 }
             ?>
