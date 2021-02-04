@@ -20,13 +20,13 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/Febina/Members-Portal/index">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="feed.php">Feed</a>
+                        <a class="nav-link" href="/Febina/Members-Portal/feed">Feed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.php">Profile</a>
+                        <a class="nav-link" href="/Febina/Members-Portal/profile">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary" href="#">Sign In</a>
@@ -36,13 +36,15 @@
         </span>
             </div>
         </div>
-    </nav>    <main>        <div class="slick-go">
+    </nav>    
+    <main>        
+        <div class="slick-go">
             <div class="banner" style="background:url(https://images.pexels.com/photos/1000444/pexels-photo-1000444.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
                 <div class="hero">
                     <div class="hero-text col-lg-5" data-aos="fade-right">
                         <h1>Grow Learn Think Share and Prosper With Us Together</h1>
                         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non molestiae temporibus voluptatibus fugit eius aut accusamus officia porro aliquam placeat vitae quod, quisquam, magnam quas quaerat voluptatum. Labore, beatae placeat.</p>
-                        <a href="#" class="btn btn-primary">Know More</a>
+                        <a href="/Febina/Members-Portal/signup" class="btn btn-primary">Sign Up</a>
                     </div>
                 </div>
             </div>
@@ -50,14 +52,14 @@
                 <div class="hero-text col-lg-5" data-aos="fade-right">
                     <h1>Grow Learn Think Share and Prosper With Us Together</h1>
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non molestiae temporibus voluptatibus fugit eius aut accusamus officia porro aliquam placeat vitae quod, quisquam, magnam quas quaerat voluptatum. Labore, beatae placeat.</p>
-                    <a href="#" class="btn btn-primary">Know More</a>
+                    <a href="/Febina/Members-Portal/signup" class="btn btn-primary">Sign Up</a>
                 </div>
             </div>
             <div class="banner" style="background:url(https://images.pexels.com/photos/862848/pexels-photo-862848.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);">
                 <div class="hero-text col-lg-5" data-aos="fade-right">
                     <h1>Grow Learn Think Share and Prosper With Us Together</h1>
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non molestiae temporibus voluptatibus fugit eius aut accusamus officia porro aliquam placeat vitae quod, quisquam, magnam quas quaerat voluptatum. Labore, beatae placeat.</p>
-                    <a href="#" class="btn btn-primary">Know More</a>
+                    <a href="/Febina/Members-Portal/signup" class="btn btn-primary">Sign Up</a>
                 </div>
             </div>
         </div>        <div class="jumbotron usp-section">

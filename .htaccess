@@ -1,0 +1,7 @@
+RewriteEngine on
+
+RewriteRule ^code$ code.php [L]
+RewriteRule ^feed$ feed.php [L]
+RewriteRule ^index$ index.php [L]
+RewriteRule ^profile$ profile.php [L]
+RewriteRule ^signup$ signup.php [L]

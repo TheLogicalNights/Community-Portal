@@ -1,6 +1,6 @@
 <?php
     session_start();
-
+    include "./database/db.php";
 
     if($_SERVER['REQUEST_METHOD']=="POST")
     {
@@ -13,6 +13,7 @@
         {
             $otptosend = rand(99999,999999);
             $to = $_POST['email'];
+            $_SESSION['email'] = $_POST['email'];
             $subject = "Email Verification";
             $message = "Hello sir/mam your OTP for email verifivation is ".$otptosend;
             $headers = "From: swapnil.febina1@gmail.com";
@@ -24,7 +25,7 @@
                 $_SESSION['email'] = $to;
               
                 $_SESSION['otpsuccess'] = "success";
-                header('Location: /Febina/Members-Portal/signup.php');
+                header('Location: /Febina/Members-Portal/signup');
             }
             else
             {
@@ -52,7 +53,7 @@
             else
             {
                 $_SESSION['RegisterFailure'] = "Mismatch OTP..! Please try again.";
-                header('Location: /Febina/Members-Portal/signup.php');
+                header('Location: /Febina/Members-Portal/signup');
             }
         }
 
@@ -61,7 +62,7 @@
         //          User Registration
         //
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (isset($_POST['register']))
+        if (isset($_SESSION['email']))
         {
             $name = $_POST['name'];
             $contact = $_POST['contactnumber'];
@@ -71,26 +72,32 @@
             $password = $_POST['password'];
             $key = $_POST['key'];
             $present = false;
+            $invalidkey = false;
+            $duplicateuser = false;
             $srno = 0;
 
             $query = "select * from adharno where adhar = '$key'";
 
             $result = mysqli_query($conn, $query);
 
-                if (!$result) 
+            if (!$result) 
+            {
+                $_SESSION['RegisterFailure'] = "This VA key is not generated yet please contact admin.";
+            } 
+            else 
+            {
+                while ($row = $result->fetch_assoc()) 
                 {
-                    echo "error : 5";
-                } 
-                else 
-                {
-                    while ($row = $result->fetch_assoc()) 
+                    if ($row['valid'] == "0" || $row['valid'] == "1") 
                     {
-                        if ($row['valid'] == "0" || $row['valid'] == "1") 
-                        {
-                            $present = true;
-                        }
+                        $present = true;
+                    }
+                    else
+                    {
+                        $_SESSION['RegisterFailure'] = "This VA key is not generated yet please contact admin.";
                     }
                 }
+            }
 
             $query = "select * from user where username = '$username'";
 
@@ -98,12 +105,12 @@
           
             while ($row = $result->fetch_assoc()) 
             {
-              if ($username == $row['username']) 
-              {
-                $duplicateuser = true;
-                break;
-              }
-              $srno = $row['sr_no'];
+                if ($username == $row['username']) 
+                {
+                    $duplicateuser = true;
+                    break;
+                }
+                $srno = $row['sr_no'];
             }
             $srno = $srno + 1;
           
@@ -113,7 +120,6 @@
             } 
             else 
             {
-        
                 if ($present) 
                 {
                     $query = "select * from adharno where adhar = '$key'";
@@ -141,7 +147,7 @@
 
                         if (!$result) 
                         {
-                        die("Error : " . mysqli_error($conn));
+                            die("Error : " . mysqli_error($conn));
                         } 
                         else 
                         {
@@ -149,22 +155,14 @@
 
                             $result = mysqli_query($conn, $query);
 
-                            if (!$result) 
+                            if ($result) 
                             {
-                                
-                            } 
-                            else 
-                            {
-                                $success = true;   
+                                $_SESSION['RegisterationSuccess'] = "You have registered successfully, now you can login into community.";   
                                 unset($_SESSION['email']);
-                                header("Location: index.php");
-                            }
+                                header('Location: /Febina/Members-Portal/signup');   
+                            } 
                         }
                      }
-                }
-                else
-                {
-                    $_SESSION['RegisterFailure'] = "This VA key is not generated, please contact to admin.";
                 }
             }
     

@@ -52,13 +52,13 @@
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="feed.php">Feed</a>
+                        <a class="nav-link" href="/Febina/Members-Portal/feed">Feed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="addpost.php">Add Post</a>
+                        <a class="nav-link" href="/Febina/Members-Portal/addpost.php">Add Post</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.php">Profile</a>
+                        <a class="nav-link" href="/Febina/Members-Portal/profile.php">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary" href="#">Sign In</a>
@@ -77,6 +77,15 @@
             echo '
             <script>
                 swal("Oops..!", "'.$_SESSION['RegisterFailure'].'", "error");
+            </script>
+            ';
+            unset($_SESSION['RegisterFailure']);
+        }
+        if(isset($_SESSION['RegisterationSuccess']))
+        {
+            echo '
+            <script>
+                swal("Congratulations..!", "'.$_SESSION['RegisterationSuccess'].'", "success");
             </script>
             ';
             unset($_SESSION['RegisterFailure']);
