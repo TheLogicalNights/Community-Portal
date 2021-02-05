@@ -83,6 +83,8 @@
             if (!$result) 
             {
                 $_SESSION['RegisterFailure'] = "This VA key is not generated yet please contact admin.";
+                unset($_SESSION['email']);
+                header('Location: /Febina/Members-Portal/signup');
             } 
             else 
             {
@@ -95,6 +97,8 @@
                     else
                     {
                         $_SESSION['RegisterFailure'] = "This VA key is not generated yet please contact admin.";
+                        unset($_SESSION['email']);
+                        header('Location: /Febina/Members-Portal/signup');
                     }
                 }
             }
@@ -117,6 +121,8 @@
             if ($duplicateuser) 
             {
                 $_SESSION['RegisterFailure'] = " This username already taken please try another one.";
+                unset($_SESSION['email']);
+                header('Location: /Febina/Members-Portal/signup');
             } 
             else 
             {
@@ -138,6 +144,8 @@
                     if ($invalidkey) 
                     {
                         $_SESSION['RegisterFailure'] = "This VA key is used, you can use one VA ket at only once.";
+                        unset($_SESSION['email']);
+                        header('Location: /Febina/Members-Portal/signup');
                     } 
                     else 
                     {
