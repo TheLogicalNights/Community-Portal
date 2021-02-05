@@ -48,7 +48,7 @@
                 unset($_SESSION['otp']);
                
                 $_SESSION['otpverified'] = "success";
-                header("Location: /Febina/Members-Portal/signup.php");
+                header("Location: /Febina/Members-Portal/signup");
             }
             else
             {
@@ -175,50 +175,111 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (isset($_POST['addpost']))
         {
-            $target_dir = "postuploads/";
+            $postid = 0;
+            $query = "select * from posts";
+
+            $result = mysqli_query($conn,$query);
+            while($row = $result->fetch_assoc())
+            {
+                $postid = $row['postid'];
+            }
+            $postid = $postid + 1;
+            $target_dir = "./postuploads/$postid/";
             $target_file = $target_dir . basename($_FILES["postimg"]["name"]);
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
             $posttitle = $_POST['posttitle'];
             $postbody = $_POST['postbody'];
+            date_default_timezone_set("Asia/Kolkata");
+            $date = date("Y-m-d h:i:s");
+            $name = "Aniket Dhole";
+            $username = "aniket_dhole_";
+            
+            if(isset($_FILES['postimg']) && !empty($_FILES['postimg']['name']))
+            {
+                //check if folder is exists or not if not then create it
+                if (!file_exists($target_dir)) 
+                { 
+                    mkdir($target_dir, 0777, true);
+                }
+                // Check if image file is a actual image or fake image
+                $check = getimagesize($_FILES["postimg"]["tmp_name"]);
+                if($check !== false) 
+                {
+                  //  echo "File is an image - " . $check["mime"] . ".";
+                    $uploadOk = 1;
+                } 
+                else 
+                {
+                    echo "File is not an image.";
+                    $uploadOk = 0;
+                }
+                // Allow certain file formats
+                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                && $imageFileType != "gif" ) 
+                {
+                    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                    $uploadOk = 0;
+                }
+                // Check if $uploadOk is set to 0 by an error
+                if ($uploadOk == 0) 
+                {
+                    echo "Sorry, your file was not uploaded.";
 
-            // Check if image file is a actual image or fake image
-            $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-            if($check !== false) 
-            {
-                echo "File is an image - " . $check["mime"] . ".";
-                $uploadOk = 1;
-            } 
-            else 
-            {
-                echo "File is not an image.";
-                $uploadOk = 0;
+                } 
+                // if everything is ok, try to upload file
+                else  
+                {
+                        if (move_uploaded_file($_FILES["postimg"]["tmp_name"], $target_file)) 
+                        {
+                            echo $name." ";
+                            echo $username." ";
+                            echo $posttitle." ";
+                            echo $postbody." ";
+                            echo $date." ";
+                            echo $target_file." ";
+                            $query = "insert into posts(name,username,posttitle,post,postid,posted_at,img_path) values('$name','$username','$posttitle','$postbody','$postid','$date','$target_file')";
+                            $result = mysqli_query($conn,$query);
+                            if($result)
+                            {
+                                $_SESSION['postedsuccessfully'] = "Your post is on feed, Stay connected with us..!";
+                                header('Location: /Febina/Members-Portal/feed');
+                                
+                            }     
+                            else
+                            {
+                                die("error".mysqli_error($conn));
+                                $_SESSION['postfailure'] = "We have error while posting your thoughts,sorry for inconvenience.";
+                                header('Location: /Febina/Members-Portal/addpost');
+                            }
+                            
+                        } 
+                        else 
+                        {
+                            $_SESSION['postfailure'] = "We have error while posting your thoughts, sorry for inconvenience.";
+                            header('Location: /Febina/Members-Portal/addpost');
+                        }
+                }
             }
-            // Allow certain file formats
-            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-            && $imageFileType != "gif" ) 
+            else
             {
-                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-                $uploadOk = 0;
-            }
-            // Check if $uploadOk is set to 0 by an error
-            if ($uploadOk == 0) 
-            {
-                echo "Sorry, your file was not uploaded.";
-                
-            } 
-            // if everything is ok, try to upload file
-            else  
-            {
-                    if (move_uploaded_file($_FILES["postimg"]["tmp_name"], $target_file)) 
-                    {
-                            $query = "insert into posts values(                        
-                    } 
-                    else 
-                    {
-                        echo "Sorry, there was an error uploading your file.";
-                    }
+                $target_file = "-";
+                $query = "insert into posts(name,username,posttitle,post,postid,posted_at,img_path) values('$name','$username','$posttitle','$postbody','$postid','$date','$target_file')";
+                $result = mysqli_query($conn,$query);
+                if($result)
+                {
+                    $_SESSION['postedsuccessfully'] = "Your post is on feed, Stay connected with us..!";
+                    header('Location: /Febina/Members-Portal/feed');
+                    
+                }
+                else
+                {
+                    $_SESSION['postfailure'] = "We have error while posting your thoughts, sorry for inconvenience.";
+                    header('Location: /Febina/Members-Portal/addpost');
+                }
             }
         }
+        
+    
     }
 ?>

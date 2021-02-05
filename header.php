@@ -12,6 +12,10 @@
     />    
     <!-- CkEditor -->
     <script src="https://cdn.ckeditor.com/4.16.0/basic/ckeditor.js"></script>
+
+    <!-- sweet alert cdn -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
     <!-- ANIMXYZ  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@animxyz/core@0.4.0/dist/animxyz.min.css"></head><body>    <!-- Here is another comment -->    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
         <div class="container-fluid">

@@ -3,7 +3,16 @@
     include('./database/db.php');
     $query = "select * from posts";
     $res = mysqli_query($conn,$query);
-    include('header.php');    
+    include('header.php');
+    if(isset($_SESSION['postedsuccessfully']))
+    {
+        echo '
+        <script>
+            swal("Congratulations..!", "'.$_SESSION['postedsuccessfully'].'", "success");
+        </script>
+        ';
+        unset($_SESSION['postedsuccessfully']);
+    }
 ?>
 
     <main>
