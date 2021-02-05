@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if (!isset($_SESSION['status']))
+    {
+        header('Location: signin.php');
+    }
     include('./database/db.php');
     include('header.php'); 
     if(isset($_SESSION['postfailure']))

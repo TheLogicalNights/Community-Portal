@@ -312,18 +312,26 @@
                 $_SESSION['username'] = $username;
                 if($isset==0)
                 {
-                    //header("Location: /Febina/Community/setupprofile");
+                    header("Location: /Febina/Members-Portal/feed");
                 }
                 else
                 {
-                    header("location: /Febina/Members-Portal/feed");
+                    header("Location: /Febina/Members-Portal/feed");
                 }
             } 
             else 
             {
                 $_SESSION['loginfailure'] = "Invalid username, please try again...";
-                header("location: /Febina/Members-Portal/signin");
+                //header("location: /Febina/Members-Portal/signin");
             }
+        }
+
+        if (isset($_POST['logout']))
+        {
+            unset($_SESSION['status']);
+            unset($_SESSION['username']);
+            unset($_SESSION['name']);
+            header('Location: /Febina/Members-Portal/signin');
         }
                 
     }

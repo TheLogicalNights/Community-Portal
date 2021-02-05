@@ -1,7 +1,12 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['status']))
+    {
+        header('Location: signin.php');
+    }
     include ('header.php');
     include ('./database/db.php');
-    $query = "select * from profile where username='_aniket_'";
+    $query = "select * from profile where username='".$_SESSION['username']."'";
     $result = mysqli_query($conn,$query);
     
 ?>
@@ -42,7 +47,7 @@
 
             <div class="container feed-cards">
                 <?php
-                    $query1 = "select * from posts where username='_aniket_'";
+                    $query1 = "select * from posts where username='".$_SESSION['username']."'";
                     $result1 = mysqli_query($conn,$query1);
                     
                     if ($result1)
@@ -58,26 +63,25 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $row1['posttitle']; ?></h5>
-                                <p class="card-text"><?php 
-                                /*$post = "";
-                                if (strlen($row1['post'])>= 80)
-                                {
-                                    for ($i = 0; $i < 80; $i++)
+                                <p class="card-text">
+                                <?php 
+                                    $post = "";
+                                    if (strlen($row1['post'])>= 80)
                                     {
-                                        $post .= $row1['post'][$i];
+                                        for ($i = 0; $i < 80; $i++)
+                                        {
+                                            $post .= $row1['post'][$i];
+                                        }
+                                        $post .= ".....";
                                     }
-                                    $post .= ".....";
-                                }
-                                else
-                                {
-                                    for ($i = 0; $i < strlen($row1['post']); $i++)
+                                    else
                                     {
-                                        $post .= $row1['post'][$i];
+                                        for ($i = 0; $i < strlen($row1['post']); $i++)
+                                        {
+                                            $post .= $row1['post'][$i];
+                                        }
                                     }
-                                }
-                                echo $post;
-                                */
-                                echo $row1['post'];
+                                    echo $post;
                                 ?></p>
                                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                             </div>

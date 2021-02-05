@@ -1,3 +1,6 @@
+<?php
+    //session_start();
+?>
 <!DOCTYPE html>
 <html lang="en"><head>
     <meta charset="UTF-8">
@@ -33,18 +36,36 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/Febina/Members-Portal/index">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Febina/Members-Portal/feed">Feed</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Febina/Members-Portal/addpost">Add Post</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Febina/Members-Portal/profile">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-primary" href="#">Sign In</a>
-                    </li>
+                    <?php
+                    if (isset($_SESSION['status']))
+                    {
+                    ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Febina/Members-Portal/feed">Feed</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Febina/Members-Portal/addpost">Add Post</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Febina/Members-Portal/profile">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <form action="/Febina/Members-Portal/code" method="post">
+                                <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
+                                <button class="btn btn-primary" type="submit" name="logout">Sign Out</button>
+                            </form>
+                        </li>
+                    <?php
+                    }
+                    else
+                    {
+                    ?>
+                        <li class="nav-item">
+                            <a class="btn btn-primary" href="#">Sign In</a>
+                        </li>
+                    <?php
+                    }
+                    ?>
                 </ul>
                 <span class="navbar-text">
         </span>

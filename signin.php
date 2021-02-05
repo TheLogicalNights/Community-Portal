@@ -30,7 +30,7 @@
                 <div class="hero-text col-lg-5" data-aos="fade-right">
                     <h2 class="mb-5 ms-2">Sign In</h2>
                     <div class="container mb-5">
-                    <form action="/Febina/Members-Portal/code.php" class="mt-5" method="POST">
+                    <form action="/Febina/Members-Portal/code" class="mt-5" method="POST">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
                             <input type="username" class="form-control" id="username" name="username" aria-describedby="emailHelp" required>

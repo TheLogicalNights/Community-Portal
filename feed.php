@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if (!isset($_SESSION['status']))
+    {
+        header('Location: signin.php');
+    }
     include('./database/db.php');
     $query = "select * from posts";
     $res = mysqli_query($conn,$query);
