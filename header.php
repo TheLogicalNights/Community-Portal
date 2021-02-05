@@ -12,6 +12,9 @@
     />    
     <!-- CkEditor -->
     <script src="https://cdn.ckeditor.com/4.16.0/basic/ckeditor.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <!-- ANIMXYZ  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@animxyz/core@0.4.0/dist/animxyz.min.css"></head><body>    <!-- Here is another comment -->    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
         <div class="container-fluid">
