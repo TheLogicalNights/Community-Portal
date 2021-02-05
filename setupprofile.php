@@ -5,6 +5,10 @@
     {
         header("Location: /Febina/Members-Portal/signin");
     }
+    if(!isset($_SESSION['setupprofile']))
+    {
+        header("Location: /Febina/Members-Portal/feed");
+    }
 ?>
 
 <main>

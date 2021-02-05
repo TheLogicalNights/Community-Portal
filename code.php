@@ -309,10 +309,11 @@
                 }
                 $_SESSION['status'] = "login";
                 $_SESSION['name'] = $name;
-                $_SESSION['username'] = $username;
+                $_SESSION['username'] = $username; 
                 if($isset==0)
                 {
-                    header("Location: /Febina/Members-Portal/feed");
+                    $_SESSION['setupprofile'] = "true";
+                    header("Location: /Febina/Members-Portal/setupprofile");
                 }
                 else
                 {
@@ -437,6 +438,11 @@
                 }
             }
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          User delete post
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (isset($_POST['deletepost']))
         {
             $postid = $_POST['postid'];
@@ -549,6 +555,7 @@
             if($result)
             {
                 $_SESSION['setupprofilsuccessfully'] = "Your profile set successfully";
+                unset($_SESSION['setupprofile']);
                 header("Location:/Febina/Members-Portal/feed");
             }
             else

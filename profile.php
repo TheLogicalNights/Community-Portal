@@ -49,11 +49,11 @@
             <div class="container">
                 <div class="profile-section">
                     <div class="profile-img">
-                        <img style="max-width:100%; min-height:190px; max-height:200px; border-radius:50%;" src="<?php echo $row['dppath']; ?>" alt="">
+                        <img src="<?php echo $row['dppath']; ?>" class="rounded-circle" width="250" height="250" alt="Profile picture">
                     </div>
                     <div class="profile-details">
-                        <h1><?php echo $row['name']; ?></h1>
-                        <small><?php echo $row['username']; ?></small>
+                        <h1 class="mt-4"><?php echo $row['name']; ?></h1>
+                        <small><a href=""><?php echo $row['username']; ?></a></small>
                         <p>
                         <br>
                         <?php echo $row['about']; ?>
