@@ -59,7 +59,7 @@
                         <div class="card mb-3 post-card">
                             <div class="row g-0">
                                 <div class="post-img col-md-4">
-                                    <img src="demo.jpg" alt="Post Image">
+                                    <img src="'.$row['img_path'].'" alt="Post Image">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
