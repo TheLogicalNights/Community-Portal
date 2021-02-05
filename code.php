@@ -1,7 +1,7 @@
 <?php
     session_start();
     include "./database/db.php";
-
+    date_default_timezone_set("Asia/Kolkata");
     if($_SERVER['REQUEST_METHOD']=="POST")
     {
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -211,7 +211,7 @@
                 } 
                 else 
                 {
-                    echo "File is not an image.";
+                    $_SESSION['notimage'] = "File is not an image, please select valid file";
                     $uploadOk = 0;
                 }
                 // Allow certain file formats
@@ -325,6 +325,107 @@
                 header("location: /Febina/Members-Portal/signin");
             }
         }
-                
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Upload profile picture
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(isset($_POST['uploadprofilepicture']))
+        {
+            $username = "Swapnil_1708";
+            $name = "Swapnil Ramesh Adhav";
+            $target_dir = "./profilepictures/$username/";
+            $target_file = $target_dir . basename($_FILES["profileimg"]["name"]);
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            if(isset($_FILES['profileimg']) && !empty($_FILES['profileimg']['name']))
+            {
+                //check if folder is exists or not if not then create it
+                if (!file_exists($target_dir)) 
+                { 
+                    mkdir($target_dir, 0777, true);
+                }
+                // Check if image file is a actual image or fake image
+                $check = getimagesize($_FILES["profileimg"]["tmp_name"]);
+                if($check !== false) 
+                {
+                    //File is an image
+                    $uploadOk = 1;
+                } 
+                else 
+                {
+                   $_SESSION['notimage'] = "File is not an image, please select valid file";
+                    $uploadOk = 0;
+                }
+                // Allow certain file formats
+                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") 
+                {
+                    $_SESSION['imgformatfailure'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                    $uploadOk = 0;
+                }
+                if ($uploadOk == 0) 
+                {
+                    echo "Sorry, your file was not uploaded.";
+
+                } 
+                // if everything is ok, try to upload file
+                else  
+                {
+                        if (move_uploaded_file($_FILES["profileimg"]["tmp_name"], $target_file)) 
+                        {
+                            $query = "insert into profile(name,username,about,dppath,instalink,fblink,isset,birthdate) values('$name','$username','about','$target_file','insta','fb',1,0000-00-00)";
+                            $result = mysqli_query($conn,$query);
+                            if($result)
+                            {
+                                $_SESSION['profilepictureuploaded'] = "Profile picture successfully uploaded..!";
+                                $_SESSION['profilepath'] = $target_file;
+                                header('Location: /Febina/Members-Portal/setupprofile');
+                                
+                            }     
+                            else
+                            {
+                                die("error".mysqli_error($conn));
+                                $_SESSION['profilepictureuploadfailure'] = "We have error while uploading your profile picture";
+                                header('Location: /Febina/Members-Portal/setupprofile');
+                            }
+                            
+                        } 
+                        else 
+                        {
+                            $_SESSION['profilepictureuploadfailure'] = "We have error while uploading your profile picture";
+                            header('Location: /Febina/Members-Portal/setupprofile');
+                        }
+                }
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Setup Profile
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(isset($_POST['setupprofile']))
+        {
+            $birthdate = $_POST['birthdate'];
+            $about = $_POST['about'];
+            $instalink = $_POST['insta'];
+            $fblink = $_POST['fb'];
+            $username = $_SESSION['username']; 
+            $query = "update profile set about='$about' , instalink='$instalink' , fblink='$fblink', username='$username' , birthdate='$birthdate' where username = '$username';";
+
+            $result = mysqli_query($conn,$query);
+            if($result)
+            {
+                $_SESSION['setupprofilsuccessfully'] = "Your profile set successfully";
+                header("Location:/Febina/Members-Portal/feed");
+            }
+            else
+            {
+                die("Error:".mysqli_error($conn));
+                $_SESSION['setupprofilefailure'] = "Unable to setup your profile please try again..";
+                header("Location:/Febina/Members-Portal/setupprofile");
+            }
+
+        }
     }
 ?>

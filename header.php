@@ -16,6 +16,7 @@
 
     <!-- sweet alert cdn -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <!-- Stylesheet for icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -43,7 +44,7 @@
                         <a class="nav-link" href="/Febina/Members-Portal/profile">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary" href="#">Sign In</a>
+                        <a class="btn btn-primary" href="/Febina/Members-Portal/signin">Sign In</a>
                     </li>
                 </ul>
                 <span class="navbar-text">
