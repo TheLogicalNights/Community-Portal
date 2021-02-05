@@ -428,5 +428,26 @@
                 }
             }
         }
+        if (isset($_POST['deletepost']))
+        {
+            $postid = $_POST['postid'];
+
+            $query = "delete from report where postid='$postid'";
+            $res = mysqli_query($conn,$query);
+            $query = "delete from reportuser where postid='$postid'";
+            $res = mysqli_query($conn,$query);
+            $query = "delete from posts where postid='$postid'";
+            $res = mysqli_query($conn,$query);
+            if ($res)
+            {
+                $_SESSION['postdeleted'] = "Post deleted..";
+                header('Location: /Febina/Members-Portal/profile');
+            }
+            else
+            {
+                $_SESSION['postnotdeleted'] = "Post not deleted..";
+                header('Location: /Febina/Members-Portal/profile');
+            }
+        }
     }
 ?>

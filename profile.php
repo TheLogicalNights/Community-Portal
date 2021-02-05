@@ -17,6 +17,24 @@
         ';
         unset($_SESSION['postededitsuccessfully']);
     }
+    if(isset($_SESSION['postdeleted']))
+    {
+        echo '
+        <script>
+            swal("Deleted..!", "'.$_SESSION['postdeleted'].'", "success");
+        </script>
+        ';
+        unset($_SESSION['postdeleted']);
+    }
+    if(isset($_SESSION['postnotdeleted']))
+    {
+        echo '
+        <script>
+            swal("Error..!", "'.$_SESSION['postnotdeleted'].'", "error");
+        </script>
+        ';
+        unset($_SESSION['postnotdeleted']);
+    }
     $query = "select * from profile where username='".$_SESSION['username']."'";
     $result = mysqli_query($conn,$query);
     
@@ -95,10 +113,18 @@
                                     echo $post;
                                 ?></p>
                                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            <div class="container">
                             <form action="/Febina/Members-Portal/editpost" method="post">
-                            <input type="hidden" name="postid" value="<?php echo $row1['postid']; ?>">
-                            <button type="submit" class="btn btn-primary" name="editposts">Edit Post</button>
+                                <input type="hidden" name="postid" value="<?php echo $row1['postid']; ?>">
+                                <button type="submit" class="btn btn-primary" name="editposts">Edit Post</button>
                             </form>
+                            </div>
+                            <div class="container mt-1">
+                            <form action="/Febina/Members-Portal/code" method="post">
+                                <input type="hidden" name="postid" value="<?php echo $row1['postid']; ?>">
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-primary" name="deletepost">Delete Post</button>
+                            </form>
+                            </div>
                             </div>
                         </div>
                     </div>

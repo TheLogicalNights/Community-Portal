@@ -15,6 +15,7 @@
     <script>
         CKEDITOR.replace( 'postbody' );
     </script>
+    
     <script>
         $(document).ready(function() {
             AOS.init();
