@@ -13,6 +13,9 @@
     <script src="./assets/js/script.js"></script>    <!-- AOS  -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
+        CKEDITOR.replace( 'postbody' );
+    </script>
+    <script>
         $(document).ready(function() {
             AOS.init();
         });
