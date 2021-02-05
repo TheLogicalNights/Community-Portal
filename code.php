@@ -325,7 +325,11 @@
                 //header("location: /Febina/Members-Portal/signin");
             }
         }
-
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          User Logout
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (isset($_POST['logout']))
         {
             unset($_SESSION['status']);
@@ -333,7 +337,11 @@
             unset($_SESSION['name']);
             header('Location: /Febina/Members-Portal/signin');
         }
-        
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          User edit post
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (isset($_POST['editpost']))
         {
             $postid = $_POST['postid'];
@@ -411,20 +419,21 @@
             }
             else
             {
+                echo "Success";
                 $target_file = "-";
                 $query = "update posts set name='$name',username='$username',posttitle='$posttitle',post='$postbody',posted_at='$date',img_path='$target_file' where postid='$postid'";
                 $result = mysqli_query($conn,$query);
                 if($result)
                 {
                     $_SESSION['postededitsuccessfully'] = "Edit successfully.";
-                    header('Location: /Febina/Members-Portal/profile');
+                 //   header('Location: /Febina/Members-Portal/profile');
                     
                 }
                 else
                 {
                     die("error".mysqli_error($conn));
                     $_SESSION['posteditfailure'] = "Post edit failure, sorry for inconvenience.";
-                    header('Location: /Febina/Members-Portal/editpost');
+                 //   header('Location: /Febina/Members-Portal/editpost');
                 }
             }
         }

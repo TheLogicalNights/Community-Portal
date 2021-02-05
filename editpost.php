@@ -27,7 +27,7 @@
 <main>
 <div class="container mt-5"  id="editPost">
         <h1 class="mt-2">Edit Post</h1>
-        <form action="/Febina/Members-Portal/code" method="POST">
+    <form action="/Febina/Members-Portal/code" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="postid" value="<?php echo $row['postid']; ?>">
             <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">Post title:</label>
