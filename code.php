@@ -212,7 +212,7 @@
             {
                     if (move_uploaded_file($_FILES["postimg"]["tmp_name"], $target_file)) 
                     {
-                            $query = "insert into posts values("                        
+                            $query = "insert into posts values(                        
                     } 
                     else 
                     {
