@@ -83,6 +83,8 @@
             if (!$result) 
             {
                 $_SESSION['RegisterFailure'] = "This VA key is not generated yet please contact admin.";
+                unset($_SESSION['email']);
+                header('Location: /Febina/Members-Portal/signup');
             } 
             else 
             {
@@ -95,6 +97,8 @@
                     else
                     {
                         $_SESSION['RegisterFailure'] = "This VA key is not generated yet please contact admin.";
+                        unset($_SESSION['email']);
+                        header('Location: /Febina/Members-Portal/signup');
                     }
                 }
             }
@@ -117,6 +121,8 @@
             if ($duplicateuser) 
             {
                 $_SESSION['RegisterFailure'] = " This username already taken please try another one.";
+                unset($_SESSION['email']);
+                header('Location: /Febina/Members-Portal/signup');
             } 
             else 
             {
@@ -138,6 +144,8 @@
                     if ($invalidkey) 
                     {
                         $_SESSION['RegisterFailure'] = "This VA key is used, you can use one VA ket at only once.";
+                        unset($_SESSION['email']);
+                        header('Location: /Febina/Members-Portal/signup');
                     } 
                     else 
                     {
@@ -309,10 +317,11 @@
                 }
                 $_SESSION['status'] = "login";
                 $_SESSION['name'] = $name;
-                $_SESSION['username'] = $username;
+                $_SESSION['username'] = $username; 
                 if($isset==0)
                 {
-                    header("Location: /Febina/Members-Portal/feed");
+                    $_SESSION['setupprofile'] = "true";
+                    header("Location: /Febina/Members-Portal/setupprofile");
                 }
                 else
                 {
@@ -437,6 +446,11 @@
                 }
             }
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          User delete post
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (isset($_POST['deletepost']))
         {
             $postid = $_POST['postid'];
@@ -549,6 +563,7 @@
             if($result)
             {
                 $_SESSION['setupprofilsuccessfully'] = "Your profile set successfully";
+                unset($_SESSION['setupprofile']);
                 header("Location:/Febina/Members-Portal/feed");
             }
             else
