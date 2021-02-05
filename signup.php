@@ -49,16 +49,13 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                        <a class="nav-link active" aria-current="page" href="index">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/Febina/Members-Portal/feed">Feed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Febina/Members-Portal/addpost.php">Add Post</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Febina/Members-Portal/profile.php">Profile</a>
+                        <a class="nav-link" href="/Febina/Members-Portal/profile">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary" href="#">Sign In</a>

@@ -45,7 +45,7 @@
                         <a class="nav-link" href="/Febina/Members-Portal/feed">Feed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Add Post</a>
+                    <a class="nav-link" href="/Febina/Members-Portal/addpost">Add Post</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/Febina/Members-Portal/profile">Profile</a>
