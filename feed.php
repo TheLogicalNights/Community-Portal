@@ -17,6 +17,15 @@
         ';
         unset($_SESSION['postedsuccessfully']);
     }
+    if(isset($_SESSION['postededitsuccessfully']))
+    {
+        echo '
+        <script>
+            swal("Congratulations..!", "'.$_SESSION['postededitsuccessfully'].'", "success");
+        </script>
+        ';
+        unset($_SESSION['postededitsuccessfully']);
+    }
 ?>
 
     <main>

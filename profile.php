@@ -5,7 +5,18 @@
         header('Location: signin.php');
     }
     include ('header.php');
+
     include ('./database/db.php');
+    
+    if(isset($_SESSION['postededitsuccessfully']))
+    {
+        echo '
+        <script>
+            swal("Congratulations..!", "'.$_SESSION['postededitsuccessfully'].'", "success");
+        </script>
+        ';
+        unset($_SESSION['postededitsuccessfully']);
+    }
     $query = "select * from profile where username='".$_SESSION['username']."'";
     $result = mysqli_query($conn,$query);
     
@@ -84,6 +95,10 @@
                                     echo $post;
                                 ?></p>
                                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            <form action="/Febina/Members-Portal/editpost" method="post">
+                            <input type="hidden" name="postid" value="<?php echo $row1['postid']; ?>">
+                            <button type="submit" class="btn btn-primary" name="editposts">Edit Post</button>
+                            </form>
                             </div>
                         </div>
                     </div>

@@ -333,6 +333,100 @@
             unset($_SESSION['name']);
             header('Location: /Febina/Members-Portal/signin');
         }
-                
+        
+        if (isset($_POST['editpost']))
+        {
+            $postid = $_POST['postid'];
+            $posttitle = $_POST['posttitleEdit'];
+            $postbody = $_POST['postbodyEdit'];
+            date_default_timezone_set("Asia/Kolkata");
+            $date = date("Y-m-d h:i:s");
+            $name = $_SESSION['name'];
+            $username = $_SESSION['username'];
+            
+            if(isset($_FILES['editeduploadpic']) && !empty($_FILES['editeduploadpic']['name']))
+            {
+                $target_dir = "./postuploads/$postid/";
+                $target_file = $target_dir . basename($_FILES["editeduploadpic"]["name"]);
+                $uploadOk = 1;
+                $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            
+                //check if folder is exists or not if not then create it
+                if (!file_exists($target_dir)) 
+                { 
+                    mkdir($target_dir, 0777, true);
+                }
+                // Check if image file is a actual image or fake image
+                $check = getimagesize($_FILES["editeduploadpic"]["tmp_name"]);
+                if($check !== false) 
+                {
+                  //  echo "File is an image - " . $check["mime"] . ".";
+                    $uploadOk = 1;
+                } 
+                else 
+                {
+                    echo "File is not an image.";
+                    $uploadOk = 0;
+                }
+                // Allow certain file formats
+                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                && $imageFileType != "gif" ) 
+                {
+                    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                    $uploadOk = 0;
+                }
+                // Check if $uploadOk is set to 0 by an error
+                if ($uploadOk == 0) 
+                {
+                    echo "Sorry, your file was not uploaded.";
+
+                } 
+                // if everything is ok, try to upload file
+                else  
+                {
+                        if (move_uploaded_file($_FILES["editeduploadpic"]["tmp_name"], $target_file)) 
+                        {
+                            $query = "update posts set name='$name',username='$username',posttitle='$posttitle',post='$postbody',posted_at='$date',img_path='$target_file' where postid='$postid'";
+                            $result = mysqli_query($conn,$query);
+                            if($result)
+                            {
+                                $_SESSION['postededitsuccessfully'] = "Edited successfully";
+                                header('Location: /Febina/Members-Portal/profile');
+                                
+                            }     
+                            else
+                            {
+                                die("error".mysqli_error($conn));
+                                $_SESSION['posteditfailure'] = "Post edit failure.";
+                                header('Location: /Febina/Members-Portal/editpost');
+                            }
+                            
+                        } 
+                        else 
+                        {
+                            $_SESSION['posteditfailure'] = "Post edit failure, sorry for inconvenience.";
+                            header('Location: /Febina/Members-Portal/editpost');
+                        }
+                }
+            }
+            else
+            {
+                $target_file = "-";
+                $query = "update posts set name='$name',username='$username',posttitle='$posttitle',post='$postbody',posted_at='$date',img_path='$target_file' where postid='$postid'";
+                $result = mysqli_query($conn,$query);
+                if($result)
+                {
+                    $_SESSION['postededitsuccessfully'] = "Edit successfully.";
+                    header('Location: /Febina/Members-Portal/profile');
+                    
+                }
+                else
+                {
+                    die("error".mysqli_error($conn));
+                    $_SESSION['posteditfailure'] = "Post edit failure, sorry for inconvenience.";
+                    header('Location: /Febina/Members-Portal/editpost');
+                }
+            }
+        }
     }
 ?>
