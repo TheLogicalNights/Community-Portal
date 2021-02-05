@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if (!isset($_SESSION['status']))
+    {
+        header('Location: signin.php');
+    }
     include('./database/db.php');
     $query = "select * from posts";
     $res = mysqli_query($conn,$query);
@@ -13,6 +17,7 @@
         ';
         unset($_SESSION['postedsuccessfully']);
     }
+
     if(isset($_SESSION['setupprofilsuccessfully']))
     {
         echo '
@@ -21,6 +26,15 @@
         </script>
         ';
         unset($_SESSION['setupprofilsuccessfully']);
+    }
+    if(isset($_SESSION['postededitsuccessfully']))
+    {
+        echo '
+        <script>
+            swal("Congratulations..!", "'.$_SESSION['postededitsuccessfully'].'", "success");
+        </script>
+        ';
+        unset($_SESSION['postededitsuccessfully']);
     }
 ?>
 

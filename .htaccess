@@ -7,4 +7,8 @@ RewriteRule ^profile$ profile.php [L]
 RewriteRule ^signup$ signup.php [L]
 RewriteRule ^addpost$ addpost.php [L]
 RewriteRule ^signin$ signin.php [L]
+<<<<<<< HEAD
 RewriteRule ^setupprofile$ setupprofile.php [L]
+=======
+RewriteRule ^editpost$ editpost.php [L]
+>>>>>>> 23741c4530cdaf1d33121e157dd7ec25a48412be
