@@ -17,6 +17,16 @@
         ';
         unset($_SESSION['postedsuccessfully']);
     }
+
+    if(isset($_SESSION['setupprofilsuccessfully']))
+    {
+        echo '
+        <script>
+            swal("Congratulations..!", "'.$_SESSION['setupprofilsuccessfully'].'", "success");
+        </script>
+        ';
+        unset($_SESSION['setupprofilsuccessfully']);
+    }
     if(isset($_SESSION['postededitsuccessfully']))
     {
         echo '

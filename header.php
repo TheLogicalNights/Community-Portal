@@ -19,6 +19,7 @@
 
     <!-- sweet alert cdn -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <!-- Stylesheet for icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -36,6 +37,20 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/Febina/Members-Portal/index">Home</a>
                     </li>
+<<<<<<< HEAD
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Febina/Members-Portal/feed">Feed</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Febina/Members-Portal/addpost">Add Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Febina/Members-Portal/profile">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="/Febina/Members-Portal/signin">Sign In</a>
+                    </li>
+=======
                     <?php
                     if (isset($_SESSION['status']))
                     {
@@ -66,6 +81,7 @@
                     <?php
                     }
                     ?>
+>>>>>>> 23741c4530cdaf1d33121e157dd7ec25a48412be
                 </ul>
                 <span class="navbar-text">
         </span>
