@@ -1,12 +1,21 @@
 <?php
     session_start();
     include('./database/db.php');
-    include('header.php');  
+    include('header.php'); 
+    if(isset($_SESSION['postfailure']))
+    {
+        echo '
+        <script>
+            swal("Oops..!", "'.$_SESSION['postfailure'].'", "error");
+        </script>
+        ';
+        unset($_SESSION['postfailure']);
+    }
 ?>
 <main>
 <div class="container mt-3">
     <h2 class="mb-3">Add Post</h2>
-    <form action="/Febina/Community/code" method="POST" enctype="multipart/form-data">
+    <form action="/Febina/Members-Portal/code" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="posttitle" class="col-form-label">Post title:</label>
             <input type="text" class="form-control" id="posttitle" name="posttitle" required>
