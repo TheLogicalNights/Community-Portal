@@ -479,8 +479,8 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(isset($_POST['uploadprofilepicture']))
         {
-            $username = "Swapnil_1708";
-            $name = "Swapnil Ramesh Adhav";
+            $username = $_SESSION['username'];
+            $name = $_SESSION['name'];
             $target_dir = "./profilepictures/$username/";
             $target_file = $target_dir . basename($_FILES["profileimg"]["name"]);
             $uploadOk = 1;
