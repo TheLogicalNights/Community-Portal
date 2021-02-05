@@ -192,8 +192,8 @@
             $postbody = $_POST['postbody'];
             date_default_timezone_set("Asia/Kolkata");
             $date = date("Y-m-d h:i:s");
-            $name = "Aniket Dhole";
-            $username = "aniket_dhole_";
+            $name = $_SESSION['name'];
+            $username = $_SESSION['username'];
             
             if(isset($_FILES['postimg']) && !empty($_FILES['postimg']['name']))
             {
