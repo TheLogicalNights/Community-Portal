@@ -29,7 +29,8 @@
             }
             else
             {
-                
+                $_SESSION['RegisterFailure'] = "OTP not send..! Please try again.";
+                header('Location: /Febina/Members-Portal/signup');
             }
         }
 
