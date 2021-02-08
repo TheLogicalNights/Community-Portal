@@ -41,7 +41,6 @@
     <main>
 
         <div class="jumbotron feed-top-section">
-
         </div>
 
         <div class="jumbotron feed-body-section">
@@ -57,6 +56,16 @@
                     {
                         $post = '
                         <div class="card mb-3 post-card">
+                            <div class="dropdown d-flex justify-content-end">
+                                <button class="btn btn-secondary" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <li><button class="dropdown-item" type="button">Edit</button></li>
+                                    <li><button class="dropdown-item" type="button">Delete</button></li>
+                                    <li><button class="dropdown-item" type="button">Report</button></li>
+                                </ul>
+                            </div>
                             <div class="row g-0">
                                 <div class="post-img col-md-4">
                                     <img src="'.$row['img_path'].'" alt="Post Image">
@@ -97,8 +106,6 @@
                 }
             ?>
         </div>
-
-
     </main>
 
 <?php
