@@ -29,14 +29,14 @@
                         while($row = mysqli_fetch_assoc($result))
                         {
                             $sno++;
-                            echo"
+                            echo "
                                 <tr>
                                     <td>".$row['name']."</td>
                                     <td>".$row['username']."</td>
                                     <td>
-                                        <form action=\"/Febina/Members-Portal/code\" method=\"POST\">
-                                            <input type=\"hidden\" name=\"username\" id=\"visit\" value=\"".$row['username']."\">
-                                            <button type=\"submit\" name=\"VisitMember\" class=\"visit btn btn-primary\">Visit</button>
+                                        <form action='/Febina/Members-Portal/profile' method='POST'>
+                                            <input type='hidden' name='username' id='visit' value=\"".$row['username']."\">
+                                            <button type='submit' name='VisitMember' class='visit btn btn-primary'>Visit</button>
                                         </form>
                                     </td>
                                 </tr>";
