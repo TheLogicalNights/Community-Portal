@@ -58,6 +58,7 @@
                         <?php
                         if (isset($_SESSION['otpverified']))
                         {
+                            unset($_SESSION['otpverified']);
                     ?>
                         <form class="mt-5" action="/Febina/Members-Portal/code.php" method="POST">
                             <div class="mb-3 mt-5">
@@ -87,13 +88,12 @@
                             </div>
                             <div class="mb-3">
                                 <label for="key" class="form-label">VA key</label>
-                                <input type="text" class="form-control" id="key" name="key" aria-describedby="emailHelp"
+                                <input type="text" class="form-control" id="key" name="key" minlength="12" maxlength="12" aria-describedby="emailHelp"
                                     required>
                             </div>
                             <button type="submit" name="register" class="btn btn-primary mt-3">REGISTER</button>
                         </form>
                         <?php
-                            unset($_SESSION['otpverified']);
                         } // End of if
                     ?>
                     </div>
