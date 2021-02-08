@@ -34,7 +34,7 @@
                                     <td>".$row['name']."</td>
                                     <td>".$row['username']."</td>
                                     <td>
-                                        <form action='/Febina/Members-Portal/profile' method='POST'>
+                                        <form action='/Febina/Members-Portal/code' method='POST'>
                                             <input type='hidden' name='username' id='visit' value=\"".$row['username']."\">
                                             <button type='submit' name='VisitMember' class='visit btn btn-primary'>Visit</button>
                                         </form>
