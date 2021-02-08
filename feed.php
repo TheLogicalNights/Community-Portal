@@ -61,12 +61,6 @@
                                     <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                <li>
-                                <!-- Button trigger modal -->
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    Launch demo modal
-                                    </button>
-                                </li>
                                 ';
                                 if ($row['username'] == $_SESSION['username'])
                                 {
@@ -118,8 +112,13 @@
                                     $p .= "";
                                 }
                             }
-                            $post .= $p.'</p>
-                                        <p class="card-text"><small class="text-muted">Last updated '; 
+                            $post .= $p.'
+                            <form action="/Febina/Members-Portal/readmore" method="post">
+                                <input type="hidden" name="postid" value='.$row['postid'].'>
+                                <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary stretched-link"> Read more</button>
+                            </form>
+                            </p>
+                            <p class="card-text"><small class="text-muted">Last updated '; 
                             date_default_timezone_set('Asia/Kolkata');
                             $datetime2 = strtotime($row['posted_at']);
                             $datetime1 = strtotime(date("y-m-d H:i:s"));
@@ -156,24 +155,6 @@
             ?>
         </div>
     </main>
-    <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-            </div>
-        </div>
-        </div>
 <?php
     include('footer.php');
 ?>

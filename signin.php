@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include('header.php');
 
 ?>
@@ -22,15 +23,6 @@
             </script>
             ';
             unset($_SESSION['loginfailure']);
-        }
-        if(isset($_SESSION['RegisterationSuccess']))
-        {
-            echo '
-            <script>
-                swal("Congratulations..!", "'.$_SESSION['RegisterationSuccess'].'", "success");
-            </script>
-            ';
-            unset($_SESSION['RegisterationSuccess']);
         }
     ?>
         <div class="slick-go">

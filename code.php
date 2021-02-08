@@ -305,7 +305,7 @@
 
             $result = mysqli_query($conn, $query);
             
-            if ($result) 
+            if ($num = mysqli_num_rows($result) == 1) 
             {
                 $row = $result->fetch_assoc();
                 $name = $row['name'];
@@ -332,7 +332,8 @@
             else 
             {
                 $_SESSION['loginfailure'] = "Invalid username, please try again...";
-                //header("location: /Febina/Members-Portal/signin");
+                 header("location: /Febina/Members-Portal/signin");
+                
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

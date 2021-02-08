@@ -61,32 +61,32 @@
                     ?>
                         <form class="mt-5" action="/Febina/Members-Portal/code.php" method="POST">
                             <div class="mb-3 mt-5">
-                                <label for="name" class="form-label">Name</label>
+                                <label for="name" class="form-label text-white">Name</label>
                                 <input type="text" class="form-control" id="name" name="name"
                                     aria-describedby="emailHelp" required>
                             </div>
                             <div class="mb-3">
-                                <label for="contactnumber" class="form-label">Contact number</label>
+                                <label for="contactnumber" class="form-label text-white">Contact number</label>
                                 <input type="text" class="form-control" id="contactnumber" name="contactnumber"
                                     aria-describedby="emailHelp" required>
                             </div>
                             <div class="mb-3">
-                                <label for="address" class="form-label">Address</label>
+                                <label for="address" class="form-label text-white">Address</label>
                                 <input type="text" class="form-control" id="address" name="address"
                                     aria-describedby="emailHelp" required>
                             </div>
                             <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
+                                <label for="username" class="form-label text-white">Username</label>
                                 <input type="text" class="form-control" id="username" name="username"
                                     aria-describedby="emailHelp" required onkeyup="check(this);">
                                 <small id="small" style="color: red;"></small>
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
+                                <label for="password" class="form-label text-white">Password</label>
                                 <input type="password" class="form-control" id="password" name="password" required>
                             </div>
                             <div class="mb-3">
-                                <label for="key" class="form-label">VA key</label>
+                                <label for="key" class="form-label text-white">VA key</label>
                                 <input type="text" class="form-control" id="key" name="key" aria-describedby="emailHelp"
                                     required>
                             </div>
