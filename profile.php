@@ -4,8 +4,8 @@
     {
         header('Location: signin.php');
     }
-    include "./header.php";
 
+    include ('./header.php');
     include ('./database/db.php');
     if(isset($_SESSION['postededitsuccessfully']))
     {
@@ -43,12 +43,6 @@
             $result = mysqli_query($conn,$query);
         }
     }
-    if(isset($_GET['username']))
-    {
-        $query = "select * from profile where username='".$_GET['username']."'";
-        $result = mysqli_query($conn,$query);
-    }
-    
 ?>
     <main>
         <?php
@@ -108,6 +102,37 @@
                 ?>
                 <div class="card mb-3 post-card">
                     <div class="row g-0">
+                    <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
+                                <a style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <?php    if ($row1['username'] == $_SESSION['username'])
+                                {
+                            ?>
+                                    <li>
+                                        <form action="/Febina/Members-Portal/editpost" method="post">
+                                        <input type="hidden" name="postid" value="<?php echo $row1['postid']; ?>">
+                                        <button class="dropdown-item" type="submit" name="editposts">Edit</button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <form action="/Febina/Members-Portal/code" method="post">
+                                        <input type="hidden" name="postid" value="<?php echo $row1['postid']; ?>">
+                                        <button onclick="return confirm('Are you sure you want to delete this post ?');" class="dropdown-item" type="submit" name="deletepost">Delete</button>
+                                        </form>
+                                    </li>
+                             <?php 
+                                }
+                                else
+                                {
+                            ?>
+                                  <li><button class="dropdown-item" type="button">Report</button></li>
+                            <?php
+                                }
+                            ?>
+                            </ul>
+                            </div>
                         <div class="post-img col-md-4">
                             <img src="<?php echo "/Febina/Members-Portal".ltrim($row1['img_path'],"."); ?>" alt="Post Image">
                         </div>
@@ -164,18 +189,6 @@
                                 echo $time;
                                 ?>
                                  mins ago</small></p>
-                            <div class="container">
-                            <form action="/Febina/Members-Portal/editpost" method="post">
-                                <input type="hidden" name="postid" value="<?php echo $row1['postid']; ?>">
-                                <button type="submit" class="btn btn-primary" name="editposts">Edit Post</button>
-                            </form>
-                            </div>
-                            <div class="container mt-1">
-                            <form action="/Febina/Members-Portal/code" method="post">
-                                <input type="hidden" name="postid" value="<?php echo $row1['postid']; ?>">
-                                <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-primary" name="deletepost">Delete Post</button>
-                            </form>
-                            </div>
                             </div>
                         </div>
                     </div>
