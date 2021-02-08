@@ -26,7 +26,7 @@
         }
     ?>
         <div class="slick-go">
-            <div class="banner"
+            <div class="mt-5 ms-5"
             style="background-image : url(./assets/img/banner.jpg);">
                 <div class="hero-text col-lg-5" data-aos="fade-right">
                     <h2 class="mb-5 ms-2">Sign In</h2>

@@ -11,26 +11,36 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(isset($_POST['generateotp']))
         {
-            $otptosend = rand(99999,999999);
-            $to = $_POST['email'];
-            $_SESSION['email'] = $_POST['email'];
-            $subject = "Email Verification";
-            $message = "Hello sir/mam your OTP for email verifivation is ".$otptosend;
-            $headers = "From: swapnil.febina1@gmail.com";
-            
-            if(mail($to,$subject,$message,$headers))
+            $email = $_POST['email'];
+            $query = "select * from user where email='$email'";
+            $result = mysqli_query($conn,$query);
+            if(mysqli_num_rows($result)>0)
             {
-                
-                $_SESSION['otp'] = $otptosend;
-                $_SESSION['email'] = $to;
-              
-                $_SESSION['otpsuccess'] = "success";
+                $_SESSION['RegisterFailure'] = "This email address is already used please try another one.";
                 header('Location: /Febina/Members-Portal/signup');
             }
             else
             {
-                $_SESSION['RegisterFailure'] = "OTP not send..! Please try again.";
-                header('Location: /Febina/Members-Portal/signup');
+                $otptosend = rand(99999,999999);
+                $to = $_POST['email'];
+                $_SESSION['email'] = $_POST['email'];
+                $subject = "Email Verification";
+                $message = "Hello sir/mam your OTP for email verifivation is ".$otptosend;
+                $headers = "From: swapnil.febina1@gmail.com";
+                
+                if(mail($to,$subject,$message,$headers))
+                {
+
+                    $_SESSION['otp'] = $otptosend;
+                    $_SESSION['email'] = $to;
+                    $_SESSION['otpsuccess'] = "success";
+                    header('Location: /Febina/Members-Portal/signup');
+                }
+                else
+                {
+                    $_SESSION['RegisterFailure'] = "OTP not send..! Please try again.";
+                    header('Location: /Febina/Members-Portal/signup');
+                }
             }
         }
 
@@ -63,7 +73,7 @@
         //          User Registration
         //
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (isset($_SESSION['email']))
+        if (isset($_POST['register']))
         {
             $name = $_POST['name'];
             $contact = $_POST['contactnumber'];
@@ -81,7 +91,7 @@
 
             $result = mysqli_query($conn, $query);
 
-            if (!$result) 
+            if (mysqli_num_rows($result)==0) 
             {
                 $_SESSION['RegisterFailure'] = "This VA key is not generated yet please contact admin.";
                 unset($_SESSION['email']);
@@ -89,94 +99,70 @@
             } 
             else 
             {
+                $present = true;
+                $query = "select * from user where username = '$username'";
+                $result = mysqli_query($conn, $query);
                 while ($row = $result->fetch_assoc()) 
                 {
-                    if ($row['valid'] == "0" || $row['valid'] == "1") 
+                    if ($username == $row['username']) 
                     {
-                        $present = true;
+                        $duplicateuser = true;
+                        break;
                     }
-                    else
-                    {
-                        $_SESSION['RegisterFailure'] = "This VA key is not generated yet please contact admin.";
-                        unset($_SESSION['email']);
-                        header('Location: /Febina/Members-Portal/signup');
-                    }
+                    $srno = $row['sr_no'];
                 }
-            }
-
-            $query = "select * from user where username = '$username'";
-
-            $result = mysqli_query($conn, $query);
-          
-            while ($row = $result->fetch_assoc()) 
-            {
-                if ($username == $row['username']) 
+                $srno = $srno + 1;
+                if ($duplicateuser) 
                 {
-                    $duplicateuser = true;
-                    break;
+                    $_SESSION['RegisterFailure'] = " This username already taken please try another one.";
+                    unset($_SESSION['email']);
+                    header('Location: /Febina/Members-Portal/signup');
                 }
-                $srno = $row['sr_no'];
-            }
-            $srno = $srno + 1;
-          
-            if ($duplicateuser) 
-            {
-                $_SESSION['RegisterFailure'] = " This username already taken please try another one.";
-                unset($_SESSION['email']);
-                header('Location: /Febina/Members-Portal/signup');
-            } 
-            else 
-            {
-                if ($present) 
+                else 
                 {
-                    $query = "select * from adharno where adhar = '$key'";
-
-                    $result = mysqli_query($conn, $query);
-
-                    while ($row = $result->fetch_assoc()) 
+                    if ($present) 
                     {
-                        if ($row['valid'] == "1") 
-                        {
-                            $invalidkey = true;
-                            break;
-                        }
-                    }
-
-                    if ($invalidkey) 
-                    {
-                        $_SESSION['RegisterFailure'] = "This VA key is used, you can use one VA ket at only once.";
-                        unset($_SESSION['email']);
-                        header('Location: /Febina/Members-Portal/signup');
-                    } 
-                    else 
-                    {
-                        $query = "insert into user(sr_no,name,contact_number,email,address,username,password,seckey) values('$srno','$name','$contact','$email','$address','$username','$password','$key')";
-
+                        $query = "select * from adharno where adhar = '$key'";
                         $result = mysqli_query($conn, $query);
-
-                        if (!$result) 
+                        while ($row = $result->fetch_assoc()) 
                         {
-                            die("Error : " . mysqli_error($conn));
+                            if ($row['valid'] == "1") 
+                            {
+                                $invalidkey = true;
+                                break;
+                            }
+                        }
+                        if ($invalidkey) 
+                        {
+                            $_SESSION['RegisterFailure'] = "This VA key is used, you can use one VA ket at only once.";
+                            unset($_SESSION['email']);
+                            header('Location: /Febina/Members-Portal/signup');
                         } 
                         else 
                         {
-                            $query = "update adharno set valid = '1' where adhar = '$key'";
-
+                            $query = "insert into user(sr_no,name,contact_number,email,address,username,password,seckey) values('$srno','$name','$contact','$email','$address','$username','$password','$key')";
                             $result = mysqli_query($conn, $query);
-
-                            if ($result) 
+                            if (!$result) 
                             {
-                                $_SESSION['RegisterationSuccess'] = "You have registered successfully, now you can login into community.";   
-                                unset($_SESSION['email']);
-                                header('Location: /Febina/Members-Portal/signin');   
+                                die("Error : " . mysqli_error($conn));
                             } 
+                            else 
+                            {
+                                $query = "update adharno set valid = '1' where adhar = '$key'";
+                                $result = mysqli_query($conn, $query);
+                                if ($result) 
+                                {
+                                    $_SESSION['RegisterationSuccess'] = "You have registered successfully, now you can login into community.";   
+                                    unset($_SESSION['email']);
+                                    unset($_SESSION['otpverified']);
+                                    header('Location: /Febina/Members-Portal/signin');   
+                                } 
+                            }
                         }
-                     }
+                    }
                 }
             }
-    
         }
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
         //          Add Post
@@ -272,7 +258,7 @@
             }
             else
             {
-                $target_file = "./postuploads/default.jpg";
+                $target_file = "-";
                 $query = "insert into posts(name,username,posttitle,post,postid,posted_at,img_path) values('$name','$username','$posttitle','$postbody','$postid','$date','$target_file')";
                 $result = mysqli_query($conn,$query);
                 if($result)
@@ -431,7 +417,7 @@
             else
             {
                 echo "Success";
-                $target_file = "./postuploads/default.jpg";
+                $target_file = "-";
                 $query = "update posts set name='$name',username='$username',posttitle='$posttitle',post='$postbody',posted_at='$date',img_path='$target_file' where postid='$postid'";
                 $result = mysqli_query($conn,$query);
                 if($result)
