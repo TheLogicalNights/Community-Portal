@@ -95,7 +95,32 @@
                                 }
                             }
                             $post .= $p.'</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                        <p class="card-text"><small class="text-muted">Last updated '; 
+                            date_default_timezone_set('Asia/Kolkata');
+                            $datetime2 = strtotime($row['posted_at']);
+                            $datetime1 = strtotime(date("y-m-d H:i:s"));
+                            
+                            $interval = abs($datetime1 - $datetime2);
+                            $min = round($interval/60);
+                            if ($min >= 60)
+                            {
+                                $hr = round($min/60);
+                                $min = $min%60;
+                                $p .= $hr;
+                                if ($hr>1)
+                                {
+                                    $post .= " hrs ".$min;
+                                }
+                                else if ($hr==1)
+                                {
+                                    $post .= " hr ".$min;
+                                }
+                            }
+                            else
+                            {
+                                $post .= $min;
+                            }
+                                $post .= ' mins ago</small></p>
                                     </div>
                                 </div>
                             </div>
