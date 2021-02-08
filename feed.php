@@ -56,15 +56,33 @@
                     {
                         $post = '
                         <div class="card mb-3 post-card">
-                            <div class="dropdown d-flex justify-content-end">
-                                <button class="btn btn-secondary" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
+                                <a style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                </button>
+                                </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li><button class="dropdown-item" type="button">Edit</button></li>
-                                    <li><button class="dropdown-item" type="button">Delete</button></li>
-                                    <li><button class="dropdown-item" type="button">Report</button></li>
-                                </ul>
+                                ';
+                                if ($row['username'] == $_SESSION['username'])
+                                {
+                                    $post .= '
+                                    <li>
+                                        <form action="/Febina/Members-Portal/editpost" method="post">
+                                        <input type="hidden" name="postid" value="'.$row['postid'].'">
+                                        <button class="dropdown-item" type="submit" name="editposts">Edit</button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <form action="/Febina/Members-Portal/code" method="post">
+                                        <input type="hidden" name="postid" value="'.$row['postid'].'">
+                                        <button onclick="return confirm("Are you sure you want to delete this post ?");" class="dropdown-item" type="submit" name="deletepost">Delete</button>
+                                        </form>
+                                    </li>';
+                                }
+                                else
+                                {
+                                   $post .= '<li><button class="dropdown-item" type="button">Report</button></li>';
+                                }
+                            $post .= '</ul>
                             </div>
                             <div class="row g-0">
                                 <div class="post-img col-md-4">
