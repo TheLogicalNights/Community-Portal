@@ -4,8 +4,8 @@
     {
         header('Location: signin.php');
     }
-    include ('./header.php');
 
+    include ('./header.php');
     include ('./database/db.php');
     if(isset($_SESSION['postededitsuccessfully']))
     {
@@ -35,10 +35,13 @@
         unset($_SESSION['postnotdeleted']);
     }
     $result = "";
-    if(isset($_SESSION['username']))
+    if(!isset($_GET['username']))
     {
-        $query = "select * from profile where username='".$_SESSION['username']."'";
-        $result = mysqli_query($conn,$query);
+        if(isset($_SESSION['username']))
+        {
+            $query = "select * from profile where username='".$_SESSION['username']."'";
+            $result = mysqli_query($conn,$query);
+        }
     }
 ?>
     <main>
@@ -51,7 +54,7 @@
             <div class="container">
                 <div class="profile-section">
                     <div class="profile-img">
-                        <img src="<?php echo $row['dppath']; ?>" class="rounded-circle" width="250" height="250" alt="Profile picture">
+                        <img src="<?php echo "/Febina/Members-Portal".ltrim($row['dppath'],"."); ?>" class="rounded-circle" width="250" height="250" alt="Profile picture">
                     </div>
                     <div class="profile-details">
                         <h1 class="mt-4"><?php echo $row['name']; ?></h1>
@@ -78,9 +81,20 @@
 
             <div class="container feed-cards">
                 <?php
-                    $query1 = "select * from posts where username='".$_SESSION['username']."'";
-                    $result1 = mysqli_query($conn,$query1);
-                    
+                    $result1 = 0;
+                    if(!isset($_GET['username']))
+                    {
+                        if(isset($_SESSION['username']))
+                        {
+                            $query1 = "select * from posts where username='".$_SESSION['username']."'";
+                            $result1 = mysqli_query($conn,$query1);
+                        }
+                    }
+                    if(isset($_GET['username']))
+                    {
+                        $query1 = "select * from posts where username='".$_GET['username']."'";
+                        $result1 = mysqli_query($conn,$query1);
+                    }
                     if ($result1)
                     {
                         while ($row1 = mysqli_fetch_assoc($result1))
@@ -120,7 +134,7 @@
                             </ul>
                             </div>
                         <div class="post-img col-md-4">
-                            <img src="<?php echo $row1['img_path']; ?>" alt="Post Image">
+                            <img src="<?php echo "/Febina/Members-Portal".ltrim($row1['img_path'],"."); ?>" alt="Post Image">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -191,5 +205,5 @@
     </main>
 
 <?php
-    include('footer.php');
+    include "./footer.php";
 ?>

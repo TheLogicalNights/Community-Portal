@@ -60,7 +60,7 @@
     ?>
         <div class="slick-go">
             <div class="banner"
-            style="background-image : url(./assets/img/banner.jpg);">
+            style="background-image : url(/Febina/Members-Portal/assets/img/banner.jpg);">
                 <div class="hero-text col-lg-5" data-aos="fade-right">
                     <h2 class="mb-5 ms-2">Setup Profile</h2>
                     <div class="container mb-5">
