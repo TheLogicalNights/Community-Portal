@@ -7,7 +7,6 @@
     include ('header.php');
 
     include ('./database/db.php');
-    
     if(isset($_SESSION['postededitsuccessfully']))
     {
         echo '
@@ -35,8 +34,17 @@
         ';
         unset($_SESSION['postnotdeleted']);
     }
-    $query = "select * from profile where username='".$_SESSION['username']."'";
-    $result = mysqli_query($conn,$query);
+    $result = "";
+    if(isset($_SESSION['username']))
+    {
+        $query = "select * from profile where username='".$_SESSION['username']."'";
+        $result = mysqli_query($conn,$query);
+    }
+    if(isset($_GET['username']))
+    {
+        $query = "select * from profile where username='".$_GET['username']."'";
+        $result = mysqli_query($conn,$query);
+    }
     
 ?>
     <main>

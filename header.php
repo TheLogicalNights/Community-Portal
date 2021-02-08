@@ -51,6 +51,9 @@
                             <a class="nav-link" href="/Febina/Members-Portal/profile">Profile</a>
                         </li>
                         <li class="nav-item mt-2">
+                            <a class="nav-link" href="/Febina/Members-Portal/members">Members</a>
+                        </li>
+                        <li class="nav-item mt-2">
                             <form action="/Febina/Members-Portal/code" method="post">
                                 <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
                                 <button class="btn btn-primary" type="submit" name="logout">Sign Out</button>

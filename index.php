@@ -27,7 +27,8 @@
                     <a href="/Febina/Members-Portal/signup" class="btn btn-primary">Sign Up</a>
                 </div>
             </div>
-        </div>        <div class="jumbotron usp-section">
+        </div>        
+        <div class="jumbotron usp-section">
             <div class="container">
                 <center>
                     <h1>Why Join Febina Community</h1>
@@ -70,7 +71,8 @@
                         </div>
                     </div>                </div>
             </div>
-        </div>        <div class="jumbotron story-section">
+        </div>        
+        <div class="jumbotron story-section">
             <div class="col-lg-6 p-4" data-aos="fade-in" data-aos-delay="200">
                 <h1>Our Aim is to Make Every Women Independent and Self Sufficient </h1>
             </div>
