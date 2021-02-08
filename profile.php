@@ -87,7 +87,7 @@
                 <div class="card mb-3 post-card">
                     <div class="row g-0">
                         <div class="post-img col-md-4">
-                            <img src="https://images.pexels.com/photos/217250/pexels-photo-217250.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Post Image">
+                            <img src="<?php echo $row1['img_path']; ?>" alt="Post Image">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -112,7 +112,36 @@
                                     }
                                     echo $post;
                                 ?></p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                <p class="card-text"><small class="text-muted">Last updated 
+                                <?php
+                                $time = "";
+                                date_default_timezone_set('Asia/Kolkata');
+                                $datetime2 = strtotime($row1['posted_at']);
+                                $datetime1 = strtotime(date("y-m-d H:i:s"));
+                                
+                                $interval = abs($datetime1 - $datetime2);
+                                $min = round($interval/60);
+                                if ($min >= 60)
+                                {
+                                    $hr = round($min/60);
+                                    $min = $min%60;
+                                    $time .= $hr;
+                                    if ($hr>1)
+                                    {
+                                        $time .= " hrs ".$min;
+                                    }
+                                    else if ($hr==1)
+                                    {
+                                        $time .= " hr ".$min;
+                                    }
+                                }
+                                else
+                                {
+                                    $time .= $min;
+                                }
+                                echo $time;
+                                ?>
+                                 mins ago</small></p>
                             <div class="container">
                             <form action="/Febina/Members-Portal/editpost" method="post">
                                 <input type="hidden" name="postid" value="<?php echo $row1['postid']; ?>">

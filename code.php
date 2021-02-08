@@ -435,14 +435,14 @@
                 if($result)
                 {
                     $_SESSION['postededitsuccessfully'] = "Edit successfully.";
-                 //   header('Location: /Febina/Members-Portal/profile');
+                    header('Location: /Febina/Members-Portal/profile');
                     
                 }
                 else
                 {
                     die("error".mysqli_error($conn));
                     $_SESSION['posteditfailure'] = "Post edit failure, sorry for inconvenience.";
-                 //   header('Location: /Febina/Members-Portal/editpost');
+                    header('Location: /Febina/Members-Portal/editpost');
                 }
             }
         }
