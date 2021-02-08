@@ -272,7 +272,7 @@
             }
             else
             {
-                $target_file = "-";
+                $target_file = "./postuploads/default.jpg";
                 $query = "insert into posts(name,username,posttitle,post,postid,posted_at,img_path) values('$name','$username','$posttitle','$postbody','$postid','$date','$target_file')";
                 $result = mysqli_query($conn,$query);
                 if($result)
@@ -430,7 +430,7 @@
             else
             {
                 echo "Success";
-                $target_file = "-";
+                $target_file = "./postuploads/default.jpg";
                 $query = "update posts set name='$name',username='$username',posttitle='$posttitle',post='$postbody',posted_at='$date',img_path='$target_file' where postid='$postid'";
                 $result = mysqli_query($conn,$query);
                 if($result)
