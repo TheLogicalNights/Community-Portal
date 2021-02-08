@@ -115,7 +115,7 @@
                             $post .= $p.'
                             <form action="/Febina/Members-Portal/readmore" method="post">
                                 <input type="hidden" name="postid" value='.$row['postid'].'>
-                                <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary stretched-link"> Read more</button>
+                                <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary"> Read more</button>
                             </form>
                             </p>
                             <p class="card-text"><small class="text-muted">Last updated '; 
