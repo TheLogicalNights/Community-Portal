@@ -164,31 +164,47 @@
                                 echo $time;
                                 ?>
                                  mins ago</small></p>
+                            <?php
+                                if(!isset($_GET['username']))
+                                {
+                                    if(isset($_SESSION['username']))
+                                    {
+                                        
+                            ?>
                             <div class="container">
-                            <form action="/Febina/Members-Portal/editpost" method="post">
-                                <input type="hidden" name="postid" value="<?php echo $row1['postid']; ?>">
-                                <button type="submit" class="btn btn-primary" name="editposts">Edit Post</button>
-                            </form>
-                            </div>
-                            <div class="container mt-1">
-                            <form action="/Febina/Members-Portal/code" method="post">
-                                <input type="hidden" name="postid" value="<?php echo $row1['postid']; ?>">
-                                <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-primary" name="deletepost">Delete Post</button>
-                            </form>
-                            </div>
+                                <form action="/Febina/Members-Portal/editpost" method="post">
+                                    <input type="hidden" name="postid" value="<?php echo $row1['postid']; ?>">
+                                    <button type="submit" class="btn btn-primary" name="editposts">Edit Post</button>
+                                </form>
+                                </div>
+                                <div class="container mt-1">
+                                <form action="/Febina/Members-Portal/code" method="post">
+                                    <input type="hidden" name="postid" value="<?php echo $row1['postid']; ?>">
+                                    <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-primary" name="deletepost">Delete Post</button>
+                                </form>
+                                </div>
+                                </div>
+                            <?php
+                                    }
+                                }
+                                if(isset($_GET['username']))
+                                {
+                            ?>
+                            <div class="container">
+                                <form action="/Febina/Members-Portal/editpost" method="post">
+                                    <button type="button" class="btn btn-primary" name="editposts">Report</button>
+                                </form>
                             </div>
                         </div>
+                            <?php
+                                }  
+                            }
+                        }     
+                            ?>
                     </div>
                 </div>
-                <?php
-                        }
-                    }
-                ?>
             </div>
-
         </div>
-
-
     </main>
 
 <?php
