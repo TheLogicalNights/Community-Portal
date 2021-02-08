@@ -200,7 +200,7 @@
             $posttitle = $_POST['posttitle'];
             $postbody = $_POST['postbody'];
             date_default_timezone_set("Asia/Kolkata");
-            $date = date("Y-m-d h:i:s");
+            $date = date("Y-m-d H:i:s");
             $name = $_SESSION['name'];
             $username = $_SESSION['username'];
             
@@ -358,7 +358,7 @@
             $posttitle = $_POST['posttitleEdit'];
             $postbody = $_POST['postbodyEdit'];
             date_default_timezone_set("Asia/Kolkata");
-            $date = date("Y-m-d h:i:s");
+            $date = date("Y-m-d H:i:s");
             $name = $_SESSION['name'];
             $username = $_SESSION['username'];
             

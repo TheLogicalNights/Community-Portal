@@ -4,7 +4,7 @@
     {
         header('Location: signin.php');
     }
-
+    date_default_timezone_set("Asia/Kolkata");
     include ('./header.php');
     include ('./database/db.php');
     if(isset($_SESSION['postededitsuccessfully']))
@@ -42,6 +42,11 @@
             $query = "select * from profile where username='".$_SESSION['username']."'";
             $result = mysqli_query($conn,$query);
         }
+    }
+    if(isset($_GET['username']))
+    {
+        $query = "select * from profile where username='".$_GET['username']."'";
+        $result = mysqli_query($conn,$query);
     }
 ?>
     <main>
@@ -165,7 +170,6 @@
                                 date_default_timezone_set('Asia/Kolkata');
                                 $datetime2 = strtotime($row1['posted_at']);
                                 $datetime1 = strtotime(date("y-m-d H:i:s"));
-                                
                                 $interval = abs($datetime1 - $datetime2);
                                 $min = round($interval/60);
                                 if ($min >= 60)
