@@ -34,7 +34,7 @@
         </div>
         <hr>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <a type="button" class="btn btn-secondary" href="./feed.php" data-bs-dismiss="modal">Close</a>
             <button class="btn btn-primary" name="addpost" type="submit">Add new post</button>
         </div>
     </form>
