@@ -167,6 +167,25 @@ h6 {
 }
 
 
+/* ---------------Login and Signup-----------------  */
+
+
+
+.my-form{
+    background: linear-gradient(15deg, #fce8c4 ,  white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 40px 0;
+}
+
+
+
+
+
+
+
 /* ----------------------------footer---------------------------------- */
 
 .footer-distributed {
@@ -247,7 +266,7 @@ h6 {
 }
 
 
-/* Media Queries */
+/* --------------------------Media Queries-------------------- */
 
 @media (max-width: 600px) {
     .footer-distributed .footer-left,
