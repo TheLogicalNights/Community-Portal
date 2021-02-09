@@ -177,13 +177,36 @@ h6 {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    padding: 40px 0;
+    padding: 60px 0;
+}
+
+.form-illustration{
+    display: flex;
+    justify-content: center;
+}
+
+.form-illustration img{
+    max-width: 90%;
 }
 
 
+/*------------------ Setup Profile  */
 
+.setup-section{
+    background:  url('../img/illustrations/back.png'),
+    linear-gradient(15deg, #ffe6b965 ,  white);
+    padding: 40px 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: darken;
+   
+}
 
-
+.setup-container{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
 
 
 /* ----------------------------footer---------------------------------- */

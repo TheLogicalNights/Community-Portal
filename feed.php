@@ -149,18 +149,37 @@
                             
                             $interval = abs($datetime1 - $datetime2);
                             $min = round($interval/60);
+                            
                             if ($min >= 60)
                             {
                                 $hr = round($min/60);
                                 $min = $min%60;
-                                $p .= $hr;
-                                if ($hr>1)
+                                $post .= $hr;
+                                if ($hr>1 && $hr<=24)
                                 {
                                     $post .= " hrs ".$min;
                                 }
                                 else if ($hr==1)
                                 {
                                     $post .= " hr ".$min;
+                                }
+                                else
+                                {
+                                    $day = round($hr/24);
+                                    $hr = $hr%24;
+                                    if ($day <= 1)
+                                    {
+                                        $post .= $day." day";
+                                    }
+                                    else
+                                    {
+                                        $post .= $day." days";
+                                    }
+
+                                    if ($hr <= 1)
+                                        $post .= $hr." hr ".$min;
+                                    else
+                                        $post .= $hr." hrs ".$min;
                                 }
                             }
                             else

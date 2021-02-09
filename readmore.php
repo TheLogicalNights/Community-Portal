@@ -20,7 +20,7 @@
     <a class="link-info" href=<?php echo "/Febina/Members-Portal/profile/".$row['username']; ?>>- <?php echo $row['username']; ?></a>
 </div>
 <div class="d-flex justify-content-center mt-2 bg-light">
-        <img class="img-fluid" src="<?php echo $row['img_path']; ?>"    alt="" srcset="">
+        <img class="img-fluid" src="<?php echo $row['img_path']; ?>" width="45%" height="20%"    alt="" srcset="">
 </div>
 <div class="mt-1 bg-light">
     <hr class="my-2">
@@ -40,8 +40,10 @@
                         $row1 = mysqli_fetch_assoc($result);
                         echo "Author : ".$row1['name'];
                     }
+                    $date = explode(" ",$row['posted_at']);
+                    $time = date("g:i a", strtotime($date[1]));
+                    echo "<br>Posted at : ".date("d-m-Y",strtotime($date[0]))." ".$time;
 
-                    echo "<br>Posted at : ".$row['posted_at']; 
              ?>
     </p>
 </div>
