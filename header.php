@@ -55,7 +55,7 @@
                             <a class="nav-link" href="/Febina/Members-Portal/profile">Profile<i class="mdi mdi-account"></i></a>
                         </li>
                         <li class="nav-item mt-2">
-                            <a class="nav-link" href="/Febina/Members-Portal/members">Members</a>
+                            <a class="nav-link" href="/Febina/Members-Portal/members">Members <i class="fa fa-users"></i></a>
                         </li>
                         <li class="nav-item mt-2">
                             <form action="/Febina/Members-Portal/code" method="post">
