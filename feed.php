@@ -36,6 +36,24 @@
         ';
         unset($_SESSION['postededitsuccessfully']);
     }
+    if(isset($_SESSION['reportsuccess']))
+    {
+        echo '
+        <script>
+            swal("Congratulations..!", "'.$_SESSION['reportsuccess'].'", "success");
+        </script>
+        ';
+        unset($_SESSION['reportsuccess']);
+    }
+    if(isset($_SESSION['reportfailure']))
+    {
+        echo '
+        <script>
+            swal("Error..!", "'.$_SESSION['reportfailure'].'", "error");
+        </script>
+        ';
+        unset($_SESSION['reportfailure']);
+    }
 ?>
 
     <main>
@@ -80,7 +98,13 @@
                                 }
                                 else
                                 {
-                                   $post .= '<li><button class="dropdown-item" type="button">Report</button></li>';
+                                   $post .= '<li>
+                                                    <form action="/Febina/Members-Portal/code" method="POST">
+                                                        <input type="hidden" name="reportedpostid" value="'.$_SESSION['username'].'">
+                                                        <input type="hidden" name="reportedpostid" value="'.$row['postid'].'">
+                                                        <button class="dropdown-item" type="submit">Report</button>
+                                                    </form>
+                                            </li>';
                                 }
                             $post .= '</ul>
                             </div>
