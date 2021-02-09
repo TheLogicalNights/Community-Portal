@@ -17,10 +17,10 @@
     ?>
 
         <div class="jumbotron my-form login-form mb-0">
-            <div class="form-illustration">
+            <div class="form-illustration" data-aos="fade-left">
                 <img src="/Febina/Members-Portal/assets/img/illustrations/signup.png" width="500" alt="">
             </div>
-            <div class="form-container ">
+            <div class="form-container " data-aos="fade-right">
             <div class="" data-aos="fade-right">
                     <h1 class="mb-5 ms-2">Sign Up</h1>
                     <div class="container mb-5">

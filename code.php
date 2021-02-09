@@ -55,7 +55,7 @@
             $otp = $_SESSION['otp'];
             
             // doing for testing  ! => for passing validation
-            if(($otp == $otpbyuser))
+            if(!($otp == $otpbyuser))
             {
                 unset($_SESSION['otp']);
                
