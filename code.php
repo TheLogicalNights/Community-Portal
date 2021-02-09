@@ -652,7 +652,7 @@
         if(isset($_POST['remove']))
         {
             $username = $_POST['remove'];
-            $query = "update profile set dppath = '/Febina/Members-Portal/img/user.png' where username = '$username'";
+            $query = "update profile set dppath = './img/user.png' where username = '$username'";
             $result = mysqli_query($conn,$query);
             if(!$result)
             {

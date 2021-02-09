@@ -11,6 +11,7 @@
         $dppath = $row['dppath'];
         $about = $row['about'];
     }
+    $dppath = "/Febina/Members-Portal".ltrim($dppath,".");
     if(isset($_SESSION['profileupdated']))
     {
         echo '
