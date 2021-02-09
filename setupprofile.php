@@ -58,7 +58,7 @@
             unset($_SESSION['setupprofilefailure']);
         }
     ?>
-        <div class="slick-go">
+        <div class="">
             <div class="banner"
             style="background-image : url(/Febina/Members-Portal/assets/img/banner.jpg);">
                 <div class="hero-text col-lg-5" data-aos="fade-right">
