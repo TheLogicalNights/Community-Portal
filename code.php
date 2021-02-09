@@ -687,5 +687,63 @@
                 header("Location:/Febina/Members-Portal/editprofile");
             }
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Update Name
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(isset($_POST['updatename']))
+        {
+            $name = $_POST['name'];
+            $username = $_POST['updatename'];
+            $query = "update profile set name = '$name' where username = '$username'";
+            $result = mysqli_query($conn,$query);
+            $query = "update user set name = '$name' where username = '$username'";
+            $result = mysqli_query($conn,$query);
+            $_SESSION['profileupdated'] = "Your name successfully updated..!";
+            header("Location:/Febina/Members-Portal/editprofile");
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Update Name
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(isset($_POST['updateabout']))
+        {
+            $username = $_POST['updateabout'];
+            $about = $_POST['about'];
+            $query = "update profile set about = '$about' where username = '$username'";
+            $result = mysqli_query($conn,$query);
+            $_SESSION['profileupdated'] = "Your about successfully updated..!";
+            header("Location:/Febina/Members-Portal/editprofile");
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Update Instagram Link
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(isset($_POST['updateinstalink']))
+        {
+            $username = $_POST['updateinstalink'];
+            $instalink = $_POST['instalink'];
+            $query = "update profile set instalink = '$instalink' where username = '$username'";
+            $result = mysqli_query($conn,$query);
+            $_SESSION['profileupdated'] = "Your instagram link successfully updated..!";
+            header("Location:/Febina/Members-Portal/editprofile");
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Update Facebook Link
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(isset($_POST['updatefblink']))
+        {
+            $username = $_POST['updatefblink'];
+            $fblink = $_POST['fblink'];
+            $query = "update profile set fblink = '$fblink' where username = '$username'";
+            $result = mysqli_query($conn,$query);
+            $_SESSION['profileupdated'] = "Your facebook link successfully updated..!";
+            header("Location:/Febina/Members-Portal/editprofile");
+        }
     }
 ?>
