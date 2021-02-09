@@ -644,5 +644,25 @@
                 header("Location:/Febina/Members-Portal/feed");
             }
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Remove Profile Picture
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(isset($_POST['remove']))
+        {
+            $username = $_POST['remove'];
+            $query = "update profile set dppath = '/Febina/Members-Portal/img/user.png' where username = '$username'";
+            $result = mysqli_query($conn,$query);
+            if(!$result)
+            {
+                die("error".mysqli_error($conn));
+            }
+            else
+            {
+                $_SESSION['profileupdated'] = "Your profile picture successfully removed..!";
+                header("Location:/Febina/Members-Portal/editprofile");
+            }
+        }
     }
 ?>
