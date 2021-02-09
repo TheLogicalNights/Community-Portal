@@ -58,10 +58,9 @@
             unset($_SESSION['setupprofilefailure']);
         }
     ?>
-        <div class="">
-            <div class="banner"
-            style="background-image : url(/Febina/Members-Portal/assets/img/banner.jpg);">
-                <div class="hero-text col-lg-5" data-aos="fade-right">
+        <div class="setup-section">
+            <div class="container setup-container">
+                <div class="hero-text col-lg-10 col-md-10 col-sm-10" data-aos="zoom-in">
                     <h2 class="mb-5 ms-2">Setup Profile</h2>
                     <div class="container mb-5">
                     <?php
@@ -94,16 +93,14 @@
                             <small id="limit">200/200</small>
                         </div>
                         <div class="form-floating mt-3">
-                          <textarea class="form-control" placeholder="Leave a comment here" id="insta" name="insta" required></textarea>
-                          <label for="insta"><i class="fa fa-instagram" aria-hidden="true"></i> Drop link here</label>
+                            <textarea class="form-control" placeholder="Leave a comment here" id="insta" name="insta" required></textarea>
+                            <label for="insta"><i class="fa fa-instagram" aria-hidden="true"></i> Drop link here</label>
                         </div>
                         <div class="form-floating mt-3">
-                          <textarea class="form-control" placeholder="Leave a comment here" id="fb" name="fb" required></textarea>
-                          <label for="fb"><i class="fa fa-facebook-official" aria-hidden="true"> </i> Drop link here</label>
+                            <textarea class="form-control" placeholder="Leave a comment here" id="fb" name="fb" required></textarea>
+                            <label for="fb"><i class="fa fa-facebook-official" aria-hidden="true"> </i> Drop link here</label>
                         </div>
-                        <div class="d-grid gap-2 mt-4">
-                          <button class="btn btn-primary" type="Submit" name="setupprofile">Submit</button>
-                        </div>
+                        <button class="btn btn-primary mt-4" type="Submit" name="setupprofile">Submit</button>
                     </form>
                     </div>
                 </div>

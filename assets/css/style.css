@@ -190,9 +190,23 @@ h6 {
 }
 
 
+/*------------------ Setup Profile  */
 
+.setup-section{
+    background:  url('../img/illustrations/back.png'),
+    linear-gradient(15deg, #ffe6b965 ,  white);
+    padding: 40px 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: darken;
+   
+}
 
-
+.setup-container{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
 
 
 /* ----------------------------footer---------------------------------- */
