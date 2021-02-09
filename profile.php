@@ -62,7 +62,16 @@
                         <img src="<?php echo "/Febina/Members-Portal".ltrim($row['dppath'],"."); ?>" class="rounded-circle" width="250" height="250" alt="Profile picture">
                     </div>
                     <div class="profile-details">
-                        <h1 class="mt-4"><?php echo $row['name']; ?><a href="/Febina/Members-Portal/editprofile"><i class="fa fa-pencil-square-o fa-xs ms-3" aria-hidden="true"></i></a></h1>
+                        <h1 class="mt-4"><?php echo $row['name']; ?>
+                        <?php
+                            if($_SESSION['username']==$row['username'])
+                            {
+                                echo '<a href="/Febina/Members-Portal/editprofile">
+                                    <i class="fa fa-pencil-square-o fa-xs ms-3" aria-hidden="true"></i>
+                                </a>';
+                            }
+                        ?>
+                        </h1>
                         <small><a href=""><?php echo $row['username']; ?></a></small>
                         <p>
                         <br>
