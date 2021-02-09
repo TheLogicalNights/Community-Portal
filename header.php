@@ -36,20 +36,23 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link me-2 mt-2" aria-current="page" href="/Febina/Members-Portal/index">Home</a>
+                        <a class="nav-link me-2 mt-2" aria-current="page" href="/Febina/Members-Portal/index">Home <i class="mdi mdi-home"></i>
+</a>
                     </li>
                     <?php
                     if (isset($_SESSION['status']))
                     {
                     ?>
                         <li class="nav-item mt-2">
-                            <a class="nav-link" href="/Febina/Members-Portal/feed">Feed</a>
+                            <a class="nav-link" href="/Febina/Members-Portal/feed">Feed <i class="mdi mdi-television-guide"></i>
+</a>
                         </li>
                         <li class="nav-item mt-2">
-                            <a class="nav-link" href="/Febina/Members-Portal/addpost">Add Post</a>
+                            <a class="nav-link" href="/Febina/Members-Portal/addpost">Add Post <i class="mdi mdi-pen"></i>
+</a>
                         </li>
                         <li class="nav-item mt-2">
-                            <a class="nav-link" href="/Febina/Members-Portal/profile">Profile</a>
+                            <a class="nav-link" href="/Febina/Members-Portal/profile">Profile<i class="mdi mdi-account"></i></a>
                         </li>
                         <li class="nav-item mt-2">
                             <a class="nav-link" href="/Febina/Members-Portal/members">Members</a>
