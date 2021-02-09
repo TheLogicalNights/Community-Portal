@@ -18,7 +18,7 @@
         <div class="cards-section">
             <div class="container">
                 <div class="d-flex justify-content-start me-3">
-                    <input type="text" onkeyup="getSuggestion(this.value)" autocomplete="off" style="width: 45%;" class="form-control" name="search" placeholder="Enter name">
+                    <input data-aos="fade-right" type="text" onkeyup="getSuggestion(this.value)" autocomplete="off" style="width: 45%;" class="form-control" name="search" placeholder="Enter name">
                 </div>
                 <div id="data">
                     <table class='table mt-2' id='myTable'>
