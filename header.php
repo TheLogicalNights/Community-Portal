@@ -26,7 +26,19 @@
 
     
     <!-- ANIMXYZ  -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@animxyz/core@0.4.0/dist/animxyz.min.css"></head><body>    <!-- Here is another comment -->    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@animxyz/core@0.4.0/dist/animxyz.min.css">
+    
+    <Script>
+        function limit(obj) 
+        {
+            document.getElementById('limit').innerHTML = 200 - obj.value.length + "/200";
+        }
+    </script>
+
+    </head>
+    <body>    
+    <!-- Here is another comment -->    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="/Febina/Members-Portal/assets/img/logo.png" alt="" width="60" height="60" class="d-inline-block align-top"> Febina Community </a>
