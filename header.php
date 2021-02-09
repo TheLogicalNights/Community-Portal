@@ -64,15 +64,15 @@
 </a>
                         </li>
                         <li class="nav-item mt-2">
-                            <a class="nav-link" href="/Febina/Members-Portal/profile">Profile<i class="mdi mdi-account"></i></a>
+                            <a class="nav-link" href="/Febina/Members-Portal/profile">Profile <i class="mdi mdi-account"></i></a>
                         </li>
                         <li class="nav-item mt-2">
-                            <a class="nav-link" href="/Febina/Members-Portal/members">Members</a>
+                            <a class="nav-link" href="/Febina/Members-Portal/members">Members <i class="fa fa-users ms-1"></i></a>
                         </li>
                         <li class="nav-item mt-2">
                             <form action="/Febina/Members-Portal/code" method="post">
                                 <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
-                                <button class="btn btn-primary" type="submit" name="logout">Sign Out</button>
+                                <button class="btn btn-primary" type="submit" name="logout">Sign Out <i class="fa fa-sign-out ms-1" aria-hidden="true"></i></button>
                             </form>
                         </li>
                         
@@ -82,10 +82,10 @@
                     {
                     ?>
                         <li class="nav-item me-3 mt-2">
-                            <a class="btn btn-primary" href="/Febina/Members-Portal/signin">Sign In</a>
+                            <a class="btn btn-primary" href="/Febina/Members-Portal/signin">Sign In <i class="fa fa-sign-in ms-1" aria-hidden="true"></i></a>
                         </li>
                         <li class="nav-item mt-2">
-                            <a href="/Febina/Members-Portal/signup" class="btn btn-primary">Sign Up</a>
+                            <a href="/Febina/Members-Portal/signup" class="btn btn-primary">Sign Up <i class="fa fa-user-plus ms-1"></i></a>
                         </li>
                     <?php
                     }
