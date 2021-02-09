@@ -20,4 +20,6 @@
         $(document).ready(function() {
             AOS.init();
         });
-    </script></body></html>
+    </script>
+</body>
+</html>

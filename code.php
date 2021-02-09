@@ -570,5 +570,78 @@
         {
             header("Location:/Febina/Members-Portal/profile/".$_POST['username']);
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Report Post
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(isset($_POST['reportedpostid']))
+        {
+            $postid = $_POST['reportedpostid'];
+            $reportedby = $_SESSION['username'];
+            $reportedposttitle = "";
+            $reportedpost = "";
+            $reportcount = 0;
+            $query = "select * from reportuser where username = '$reportedby' and postid = '$postid'";
+            $result = mysqli_query($conn,$query);
+            $rowcount = mysqli_num_rows($result);
+            if($rowcount==0)
+            {
+                $query = "select * from posts where postid = '$postid'";
+                $result = mysqli_query($conn,$query);
+                if($row = $result->fetch_assoc())
+                {
+                    $reportedposttitle = $row['posttitle'];
+                    $reportedpost = $row['post'];
+                }
+                $query = "insert into reportuser(username,postid) values('$reportedby','$postid')";
+                $result = mysqli_query($conn,$query);
+                if(!$result)
+                {
+                    die("Error : ".mysqli_error($conn));
+                }
+                $query = "select * from report where postid = '$postid'";
+                $result = mysqli_query($conn,$query);
+                $rowcount = mysqli_num_rows($result);
+                if($rowcount2==0)
+                {
+                    $query = "insert into report(postid,posttitle,post,reportcount) values('$postid','$reportedposttitle','$reportedpost','1')";
+                    $result = mysqli_query($conn,$query);
+                    if(!$result)
+                    {
+                        die("Error : ".mysqli_error($conn));
+                    }
+                    else
+                    {
+                        $_SESSION['reportsuccess'] = "You have successfully reported this post.";
+                        header("Location:/Febina/Members-Portal/feed");
+                    }
+                }
+                else
+                {
+                    if($row = $result->fetch_assoc())
+                    {
+                        $reportcount = $row['reportcount'];
+                    }
+                    $reportcount = $reportcount+1;
+                    $query = "update report set reportcount = '$reportcount' WHERE postid = '$postid'";
+                    $result = mysqli_query($conn,$query);
+                    if(!$result)
+                    {
+                        die("Error :".mysqli_error($conn));
+                    }
+                    else
+                    {
+                        $_SESSION['reportsuccess'] = "You have successfully reported this post.";
+                        header("Location:/Febina/Members-Portal/feed");
+                    }                  
+                }
+            }
+            else
+            {
+                $_SESSION['reportfailure'] = "You have already reported this post you can't report it again.";
+                header("Location:/Febina/Members-Portal/feed");
+            }
+        }
     }
 ?>
