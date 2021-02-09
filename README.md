@@ -4,6 +4,7 @@ Community Based Responsive Website Template
 ## this is h2
 
 
+## Improvement Notes
 
-- T^his is a bullet 
-- Byuu 2 sss
+- Add a glabal variable for base url 
+- 
