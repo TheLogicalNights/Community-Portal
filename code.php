@@ -664,5 +664,28 @@
                 header("Location:/Febina/Members-Portal/editprofile");
             }
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Update Profile Picture
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(isset($_POST['uploadimg']))
+        {
+            $username = $_POST['uploadimg'];
+            $filename = $_FILES["uploadfile"]["name"]; 
+            $tempname = $_FILES["uploadfile"]["tmp_name"];
+            if (!file_exists("./profilepictures/$username/")) 
+            { 
+                mkdir("./profilepictures/$username/", 0777, true);
+            }     
+            $folder = "./profilepictures/$username/".$filename; 
+            if (move_uploaded_file($tempname, $folder))  
+            {
+                $query = "update profile set dppath = '$folder' where username = '$username'";
+                $result = mysqli_query($conn,$query);
+                $_SESSION['profileupdated'] = "Your profile picture successfully updated..!";
+                header("Location:/Febina/Members-Portal/editprofile");
+            }
+        }
     }
 ?>

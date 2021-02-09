@@ -35,10 +35,10 @@
         </form>    
     </div>
     <div class="d-flex justify-content-center mb-5">
-        <form action="/Febina/Community/code"  method="POST" enctype="multipart/form-data">
+        <form action="/Febina/Members-Portal/code"  method="POST" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="formFileSm" class="form-label">Select Profile Picture</label>
-                    <input type="hidden" name="uploadimg" value="1">
+                <input type="hidden" name="uploadimg" value="<?php echo $_SESSION['username']; ?>">
                     <input class="form-control" type="file" id="formFile" name="uploadfile" required>
                     <button type="submit" class="btn btn-primary btn-sm mt-2 removeprofile">Update Profile Picture</button>
             </div>
