@@ -177,7 +177,16 @@ h6 {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    padding: 40px 0;
+    padding: 60px 0;
+}
+
+.form-illustration{
+    display: flex;
+    justify-content: center;
+}
+
+.form-illustration img{
+    max-width: 90%;
 }
 
 
