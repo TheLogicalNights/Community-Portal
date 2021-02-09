@@ -163,8 +163,13 @@
                                         }
                                     }
                                     echo $post;
-                                ?></p>
-                                <p class="card-text"><small class="text-muted">Last updated 
+                                ?>
+                                </p>
+                                <form action="/Febina/Members-Portal/readmore" method="post">
+                                    <input type="hidden" name="postid" value=<?php echo $row1['postid'] ?>>
+                                    <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary"> Read more</button>
+                                </form>
+                                <p class="card-text mt-2"><small class="text-muted">Last updated 
                                 <?php
                                 $time = "";
                                 date_default_timezone_set('Asia/Kolkata');

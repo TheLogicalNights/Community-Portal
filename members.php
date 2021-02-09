@@ -23,7 +23,7 @@
                         </tr>
                     </thead>
                     <?php
-                        $query = "select * from user";
+                        $query = "select * from user where username in(select username from profile where isset=1)";
                         $result = mysqli_query($conn,$query);
                         $sno = 0;
                         while($row = mysqli_fetch_assoc($result))
