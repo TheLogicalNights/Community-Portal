@@ -25,10 +25,14 @@
             unset($_SESSION['loginfailure']);
         }
     ?>
-        <div class="slick-go">
-            <div class="mt-5 ms-5"
-            style="background-image : url(./assets/img/banner.jpg);">
-                <div class="hero-text col-lg-5" data-aos="fade-right">
+
+
+        <div class="jumbotron my-form login-form mb-0">
+            <div class="form-illustration ">
+                <img src="/Febina/Members-Portal/assets/img/illustrations/login.png" width="500" alt="">
+            </div>
+            <div class="form-container">
+                <div>
                     <h2 class="mb-5 ms-2">Sign In</h2>
                     <div class="container mb-5">
                     <form action="/Febina/Members-Portal/code" class="mt-5" method="POST">
@@ -51,6 +55,7 @@
                 </div>
             </div>
         </div>
+
 </main>
 <script>
         function showpass() {
