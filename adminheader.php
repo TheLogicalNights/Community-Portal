@@ -1,5 +1,4 @@
 <?php
-    //session_start();
     date_default_timezone_set("Asia/Kolkata");
 ?>
 <!DOCTYPE html>
@@ -31,17 +30,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@animxyz/core@0.4.0/dist/animxyz.min.css">
     
     </head>
-    <Script>
-        function validate(obj) 
-        {
-            var newpassword = document.getElementById('newpassword').value;
-            if(newpassword != obj.value)
-            {
-                document.getElementById('small').innerHTML = "Passwords dosn't match....";    
-            }
-            else
-            {
-                document.getElementById('small').innerHTML = "";
+    <script>
+        function showpass() {
+            var x = document.getElementById('eye');
+            if (x.className == 'fa fa-eye') {
+                document.getElementById('eye').className = "fa fa-eye-slash";
+                document.getElementById('password').type = "text";
+            } else {
+                document.getElementById('eye').className = "fa fa-eye";
+                document.getElementById('password').type = "password";
             }
         }
     </script>
@@ -57,42 +54,26 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link me-2 mt-2" aria-current="page" href="/Febina/Members-Portal/index">Home <i class="mdi mdi-home"></i></a>
+                        <a class="nav-link mt-2" aria-current="page" href="/Febina/Members-Portal/index">Home <i class="mdi mdi-home"></i></a>
                     </li>
                     <?php
-                    if (isset($_SESSION['status']))
+                    if (isset($_SESSION['adminstatus']))
                     {
                     ?>
-                        <li class="nav-item mt-2">
-                            <a class="nav-link" href="/Febina/Members-Portal/feed">Feed <i class="mdi mdi-television-guide"></i></a>
-                        </li>
-                        <li class="nav-item mt-2">
-                            <a class="nav-link" href="/Febina/Members-Portal/addpost">Add Post <i class="mdi mdi-pen"></i></a>
-                        </li>
-                        <li class="nav-item mt-2">
-                            <a class="nav-link" href="/Febina/Members-Portal/profile">Profile <i class="mdi mdi-account"></i></a>
-                        </li>
                         <li class="nav-item mt-2">
                             <a class="nav-link" href="/Febina/Members-Portal/members">Members <i class="fa fa-users ms-1"></i></a>
                         </li>
                         <li class="nav-item mt-2">
                             <form action="/Febina/Members-Portal/code" method="post">
-                                <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
-                                <button class="btn btn-primary" type="submit" name="logout">Sign Out <i class="fa fa-sign-out ms-1" aria-hidden="true"></i></button>
+                                <button class="btn btn-primary" type="submit" name="adminlogout">Sign Out <i class="fa fa-sign-out ms-1" aria-hidden="true"></i></button>
                             </form>
                         </li>
-                        
+                </ul>
                     <?php
                     }
                     else
                     {
                     ?>
-                        <li class="nav-item me-3 mt-2">
-                            <a class="btn btn-primary" href="/Febina/Members-Portal/signin">Sign In <i class="fa fa-sign-in ms-1" aria-hidden="true"></i></a>
-                        </li>
-                        <li class="nav-item me-3 mt-2">
-                            <a href="/Febina/Members-Portal/signup" class="btn btn-primary">Sign Up <i class="fa fa-user-plus ms-1"></i></a>
-                        </li>
                         <li class="nav-item mt-2">
                             <a href="/Febina/Members-Portal/adminlogin" class="btn btn-primary">Admin <i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
                         </li>
