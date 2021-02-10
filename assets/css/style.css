@@ -257,9 +257,9 @@ h6 {
 }
 
 
-/*-------------------------- add post ------------------- */
+/*-------------------------- add post  and outline------------------- */
 
-#posttitle , .cke_inner , #postimg{
+#posttitle , .cke_inner , #postimg , .outline{
     outline:1px solid #757575;
 }
 
