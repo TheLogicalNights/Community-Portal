@@ -5,7 +5,7 @@
         header('Location: signin.php');
     }
     include('./database/db.php');
-    $query = "select * from posts";
+    $query = "select * from posts order by posted_at desc";
     $res = mysqli_query($conn,$query);
     include('header.php');
     if(isset($_SESSION['postedsuccessfully']))

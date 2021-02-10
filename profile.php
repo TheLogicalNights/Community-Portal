@@ -180,7 +180,7 @@
                                     echo $h; 
                                 ?>
                                 </h5>
-                                <p class="card-text">
+                                <div class="post-desc-container" id="postdesc">
                                 <?php 
                                     $post = "";
                                     if (strlen($row1['post'])>= 80)
@@ -198,14 +198,15 @@
                                             $post .= $row1['post'][$i];
                                         }
                                     }
+                                    $post = strip_tags($post);
                                     echo $post;
                                 ?>
-                                </p>
-                                <form action="/Febina/Members-Portal/readmore" method="post">
+                                </div>
+                                <div>
+                                <form class="post-meta" action="/Febina/Members-Portal/readmore" method="post">
                                     <input type="hidden" name="postid" value=<?php echo $row1['postid'] ?>>
                                     <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary"> Read more</button>
-                                </form>
-                                <p class="card-text mt-2"><small class="text-muted"> 
+                                    <small> 
                                 <?php
                                 $time = "";
                                 date_default_timezone_set('Asia/Kolkata');
@@ -233,7 +234,9 @@
                                 }
                                 echo $time;
                                 ?>
-                                 mins ago</small></p>
+                                 mins ago</small>
+                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
