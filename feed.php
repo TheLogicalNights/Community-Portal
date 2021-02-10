@@ -65,7 +65,7 @@
             <center>
                 <h1 style="padding: 30px 0;">Latest Posts</h1>
             </center>
-            <div class="container feed-cards" data-aos="fade-left">
+            <div class="container feed-cards" data-aos="zoom-in">
             <?php
 
                 if ($res)
