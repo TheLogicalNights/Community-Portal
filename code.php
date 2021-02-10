@@ -694,7 +694,7 @@
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
-        //          Update Name
+        //          Update About
         //
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(isset($_POST['updateabout']))
@@ -706,6 +706,23 @@
             $_SESSION['profileupdated'] = "Your about successfully updated..!";
             header("Location:/Febina/Members-Portal/editprofile");
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Update Birthdate
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        if (isset($_POST['updatebirthdate']))
+        {
+            $username = $_POST['username'];
+            $birthdate = $_POST['birthdate'];
+            $query = "update profile set birthdate = '$birthdate' where username = '$username'";
+            $result = mysqli_query($conn,$query);
+            $_SESSION['profileupdated'] = "Your birthdate successfully updated..!";
+            header("Location:/Febina/Members-Portal/editprofile");
+        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
         //          Update Instagram Link
