@@ -47,7 +47,7 @@
                         if (isset($_SESSION['otpsuccess']))
                         {
                     ?>
-                        <form action="/Febina/Members-Portal/code.php" method="POST" id="VerifyForm">
+                        <form action="/Febina/Members-Portal/code" method="POST" id="VerifyForm">
                             <div class="mb-3 mt-5">
                                 <label for="otp" class="  form-label" >Verify OTP</label>
                                 <input type="number" class="form-control" id="otp" name="otp">
