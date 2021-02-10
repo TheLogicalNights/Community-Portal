@@ -162,7 +162,8 @@ h6 {
 }
 
 .post-desc-container p{
-    /* background: red; */
+    min-height: 70px;
+    overflow-y: hidden;
 }
 
 .feed-cards {
@@ -204,11 +205,16 @@ h6 {
 }
 
 .profile-img {
-    width: 300px;
+    /* width: 300px; */
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .profile-img img {
     max-width: 100%;
+    border: 1px solid rgb(20, 20, 20);
 }
 
 .profile-details {
