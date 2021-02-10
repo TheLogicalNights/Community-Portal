@@ -47,7 +47,7 @@
                             </button>
                         </div>
                         <div>
-                            <small><a href="#" class="text-dark">forget password?</a></small>    
+                            <small><a href="/Febina/Members-Portal/forgetpassword" class="text-dark">forget password?</a></small>    
                         </div>
                         <button type="submit" name="login" class="btn btn-primary mt-3">Submit</button>
                     </form>

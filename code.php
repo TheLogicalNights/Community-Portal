@@ -201,7 +201,6 @@
                 $check = getimagesize($_FILES["postimg"]["tmp_name"]);
                 if($check !== false) 
                 {
-                  //  echo "File is an image - " . $check["mime"] . ".";
                     $uploadOk = 1;
                 } 
                 else 
@@ -213,13 +212,13 @@
                 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                 && $imageFileType != "gif" ) 
                 {
-                    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                    // echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                     $uploadOk = 0;
                 }
                 // Check if $uploadOk is set to 0 by an error
                 if ($uploadOk == 0) 
                 {
-                    echo "Sorry, your file was not uploaded.";
+                    // echo "Sorry, your file was not uploaded.";
 
                 } 
                 // if everything is ok, try to upload file
@@ -227,7 +226,7 @@
                 {
                         if (move_uploaded_file($_FILES["postimg"]["tmp_name"], $target_file)) 
                         {
-                            $query = "insert into posts(name,username,posttitle,post,postid,posted_at,img_path) values('$name','$username','$posttitle','$postbody','$postid','$date','$target_file')";
+                            $query = "insert into posts(name,username,posttitle,post,posted_at,img_path) values('$name','$username','$posttitle','$postbody','$date','$target_file')";
                             $result = mysqli_query($conn,$query);
                             if($result)
                             {
@@ -359,25 +358,24 @@
                 $check = getimagesize($_FILES["editeduploadpic"]["tmp_name"]);
                 if($check !== false) 
                 {
-                  //  echo "File is an image - " . $check["mime"] . ".";
                     $uploadOk = 1;
                 } 
                 else 
                 {
-                    echo "File is not an image.";
+                    // echo "File is not an image.";
                     $uploadOk = 0;
                 }
                 // Allow certain file formats
                 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                 && $imageFileType != "gif" ) 
                 {
-                    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                    // echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                     $uploadOk = 0;
                 }
                 // Check if $uploadOk is set to 0 by an error
                 if ($uploadOk == 0) 
                 {
-                    echo "Sorry, your file was not uploaded.";
+                    // echo "Sorry, your file was not uploaded.";
 
                 } 
                 // if everything is ok, try to upload file
@@ -410,7 +408,6 @@
             }
             else
             {
-                echo "Success";
                 $query = "update posts set name='$name',username='$username',posttitle='$posttitle',post='$postbody',posted_at='$date' where postid='$postid'";
                 $result = mysqli_query($conn,$query);
                 if($result)
@@ -493,7 +490,7 @@
                 }
                 if ($uploadOk == 0) 
                 {
-                    echo "Sorry, your file was not uploaded.";
+                    // echo "Sorry, your file was not uploaded.";
 
                 } 
                 // if everything is ok, try to upload file
@@ -766,15 +763,47 @@
 
                     $_SESSION['otp'] = $otptosend;
                     $_SESSION['email'] = $to;
-                    $_SESSION['otpsuccess'] = "success";
+                    $_SESSION['forgetpasswordotpsuccess'] = "success";
                     header('Location: /Febina/Members-Portal/forgetpassword');
                 }
                 else
                 {
-                    $_SESSION['RegisterFailure'] = "OTP not send..! Please try again.";
+                    $_SESSION['forgetpasswordfailure'] = "OTP not send..! Please try again.";
                     header('Location: /Febina/Members-Portal/forgetpassword');
                 }
             }
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Forget Password OTP verification
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(isset($_POST['forgetpasswordverifyotp']))
+        {
+            $otpbyuser = $_POST['otp'];
+            $otp = $_SESSION['otp'];
+            
+            if ($otp == $otpbyuser)
+            {
+                unset($_SESSION['otp']);
+               
+                $_SESSION['forgotpasswordotpverified'] = "success";
+                header("Location: /Febina/Members-Portal/forgetpassword");
+            }
+            else
+            {
+                $_SESSION['forgetpasswordfailure'] = "Mismatch OTP..! Please try again.";
+                header('Location: /Febina/Members-Portal/forgetpassword');
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Forget Password change password
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(isset($_POST['changepassword']))
+        {
+            
         }
     }
 ?>
