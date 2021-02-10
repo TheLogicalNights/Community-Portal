@@ -814,7 +814,7 @@
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
-        //          Forget Password change password
+        //          Reset Password & Change password
         //
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(isset($_POST['changepassword']))
@@ -836,6 +836,23 @@
                     $_SESSION['resetpasswordfailure'] = "Unable to reset password please try again.";
                     unset($_SESSION['email']);
                     header("Location: /Febina/Members-Portal/forgetpassword");
+                }
+            }
+            if(isset($_POST['username']))
+            {
+                $newpassword = $_POST['newpassword'];
+                $username = $_POST['username'];
+                $query = "update user set password = '$newpassword' where username = '$username'";
+                $result = mysqli_query($conn,$query);
+                if($result)
+                {
+                    $_SESSION['changepasswordsuccess'] = "Your password changed successfully.";
+                    header("Location:/Febina/Members-Portal/editprofile");
+                }
+                else
+                {
+                    $_SESSION['changepasswordfailure'] = "Unable to reset password please try again.";
+                    header("Location: /Febina/Members-Portal/editprofile");
                 }
             }   
         }
