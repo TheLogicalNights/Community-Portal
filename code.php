@@ -259,7 +259,7 @@
             }
             else
             {
-                $target_file = "-";
+                $target_file = "https://images.pexels.com/photos/1680172/pexels-photo-1680172.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
                 $query = "insert into posts(name,username,posttitle,post,postid,posted_at,img_path) values('$name','$username','$posttitle','$postbody','$postid','$date','$target_file')";
                 $result = mysqli_query($conn,$query);
                 if($result)
@@ -744,6 +744,45 @@
             $result = mysqli_query($conn,$query);
             $_SESSION['profileupdated'] = "Your facebook link successfully updated..!";
             header("Location:/Febina/Members-Portal/editprofile");
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Forget Password OTP generation
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(isset($_POST['forgetpassword']))
+        {
+            $email = $_POST['email'];
+            $query = "select * from user where email='$email'";
+            $result = mysqli_query($conn,$query);
+            if(mysqli_num_rows($result)==0)
+            {
+                $_SESSION['forgetpasswordfailure'] = "This email address is not registered please try another one.";
+                header('Location: /Febina/Members-Portal/forgetpassword');
+            }
+            else
+            {
+                $otptosend = rand(99999,999999);
+                $to = $_POST['email'];
+                $_SESSION['email'] = $_POST['email'];
+                $subject = "Email Verification";
+                $message = "Hello sir/mam your OTP for email verifivation is ".$otptosend;
+                $headers = "From: swapnil.febina1@gmail.com";
+                
+                if(mail($to,$subject,$message,$headers))
+                {
+
+                    $_SESSION['otp'] = $otptosend;
+                    $_SESSION['email'] = $to;
+                    $_SESSION['otpsuccess'] = "success";
+                    header('Location: /Febina/Members-Portal/forgetpassword');
+                }
+                else
+                {
+                    $_SESSION['RegisterFailure'] = "OTP not send..! Please try again.";
+                    header('Location: /Febina/Members-Portal/forgetpassword');
+                }
+            }
         }
     }
 ?>
