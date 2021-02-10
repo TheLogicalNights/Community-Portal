@@ -48,7 +48,7 @@
                 ?>
             </div>
             <div class="form-container " data-aos="fade-right">
-            <div class="" data-aos="fade-right">
+                <div class="" data-aos="fade-right">
                     <h1 class="mb-5 ms-2">Forget Password ?</h1>
                     <div class="container mb-5">
                         <?php

@@ -856,5 +856,40 @@
                 }
             }   
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Admin Login
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(isset($_POST['adminlogin']))
+        {
+            if ($_SERVER['REQUEST_METHOD'] == "POST") 
+            {
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+            
+                if ($username == "admin" && $password == "admin") 
+                {
+                    
+                    $_SESSION['adminstatus'] = "login";
+                    header("Location: /Febina/Members-Portal/admin");
+                } 
+                else 
+                {
+                    $_SESSION['adminloginfailure'] = "Unable to login check your username or password";
+                    header("Location: /Febina/Members-Portal/adminlogin");
+                }
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Admin Logout
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (isset($_POST['adminlogout']))
+        {
+            unset($_SESSION['adminstatus']);
+            header('Location: /Febina/Members-Portal/adminlogin');
+        }
     }
 ?>

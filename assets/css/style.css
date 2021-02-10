@@ -157,6 +157,7 @@ h6 {
 .post-meta{
     /* background: violet; */
     display: flex;
+    margin: 10px 0;
     justify-content: space-between;
     align-items: center;
 }
@@ -164,6 +165,7 @@ h6 {
 .post-desc-container p{
     min-height: 70px !important;
     overflow-y: hidden;
+    padding: 15px 0;
 }
 
 .feed-cards {
