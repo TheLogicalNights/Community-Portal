@@ -133,8 +133,7 @@
                                     }        
                                         
                                         
-                                $post .= $h.'</h5>
-                                        <p class="card-text">';
+                                $post .= $h.'</h5><div class="post-desc-container">';
                             $p = "";
                             if (strlen($row['post'])>= 80)
                             {
@@ -156,11 +155,13 @@
                                 }
                             }
                             $post .= $p.'
+                            </div>
+                            <div>
                             <form action="/Febina/Members-Portal/readmore" method="post">
                                 <input type="hidden" name="postid" value='.$row['postid'].'>
                                 <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary"> Read more</button>
                             </form>
-                            </p>
+                            </div>
                             <p class="card-text"><small class="text-muted">Last updated '; 
                             date_default_timezone_set('Asia/Kolkata');
                             $datetime2 = strtotime($row['posted_at']);
