@@ -11,3 +11,12 @@ Community Based Responsive Website Template
 - Make the text area of add post resizable
 - Unlink post pics on delete 
 - Post Card heading lenght on card 20 characters
+- render post desicription in card-text p tag
+- add all editor features in ckeditor
+- sanitize desc for cards
+
+
+# For Refactoring 
+
+- separating logic and markup
+- 

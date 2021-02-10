@@ -65,7 +65,7 @@
             <center>
                 <h1 style="padding: 30px 0;">Latest Posts</h1>
             </center>
-            <div class="container feed-cards" data-aos="fade-left">
+            <div class="container feed-cards" data-aos="zoom-in">
             <?php
 
                 if ($res)
@@ -73,8 +73,9 @@
                     while ($row = mysqli_fetch_assoc($res))
                     {
                         $post = '
-                        <div class="card mb-3 post-card">
-                            <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
+                        <div class="card post-card">
+                            <div class="dro
+                            pdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
                                 <a style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                 </a>
@@ -108,11 +109,11 @@
                                 }
                             $post .= '</ul>
                             </div>
-                            <div class="row g-0">
-                                <div class="post-img col-md-4">
+                            <div class="card-inner-box">
+                                <div class="post-img">
                                     <img src="'.$row['img_path'].'" alt="Post Image">
                                 </div>
-                                <div class="col-md-8">
+                                <div class="">
                                     <div class="card-body">
                                         <h5 class="card-title">';
                                         $h = "";
@@ -122,7 +123,7 @@
                                         {
                                             $h .= $row['posttitle'][$i];
                                         }
-                                        $h .= ".....";
+                                        $h .= "...";
                                     }
                                     else
                                     {
@@ -157,56 +158,56 @@
                             $post .= $p.'
                             </div>
                             <div>
-                            <form action="/Febina/Members-Portal/readmore" method="post">
+                            <form class="post-meta" action="/Febina/Members-Portal/readmore" method="post">
                                 <input type="hidden" name="postid" value='.$row['postid'].'>
                                 <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary"> Read more</button>
-                            </form>
-                            </div>
-                            <p class="card-text"><small class="text-muted">Last updated '; 
-                            date_default_timezone_set('Asia/Kolkata');
-                            $datetime2 = strtotime($row['posted_at']);
-                            $datetime1 = strtotime(date("y-m-d H:i:s"));
-                            
-                            $interval = abs($datetime1 - $datetime2);
-                            $min = round($interval/60);
-                            
-                            if ($min >= 60)
-                            {
-                                $hr = round($min/60);
-                                $min = $min%60;
-                                $post .= $hr;
-                                if ($hr>1 && $hr<=24)
+                                <small>';
+                                date_default_timezone_set('Asia/Kolkata');
+                                $datetime2 = strtotime($row['posted_at']);
+                                $datetime1 = strtotime(date("y-m-d H:i:s"));
+                                
+                                $interval = abs($datetime1 - $datetime2);
+                                $min = round($interval/60);
+                                
+                                if ($min >= 60)
                                 {
-                                    $post .= " hrs ".$min;
-                                }
-                                else if ($hr==1)
-                                {
-                                    $post .= " hr ".$min;
+                                    $hr = round($min/60);
+                                    $min = $min%60;
+                                    $post .= $hr;
+                                    if ($hr>1 && $hr<=24)
+                                    {
+                                        $post .= " hrs ".$min;
+                                    }
+                                    else if ($hr==1)
+                                    {
+                                        $post .= " hr ".$min;
+                                    }
+                                    else
+                                    {
+                                        $day = round($hr/24);
+                                        $hr = $hr%24;
+                                        if ($day <= 1)
+                                        {
+                                            $post .= $day." day";
+                                        }
+                                        else
+                                        {
+                                            $post .= $day." days";
+                                        }
+    
+                                        if ($hr <= 1)
+                                            $post .= $hr." hr ".$min;
+                                        else
+                                            $post .= $hr." hrs ".$min;
+                                    }
                                 }
                                 else
                                 {
-                                    $day = round($hr/24);
-                                    $hr = $hr%24;
-                                    if ($day <= 1)
-                                    {
-                                        $post .= $day." day";
-                                    }
-                                    else
-                                    {
-                                        $post .= $day." days";
-                                    }
-
-                                    if ($hr <= 1)
-                                        $post .= $hr." hr ".$min;
-                                    else
-                                        $post .= $hr." hrs ".$min;
+                                    $post .= $min;
                                 }
-                            }
-                            else
-                            {
-                                $post .= $min;
-                            }
-                                $post .= ' mins ago</small></p>
+                                    $post .= ' mins ago</small>
+                            </form>
+                            </div>
                                     </div>
                                 </div>
                             </div>
