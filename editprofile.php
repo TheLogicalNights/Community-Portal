@@ -25,6 +25,24 @@
         ';
         unset($_SESSION['profileupdated']);
     }
+    if(isset($_SESSION['changepasswordfailure']))
+    {
+        echo '
+        <script>
+            swal("Oops..!", "'.$_SESSION['changepasswordfailure'].'", "error");
+        </script>
+        ';
+        unset($_SESSION['changepasswordfailure']);
+    }
+    if(isset($_SESSION['changepasswordsuccess']))
+    {
+        echo '
+        <script>
+            swal("Yeah..!", "'.$_SESSION['changepasswordsuccess'].'", "success");
+        </script>
+        ';
+        unset($_SESSION['changepasswordsuccess']);
+    }
 ?>
 <main>
     <div class="jumbotron usp-section">
@@ -46,6 +64,25 @@
                         <input class="form-control" type="file" id="formFile" name="uploadfile" required>
                         <button type="submit" class="btn btn-primary btn-sm mt-2 removeprofile">Update Profile Picture</button>
                 </div>
+            </form>
+        </div>
+        <hr>
+        <h2 class="text-center mt-4 border-bottom-left-radius">Change Password</h2>
+        <div class="container">
+            <form class="mt-5" action="/Febina/Members-Portal/code" method="POST">
+                <input type="hidden" name="username" value="<?php echo $username; ?>">
+                <div class="mb-3">
+                    <label for="newpassword" class="form-label">New Password</label>
+                    <input type="text" class="form-control" minlength="8" maxlength="16" id="newpassword" name="newpassword"
+                        aria-describedby="emailHelp" required>
+                </div>
+    
+                <div class="mb-3">
+                    <label for="confirmpassword" class="form-label">Confirm Password</label>
+                    <input type="text" class="form-control" id="confirmpassword" name="confirmpassword" minlength="8" maxlength="16" aria-describedby="emailHelp" onkeyup="validate(this);" required>
+                    <small id="small" style="color: red;"></small>
+                </div>
+                <button type="submit" name="changepassword" class="btn btn-primary mt-3">Reset Password</button>
             </form>
         </div>
         <hr>
