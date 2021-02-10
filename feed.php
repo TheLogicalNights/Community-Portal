@@ -65,7 +65,7 @@
             <center>
                 <h1 style="padding: 30px 0;">Latest Posts</h1>
             </center>
-            <div class="container feed-cards" data-aos="zoom-in">
+            <div class="container feed-cards">
             <?php
 
                 if ($res)
@@ -73,7 +73,7 @@
                     while ($row = mysqli_fetch_assoc($res))
                     {
                         $post = '
-                        <div class="card post-card">
+                        <div class="card post-card" data-aos="zoom-in">
                             <div class="dro
                             pdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
                                 <a style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -134,7 +134,7 @@
                                     }        
                                         
                                         
-                                $post .= $h.'</h5><div class="post-desc-container">';
+                                $post .= $h.'</h5><div class="post-desc-container" id="postdesc"> ';
                             $p = "";
                             if (strlen($row['post'])>= 80)
                             {
@@ -155,6 +155,7 @@
                                     $p .= "";
                                 }
                             }
+                            $p = strip_tags($p);
                             $post .= $p.'
                             </div>
                             <div>
@@ -219,6 +220,12 @@
             ?>
         </div>
     </main>
+    <script>
+        input = document.getElementById('postdesc').value;
+        console.log(input);
+        var result =new Sanitizer().sanitizeToString(input);
+        document.getElementById('postdesc').innerHTML = result;
+    </script>
 <?php
     include('footer.php');
 ?>

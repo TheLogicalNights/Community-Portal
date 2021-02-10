@@ -73,7 +73,7 @@ h6 {
 }
 
 .card {
-    background: rgb(253, 248, 247);
+    background: #fcf3e5;
     display: flex;
     margin: 10px 5px;
     padding: 20px;
@@ -84,9 +84,11 @@ h6 {
     -webkit-box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.6);
     -moz-box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.6);
     box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.6);
+    transition: 350ms ease-in-out;
 }
 
 .card:hover {
+    background: #fdeacc;
     -webkit-box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.77);
     -moz-box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.77);
     box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.77);
@@ -142,7 +144,7 @@ h6 {
 }
 
 .post-img img {
-    outline: 2px solid salmon;
+    outline: 2px solid rgb(255, 191, 117);
     outline-offset: -8px;
     transition: 350ms ease-in-out;
 }
@@ -155,12 +157,15 @@ h6 {
 .post-meta{
     /* background: violet; */
     display: flex;
+    margin: 10px 0;
     justify-content: space-between;
     align-items: center;
 }
 
 .post-desc-container p{
-    /* background: red; */
+    min-height: 70px !important;
+    overflow-y: hidden;
+    padding: 15px 0;
 }
 
 .feed-cards {
@@ -181,7 +186,9 @@ h6 {
 }
 
 #dropdownMenu2{
-    border-radius: 50%;
+    background: #ffe8c8 !important;
+     border-radius: 50%;
+     color: black;
 }
 
 .post-card button {
@@ -191,20 +198,24 @@ h6 {
 /* -------------------------------profile--------------------------------- */
 
 .profile-jumbotron {
-    background: #feedd5;
+    background: linear-gradient(33deg , rgb(255, 227, 174) , rgb(222, 166, 248));
 }
-
 .profile-section {
     display: flex;
     padding: 60px 20px;
 }
 
 .profile-img {
-    width: 300px;
+    /* width: 300px; */
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .profile-img img {
     max-width: 100%;
+    border: 1px solid rgb(20, 20, 20);
 }
 
 .profile-details {
@@ -234,7 +245,7 @@ h6 {
     max-width: 90%;
 }
 
-/*------------------ Setup Profile  */
+/*------------------ Setup Profile--------------------------------------  */
 
 .setup-section{
     background:  url('../img/illustrations/back.png'),
@@ -250,6 +261,13 @@ h6 {
     display: flex;
     justify-content: center;
     text-align: center;
+}
+
+
+/*-------------------------- add post  and outline------------------- */
+
+#posttitle , .cke_inner , #postimg , .outline{
+    outline:1px solid #757575;
 }
 
 

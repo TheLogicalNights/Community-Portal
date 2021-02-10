@@ -12,8 +12,10 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous"></script>
     <script src="/Febina/Members-Portal/assets/js/script.js"></script>    <!-- AOS  -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        CKEDITOR.replace( 'postbody' );
+    <script type="text/javascript">
+        CKEDITOR.replace( 'postbody',{
+             removePlugins: 'uploadimage,tabletools,tableselection,table,save,pastefromgdocs,pastefromlibreoffice,pastefromword,removeformat,copyformatting,clipboard,image,newpage,preview,scayt,forms,blockquote,div,language,flash,smiley,pagebreak,iframe'
+        });
     </script>
     
     <script>
