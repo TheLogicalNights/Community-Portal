@@ -159,7 +159,27 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title"><?php echo $row1['posttitle']; ?></h5>
+                                <h5 class="card-title">
+                                <?php 
+                                     $h = "";
+                                     if (strlen($row1['posttitle'])>= 20)
+                                     {
+                                         for ($i = 0; $i < 20; $i++)
+                                         {
+                                             $h .= $row1['posttitle'][$i];
+                                         }
+                                         $h .= ".....";
+                                     }
+                                     else
+                                     {
+                                         for ($i = 0; $i < strlen($row1['posttitle']); $i++)
+                                         {
+                                             $h .= $row1['posttitle'][$i];
+                                         }
+                                     }
+                                    echo $h; 
+                                ?>
+                                </h5>
                                 <p class="card-text">
                                 <?php 
                                     $post = "";

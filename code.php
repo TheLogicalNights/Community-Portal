@@ -226,7 +226,7 @@
                 {
                         if (move_uploaded_file($_FILES["postimg"]["tmp_name"], $target_file)) 
                         {
-                            $query = "insert into posts(name,username,posttitle,post,postid,posted_at,img_path) values('$name','$username','$posttitle','$postbody','$postid','$date','$target_file')";
+                            $query = "insert into posts(name,username,posttitle,post,posted_at,img_path) values('$name','$username','$posttitle','$postbody','$date','$target_file')";
                             $result = mysqli_query($conn,$query);
                             if($result)
                             {

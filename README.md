@@ -10,3 +10,4 @@ Community Based Responsive Website Template
 - Post Display needs improvement
 - Make the text area of add post resizable
 - Unlink post pics on delete 
+- Post Card heading lenght on card 20 characters

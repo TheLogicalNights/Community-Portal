@@ -114,8 +114,26 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">'.$row['posttitle'].'</h5>
-                                        <p class="card-text">';
+                                        <h5 class="card-title">';
+                                        $h = "";
+                                    if (strlen($row['posttitle'])>= 20)
+                                    {
+                                        for ($i = 0; $i < 20; $i++)
+                                        {
+                                            $h .= $row['posttitle'][$i];
+                                        }
+                                        $h .= ".....";
+                                    }
+                                    else
+                                    {
+                                        for ($i = 0; $i < strlen($row['posttitle']); $i++)
+                                        {
+                                            $h .= $row['post'][$i];
+                                        }
+                                    }        
+                                        
+                                        
+                                $post .= $h.'</h5><div class="post-desc-container">';
                             $p = "";
                             if (strlen($row['post'])>= 80)
                             {
@@ -137,11 +155,13 @@
                                 }
                             }
                             $post .= $p.'
+                            </div>
+                            <div>
                             <form action="/Febina/Members-Portal/readmore" method="post">
                                 <input type="hidden" name="postid" value='.$row['postid'].'>
                                 <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary"> Read more</button>
                             </form>
-                            </p>
+                            </div>
                             <p class="card-text"><small class="text-muted">Last updated '; 
                             date_default_timezone_set('Asia/Kolkata');
                             $datetime2 = strtotime($row['posted_at']);
