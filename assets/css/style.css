@@ -73,7 +73,7 @@ h6 {
 }
 
 .card {
-    background: rgb(253, 248, 247);
+    background: #fcf3e5;
     display: flex;
     margin: 10px 5px;
     padding: 20px;
@@ -84,9 +84,11 @@ h6 {
     -webkit-box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.6);
     -moz-box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.6);
     box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.6);
+    transition: 350ms ease-in-out;
 }
 
 .card:hover {
+    background: #fdeacc;
     -webkit-box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.77);
     -moz-box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.77);
     box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.77);
@@ -142,7 +144,7 @@ h6 {
 }
 
 .post-img img {
-    outline: 2px solid salmon;
+    outline: 2px solid rgb(255, 191, 117);
     outline-offset: -8px;
     transition: 350ms ease-in-out;
 }
@@ -181,7 +183,9 @@ h6 {
 }
 
 #dropdownMenu2{
-    border-radius: 50%;
+    background: #ffe8c8 !important;
+     border-radius: 50%;
+     color: black;
 }
 
 .post-card button {
@@ -234,7 +238,7 @@ h6 {
     max-width: 90%;
 }
 
-/*------------------ Setup Profile  */
+/*------------------ Setup Profile--------------------------------------  */
 
 .setup-section{
     background:  url('../img/illustrations/back.png'),
@@ -250,6 +254,13 @@ h6 {
     display: flex;
     justify-content: center;
     text-align: center;
+}
+
+
+/*-------------------------- add post ------------------- */
+
+#posttitle , .cke_inner , #postimg{
+    outline:1px solid #757575;
 }
 
 
