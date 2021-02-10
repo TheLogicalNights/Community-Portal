@@ -43,7 +43,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="/Febina/Members-Portal/assets/img/logo.png" alt="" width="60" height="60" class="d-inline-block align-top"> Febina Community </a>
+                <img src="/Febina/Members-Portal/assets/img/logo.png" alt="" width="60" height="60" class="d-inline-block align-top"> <span style="font-weight:800;">Febina Community</span> </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
