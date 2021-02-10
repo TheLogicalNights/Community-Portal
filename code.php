@@ -54,8 +54,7 @@
             $otpbyuser = $_POST['otp'];
             $otp = $_SESSION['otp'];
             
-            // doing for testing  ! => for passing validation
-            if(!($otp == $otpbyuser))
+            if ($otp == $otpbyuser)
             {
                 unset($_SESSION['otp']);
                
@@ -228,12 +227,6 @@
                 {
                         if (move_uploaded_file($_FILES["postimg"]["tmp_name"], $target_file)) 
                         {
-                            echo $name." ";
-                            echo $username." ";
-                            echo $posttitle." ";
-                            echo $postbody." ";
-                            echo $date." ";
-                            echo $target_file." ";
                             $query = "insert into posts(name,username,posttitle,post,postid,posted_at,img_path) values('$name','$username','$posttitle','$postbody','$postid','$date','$target_file')";
                             $result = mysqli_query($conn,$query);
                             if($result)
@@ -418,8 +411,7 @@
             else
             {
                 echo "Success";
-                $target_file = "-";
-                $query = "update posts set name='$name',username='$username',posttitle='$posttitle',post='$postbody',posted_at='$date',img_path='$target_file' where postid='$postid'";
+                $query = "update posts set name='$name',username='$username',posttitle='$posttitle',post='$postbody',posted_at='$date' where postid='$postid'";
                 $result = mysqli_query($conn,$query);
                 if($result)
                 {
