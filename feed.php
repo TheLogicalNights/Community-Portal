@@ -74,7 +74,7 @@
                     {
                         $post = '
                         <div class="card mb-3 post-card">
-                            <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
+                            <div class="dro`p`down d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
                                 <a style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                 </a>
