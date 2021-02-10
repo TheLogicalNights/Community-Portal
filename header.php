@@ -30,14 +30,21 @@
     <!-- ANIMXYZ  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@animxyz/core@0.4.0/dist/animxyz.min.css">
     
+    </head>
     <Script>
-        function limit(obj) 
+        function validate(obj) 
         {
-            document.getElementById('limit').innerHTML = 200 - obj.value.length + "/200";
+            var newpassword = document.getElementById('newpassword').value;
+            if(newpassword != obj.value)
+            {
+                document.getElementById('small').innerHTML = "Passwords dosn't match....";    
+            }
+            else
+            {
+                document.getElementById('small').innerHTML = "";
+            }
         }
     </script>
-
-    </head>
     <body>    
     <!-- Here is another comment -->    
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
@@ -57,12 +64,10 @@
                     {
                     ?>
                         <li class="nav-item mt-2">
-                            <a class="nav-link" href="/Febina/Members-Portal/feed">Feed <i class="mdi mdi-television-guide"></i>
-</a>
+                            <a class="nav-link" href="/Febina/Members-Portal/feed">Feed <i class="mdi mdi-television-guide"></i></a>
                         </li>
                         <li class="nav-item mt-2">
-                            <a class="nav-link" href="/Febina/Members-Portal/addpost">Add Post <i class="mdi mdi-pen"></i>
-</a>
+                            <a class="nav-link" href="/Febina/Members-Portal/addpost">Add Post <i class="mdi mdi-pen"></i></a>
                         </li>
                         <li class="nav-item mt-2">
                             <a class="nav-link" href="/Febina/Members-Portal/profile">Profile <i class="mdi mdi-account"></i></a>

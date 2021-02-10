@@ -24,6 +24,15 @@
             ';
             unset($_SESSION['loginfailure']);
         }
+        if(isset($_SESSION['resetpasswordsuccess']))
+        {
+            echo '
+            <script>
+                swal("Congratulations..!", "'.$_SESSION['resetpasswordsuccess'].'", "success");
+            </script>
+            ';
+            unset($_SESSION['resetpasswordsuccess']);
+        }
     ?>
 
 

@@ -85,7 +85,7 @@
                     <form action="/Febina/Members-Portal/code" method="POST">
                         <div class="mt-3">
                         <label for="birthdate" class="col-form-label">Birthdate:</label>
-                            <input class="form-control" type="date" id="birthdate" name="birthdate" max="2021-01-01" required>
+                            <input class="form-control" type="date" id="birthdate" name="birthdate" required>
                         </div>
                         <div class="form-floating mt-3">
                             <textarea class="form-control" placeholder="" id="about" name="about" style="height: 100px" maxlength="200" onkeyup="limit(this);" required></textarea>

@@ -13,6 +13,7 @@
         $about = $row['about'];
         $instalink = $row['instalink'];
         $fblink = $row['fblink'];
+        $birthdate = $row['birthdate'];
     }
     $dppath = "/Febina/Members-Portal".ltrim($dppath,".");
     if(isset($_SESSION['profileupdated']))
@@ -72,22 +73,31 @@
             </div>
         </form>
         <hr>
+        <h2 class="text-center mt-4 border-bottom-left-radius">Update Birthdate</h2>
+        <form action="/Febina/Members-Portal/code" method="POST">
+            <div class="container mb-5">
+                    <label for="birthdate" class="form-label">Birthdate</label>
+                    <input type="date" class="form-control" id="birthdate" name="birthdate" value="<?php echo $birthdate; ?>" required> 
+                    <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
+                    <button type="submit" name="updatebirthdate" class="btn btn-primary btn-sm mt-3">Update Birthdate</button>
+            </div>
+        </form>
         <h2 class="text-center mt-4 border-bottom-left-radius">Update Instagram Link</h2>
         <form action="/Febina/Members-Portal/code" method="POST">
             <div class="container mb-5">
                     <label for="instalink" class="form-label">Instagram Link</label>
                     <input type="text" class="form-control" id="instalink" name="instalink" value="<?php echo $instalink; ?>" required> 
                     <input type="hidden" name="updateinstalink" value="<?php echo $_SESSION['username']; ?>">
-                    <button type="submit" class="btn btn-primary btn-sm mt-3">Update Insta Link</button>
+                    <button type="submit" class="btn btn-primary btn-sm mt-3">Update Instagram Link</button>
             </div>
         </form>
-        <h2 class="text-center mt-4 border-bottom-left-radius">Update Instagram Link</h2>
+        <h2 class="text-center mt-4 border-bottom-left-radius">Update Facebook Link</h2>
         <form action="/Febina/Members-Portal/code" method="POST">
             <div class="container mb-5">
                     <label for="instalink" class="form-label">Facebook Link</label>
                     <input type="text" class="form-control" id="fblink" name="fblink" value="<?php echo $fblink; ?>" required> 
                     <input type="hidden" name="updatefblink" value="<?php echo $_SESSION['username']; ?>">
-                    <button type="submit" class="btn btn-primary btn-sm mt-3">Update Insta Link</button>
+                    <button type="submit" class="btn btn-primary btn-sm mt-3">Update Facebook Link</button>
             </div>
         </form>
     </div>
