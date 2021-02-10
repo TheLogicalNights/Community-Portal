@@ -252,7 +252,7 @@
             }
             else
             {
-                $target_file = "https://images.pexels.com/photos/1680172/pexels-photo-1680172.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
+                $target_file = "https://source.unsplash.com/4KLNtB58WOM/725x700";
                 $query = "insert into posts(name,username,posttitle,post,postid,posted_at,img_path) values('$name','$username','$posttitle','$postbody','$postid','$date','$target_file')";
                 $result = mysqli_query($conn,$query);
                 if($result)

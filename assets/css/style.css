@@ -151,7 +151,9 @@ h6 {
     text-align: left;
 }
 
-
+#dropdownMenu2{
+    border-radius: 50%;
+}
 /* -------------------------------profile--------------------------------- */
 
 .profile-jumbotron {
