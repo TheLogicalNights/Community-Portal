@@ -58,10 +58,10 @@
         <div class="jumbotron profile-jumbotron">
             <div class="container">
                 <div class="profile-section">
-                    <div class="profile-img">
+                    <div class="profile-img" data-aos="zoom-out-right">
                         <img src="<?php echo "/Febina/Members-Portal".ltrim($row['dppath'],"."); ?>" class="rounded-circle" width="250" height="250" alt="Profile picture">
                     </div>
-                    <div class="profile-details">
+                    <div class="profile-details" data-aos="zoom-out-left">
                         <h1 class="mt-4"><?php echo $row['name']; ?>
                         <?php
                             if($_SESSION['username']==$row['username'])
@@ -93,7 +93,7 @@
                 <h1 style="padding: 30px 0;">Latest Posts </h1>
             </center>
 
-            <div class="container feed-cards" data-aos="zoom-in">
+            <div class="container feed-cards" >
                 <?php
                     $result1 = 0;
                     if(!isset($_GET['username']))
@@ -114,7 +114,7 @@
                         while ($row1 = mysqli_fetch_assoc($result1))
                         {
                 ?>
-                <div class="card mb-3 post-card">
+                <div class="card mb-3 post-card" data-aos="zoom-in">
                     <div class="row g-0">
                     <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
                                 <a style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -205,7 +205,7 @@
                                     <input type="hidden" name="postid" value=<?php echo $row1['postid'] ?>>
                                     <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary"> Read more</button>
                                 </form>
-                                <p class="card-text mt-2"><small class="text-muted">Last updated 
+                                <p class="card-text mt-2"><small class="text-muted"> 
                                 <?php
                                 $time = "";
                                 date_default_timezone_set('Asia/Kolkata');
