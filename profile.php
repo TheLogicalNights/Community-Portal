@@ -154,7 +154,8 @@
                             </ul>
                             </div>
                         <div class="post-img col-md-4">
-                            <img src="<?php echo "/Febina/Members-Portal".ltrim($row1['img_path'],"."); ?>" alt="Post Image">
+                            <img src="<?php //echo "/Febina/Members-Portal".ltrim($row1['img_path'],".");
+                                        echo $row1['img_path'];?>" alt="Post Image">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
