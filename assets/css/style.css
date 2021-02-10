@@ -120,6 +120,7 @@ h6 {
 
 .post-img {
     display: flex;
+    border: 2px solid rebeccapurple !important;
 }
 
 .post-img img {
