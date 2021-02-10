@@ -120,11 +120,18 @@ h6 {
 
 .post-img {
     display: flex;
-    border: 2px solid rebeccapurple !important;
+    min-height: 200px;
+    min-width: 100%;
+    max-height: 200px;
+    max-width: 200px;
 }
 
 .post-img img {
-    width: 100%;
+    
+}
+
+.card-text{
+
 }
 
 .feed-cards {
