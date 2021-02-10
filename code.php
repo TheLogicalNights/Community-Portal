@@ -786,7 +786,6 @@
             if ($otp == $otpbyuser)
             {
                 unset($_SESSION['otp']);
-               
                 $_SESSION['forgotpasswordotpverified'] = "success";
                 header("Location: /Febina/Members-Portal/forgetpassword");
             }
@@ -803,7 +802,25 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(isset($_POST['changepassword']))
         {
-            
+            if(isset($_SESSION['email']))
+            {
+                $newpassword = $_POST['newpassword'];
+                $email =  $_SESSION['email'];
+                $query = "update user set password = '$newpassword' where email = '$email'";
+                $result = mysqli_query($conn,$query);
+                if($result)
+                {
+                    $_SESSION['resetpasswordsuccess'] = "Your reset password successfully done. Now you can signin.";
+                    unset($_SESSION['email']);
+                    header("Location:/Febina/Members-Portal/signin");
+                }
+                else
+                {
+                    $_SESSION['resetpasswordfailure'] = "Unable to reset password please try again.";
+                    unset($_SESSION['email']);
+                    header("Location: /Febina/Members-Portal/forgetpassword");
+                }
+            }   
         }
     }
 ?>
