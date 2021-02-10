@@ -7,3 +7,5 @@ Community Based Responsive Website Template
 ## Improvement Notes
 
 - Add a glabal variable for base url 
+- Post Display needs improvement
+- Make the text area of add post resizable

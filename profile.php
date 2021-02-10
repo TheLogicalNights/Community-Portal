@@ -141,7 +141,13 @@
                                 else
                                 {
                             ?>
-                                  <li><button class="dropdown-item" type="button">Report</button></li>
+                                  <li>
+                                        <form action="/Febina/Members-Portal/code" method="POST">
+                                            <input type="hidden" name="reportedpostid" value="'.$_SESSION['username'].'">
+                                            <input type="hidden" name="reportedpostid" value="'.$row['postid'].'">
+                                            <button class="dropdown-item" type="submit">Report</button>
+                                        </form>
+                                  </li>
                             <?php
                                 }
                             ?>
