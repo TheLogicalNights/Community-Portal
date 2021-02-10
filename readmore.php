@@ -63,7 +63,7 @@
     }
     else
     {
-        header('Location: /Febina/Members-Portal/feed.php');
+        header('Location: /Febina/Members-Portal/feed');
     }
 ?>
 
