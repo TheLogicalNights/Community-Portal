@@ -114,7 +114,26 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">'.$row['posttitle'].'</h5>
+                                        <h5 class="card-title">';
+                                        $h = "";
+                                    if (strlen($row['posttitle'])>= 20)
+                                    {
+                                        for ($i = 0; $i < 20; $i++)
+                                        {
+                                            $h .= $row['posttitle'][$i];
+                                        }
+                                        $h .= ".....";
+                                    }
+                                    else
+                                    {
+                                        for ($i = 0; $i < strlen($row['posttitle']); $i++)
+                                        {
+                                            $h .= $row['post'][$i];
+                                        }
+                                    }        
+                                        
+                                        
+                                $post .= $h.'</h5>
                                         <p class="card-text">';
                             $p = "";
                             if (strlen($row['post'])>= 80)
