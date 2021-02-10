@@ -124,14 +124,43 @@ h6 {
     min-width: 100%;
     max-height: 200px;
     max-width: 200px;
+    overflow: hidden;
+}
+
+.dropdown{
+    margin-right: 0;
+}
+
+.card-inner-box{
+    min-width:100% ;
+    min-height: 80%;
+}
+
+.card-body{
+    /* background: violet; */
+    min-width: 100%;
 }
 
 .post-img img {
-    
+    outline: 2px solid salmon;
+    outline-offset: -8px;
+    transition: 350ms ease-in-out;
 }
 
-.card-text{
+.post-card:hover img  {
+    outline-offset: -4px;
+    transform: scale(1.05);
+}
 
+.post-meta{
+    /* background: violet; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-desc-container p{
+    /* background: red; */
 }
 
 .feed-cards {
@@ -147,13 +176,18 @@ h6 {
 
 .post-card {
     max-width: 45   0px !important;
-    min-width: 420px !important;
+    min-width: 350px !important;
     text-align: left;
 }
 
 #dropdownMenu2{
     border-radius: 50%;
 }
+
+.post-card button {
+    border-radius: 24px;
+}
+
 /* -------------------------------profile--------------------------------- */
 
 .profile-jumbotron {
