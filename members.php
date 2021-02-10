@@ -11,13 +11,13 @@
     $sno = 0;
 ?>
 
-<main>
-    <div class="jumbotron usp-section" >
+<main style="background:url('./assets/img/banner.jpg')">
+    <div class="jumbotron usp-section" style="padding:80px 0 !important;">
         <div class="container">
             <center>
                 <h1>Members</h1>
             </center>
-            <div class="cards-section">
+            <div>
                 <div class="container">
                     <div class="d-flex justify-content-start me-3">
                         <input data-aos="fade-right" type="text" onkeyup="getSuggestion(this.value)" autocomplete="off" style="width: 45%;" class="form-control" name="search" placeholder="Enter name">
