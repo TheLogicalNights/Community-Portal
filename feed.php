@@ -134,7 +134,7 @@
                                     }        
                                         
                                         
-                                $post .= $h.'</h5><div class="post-desc-container">';
+                                $post .= $h.'</h5><div class="post-desc-container" id="postdesc"> ';
                             $p = "";
                             if (strlen($row['post'])>= 80)
                             {
@@ -155,6 +155,7 @@
                                     $p .= "";
                                 }
                             }
+                            $p = strip_tags($p);
                             $post .= $p.'
                             </div>
                             <div>
@@ -219,6 +220,12 @@
             ?>
         </div>
     </main>
+    <script>
+        input = document.getElementById('postdesc').value;
+        console.log(input);
+        var result =new Sanitizer().sanitizeToString(input);
+        document.getElementById('postdesc').innerHTML = result;
+    </script>
 <?php
     include('footer.php');
 ?>
