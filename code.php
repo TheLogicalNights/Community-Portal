@@ -171,14 +171,17 @@
         if (isset($_POST['addpost']))
         {
             $postid = 0;
-            $query = "select * from posts";
+            $query = "select max(postid) as postid from posts";
 
             $result = mysqli_query($conn,$query);
-            while($row = $result->fetch_assoc())
+            
+            if(mysqli_num_rows($result) == 1)
             {
+                $row = $result->fetch_assoc();
                 $postid = $row['postid'];
             }
             $postid = $postid + 1;
+            echo "postid :".$postid;
             $target_dir = "./postuploads/$postid/";
             $target_file = $target_dir . basename($_FILES["postimg"]["name"]);
             $uploadOk = 1;
@@ -196,6 +199,7 @@
                 if (!file_exists($target_dir)) 
                 { 
                     mkdir($target_dir, 0777, true);
+                    echo " dir :".$target_dir;
                 }
                 // Check if image file is a actual image or fake image
                 $check = getimagesize($_FILES["postimg"]["tmp_name"]);
@@ -226,7 +230,7 @@
                 {
                         if (move_uploaded_file($_FILES["postimg"]["tmp_name"], $target_file)) 
                         {
-                            $query = "insert into posts(name,username,posttitle,post,posted_at,img_path) values('$name','$username','$posttitle','$postbody','$date','$target_file')";
+                            $query = "insert into posts(name,username,posttitle,post,posted_at,img_path,postid) values('$name','$username','$posttitle','$postbody','$date','$target_file','$postid')";
                             $result = mysqli_query($conn,$query);
                             if($result)
                             {
@@ -252,7 +256,7 @@
             else
             {
                 $target_file = "https://images.pexels.com/photos/1680172/pexels-photo-1680172.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
-                $query = "insert into posts(name,username,posttitle,post,posted_at,img_path) values('$name','$username','$posttitle','$postbody','$date','$target_file')";
+                $query = "insert into posts(name,username,posttitle,post,posted_at,img_path,postid) values('$name','$username','$posttitle','$postbody','$date','$target_file','$postid')";
                 $result = mysqli_query($conn,$query);
                 if($result)
                 {
@@ -387,6 +391,26 @@
                             $result = mysqli_query($conn,$query);
                             if($result)
                             {
+                                $dir = "./postuploads/".$postid."/";
+                                
+                                if (is_dir($dir))
+                                {
+                                    if ($fd = opendir($dir))
+                                    {
+                                        while (($file = readdir($fd)) !== false)
+                                        {
+                                            if ($file != "." && $file != "..")
+                                            {
+                                                $file = $dir.$file;
+                                                if ($file != $target_file)
+                                                {    
+                                                   unlink($file);
+                                                }
+                                            }
+                                        }           
+                                        closedir($fd);
+                                    }
+                                }
                                 $_SESSION['postededitsuccessfully'] = "Edited successfully";
                                 header('Location: /Febina/Members-Portal/profile');
                                 
@@ -437,17 +461,31 @@
             $res = mysqli_query($conn,$query);
             $query = "delete from reportuser where postid='$postid'";
             $res = mysqli_query($conn,$query);
+            $query = "select img_path from posts where postid='$postid'";
+            $result = mysqli_query($conn,$query);
+            if($result)
+            {
+                $row = $result->fetch_assoc();
+                $target_file = $row['img_path'];
+                if (file_exists($target_file)) 
+                { 
+                    if(unlink($target_file))
+                    {
+                        rmdir('./postuploads/'.$postid);
+                    }
+                }
+            }
             $query = "delete from posts where postid='$postid'";
             $res = mysqli_query($conn,$query);
             if ($res)
             {
                 $_SESSION['postdeleted'] = "Post deleted..";
-                header('Location: /Febina/Members-Portal/profile');
+                header('Location: /Febina/Members-Portal/feed');
             }
             else
             {
-                $_SESSION['postnotdeleted'] = "Post not deleted..";
-                header('Location: /Febina/Members-Portal/profile');
+               $_SESSION['postnotdeleted'] = "Post not deleted..";
+                header('Location: /Febina/Members-Portal/feed');
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
