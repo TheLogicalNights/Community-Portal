@@ -91,10 +91,9 @@ h6 {
 .card {
     background: #fcf3e5;
     display: flex;
-    margin: 10px 5px;
+    margin:10px;
     padding: 20px;
     border-radius: 8px;
-    max-width: 350px;
     align-items: center;
     text-align: center;
     -webkit-box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.6);
@@ -144,9 +143,8 @@ h6 {
 .post-img {
     display: flex;
     min-height: 200px;
-    min-width: 100%;
     max-height: 200px;
-    max-width: 200px;
+    max-width: 100%;
     overflow: hidden;
 }
 
@@ -172,7 +170,7 @@ h6 {
 
 .post-card:hover img  {
     outline-offset: -4px;
-    transform: scale(1.05);
+    transform: scale(1.15);
 }
 
 .post-meta{
@@ -197,12 +195,14 @@ h6 {
 }
 
 .feed-cards .card img {
-    min-width: 100%;
+    min-width: 95%;
+    max-width: 95%;
+    margin: 10px auto;
 }
 
 .post-card {
-    max-width: 45   0px !important;
-    min-width: 350px !important;
+    min-width: 330px !important;
+    max-width: 330px;
     text-align: left;
 }
 
@@ -407,6 +407,10 @@ h6 {
         font-size: .8em !important;
     }
 
+    .post-card {
+        /* min-width: 80vw !important; */
+        /* max-width: 80vw !important; */
+    }
 
     .banner {
         padding: 100px 20px;
