@@ -213,14 +213,13 @@
                                                             {
                                                                 $hr = round($min/60);
                                                                 $min = $min%60;
-                                                                $time .= $hr;
-                                                                if ($hr>1 && $hr<=24)
+                                                                if ($hr>1 && $hr<24)
                                                                 {
-                                                                    $time .= " hrs ".$min;
+                                                                    $time .= " hrs ";
                                                                 }
                                                                 else if ($hr==1)
                                                                 {
-                                                                    $time .= " hr ".$min;
+                                                                    $time .= " hr ";
                                                                 }
                                                                 else
                                                                 {
@@ -234,11 +233,6 @@
                                                                     {
                                                                         $time .= $day." days";
                                                                     }
-                                
-                                                                    if ($hr <= 1)
-                                                                        $time .= $hr." hr ";
-                                                                    else
-                                                                        $time .= $hr." hrs ";
                                                                 }
                                                             }
                                                             else
