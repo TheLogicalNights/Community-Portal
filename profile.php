@@ -236,18 +236,18 @@
                                                                     }
                                 
                                                                     if ($hr <= 1)
-                                                                        $time .= $hr." hr ".$min;
+                                                                        $time .= $hr." hr ";
                                                                     else
-                                                                        $time .= $hr." hrs ".$min;
+                                                                        $time .= $hr." hrs ";
                                                                 }
                                                             }
                                                             else
                                                             {
-                                                                $time .= $min;
+                                                                $time .= $min." mins ";
                                                             }
                                                             echo $time;
                                                         ?>
-                                                    mins ago
+                                                    ago
                                                     </small>
                                                 </form>
                                             </div>

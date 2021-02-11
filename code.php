@@ -679,6 +679,16 @@
         if(isset($_POST['remove']))
         {
             $username = $_POST['remove'];
+            $query = "select dppath from profile where username = '$username'";
+            $result = mysqli_query($conn,$query);
+            if($row = $result->fetch_assoc())
+            {
+                if($row['dppath'] != "./img/user.png")
+                {
+                    unlink($row['dppath']);
+                }
+
+            }
             $query = "update profile set dppath = './img/user.png' where username = '$username'";
             $result = mysqli_query($conn,$query);
             if(!$result)
@@ -708,6 +718,26 @@
             $folder = "./profilepictures/$username/".$filename; 
             if (move_uploaded_file($tempname, $folder))  
             {
+                $dir = "./profilepictures/$username/";
+                                
+                if (is_dir($dir))
+                {
+                    if ($fd = opendir($dir))
+                    {
+                        while (($file = readdir($fd)) !== false)
+                        {
+                            if ($file != "." && $file != "..")
+                            {
+                                $file = $dir.$file;
+                                if ($file != $folder)
+                                {    
+                                    unlink($file);
+                                }
+                            }
+                        }           
+                        closedir($fd);
+                    }
+                }
                 $query = "update profile set dppath = '$folder' where username = '$username'";
                 $result = mysqli_query($conn,$query);
                 $_SESSION['profileupdated'] = "Your profile picture successfully updated..!";
