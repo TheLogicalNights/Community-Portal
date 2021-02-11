@@ -15,6 +15,9 @@ Community Based Responsive Website Template
 - add all editor features in ckeditor (Done)
 - sanitize desc for cards (Done)
 - Post Title not displaying (Done)
+- Work on Post Date
+  -Eg 1min-1hour-12hour-1day-1week-2week-,1 month..11month...1yr to nyr ago......
+  
 
 
 
