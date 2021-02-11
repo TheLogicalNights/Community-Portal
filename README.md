@@ -14,6 +14,8 @@ Community Based Responsive Website Template
 - render post desicription in card-text p tag
 - add all editor features in ckeditor
 - sanitize desc for cards
+- Post Title not displaying 
+
 
 
 # For Refactoring 
