@@ -11,6 +11,7 @@ body {
 }
 
 main {
+    padding-top: 90px !important; /* for fixed navbar*/
     min-height: 70vh;
 }
 
@@ -31,6 +32,21 @@ h6 {
 .navbar {
     padding: 10px 10px;
 }
+
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+  }
+  
+  /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+  .sticky + .content {
+    padding-top: 60px;
+    border: 5px  solid chartreuse;
+  }
+
 
 .navbar-brand {
     display: flex !important;
@@ -97,6 +113,11 @@ h6 {
 .card img {
     max-width: 80px;
 }
+
+.dropdown-menu{
+    transform: translate(139px, 32px) !important;
+}
+
 
 .story-section {
     background: url(https://images.pexels.com/photos/691919/pexels-photo-691919.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
@@ -202,7 +223,7 @@ h6 {
 }
 .profile-section {
     display: flex;
-    padding: 60px 20px;
+    padding: 20px 20px 30px 20px;
 }
 
 .profile-img {
@@ -371,6 +392,12 @@ h6 {
 /* -------------------------------media queries--------------------  */
 
 @media(max-width:600px) {
+
+    .navbar-brand span{
+        font-size: .8em !important;
+    }
+
+
     .banner {
         padding: 100px 20px;
     }
