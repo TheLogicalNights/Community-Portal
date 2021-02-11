@@ -91,7 +91,7 @@ h6 {
 .card {
     background: #fcf3e5;
     display: flex;
-    margin:10px;
+    margin:10px 5px;
     padding: 20px;
     border-radius: 8px;
     align-items: center;
@@ -100,6 +100,10 @@ h6 {
     -moz-box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.6);
     box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.6);
     transition: 350ms ease-in-out;
+}
+
+.usp-card{
+    max-width: 330px;
 }
 
 .card:hover {
@@ -183,9 +187,10 @@ h6 {
 
 #postdesc{
     min-height: 70px !important;
+    max-height: 70px !important;
+    overflow-y: hidden;
     /* background: chartreuse; */
     /* border: 2px solid; */
-    /* overflow-y: hidden; */
     /* padding: 15px 0; */
 }
 
