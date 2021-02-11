@@ -1,6 +1,6 @@
 <?php
-    include('header.php');
     session_start();
+    include('header.php');
     if(!isset($_SESSION['status']))
     {
         header("Location: /Febina/Members-Portal/signin");
