@@ -181,10 +181,12 @@ h6 {
     align-items: center;
 }
 
-.post-desc-container p{
+#postdesc{
     min-height: 70px !important;
-    overflow-y: hidden;
-    padding: 15px 0;
+    /* background: chartreuse; */
+    /* border: 2px solid; */
+    /* overflow-y: hidden; */
+    /* padding: 15px 0; */
 }
 
 .feed-cards {
