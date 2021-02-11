@@ -35,6 +35,7 @@
         unset($_SESSION['postnotdeleted']);
     }
     $result = "";
+
     if(!isset($_GET['username']))
     {
         if(isset($_SESSION['username']))
@@ -111,136 +112,149 @@
                     }
                     if ($result1)
                     {
-                        while ($row1 = mysqli_fetch_assoc($result1))
+                        while ($row = mysqli_fetch_assoc($result1))
                         {
                 ?>
-                <div class="card mb-3 post-card" data-aos="zoom-in">
-                    <div class="row g-0">
-                    <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
-                                <a style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <?php    if ($row1['username'] == $_SESSION['username'])
-                                {
-                            ?>
-                                    <li>
-                                        <form action="/Febina/Members-Portal/editpost" method="post">
-                                        <input type="hidden" name="postid" value="<?php echo $row1['postid']; ?>">
-                                        <button class="dropdown-item" type="submit" name="editposts">Edit</button>
-                                        </form>
-                                    </li>
-                                    <li>
-                                        <form action="/Febina/Members-Portal/code" method="post">
-                                        <input type="hidden" name="postid" value="<?php echo $row1['postid']; ?>">
-                                        <button onclick="return confirm('Are you sure you want to delete this post ?');" class="dropdown-item" type="submit" name="deletepost">Delete</button>
-                                        </form>
-                                    </li>
-                             <?php 
-                                }
-                                else
-                                {
-                            ?>
-                                  <li>
-                                        <form action="/Febina/Members-Portal/code" method="POST">
-                                            <input type="hidden" name="reportedpostid" value="'.$_SESSION['username'].'">
-                                            <input type="hidden" name="reportedpostid" value="'.$row['postid'].'">
-                                            <button class="dropdown-item" type="submit">Report</button>
-                                        </form>
-                                  </li>
-                            <?php
-                                }
-                            ?>
-                            </ul>
-                            </div>
-                        <div class="post-img col-md-4">
-                            <img src="<?php //echo "/Febina/Members-Portal".ltrim($row1['img_path'],".");
-                                        echo $row1['img_path'];?>" alt="Post Image">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                <?php 
-                                     $h = "";
-                                     if (strlen($row1['posttitle'])>= 20)
-                                     {
-                                         for ($i = 0; $i < 20; $i++)
-                                         {
-                                             $h .= $row1['posttitle'][$i];
-                                         }
-                                         $h .= ".....";
-                                     }
-                                     else
-                                     {
-                                         for ($i = 0; $i < strlen($row1['posttitle']); $i++)
-                                         {
-                                             $h .= $row1['posttitle'][$i];
-                                         }
-                                     }
-                                    echo $h; 
-                                ?>
-                                </h5>
-                                <div class="post-desc-container" id="postdesc">
-                                <?php 
-                                    $post = "";
-                                    if (strlen($row1['post'])>= 80)
-                                    {
-                                        for ($i = 0; $i < 80; $i++)
+                            <div class="card post-card" data-aos="zoom-in">
+                                <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
+                                    <a style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <?php
+                                        if ($_SESSION['username'] == $row['username'])
                                         {
-                                            $post .= $row1['post'][$i];
+                                    ?>
+                                            <li>
+                                                <form action="/Febina/Members-Portal/editpost" method="post">
+                                                <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
+                                                <button class="dropdown-item" type="submit" name="editposts">Edit</button>
+                                                </form>
+                                            </li>
+                                            <li>
+                                                <form action="/Febina/Members-Portal/code" method="post">
+                                                <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
+                                                <button onclick="return confirm('Are you sure you want to delete this post ?');" class="dropdown-item" type="submit" name="deletepost">Delete</button>
+                                                </form>
+                                            </li>
+                                    <?php
                                         }
-                                        $post .= ".....";
-                                    }
-                                    else
-                                    {
-                                        for ($i = 0; $i < strlen($row1['post']); $i++)
+                                        else
                                         {
-                                            $post .= $row1['post'][$i];
+                                    ?>
+                                            <li>
+                                                <form action="/Febina/Members-Portal/code" method="POST">
+                                                    <input type="hidden" name="reportedpostid" value=<?php echo $_SESSION['username']; ?>>
+                                                    <input type="hidden" name="reportedpostid" value=<?php echo $row['postid']; ?>>
+                                                    <button class="dropdown-item" type="submit">Report</button>
+                                                </form>
+                                            </li>
+                                    <?php
                                         }
-                                    }
-                                    $post = strip_tags($post);
-                                    echo $post;
-                                ?>
+                                    ?>
+                                    </ul>
                                 </div>
-                                <div>
-                                <form class="post-meta" action="/Febina/Members-Portal/readmore" method="post">
-                                    <input type="hidden" name="postid" value=<?php echo $row1['postid'] ?>>
-                                    <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary"> Read more</button>
-                                    <small> 
-                                <?php
-                                $time = "";
-                                date_default_timezone_set('Asia/Kolkata');
-                                $datetime2 = strtotime($row1['posted_at']);
-                                $datetime1 = strtotime(date("y-m-d H:i:s"));
-                                $interval = abs($datetime1 - $datetime2);
-                                $min = round($interval/60);
-                                if ($min >= 60)
-                                {
-                                    $hr = round($min/60);
-                                    $min = $min%60;
-                                    $time .= $hr;
-                                    if ($hr>1)
-                                    {
-                                        $time .= " hrs ".$min;
-                                    }
-                                    else if ($hr==1)
-                                    {
-                                        $time .= " hr ".$min;
-                                    }
-                                }
-                                else
-                                {
-                                    $time .= $min;
-                                }
-                                echo $time;
-                                ?>
-                                 mins ago</small>
-                                </form>
+                                <div class="card-inner-box">
+                                    <div class="post-img">
+                                        <img src=<?php echo $row['img_path']; ?> alt="Post Image">
+                                    </div>
+                                    <div class="">
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <?php 
+                                                    $title = strip_tags($row['posttitle']);
+                                            
+                                                    if (strlen($title) > 20)
+                                                    {
+                                                        for ($i = 0; $i < 20; $i++)
+                                                        {
+                                                            echo $title[$i];
+                                                        }
+                                                        echo "...";
+                                                    }
+                                                    else
+                                                    {
+                                                        echo $title;
+                                                    }
+
+                                                ?>
+                                            </h5>
+                                            <div class="post-desc-container" id="postdesc">   
+                                                <?php 
+                                                    $post = strip_tags($row['post']); 
+                                                    if (strlen($post) > 80)
+                                                    {
+                                                        for ($i = 0; $i < 80; $i++)
+                                                        {
+                                                            echo $post[$i];
+                                                        }
+                                                        echo "...";
+                                                    }
+                                                    else
+                                                    {
+                                                        echo $post;
+                                                    }
+                                                ?>
+                                            </div>
+                                            <div>
+                                                <form class="post-meta" action="/Febina/Members-Portal/readmore" method="post">
+                                                    <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
+                                                    <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary"> Read more</button>
+                                                    <small>
+                                                        <?php
+                                                            date_default_timezone_set('Asia/Kolkata');
+                                                            $datetime2 = strtotime($row['posted_at']);
+                                                            $datetime1 = strtotime(date("y-m-d H:i:s"));
+                                                            
+                                                            $interval = abs($datetime1 - $datetime2);
+                                                            $min = round($interval/60);
+                                                            $time = "";
+                                                            if ($min >= 60)
+                                                            {
+                                                                $hr = round($min/60);
+                                                                $min = $min%60;
+                                                                $time .= $hr;
+                                                                if ($hr>1 && $hr<=24)
+                                                                {
+                                                                    $time .= " hrs ".$min;
+                                                                }
+                                                                else if ($hr==1)
+                                                                {
+                                                                    $time .= " hr ".$min;
+                                                                }
+                                                                else
+                                                                {
+                                                                    $day = round($hr/24);
+                                                                    $hr = $hr%24;
+                                                                    if ($day <= 1)
+                                                                    {
+                                                                        $time .= $day." day";
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        $time .= $day." days";
+                                                                    }
+                                
+                                                                    if ($hr <= 1)
+                                                                        $time .= $hr." hr ".$min;
+                                                                    else
+                                                                        $time .= $hr." hrs ".$min;
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                $time .= $min;
+                                                            }
+                                                            echo $time;
+                                                        ?>
+                                                    mins ago
+                                                    </small>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
                 <?php
                         }
                     }
