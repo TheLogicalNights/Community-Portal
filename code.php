@@ -284,7 +284,7 @@
             $name = "";
             $isset = 0;
             $matched = true;
-            $query = "select * from user where username = '$username' and password = '$password'";
+            $query = "select * from user where username = '$username' and password='$password'";
 
             $result = mysqli_query($conn, $query);
             
@@ -292,6 +292,7 @@
             {
                 $row = $result->fetch_assoc();
                 $name = $row['name'];
+
                 $query = "select * from profile where username = '$username'";
 
                 $result = mysqli_query($conn,$query);
@@ -315,8 +316,7 @@
             else 
             {
                 $_SESSION['loginfailure'] = "Invalid username, please try again...";
-                 header("location: /Febina/Members-Portal/signin");
-                
+                header("Location: /Febina/Members-Portal/signin");
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
