@@ -28,6 +28,7 @@
 <div class="container mt-5"  id="editPost">
         <h1 class="mt-2">Edit Post</h1>
     <form action="/Febina/Members-Portal/code" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="redirectto" value="<?php echo $_POST['redirectto']; ?>">
             <input type="hidden" name="postid" value="<?php echo $row['postid']; ?>">
             <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">Post title:</label>
@@ -45,6 +46,11 @@
                 <label for="formFileSm" class="form-label">Select Picture (Optional)</label>
                 <input class="form-control" type="file" id="formFile" name="editeduploadpic" >
             </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" name="removeimage" id="removeimage">
+                <label class="form-check-label" for="removeimage">Remove image</label>
+            </div>
+          
             <hr>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <a type="button" href="/Febina/Members-Portal/profile" class="btn btn-secondary">Close</a>
@@ -58,12 +64,12 @@
         }
         else
         {
-       //     header('Location: /Febina/Members-Portal/profile');    
+            header('Location: /Febina/Members-Portal/'.$_POST['redirectto']);    
         }
     }
     else
     {
-       // header('Location: /Febina/Members-Portal/profile');
+        header('Location: /Febina/Members-Portal/'.$_POST['redirectto']);
     }
     include ('footer.php');
 ?>

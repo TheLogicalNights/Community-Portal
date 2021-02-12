@@ -54,6 +54,24 @@
         ';
         unset($_SESSION['reportfailure']);
     }
+    if(isset($_SESSION['postdeleted']))
+    {
+        echo '
+        <script>
+            swal("Deleted..!", "'.$_SESSION['postdeleted'].'", "success");
+        </script>
+        ';
+        unset($_SESSION['postdeleted']);
+    }
+    if(isset($_SESSION['postnotdeleted']))
+    {
+        echo '
+        <script>
+            swal("Error..!", "'.$_SESSION['postnotdeleted'].'", "error");
+        </script>
+        ';
+        unset($_SESSION['postnotdeleted']);
+    }
 ?>
 
     <main>
@@ -81,14 +99,16 @@
                                     ?>
                                             <li>
                                                 <form action="/Febina/Members-Portal/editpost" method="post">
-                                                <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
-                                                <button class="dropdown-item" type="submit" name="editposts">Edit</button>
+                                                    <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
+                                                    <input type="hidden" name="redirectto" value="feed">
+                                                    <button class="dropdown-item" type="submit" name="editposts">Edit</button>
                                                 </form>
                                             </li>
                                             <li>
                                                 <form action="/Febina/Members-Portal/code" method="post">
-                                                <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
-                                                <button onclick="return confirm('Are you sure you want to delete this post ?');" class="dropdown-item" type="submit" name="deletepost">Delete</button>
+                                                    <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
+                                                    <input type="hidden" name="redirectto" value="feed">
+                                                    <button onclick="return confirm('Are you sure you want to delete this post ?');" class="dropdown-item" type="submit" name="deletepost">Delete</button>
                                                 </form>
                                             </li>
                                     <?php
@@ -169,29 +189,54 @@
                                                                 $min = $min%60;
                                                                 if ($hr>1 && $hr<24)
                                                                 {
-                                                                    $time .= $hr." hrs ".$min;
+                                                                    $time .= $hr." hrs ";
                                                                 }
                                                                 else if ($hr==1)
                                                                 {
-                                                                    $time .= $hr." hr ".$min;
+                                                                    $time .= $hr." hr ";
                                                                 }
                                                                 else
                                                                 {
                                                                     $day = round($hr/24);
-                                                                    $hr = $hr%24;
                                                                     if ($day == 1)
                                                                     {
                                                                         $time .= $day." day ";
                                                                     }
                                                                     if ($day > 1)
                                                                     {
-                                                                        $time .= $day." days ";
+                                                                        if ($day >= 30)
+                                                                        {
+                                                                            $month = (int)($day/30);
+                                                                            if ($month == 1)
+                                                                            {
+                                                                                $time .= $month." month ";
+                                                                            }
+                                                                            else if ($month > 1)
+                                                                            {
+                                                                                if ($month > 12)
+                                                                                {
+                                                                                    $year = (int)($month/12);
+                                                                                    if ($year == 1)
+                                                                                    {
+                                                                                        $time .= $year." year ";
+                                                                                    }
+                                                                                    else if ($year > 1)
+                                                                                    {
+                                                                                        $time .= $year." years ";
+                                                                                    }
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    $time .= $month." months ";
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            $time .= $day." days ";
+                                                                        }
+
                                                                     } 
-                                
-                                                                    if ($hr == 1)
-                                                                        $time .= $hr." hr ";
-                                                                    else if ($hr > 1)
-                                                                        $time .= $hr." hrs ";
                                                                 }
                                                             }
                                                             else

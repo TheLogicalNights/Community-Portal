@@ -128,12 +128,14 @@
                                             <li>
                                                 <form action="/Febina/Members-Portal/editpost" method="post">
                                                 <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
+                                                <input type="hidden" name="redirectto" value="profile">
                                                 <button class="dropdown-item" type="submit" name="editposts">Edit</button>
                                                 </form>
                                             </li>
                                             <li>
                                                 <form action="/Febina/Members-Portal/code" method="post">
                                                 <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
+                                                <input type="hidden" name="redirectto" value="profile">
                                                 <button onclick="return confirm('Are you sure you want to delete this post ?');" class="dropdown-item" type="submit" name="deletepost">Delete</button>
                                                 </form>
                                             </li>
