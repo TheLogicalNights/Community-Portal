@@ -23,7 +23,7 @@
                         <input data-aos="fade-right" type="text" onkeyup="getSuggestion(this.value)" autocomplete="off" style="width: 45%;" class="form-control" name="search" placeholder="Enter name">
                     </div>
                     <div id="data">
-                        <table class='table mt-2' id='myTable'>
+                        <table class='table mt-2'>
                                         <thead>
                                             <tr>
                                                 <th scope='col'>Member name</th>

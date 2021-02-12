@@ -80,8 +80,8 @@
                         </p>
                         <a href="<?php echo $row['fblink']; ?>"> <span class="mdi mdi-facebook" style="color:black; font-size: 2em;"></span></a>
                         <a href="<?php echo $row['instalink']; ?>"> <span class="mdi mdi-instagram" style="color:black; font-size: 2em;"></span></a>
-                        <a href="#"> <span class="mdi mdi-linkedin" style="color:black; font-size: 2em;"></span></a>
-                        <a href="#"> <span class="mdi mdi-youtube" style="color:black; font-size: 2em; "></span></a>
+                        <!-- <a href="#"> <span class="mdi mdi-linkedin" style="color:black; font-size: 2em;"></span></a>
+                        <a href="#"> <span class="mdi mdi-youtube" style="color:black; font-size: 2em; "></span></a> -->
                     </div>
                 </div>
             </div>
