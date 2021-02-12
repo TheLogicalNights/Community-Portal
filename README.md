@@ -9,7 +9,7 @@ Community Based Responsive Website Template
 - Add a glabal variable for base url 
 - Post Display needs improvement (Done)
 - Make the text area of add post resizable
-- Unlink post pics on delete 
+- Unlink post pics on delete (Done)
 - Post Card heading lenght on card 20 characters (Done)
 - render post desicription in card-text p tag (Done)
 - add all editor features in ckeditor (Done)
