@@ -19,6 +19,7 @@ Community Based Responsive Website Template
   -Eg 1min-1hour-12hour-1day-1week-2week-,1 month..11month...1yr to nyr ago......
   -No need to add 1day 5hours etc
 - Wrong sigin attempts should alert with appropriate messages(swal)
+- optimize card image for all resolutions
 
 
 

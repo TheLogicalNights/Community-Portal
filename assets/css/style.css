@@ -107,7 +107,7 @@ h6 {
 }
 
 .card:hover {
-    background: #fdeacc;
+    background: #fdf2e0;
     -webkit-box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.77);
     -moz-box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.77);
     box-shadow: 10px 10px 40px -22px rgba(0, 0, 0, 0.77);
@@ -282,6 +282,7 @@ h6 {
 
 .form-illustration img{
     max-width: 90%;
+    max-height: 70vh;
 }
 
 /*------------------ Setup Profile--------------------------------------  */
