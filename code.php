@@ -641,7 +641,7 @@
                 $rowcount = mysqli_num_rows($result);
                 if($rowcount2==0)
                 {
-                    $query = "insert into report(postid,posttitle,post,reportcount) values('$postid','$reportedposttitle','$reportedpost','1')";
+                    $query = "insert into report(postid,posttitle,post,reportcount,reportedby) values('$postid','$reportedposttitle','$reportedpost','1','$reportedby')";
                     $result = mysqli_query($conn,$query);
                     if(!$result)
                     {
@@ -966,6 +966,68 @@
         {
             unset($_SESSION['adminstatus']);
             header('Location: /Febina/Members-Portal/adminlogin');
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Add new VA key
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(isset($_POST['addvakey']))
+        {
+            $newadharno = $_POST['adharno'];
+            $query = "select * from adharno where adhar='$newadharno'";
+            $result = mysqli_query($conn, $query);
+            if(mysqli_num_rows($result)==0)
+            {
+                $query = "insert into adharno(adhar,valid) values('$newadharno','0')";
+                $result = mysqli_query($conn, $query);
+                if ($result) 
+                {
+                    $to = $_POST['email'];
+                    $_SESSION['email'] = $_POST['email'];
+                    $subject = "VA key alert";
+                    $message = "Hello sir/mam your VA for Febina community is ".$newadharno;
+                    $headers = "From: swapnil.febina1@gmail.com";
+                    
+                    if(mail($to,$subject,$message,$headers))
+                    {
+                        $_SESSION['newvakeysuccess'] = "New VA key added successfully..!";
+                        header('Location: /Febina/Members-Portal/admin');
+                    }
+                }
+            }
+            else
+            {
+                $_SESSION['newadharnofailure'] = "This adhar number is already in use please enter another one";
+                header('Location: /Febina/Members-Portal/admin');
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Remove User
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(isset($_POST['removeuser']))
+        {
+            $username = $_POST['username'];
+            $query = "select * from user where username = '$username'";
+            $result = mysqli_query($conn,$query);
+            $row = $result->fetch_assoc();
+            $seckey = $row['seckey'];
+            $query = "delete from reportuser where username = '$username'";
+            $result = mysqli_query($conn,$query);
+            $query = "delete from report where reportedby = '$username'";
+            $result = mysqli_query($conn,$query);
+            $query = "delete from profile where username = '$username'";
+            $result = mysqli_query($conn,$query);
+            $query = "delete from posts where username = '$username'";
+            $result = mysqli_query($conn,$query);
+            $query = "delete from user where username = '$username'";
+            $result = mysqli_query($conn,$query);
+            $query = "delete from adharno where adhar = '$seckey'";
+            $result = mysqli_query($conn,$query);
+            $_SESSION['userdeletedsuccess'] = "Member removed successfully...!";
+            header('Location: /Febina/Members-Portal/admin');
         }
     }
 ?>
