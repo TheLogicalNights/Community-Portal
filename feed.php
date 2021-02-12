@@ -169,11 +169,11 @@
                                                                 $min = $min%60;
                                                                 if ($hr>1 && $hr<24)
                                                                 {
-                                                                    $time .= $hr." hrs ".$min;
+                                                                    $time .= $hr." hrs ";
                                                                 }
                                                                 else if ($hr==1)
                                                                 {
-                                                                    $time .= $hr." hr ".$min;
+                                                                    $time .= $hr." hr ";
                                                                 }
                                                                 else
                                                                 {
@@ -187,11 +187,6 @@
                                                                     {
                                                                         $time .= $day." days ";
                                                                     } 
-                                
-                                                                    if ($hr == 1)
-                                                                        $time .= $hr." hr ";
-                                                                    else if ($hr > 1)
-                                                                        $time .= $hr." hrs ";
                                                                 }
                                                             }
                                                             else
