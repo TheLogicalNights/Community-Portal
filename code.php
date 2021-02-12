@@ -752,6 +752,56 @@
                 header("Location:/Febina/Members-Portal/editprofile");
             }
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Update Username
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        if (isset($_POST['updateusername']))
+        {
+            $username = $_SESSION['username'];
+            $newusername = $_POST['username'];
+            $path ="";
+            $query = "select username from user where username='$newusername'";
+            $res = mysqli_query($conn,$query);
+            if (mysqli_num_rows($res) == 0)
+            {
+                $query = "select dppath from profile where username='$username'";
+                $res= mysqli_query($conn,$query);
+                if ($res)
+                {
+                    $row = mysqli_fetch_assoc($res);
+                    $dppath = $row['dppath'];
+                    $arr = explode("/",$dppath);
+                    $file = $arr[3];
+                    $path = "./profilepictures/".$newusername."/".$file;
+                    $query = "update user set username='$newusername' where username='$username'";
+                    $res = mysqli_query($conn,$query);
+                    $query = "update profile set username='$newusername',dppath='$path' where username='$username'";
+                    $res = mysqli_query($conn,$query);
+                    $query = "update posts set username='$newusername' where username='$username'";
+                    $res = mysqli_query($conn,$query);
+                    $query = "update report set username='$newusername' where username='$username'";
+                    $res = mysqli_query($conn,$query);
+                    $query = "update reportuser set username='$newusername' where username='$username'";
+                    $res = mysqli_query($conn,$query);
+                
+                    rename('./profilepictures/'.$username,'./profilepictures/'.$newusername);
+                    $_SESSION['username'] = $newusername;
+                    $_SESSION['profileupdated'] = "Your username successfully updated..!";
+                    header("Location:/Febina/Members-Portal/editprofile");
+                }
+            }
+            else
+            {
+                $_SESSION['profileupdatefailure'] = "Username already exists , try another username.";
+                header("Location:/Febina/Members-Portal/editprofile");
+            }
+
+        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
         //          Update Name
