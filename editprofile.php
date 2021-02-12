@@ -25,6 +25,15 @@
         ';
         unset($_SESSION['profileupdated']);
     }
+    if(isset($_SESSION['profileupdatefailure']))
+    {
+        echo '
+        <script>
+            swal("Oops..!", "'.$_SESSION['profileupdatefailure'].'", "error");
+        </script>
+        ';
+        unset($_SESSION['profileupdatefailure']);
+    }
     if(isset($_SESSION['changepasswordfailure']))
     {
         echo '
@@ -85,6 +94,17 @@
                 <button type="submit" name="changepassword" class="btn btn-primary mt-3">Reset Password</button>
             </form>
         </div>
+        <hr>
+        <h2 class="text-center mt-4 border-bottom-left-radius">Update Username</h2>
+        <form action="/Febina/Members-Portal/code" id="updateusername" method="POST">
+            <div class="container mb-5">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control outline" id="username" name="username" value="<?php echo $_SESSION['username']; ?>" required> 
+                   <button type="submit" name="updateusername" class="btn btn-primary btn-sm mt-3">Update Username</button>
+                </div>
+            </div>
+        </form>
         <hr>
         <h2 class="text-center mt-4 border-bottom-left-radius">Update Name</h2>
         <form action="/Febina/Members-Portal/code" id="updatename" method="POST">
