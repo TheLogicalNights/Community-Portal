@@ -20,6 +20,7 @@ Community Based Responsive Website Template
   -No need to add 1day 5hours etc
 - Wrong sigin attempts should alert with appropriate messages(swal)
 - optimize card image for all resolutions
+- add post author on card
 
 
 
