@@ -412,7 +412,7 @@
                                     }
                                 }
                                 $_SESSION['postededitsuccessfully'] = "Edited successfully";
-                                header('Location: /Febina/Members-Portal/profile');
+                                header('Location: /Febina/Members-Portal/'.$_POST['redirectto']);
                                 
                             }     
                             else
@@ -432,12 +432,20 @@
             }
             else
             {
-                $query = "update posts set name='$name',username='$username',posttitle='$posttitle',post='$postbody',posted_at='$date' where postid='$postid'";
+                if ($_POST['removeimage'])
+                {
+                    $target_file = "https://images.pexels.com/photos/1680172/pexels-photo-1680172.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
+                    $query = "update posts set name='$name',username='$username',posttitle='$posttitle',post='$postbody',posted_at='$date',img_path='$target_file' where postid='$postid'";
+                }
+                else
+                {
+                    $query = "update posts set name='$name',username='$username',posttitle='$posttitle',post='$postbody',posted_at='$date' where postid='$postid'";
+                }
                 $result = mysqli_query($conn,$query);
                 if($result)
                 {
                     $_SESSION['postededitsuccessfully'] = "Edit successfully.";
-                    header('Location: /Febina/Members-Portal/profile');
+                    header('Location: /Febina/Members-Portal/'.$_POST['redirectto']);
                     
                 }
                 else
@@ -480,12 +488,12 @@
             if ($res)
             {
                 $_SESSION['postdeleted'] = "Post deleted..";
-                header('Location: /Febina/Members-Portal/feed');
+                header('Location: /Febina/Members-Portal/'.$_POST['redirectto']);
             }
             else
             {
                $_SESSION['postnotdeleted'] = "Post not deleted..";
-                header('Location: /Febina/Members-Portal/feed');
+                header('Location: /Febina/Members-Portal/'.$_POST['redirectto']);
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -128,12 +128,14 @@
                                             <li>
                                                 <form action="/Febina/Members-Portal/editpost" method="post">
                                                 <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
+                                                <input type="hidden" name="redirectto" value="profile">
                                                 <button class="dropdown-item" type="submit" name="editposts">Edit</button>
                                                 </form>
                                             </li>
                                             <li>
                                                 <form action="/Febina/Members-Portal/code" method="post">
                                                 <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
+                                                <input type="hidden" name="redirectto" value="profile">
                                                 <button onclick="return confirm('Are you sure you want to delete this post ?');" class="dropdown-item" type="submit" name="deletepost">Delete</button>
                                                 </form>
                                             </li>
@@ -213,14 +215,13 @@
                                                             {
                                                                 $hr = round($min/60);
                                                                 $min = $min%60;
-                                                                $time .= $hr;
-                                                                if ($hr>1 && $hr<=24)
+                                                                if ($hr>1 && $hr<24)
                                                                 {
-                                                                    $time .= " hrs ".$min;
+                                                                    $time .= " hrs ";
                                                                 }
                                                                 else if ($hr==1)
                                                                 {
-                                                                    $time .= " hr ".$min;
+                                                                    $time .= " hr ";
                                                                 }
                                                                 else
                                                                 {
@@ -234,11 +235,6 @@
                                                                     {
                                                                         $time .= $day." days";
                                                                     }
-                                
-                                                                    if ($hr <= 1)
-                                                                        $time .= $hr." hr ";
-                                                                    else
-                                                                        $time .= $hr." hrs ";
                                                                 }
                                                             }
                                                             else
