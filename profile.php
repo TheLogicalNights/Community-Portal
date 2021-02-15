@@ -261,7 +261,20 @@
 
 
     </main>
-
+    <script type="text/javascript">
+        function addToFavourit(q)
+        {
+            $.ajax({
+                type: "GET",
+                url: "suggestion.php",
+                data: {item:q},
+                success:function(data){
+                $("#data").html(data);
+                }
+            });
+        
+        }
+    </script>
 <?php
     include "./footer.php";
 ?>
