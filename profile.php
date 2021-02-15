@@ -80,6 +80,7 @@
                         </p>
                         <a href="<?php echo $row['fblink']; ?>"> <span class="mdi mdi-facebook" style="color:black; font-size: 2em;"></span></a>
                         <a href="<?php echo $row['instalink']; ?>"> <span class="mdi mdi-instagram" style="color:black; font-size: 2em;"></span></a>
+                        <a type="button" onclick="favourite()"> <span id="fav" class="fa fa-heart-o fa-2x" style="color:black; font-size: 2em;"></span></a>
                         <!-- <a href="#"> <span class="mdi mdi-linkedin" style="color:black; font-size: 2em;"></span></a>
                         <a href="#"> <span class="mdi mdi-youtube" style="color:black; font-size: 2em; "></span></a> -->
                     </div>
@@ -261,6 +262,7 @@
 
 
     </main>
+
     <script type="text/javascript">
         function addToFavourit(q)
         {
@@ -275,6 +277,22 @@
         
         }
     </script>
+    <script type="text/javascript">
+        function favourite()
+        {
+            if (document.getElementById('fav').className == "fa fa-heart-o fa-2x")
+            {
+                document.getElementById('fav').className = "fa fa-heart fa-2x"
+                document.getElementById('fav').style.color = "red";   
+            }
+            else if (document.getElementById('fav').className == "fa fa-heart fa-2x")
+            {
+                document.getElementById('fav').className = "fa fa-heart-o fa-2x";
+                document.getElementById('fav').style.color = "black";
+            }
+        }
+    </script>
+
 <?php
     include "./footer.php";
 ?>
