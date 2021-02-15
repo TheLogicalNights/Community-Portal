@@ -19,7 +19,7 @@
         {
             echo '
             <script>
-                swal("Oops..!", "'.$_SESSION['loginfailure'].'", "error"");
+                swal("Oops..!", "'.$_SESSION['loginfailure'].'", "error");
             </script>
             ';
             unset($_SESSION['loginfailure']);
