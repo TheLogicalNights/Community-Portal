@@ -48,6 +48,8 @@
     {
         $query = "select * from profile where username='".$_GET['username']."'";
         $result = mysqli_query($conn,$query);
+        $query1 = "select * from favourit where uname='".$_GET['username']."' and username='".$_SESSION['username']."'";
+        $result1 = mysqli_query($conn,$query1);
     }
 ?>
     <main>
@@ -80,9 +82,27 @@
                         </p>
                         <a href="<?php echo $row['fblink']; ?>"> <span class="mdi mdi-facebook" style="color:black; font-size: 2em;"></span></a>
                         <a href="<?php echo $row['instalink']; ?>"> <span class="mdi mdi-instagram" style="color:black; font-size: 2em;"></span></a>
-                        <a type="button" onclick="favourite()"> <span id="fav" class="fa fa-heart-o fa-2x" style="color:black; font-size: 2em;"></span></a>
+                        <?php
+                            if($_SESSION['username']!=$row['username'])
+                            {
+                                
+                                if(mysqli_num_rows($result1)==0)
+                                {
+                                    echo '<a type="button" onclick="favourite(this.id)"> <span id="fav" class="fa fa-heart-o fa-2x" style="color:black; font-size: 2em;"></span></a>';
+                                }
+                                else
+                                {
+                                    echo '<a type="button" onclick="favourite(this.id)"> <span id="fav" class="fa fa-heart fa-2x" style="color:red; font-size: 2em;"></span></a>';
+                                }
+                            }
+                        ?>
                         <!-- <a href="#"> <span class="mdi mdi-linkedin" style="color:black; font-size: 2em;"></span></a>
                         <a href="#"> <span class="mdi mdi-youtube" style="color:black; font-size: 2em; "></span></a> -->
+                        <form action="/Febina/Members-Portal/code" id="favouritform" method="POST">
+                            <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
+                            <input type="hidden" name="uname" value="<?php echo $row['username']; ?>">
+                            <input type="hidden" name="name" value="<?php echo $row['name']; ?>">
+                        </form>
                     </div>
                 </div>
             </div>
@@ -171,9 +191,9 @@
                                             </li>
                                             <li>
                                                 <form action="/Febina/Members-Portal/code" method="post">
-                                                <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
-                                                <input type="hidden" name="redirectto" value="profile">
-                                                <button onclick="return confirm('Are you sure you want to delete this post ?');" class="dropdown-item" type="submit" name="deletepost">Delete</button>
+                                                    <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
+                                                    <input type="hidden" name="redirectto" value="profile">
+                                                    <button onclick="return confirm('Are you sure you want to delete this post ?');" class="dropdown-item" type="submit" name="deletepost">Delete</button>
                                                 </form>
                                             </li>
                                     <?php
@@ -295,24 +315,29 @@
             </div>
 
         </div>
-
+        <div id="f">
+                    
+        </div>
 
     </main>
-<script type="text/javascript">
-    function favourite()
-    {
-        if (document.getElementById('fav').className == "fa fa-heart-o fa-2x")
+    <script type="text/javascript">
+        function favourite(id)
         {
-            document.getElementById('fav').className = "fa fa-heart fa-2x"
-            document.getElementById('fav').style.color = "red";   
+            if (document.getElementById('fav').className == "fa fa-heart-o fa-2x")
+            {
+                document.getElementById('fav').className = "fa fa-heart fa-2x"
+                document.getElementById('fav').style.color = "red";  
+                document.getElementById("favouritform").submit();  
+            }
+            else if (document.getElementById('fav').className == "fa fa-heart fa-2x")
+            {
+                document.getElementById('fav').className = "fa fa-heart-o fa-2x";
+                document.getElementById('fav').style.color = "black";
+                document.getElementById("favouritform").submit();  
+            }
         }
-        else if (document.getElementById('fav').className == "fa fa-heart fa-2x")
-        {
-            document.getElementById('fav').className = "fa fa-heart-o fa-2x";
-            document.getElementById('fav').style.color = "black";
-        }
-    }
-</script>
+    </script>
+
 <?php
     include "./footer.php";
 ?>
