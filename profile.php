@@ -111,17 +111,24 @@
         }
         ?>
         <div class="jumbotron feed-body-section">
-            <center>
-                <h1 style="padding: 30px 0;">Favourites</h1>
-            </center>
-            <div class="container favourite-container">
-                <?php
-                    $query = "select * from favourit where username='".$_SESSION['username']."'";
-                    $result = mysqli_query($conn,$query);
-                        if ($result)
+            <?php
+                    if (isset($_GET['username']))
+                    {
+                        $query = "select * from favourit where username='".$_GET['username']."'";
+                    }
+                    else
+                    {
+                        $query = "select * from favourit where username='".$_SESSION['username']."'";
+                    }
+                        $result = mysqli_query($conn,$query);
+                        if ($result && (mysqli_num_rows($result)> 0))
                         {
                             $cnt = 0;
                 ?>
+                            <center>
+                                <h1 style="padding: 30px 0;">Favourites</h1>
+                            </center>
+                            <div class="container favourite-container">
                                 <ul class="list-group user-data" style="max-height:200px;overflow-y:scroll;">
                                 <?php
                                     while ($row = mysqli_fetch_assoc($result))
@@ -129,14 +136,14 @@
                                         if ($cnt % 2 == 0)
                                         { 
                                 ?>
-                                                <a href="/Febina/Members-Portal/profile/<?php echo $row['u_name']; ?>" class="list-group-item text-dark" name='VisitMember' ><?php echo $row['name']; ?></a>
+                                                <a href=<?php echo "/Febina/Members-Portal/profile/".$row['uname'];?> class="list-group-item text-dark" name='VisitMember' ><?php echo $row['name']; ?></a>
                             
                                 <?php
                                         }
                                         else
                                         {
                                 ?>
-                                                <a href="/Febina/Members-Portal/profile/<?php echo $row['u_name']; ?>" name='VisitMember' class='list-group-item list-group-item-warning text-dark'><?php echo $row['name']; ?></a>
+                                                <a href=<?php echo "/Febina/Members-Portal/profile/".$row['uname'];?> name='VisitMember' class='list-group-item list-group-item-warning text-dark'><?php echo $row['name']; ?></a>
                                 <?php
                                         }
                                 $cnt++;
