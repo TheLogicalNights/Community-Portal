@@ -35,13 +35,16 @@
         unset($_SESSION['postnotdeleted']);
     }
     $result = "";
-
+    $cnt = 0;
     if(!isset($_GET['username']))
     {
         if(isset($_SESSION['username']))
         {
             $query = "select * from profile where username='".$_SESSION['username']."'";
             $result = mysqli_query($conn,$query);
+            $query = "select * from favourit where username='".$_SESSION['username']."'";
+            $result1 = mysqli_query($conn,$query);
+            $cnt = mysqli_num_rows($result1);
         }
     }
     if(isset($_GET['username']))
@@ -50,6 +53,9 @@
         $result = mysqli_query($conn,$query);
         $query1 = "select * from favourit where uname='".$_GET['username']."' and username='".$_SESSION['username']."'";
         $result1 = mysqli_query($conn,$query1);
+        $query = "select * from favourit where username='".$_GET['username']."'";
+        $result2 = mysqli_query($conn,$query);
+        $cnt = mysqli_num_rows($result2);
     }
 ?>
     <main>
@@ -76,9 +82,17 @@
                         ?>
                         </h1>
                         <small><a href=""><?php echo $row['username']; ?></a></small>
-                        <p>
-                        <br>
+                        <p class="mt-2">
                         <?php echo $row['about']; ?>
+                        </p>
+                        <p>
+                        <a href=
+                        <?php 
+                                echo "/Febina/Members-Portal/favourite/".$row['username'];
+                        ?>
+                        class="link link-danger" style="text-decoration:none;">
+                         Favourites <span class="badge badge-danger" style="border:1px solid black;color:black"><?php echo $cnt; ?></span>
+                        </a>
                         </p>
                         <a href="<?php echo $row['fblink']; ?>"> <span class="mdi mdi-facebook" style="color:black; font-size: 2em;"></span></a>
                         <a href="<?php echo $row['instalink']; ?>"> <span class="mdi mdi-instagram" style="color:black; font-size: 2em;"></span></a>
