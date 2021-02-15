@@ -31,6 +31,7 @@ Community Based Responsive Website Template
 
       Notice: Trying to access array offset on value of type null in E:\xampp\htdocs\Febina\Members-Portal\profile.php on line 79
 
+- profile setup resolve mandatory 
 
 # For Refactoring 
 
