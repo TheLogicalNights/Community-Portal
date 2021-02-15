@@ -1079,5 +1079,30 @@
             $_SESSION['userdeletedsuccess'] = "Member removed successfully...!";
             header('Location: /Febina/Members-Portal/admin');
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Add or Remove favourit
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(isset($_POST['uname']))
+        {
+            $username = $_POST['username'];
+            $uname = $_POST['uname'];
+            $name = $_POST['name'];
+            $query = "select * from favourit where username='$username' and uname='$uname'";
+            $result = mysqli_query($conn,$query);
+            if(mysqli_num_rows($result)==0)
+            {
+                $query = "insert into favourit(name,username,uname) values('$name','$username','$uname')";
+                $result = mysqli_query($conn,$query);
+                header("Location:/Febina/Members-Portal/profile/".$uname);
+            }
+            else
+            {
+                $query = "delete from favourit where username='$username' and uname='$uname'";
+                $result = mysqli_query($conn,$query);
+                header("Location:/Febina/Members-Portal/profile/".$uname);
+            }
+        }
     }
 ?>
