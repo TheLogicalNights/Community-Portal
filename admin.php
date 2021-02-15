@@ -80,7 +80,10 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <button type=\"button\" class=\"visit btn btn-primary btn-sm\">Visit Profile</button>
+                                <form action='/Febina/Members-Portal/code' method='POST'>
+                                    <input type='hidden' name='username' id='visit' value=".$row['username'].">
+                                    <button type='submit' name='adminVisitMember' class='visit btn btn-primary'>Visit</button>
+                                </form>
                                 </td>
                             </tr>";
             }
