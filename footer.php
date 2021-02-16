@@ -41,10 +41,36 @@
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#myTable').DataTable(
+            {
+                "info" : false,
+                "lengthChange" : false
+            }
+        );
     });
     $(document).ready(function() {
-        $('#myTable1').DataTable();
+        $('#myTable1').DataTable(
+            {
+                "info" : false,
+                "lengthChange" : false
+            }
+        );
+    });
+    $(document).ready(function() {
+        $('#myTable2').DataTable(
+            {
+                "info" : false,
+                "lengthChange" : false
+            }
+        );
+    });
+    $(document).ready(function() {
+        $('#myTable3').DataTable(
+            {
+                "info" : false,
+                "lengthChange" : false
+            }
+        );
     });
 </script>
 </body>

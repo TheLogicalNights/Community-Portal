@@ -6,27 +6,21 @@
     }
     include('header.php');
     include('./database/db.php');
-    if (isset($_GET['username']))
-    {
-        $username = $_GET['username'];
-    } 
-    $query = "select * from favourit where username ='$username'";
+    $query = "select * from favourit where username = '".$_GET['username']."'";
     $result = mysqli_query($conn,$query);
+    $sno = 0;
 ?>
+
 <main style="background:url('./assets/img/banner.jpg')">
     <div class="jumbotron usp-section" style="padding:80px 0 !important;">
         <div class="container">
             <center>
-                <h1>Your Favourites</h1>
+                <h1>Favourites</h1>
+                <br>
             </center>
             <div>
-                <div class="container">
-                    <div class="d-flex justify-content-start me-3">
-                        <input type="hidden" name="username" id="username" value=<?php echo $username; ?> >
-                        <input data-aos="fade-right" type="text" onkeyup="getSuggestion(this.value)" autocomplete="off" style="width: 45%;" class="form-control" name="search" placeholder="Enter name">
-                    </div>
-                    <div id="data">
-                        <table class='table mt-2'>
+                <div class="container mt-3">
+                        <table class='table mt-2' id="myTable2">
                                         <thead>
                                             <tr>
                                                 <th scope='col'>Name</th>
@@ -37,7 +31,7 @@
                         <?php
                                 while($row = mysqli_fetch_assoc($result))
                                 {
-                                  
+                                    $sno++;
                         ?>
                                         <tr>
                                             <td><?php echo $row['name']; ?></td>
@@ -53,27 +47,16 @@
                                 }
                         ?>
                         </table>
-                    </div>
+                   
                 </div>
             </div>
         </div>
     </div>
 </main>
-<script type="text/javascript">
-        function getSuggestion(q)
-        {
-            username = document.getElementById('username').value;
-            $.ajax({
-                type: "GET",
-                url: "suggestion.php",
-                data: {user:q,uname:username},
-                success:function(data){
-                $("#data").html(data);
-                }
-            });
+    <script type="text/javascript">
         
-        }
     </script>
 <?php
-    include ('./footer.php');
+    include('footer.php');
 ?>
+
