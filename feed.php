@@ -7,7 +7,7 @@
     include('./database/db.php');
     $isBirthdate = false;
     $fname = "";
-    $query = "select birthdate,name from profile where username='".$_SESSION['username']."'";
+    $query = "select * from profile where username='".$_SESSION['username']."'";
     $result1 = mysqli_query($conn,$query);
     if ($result1)
     {
