@@ -33,6 +33,24 @@
         ';
         unset($_SESSION['userdeletedsuccess']);
     }
+    if(isset($_SESSION['adminreportedpostnotdeleted']))
+    {
+        echo '
+        <script>
+            swal("Oops..!", "'.$_SESSION['adminreportedpostnotdeleted'].'", "error");
+        </script>
+        ';
+        unset($_SESSION['adminreportedpostnotdeleted']);
+    }
+    if(isset($_SESSION['adminreportedpostdeleted']))
+    {
+        echo '
+        <script>
+            swal("Yeahh..!", "'.$_SESSION['adminreportedpostdeleted'].'", "success");
+        </script>
+        ';
+        unset($_SESSION['adminreportedpostdeleted']);
+    }
 ?>
 <div class="jumbotron usp-section mt-5">
     <div class="container mt-5">
@@ -117,12 +135,16 @@
                                     <td hidden>".$row['post']."</td>
                                     <td>".$row['reportcount']."</td>
                                     <td>
-                                        <button type=\"button\" id=".$row['postid']." class=\"modalbutton btn btn-primary btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#staticBackdrop\">
-                                        View Post
-                                        </button>
+                                        <form action='/Febina/Members-Portal/adminreadmore' method='post'>
+                                            <input type='hidden' name='postid' value=".$row['postid'].">
+                                            <button type='submit' name='readmorefeed' href='readmore.php' class='btn btn-primary btn-sm'> Read more</button>
+                                        </form>        
                                     </td>
                                     <td>
-                                    <button type=\"button\" class=\"deletepost btn btn-primary btn-sm\">Delete</button>
+                                        <form action='/Febina/Members-Portal/code' method='post'>
+                                            <input type='hidden' name='postid' value=".$row['postid'].">
+                                            <button onclick='return confirm('Are you sure you want to delete this post ?');' class='btn btn-primary btn-sm' type='submit' name='admindeletereportedpost'>Delete</button>
+                                        </form>
                                     </td>
                                 </tr>";
                 }
