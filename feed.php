@@ -72,9 +72,24 @@
         ';
         unset($_SESSION['postnotdeleted']);
     }
+    $isBirthdate = false;
+    $query = "select birthdate from profile where username='".$_SESSION['username']."'";
+    $res = mysqli_query($conn,$query);
+    if ($res)
+    {
+        $row = mysqli_fetch_assoc($res);
+        $birthDate = $row['birthdate'];
+        $time = strtotime($birthDate);
+        if(date('m-d') == date('m-d', $time)) 
+        {
+            $isBirthdate = true;
+        }
+    }
+    
 ?>
 
     <main>
+    
         <div class="jumbotron feed-body-section">
             <center>
                 <h1 style="padding: 30px 0;">Latest Posts</h1>
