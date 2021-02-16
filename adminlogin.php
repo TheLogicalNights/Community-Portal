@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if (isset($_SESSION['adminstatus']))
+    {
+        header('Location: admin.php');
+    }
     include('adminheader.php');
     if(isset($_SESSION['adminloginfailure']))
     {

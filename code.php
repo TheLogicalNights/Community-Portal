@@ -639,7 +639,7 @@
                 $query = "select * from report where postid = '$postid'";
                 $result = mysqli_query($conn,$query);
                 $rowcount = mysqli_num_rows($result);
-                if($rowcount2==0)
+                if($rowcount==0)
                 {
                     $query = "insert into report(postid,posttitle,post,reportcount,reportedby) values('$postid','$reportedposttitle','$reportedpost','1','$reportedby')";
                     $result = mysqli_query($conn,$query);
@@ -1149,7 +1149,7 @@
             }
             else
             {
-               $_SESSION['adminpostnotdeleted'] = "Post not deleted..";
+                $_SESSION['adminpostnotdeleted'] = "Post not deleted..";
                 header("Location: /Febina/Members-Portal/adminprofilevisit/".$_POST['username']);
             }
         }

@@ -90,6 +90,45 @@
             ?>
         </table>
     </div>
+
+    <div class="container my-5">
+            <table class="table" id="myTable1">
+                <thead>
+                    <tr>
+                        <th scope="col">Post id</th>
+                        <th scope="col">Post Title</th>
+                        <th scope="col" hidden>Post</th>
+                        <th scope="col">Report Count</th>
+                        <th scope="col">View</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <?php
+                    $query = "select * from report order by reportcount desc";
+                    $result = mysqli_query($conn,$query);
+                    $sno = 0;
+                    while($row = mysqli_fetch_assoc($result))
+                    {
+                        $sno++;
+                        echo"
+                                <tr>
+                                    <td>".$row['postid']."</td>
+                                    <td>".$row['posttitle']."</td>
+                                    <td hidden>".$row['post']."</td>
+                                    <td>".$row['reportcount']."</td>
+                                    <td>
+                                        <button type=\"button\" id=".$row['postid']." class=\"modalbutton btn btn-primary btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#staticBackdrop\">
+                                        View Post
+                                        </button>
+                                    </td>
+                                    <td>
+                                    <button type=\"button\" class=\"deletepost btn btn-primary btn-sm\">Delete</button>
+                                    </td>
+                                </tr>";
+                }
+                ?>
+            </table>
+        </div>
 </div>
 <?php
     include('footer.php');
