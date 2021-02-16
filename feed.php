@@ -22,7 +22,7 @@
     }
     $query = "select * from posts order by posted_at desc";
     $res = mysqli_query($conn,$query);
-    include('header.php');
+    //include('header.php');
     if(isset($_SESSION['postedsuccessfully']))
     {
         echo '
