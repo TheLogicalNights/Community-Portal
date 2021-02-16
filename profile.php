@@ -126,7 +126,7 @@
         ?>
         <div class="jumbotron feed-body-section">
             <center>
-                <h1 style="padding: 30px 0;">Latest Posts </h1>
+                <h1 style="padding: 30px 0;">Your Posts </h1>
             </center>
 
             <div class="container feed-cards" >

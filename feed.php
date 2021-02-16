@@ -5,6 +5,21 @@
         header('Location: signin.php');
     }
     include('./database/db.php');
+    $isBirthdate = false;
+    $fname = "";
+    $query = "select birthdate,name from profile where username='".$_SESSION['username']."'";
+    $result1 = mysqli_query($conn,$query);
+    if ($result1)
+    {
+        $row = mysqli_fetch_assoc($result1);
+        $birthDate = $row['birthdate'];
+        $fname = $row['name'];
+        $time = strtotime($birthDate);
+        if(date('m-d') == date('m-d', $time)) 
+        {
+            $isBirthdate = true;
+        }
+    }
     $query = "select * from posts order by posted_at desc";
     $res = mysqli_query($conn,$query);
     include('header.php');
@@ -72,16 +87,52 @@
         ';
         unset($_SESSION['postnotdeleted']);
     }
+    
+    
 ?>
 
     <main>
-        <div class="jumbotron feed-body-section">
             <center>
                 <h1 style="padding: 30px 0;">Latest Posts</h1>
             </center>
+        <div class="container mt-3" style="background-color: rgb(233,154,100);border-radius:5px;">
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-12">
+                        <div class="card-body ">
+                            <h3 class="card-title text-center" style="font-family: 'Great Vibes', cursive;font-size:40px;">Happy Birthday</h3>
+                            <p class="card-text text-center" >A wish for you on your birthday, whatever you ask may you receive, whatever you seek may you find, whatever you wish may it be fulfilled on your birthday and always. Happy birthday! 
+                                <i class="fa fa-birthday-cake" style="color:brown;"></i>
+                            </p>
+                            <p class="card-text"><small class="text-muted">- Febina Group</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
             <div class="container feed-cards">
+            <?php
+            if ($isBirthdate)
+            {
+            ?>
+            <div class="card post-card" data-aos="zoom-in">
+                    <div class="card-inner-box">
+                        <div class="post-img">
+                            <img src="https://images.pexels.com/photos/2072181/pexels-photo-2072181.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Post Image">
+                        </div>
+                        <div class="card-body">
+                                <h5 class="card-title">
+                                    
+                                </h5>
+                                <div class="post-desc-container" id="postdesc">   
+                                
+                                </div>
+                        </div>
+                    </div>
+            </div>
                 <?php
-
+            }
                     if ($res)
                     {
                         while ($row = mysqli_fetch_assoc($res))
