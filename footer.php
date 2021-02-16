@@ -32,6 +32,9 @@
             $(document).ready(function () {
                 $('#myTable').DataTable();
             });
+            $(document).ready(function () {
+                $('#myTable1').DataTable();
+            });
     </script>
 </body>
 </html>

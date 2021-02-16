@@ -62,9 +62,6 @@
                     {
                     ?>
                         <li class="nav-item mt-2">
-                            <a class="nav-link" href="/Febina/Members-Portal/members">Members <i class="fa fa-users ms-1"></i></a>
-                        </li>
-                        <li class="nav-item mt-2">
                             <form action="/Febina/Members-Portal/code" method="post">
                                 <button class="btn btn-primary" type="submit" name="adminlogout">Sign Out <i class="fa fa-sign-out ms-1" aria-hidden="true"></i></button>
                             </form>

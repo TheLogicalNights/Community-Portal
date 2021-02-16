@@ -12,19 +12,19 @@
     {
         echo '
         <script>
-            swal("Deleted..!", "'.$_SESSION['postdeleted'].'", "success");
+            swal("Deleted..!", "'.$_SESSION['adminpostdeleted'].'", "success");
         </script>
         ';
-        unset($_SESSION['postdeleted']);
+        unset($_SESSION['adminpostdeleted']);
     }
     if(isset($_SESSION['adminpostnotdeleted']))
     {
         echo '
         <script>
-            swal("Error..!", "'.$_SESSION['postnotdeleted'].'", "error");
+            swal("Error..!", "'.$_SESSION['adminpostnotdeleted'].'", "error");
         </script>
         ';
-        unset($_SESSION['postnotdeleted']);
+        unset($_SESSION['adminpostnotdeleted']);
     }
     if(isset($_GET['username']))
     {
@@ -97,7 +97,7 @@
                                                 <form action="/Febina/Members-Portal/code" method="post">
                                                     <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
                                                     <input type="hidden" name="username" value=<?php echo $row['username']; ?>>
-                                                    <button onclick="return confirm('Are you sure you want to delete this post ?');" class="dropdown-item" type="submit" name="deletepost">Delete</button>
+                                                    <button onclick="return confirm('Are you sure you want to delete this post ?');" class="dropdown-item" type="submit" name="admindeletepost">Delete</button>
                                                 </form>
                                             </li>
                                     <?php
