@@ -36,10 +36,13 @@
     }
     $result = "";
     $cnt = 0;
+    $isBirthdate = false;
+    $fname = "";
     if(!isset($_GET['username']))
     {
         if(isset($_SESSION['username']))
         {
+          
             $query = "select * from profile where username='".$_SESSION['username']."'";
             $result = mysqli_query($conn,$query);
             $query = "select * from favourit where username='".$_SESSION['username']."'";
@@ -125,6 +128,7 @@
         }
         ?>
         <div class="jumbotron feed-body-section">
+            
             <center>
                 <h1 style="padding: 30px 0;">Your Posts </h1>
             </center>

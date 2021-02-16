@@ -104,7 +104,7 @@
                 <div class="row g-0">
                     <div class="col-md-12">
                         <div class="card-body ">
-                            <h3 class="card-title text-center" style="font-family: 'Great Vibes', cursive;font-size:40px;">Happy Birthday</h3>
+                            <h3 class="card-title text-center" style="font-family: 'Great Vibes', cursive;font-size:40px;">Happy Birthday <?php echo $fname; ?></h3>
                             <p class="card-text text-center" >A wish for you on your birthday, whatever you ask may you receive, whatever you seek may you find, whatever you wish may it be fulfilled on your birthday and always. Happy birthday! 
                                 <i class="fa fa-birthday-cake" style="color:brown;"></i>
                             </p>
