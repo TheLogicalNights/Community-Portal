@@ -7,7 +7,7 @@
     include('./database/db.php');
     $isBirthdate = false;
     $fname = "";
-    $query = "select birthdate,name from profile where username='".$_SESSION['username']."'";
+    $query = "select * from profile where username='".$_SESSION['username']."'";
     $result1 = mysqli_query($conn,$query);
     if ($result1)
     {
@@ -22,7 +22,7 @@
     }
     $query = "select * from posts order by posted_at desc";
     $res = mysqli_query($conn,$query);
-    //include('header.php');
+    include('header.php');
     if(isset($_SESSION['postedsuccessfully']))
     {
         echo '
