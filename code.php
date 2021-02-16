@@ -1153,5 +1153,45 @@
                 header("Location: /Febina/Members-Portal/adminprofilevisit/".$_POST['username']);
             }
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //          Delete Reported post
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (isset($_POST['admindeletereportedpost']))
+        {
+            $postid = $_POST['postid'];
+
+            $query = "delete from report where postid='$postid'";
+            $res = mysqli_query($conn,$query);
+            $query = "delete from reportuser where postid='$postid'";
+            $res = mysqli_query($conn,$query);
+            $query = "select img_path from posts where postid='$postid'";
+            $result = mysqli_query($conn,$query);
+            if($result)
+            {
+                $row = $result->fetch_assoc();
+                $target_file = $row['img_path'];
+                if (file_exists($target_file)) 
+                { 
+                    if(unlink($target_file))
+                    {
+                        rmdir('./postuploads/'.$postid);
+                    }
+                }
+            }
+            $query = "delete from posts where postid='$postid'";
+            $res = mysqli_query($conn,$query);
+            if ($res)
+            {
+                $_SESSION['adminreportedpostdeleted'] = "Post deleted..";
+                header("Location:/Febina/Members-Portal/admin");
+            }
+            else
+            {
+                $_SESSION['adminreportedpostnotdeleted'] = "Post not deleted..";
+                header("Location: /Febina/Members-Portal/admin");
+            }
+        }
     }
 ?>

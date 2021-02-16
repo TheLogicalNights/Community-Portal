@@ -148,7 +148,7 @@
                                                 ?>
                                             </div>
                                             <div>
-                                                <form class="post-meta" action="/Febina/Members-Portal/readmore" method="post">
+                                                <form class="post-meta" action="/Febina/Members-Portal/adminreadmore" method="post">
                                                     <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
                                                     <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary"> Read more</button>
                                                     <small>
