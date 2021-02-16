@@ -95,7 +95,11 @@
             <center>
                 <h1 style="padding: 30px 0;">Latest Posts</h1>
             </center>
-        <div class="container mt-3" style="background-color: rgb(233,154,100);border-radius:5px;">
+        <?php
+            if ($isBirthdate)
+            {
+        ?>
+        <div class="container mt-3" style="background-color: rgb(233,154,100);border-radius:6px;">
             <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-md-12">
@@ -110,29 +114,11 @@
                 </div>
             </div>
         </div>
-            
-            <div class="container feed-cards">
-            <?php
-            if ($isBirthdate)
-            {
-            ?>
-            <div class="card post-card" data-aos="zoom-in">
-                    <div class="card-inner-box">
-                        <div class="post-img">
-                            <img src="https://images.pexels.com/photos/2072181/pexels-photo-2072181.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Post Image">
-                        </div>
-                        <div class="card-body">
-                                <h5 class="card-title">
-                                    
-                                </h5>
-                                <div class="post-desc-container" id="postdesc">   
-                                
-                                </div>
-                        </div>
-                    </div>
-            </div>
-                <?php
+        <?php
             }
+        ?>    
+            <div class="container feed-cards">
+                <?php
                     if ($res)
                     {
                         while ($row = mysqli_fetch_assoc($res))
