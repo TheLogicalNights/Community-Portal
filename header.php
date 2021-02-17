@@ -96,9 +96,6 @@ date_default_timezone_set("Asia/Kolkata");
                         <li class="nav-item me-3 mt-2">
                             <a href="/Febina/Members-Portal/signup" class="btn btn-primary">Sign Up <i class="fa fa-user-plus ms-1"></i></a>
                         </li>
-                        <li class="nav-item mt-2">
-                            <a href="/Febina/Members-Portal/adminlogin" class="btn btn-primary">Admin <i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
-                        </li>
                     <?php
                     }
                     ?>
