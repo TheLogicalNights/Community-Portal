@@ -458,3 +458,24 @@ h6 {
     }
 }
 
+<<<<<<< HEAD
+=======
+.favourite-section
+{
+    background: linear-gradient(33deg , rgb(11, 14, 224) , rgb(120, 248, 248));
+    display :flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-height: 100px;
+}
+.user-data
+{
+    background-color: red !important;
+    max-height:100px;
+    overflow-y:scroll;
+}
+
+
+>>>>>>> 5ea95d622ddf604226617d8d865c152bbd5ac3e0
