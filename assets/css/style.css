@@ -392,6 +392,26 @@ h6 {
     text-decoration: underline;
 }
 
+.page-wrap {
+    min-height: 75vh;
+}
+
+.favourite-section
+{
+    background: linear-gradient(33deg , rgb(11, 14, 224) , rgb(120, 248, 248));
+    display :flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-height: 100px;
+}
+.user-data
+{
+    background-color: red !important;
+    max-height:100px;
+    overflow-y:scroll;
+}
 
 /* --------------------------Media Queries-------------------- */
 
@@ -438,19 +458,3 @@ h6 {
     }
 }
 
-.favourite-section
-{
-    background: linear-gradient(33deg , rgb(11, 14, 224) , rgb(120, 248, 248));
-    display :flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    max-height: 100px;
-}
-.user-data
-{
-    background-color: red !important;
-    max-height:100px;
-    overflow-y:scroll;
-}

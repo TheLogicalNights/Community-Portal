@@ -61,6 +61,9 @@
                     if (isset($_SESSION['adminstatus']))
                     {
                     ?>
+                        <li class="nav-item">
+                            <a class="nav-link mt-2" aria-current="page" href="/Febina/Members-Portal/todayspost">Today's Post <i class="fa fa-podcast"></i></a>
+                        </li>
                         <li class="nav-item mt-2">
                             <form action="/Febina/Members-Portal/code" method="post">
                                 <button class="btn btn-primary" type="submit" name="adminlogout">Sign Out <i class="fa fa-sign-out ms-1" aria-hidden="true"></i></button>
