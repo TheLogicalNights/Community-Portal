@@ -1,6 +1,11 @@
 <?php
     include "./database/db.php";
     session_start();
+    function startsWith ($string, $startString) 
+    { 
+        $len = strlen($startString); 
+        return (substr($string, 0, $len) === $startString); 
+    } 
     if(isset($_POST['limit']))
     {
         $offset = $_POST['offset'];
@@ -24,7 +29,7 @@
                                 if ($_SESSION['username'] == $row['username'])
                                 {
                             
-                                    echo'.
+                                    echo '
                                     <li>
                                         <form action="/Febina/Members-Portal/editpost" method="post">
                                             <input type="hidden" name="postid" value='.$row['postid'].' >
@@ -39,26 +44,35 @@
                                             <button onclick="return confirm(\'Are you sure you want to delete this post ?\');" class="dropdown-item" type="submit" name="deletepost">Delete</button>
                                         </form>
                                     </li>
-                                    .';
+                                    ';
                                 }
                                 else
                                 {
                             
-                                    echo '.<li>
+                                    echo '<li>
                                         <form action="/Febina/Members-Portal/code" method="POST">
                                             <input type="hidden" name="reportedpostid" value='.$_SESSION['username'].' >
                                             <input type="hidden" name="reportedpostid" value='.$row['postid'].' >
                                             <button class="dropdown-item" type="submit">Report</button>
                                         </form>
                                     </li>
-                                    .';
+                                    ';
                                 }
                             
                             echo '</ul>
                         </div>
                         <div class="card-inner-box">
                             <div class="post-img">
-                                <img src='.$row['img_path'].';  alt="Post Image">
+                                <img src=';
+                                if (startsWith($row['img_path'],"./"))
+                                {
+                                    echo "/Febina/Members-Portal".ltrim($row['img_path'],".");
+                                } 
+                                else
+                                {
+                                    echo $row['img_path'];
+                                }
+                              echo ' alt="Post Image">
                             </div>
                             <div class="">
                                 <div class="card-body">

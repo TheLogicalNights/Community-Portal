@@ -122,7 +122,7 @@
                     'limit':3
                 },
                 success:function(data){
-                    $('#posts').append(data);
+                    $('#posts1').append(data);
                     flag = flag+3;
                 }
             });
@@ -139,7 +139,7 @@
                         'limit':3
                     },
                     success:function(data){
-                        $('#posts').append(data);
+                        $('#posts1').append(data);
                         flag = flag+3;
                     }
                 });
