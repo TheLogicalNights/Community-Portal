@@ -113,7 +113,7 @@
             {
         ?>
         <div class="container mt-3">
-            <div class="card mb-3 main-content" style="background-color:#c70000 ; color:goldenrod;border-style: solid;border-color:none;border-width:2px;animation-name:example;animation-duration:2s;">
+            <div class="card mb-3 main-content" style="background-color:#c70000 ; color:goldenrod;border-style: solid;border-color:goldenrod;border-width:2px;animation-name:example;animation-duration:2s;">
                 
                 <div class="row g-0">
                     <div class="col-md-12">

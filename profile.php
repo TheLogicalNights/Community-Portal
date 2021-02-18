@@ -197,7 +197,7 @@
                                 </div>
                                 <div class="card-inner-box">
                                     <div class="post-img">
-                                        <img src=<?php echo "/Febina/Members-Portal".ltrim($row['img_path'],"."); ?> alt="Post Image">
+                                        <img src=<?php echo $row['img_path']; ?> alt="Post Image">
                                     </div>
                                     <div class="">
                                         <div class="card-body">
