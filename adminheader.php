@@ -55,7 +55,7 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link mt-2" aria-current="page" href="/Febina/Members-Portal/index">Home <i class="mdi mdi-home"></i></a>
+                        <a class="nav-link mt-2" aria-current="page" href="/Febina/Members-Portal/admin">Home <i class="mdi mdi-home"></i></a>
                     </li>
                     <?php
                     if (isset($_SESSION['adminstatus']))
