@@ -79,9 +79,9 @@
             var flag = 0;
             $.ajax({
                 type:"POST",
-                url:"infinitescroll.php",
+                url:"infinitescrollfeed.php",
                 data:{
-                    'offset':0,
+                    'offset':flag,
                     'limit':3
                 },
                 success:function(data){
@@ -96,7 +96,44 @@
                 {
                     $.ajax({
                     type:"POST",
-                    url:"infinitescroll.php",
+                    url:"infinitescrollfeed.php",
+                    data:{
+                        'offset':flag,
+                        'limit':3
+                    },
+                    success:function(data){
+                        $('#posts').append(data);
+                        flag = flag+3;
+                    }
+                });
+            }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function()
+        {
+            var flag = 0;
+            $.ajax({
+                type:"POST",
+                url:"infinitescrollprofile.php",
+                data:{
+                    'offset':flag,
+                    'limit':3
+                },
+                success:function(data){
+                    $('#posts').append(data);
+                    flag = flag+3;
+                }
+            });
+
+            $(window).scroll(function()
+            {
+                if($(window).scrollTop() >= $(document).height() - $(window).height())
+                {
+                    $.ajax({
+                    type:"POST",
+                    url:"infinitescrollprofile.php",
                     data:{
                         'offset':flag,
                         'limit':3
