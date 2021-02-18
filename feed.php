@@ -133,7 +133,12 @@
         <?php
             }
         ?>    
-        <div class="container feed-cards" id="posts"></div>
+
+
+            <div class="container feed-cards" id="posts"></div>
+
+        </div>
+
     </main>
     <script>
         input = document.getElementById('postdesc').value;
