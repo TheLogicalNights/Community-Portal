@@ -244,6 +244,7 @@
                                                     <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary"> Read more</button>
                                                     <small>
                                                         <?php
+
                                                              date_default_timezone_set('Asia/Kolkata');
                                                              $datetime2 = strtotime($row['posted_at']);
                                                              $datetime1 = strtotime(date("y-m-d H:i:s"));
@@ -312,6 +313,7 @@
                                                                  $time .= $min." mins ";
                                                              }
                                                              echo $time;
+
                                                         ?>
                                                     ago
                                                     </small>

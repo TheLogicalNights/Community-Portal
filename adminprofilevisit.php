@@ -4,6 +4,12 @@
     {
         header('Location: adminlogin.php');
     }
+    function startsWith ($string, $startString) 
+    { 
+        $len = strlen($startString); 
+        return (substr($string, 0, $len) === $startString); 
+    } 
+
     date_default_timezone_set("Asia/Kolkata");
     include ('./adminheader.php');
     include ('./database/db.php');
@@ -107,7 +113,18 @@
                                 </div>
                                 <div class="card-inner-box">
                                     <div class="post-img">
-                                        <img src=<?php echo "/Febina/Members-Portal".ltrim($row['img_path'],".") ?> alt="Post Image">
+
+                                        <img src=
+                                        <?php 
+                                            if (startsWith($row['img_path'],"./"))
+                                            {
+                                                echo "/Febina/Members-Portal".ltrim($row['img_path'],".");
+                                            } 
+                                            else
+                                            {
+                                                echo $row['img_path'];
+                                            }
+                                        ?> alt="Post Image">
                                     </div>
                                     <div class="">
                                         <div class="card-body">
@@ -153,44 +170,77 @@
                                                     <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary"> Read more</button>
                                                     <small>
                                                         <?php
-                                                            date_default_timezone_set('Asia/Kolkata');
-                                                            $datetime2 = strtotime($row['posted_at']);
-                                                            $datetime1 = strtotime(date("y-m-d H:i:s"));
+
+                                                             date_default_timezone_set('Asia/Kolkata');
+                                                             $datetime2 = strtotime($row['posted_at']);
+                                                             $datetime1 = strtotime(date("y-m-d H:i:s"));
+                                                             
+                                                             $interval = abs($datetime1 - $datetime2);
+                                                             $min = round($interval/60);
+                                                             $time = "";
+                                                             if ($min >= 60)
+                                                             {
+                                                                 $hr = round($min/60);
+                                                                 $min = $min%60;
+                                                                 if ($hr>1 && $hr<24)
+                                                                 {
+                                                                     $time .= $hr." hrs ";
+                                                                 }
+                                                                 else if ($hr==1)
+                                                                 {
+                                                                     $time .= $hr." hr ";
+                                                                 }
+                                                                 else
+                                                                 {
+                                                                     $day = round($hr/24);
+                                                                     if ($day == 1)
+                                                                     {
+                                                                         $time .= $day." day ";
+                                                                     }
+                                                                     if ($day > 1)
+                                                                     {
+                                                                         if ($day >= 30)
+                                                                         {
+                                                                             $month = (int)($day/30);
+                                                                             if ($month == 1)
+                                                                             {
+                                                                                 $time .= $month." month ";
+                                                                             }
+                                                                             else if ($month > 1)
+                                                                             {
+                                                                                 if ($month > 12)
+                                                                                 {
+                                                                                     $year = (int)($month/12);
+                                                                                     if ($year == 1)
+                                                                                     {
+                                                                                         $time .= $year." year ";
+                                                                                     }
+                                                                                     else if ($year > 1)
+                                                                                     {
+                                                                                         $time .= $year." years ";
+                                                                                     }
+                                                                                 }
+                                                                                 else
+                                                                                 {
+                                                                                     $time .= $month." months ";
+                                                                                 }
+                                                                             }
+                                                                         }
+                                                                         else
+                                                                         {
+                                                                             $time .= $day." days ";
+                                                                         
+                                                                         } 
+                                                                     }
+                                                                 }
+                                                             }
+                                                             else
+                                                             {
+                                                                 $time .= $min." mins ";
+                                                             }
+                                                             echo $time;
+
                                                             
-                                                            $interval = abs($datetime1 - $datetime2);
-                                                            $min = round($interval/60);
-                                                            $time = "";
-                                                            if ($min >= 60)
-                                                            {
-                                                                $hr = round($min/60);
-                                                                $min = $min%60;
-                                                                if ($hr>1 && $hr<24)
-                                                                {
-                                                                    $time .= " hrs ";
-                                                                }
-                                                                else if ($hr==1)
-                                                                {
-                                                                    $time .= " hr ";
-                                                                }
-                                                                else
-                                                                {
-                                                                    $day = round($hr/24);
-                                                                    $hr = $hr%24;
-                                                                    if ($day <= 1)
-                                                                    {
-                                                                        $time .= $day." day";
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        $time .= $day." days";
-                                                                    }
-                                                                }
-                                                            }
-                                                            else
-                                                            {
-                                                                $time .= $min." mins ";
-                                                            }
-                                                            echo $time;
                                                         ?>
                                                     ago
                                                     </small>

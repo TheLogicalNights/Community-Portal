@@ -5,7 +5,9 @@
         header('Location: adminlogin.php');
     }
     include('./database/db.php');
-    include('header.php');
+
+    include('adminheader.php');
+
     if (isset($_POST['readmorefeed']))
     {
         $query = "select * from posts where postid='".$_POST['postid']."'";
