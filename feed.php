@@ -133,6 +133,7 @@
         <?php
             }
         ?>    
+
             <div class="container feed-cards">
                 <?php
                     if ($res)
@@ -312,6 +313,9 @@
                     }
                 ?>
             </div>
+
+            <div class="container feed-cards" id="posts"></div>
+
         </div>
     </main>
     <script>
@@ -320,6 +324,7 @@
         var result =new Sanitizer().sanitizeToString(input);
         document.getElementById('postdesc').innerHTML = result;
     </script>
+    
 <?php
     include('footer.php');
 ?>

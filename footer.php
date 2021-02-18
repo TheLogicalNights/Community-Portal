@@ -73,6 +73,43 @@
         );
     });
 </script>
+<script>
+        $(document).ready(function()
+        {
+            var flag = 0;
+            $.ajax({
+                type:"POST",
+                url:"infinitescroll.php",
+                data:{
+                    'offset':0,
+                    'limit':3
+                },
+                success:function(data){
+                    $('#posts').append(data);
+                    flag = flag+3;
+                }
+            });
+
+            $(window).scroll(function()
+            {
+                if($(window).scrollTop() >= $(document).height() - $(window).height())
+                {
+                    $.ajax({
+                    type:"POST",
+                    url:"infinitescroll.php",
+                    data:{
+                        'offset':flag,
+                        'limit':3
+                    },
+                    success:function(data){
+                        $('#posts').append(data);
+                        flag = flag+3;
+                    }
+                });
+            }
+            });
+        });
+    </script>
 </body>
 
 </html>
