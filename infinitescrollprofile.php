@@ -13,33 +13,74 @@
         $query = "select * from posts order by posted_at DESC limit {$limit} offset {$offset} ";
         $res = mysqli_query($conn,$query);
         
-        echo '<div class="container feed-cards" >';        
-                    $result1 = 0;
-                    if(!isset($_GET['username']))
-                    {
-                        if(isset($_SESSION['username']))
-                        {
-                            $query1 = "select * from posts where username='".$_SESSION['username']."'";
-                            $result1 = mysqli_query($conn,$query1);
-                        }
-                    }
-                    if(isset($_GET['username']))
-                    {
-                        $query1 = "select * from posts where username='".$_GET['username']."'";
-                        $result1 = mysqli_query($conn,$query1);
-                    }
-                    if ($result1)
-                    {
-                        while ($row = mysqli_fetch_assoc($result1))
-                        {
-                
-                            echo '<div class="card post-card" data-aos="zoom-in">
-                                <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
-                                <a style="margin-right:auto;color:black;font-weight:700;text-decoration:none;" href="/Febina/Members-Portal/profile/'.$row['username'].' ">'.$row['name'].'</a>
-                                    <a style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">';
+        echo '<div class="container feed-cards">';
+            if ($res)
+            {
+                while ($row = mysqli_fetch_assoc($res))
+                {
+                    echo '<div class="card post-card" data-aos="zoom-in">
+                        <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
+                            <a style="margin-right:auto;color:black;font-weight:700;text-decoration:none;" href="/Febina/Members-Portal/profile/'.$row['username'].'">'.$row['name'] .'</a>
+                            <a  style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">';
+                            
+                                if ($_SESSION['username'] == $row['username'])
+                                {
+                            
+                                    echo '
+                                    <li>
+                                        <form action="/Febina/Members-Portal/editpost" method="post">
+                                            <input type="hidden" name="postid" value='.$row['postid'].' >
+                                            <input type="hidden" name="redirectto" value="feed">
+                                            <button class="dropdown-item" type="submit" name="editposts">Edit</button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <form action="/Febina/Members-Portal/code" method="post">
+                                            <input type="hidden" name="postid" value='.$row['postid'].' >
+                                            <input type="hidden" name="redirectto" value="feed">
+                                            <button onclick="return confirm(\'Are you sure you want to delete this post ?\');" class="dropdown-item" type="submit" name="deletepost">Delete</button>
+                                        </form>
+                                    </li>
+                                    ';
+                                }
+                                else
+                                {
+                            
+                                    echo '<li>
+                                        <form action="/Febina/Members-Portal/code" method="POST">
+                                            <input type="hidden" name="reportedpostid" value='.$_SESSION['username'].' >
+                                            <input type="hidden" name="reportedpostid" value='.$row['postid'].' >
+                                            <button class="dropdown-item" type="submit">Report</button>
+                                        </form>
+                                    </li>
+                                    ';
+                                }
+                            
+                            echo '</ul>
+                        </div>
+                        <div class="card-inner-box">
+                            <div class="post-img">
+                                <img src=';
+                                if (startsWith($row['img_path'],"./"))
+                                {
+                                    echo "/Febina/Members-Portal".ltrim($row['img_path'],".");
+                                } 
+                                else
+                                {
+                                    
+                                    echo $row['img_path'];
+                                }
+                              echo ' alt="Post Image">
+                            </div>
+                            <div class="">
+                                <div class="card-body">
+                                    <h5 class="card-title">';
+                                       
+                                            $title = strip_tags($row['posttitle']);
+
                                     
                                         if ($_SESSION['username'] == $row['username'])
                                         {
