@@ -29,7 +29,7 @@
                                 if ($_SESSION['username'] == $row['username'])
                                 {
                             
-                                    echo'.
+                                    echo'
                                     <li>
                                         <form action="/Febina/Members-Portal/editpost" method="post">
                                             <input type="hidden" name="postid" value='.$row['postid'].' >
@@ -44,19 +44,19 @@
                                             <button onclick="return confirm(\'Are you sure you want to delete this post ?\');" class="dropdown-item" type="submit" name="deletepost">Delete</button>
                                         </form>
                                     </li>
-                                    .';
+                                    ';
                                 }
                                 else
                                 {
                             
-                                    echo '.<li>
+                                    echo '<li>
                                         <form action="/Febina/Members-Portal/code" method="POST">
                                             <input type="hidden" name="reportedpostid" value='.$_SESSION['username'].' >
                                             <input type="hidden" name="reportedpostid" value='.$row['postid'].' >
                                             <button class="dropdown-item" type="submit">Report</button>
                                         </form>
                                     </li>
-                                    .';
+                                    ';
                                 }
                             
                             echo '</ul>
