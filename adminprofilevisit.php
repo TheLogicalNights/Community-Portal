@@ -122,6 +122,7 @@
                                             } 
                                             else
                                             {
+                                                
                                                 echo $row['img_path'];
                                             }
                                         ?> alt="Post Image">
