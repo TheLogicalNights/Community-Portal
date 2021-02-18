@@ -9,6 +9,7 @@
         $len = strlen($startString); 
         return (substr($string, 0, $len) === $startString); 
     } 
+
     date_default_timezone_set("Asia/Kolkata");
     include ('./adminheader.php');
     include ('./database/db.php');
@@ -112,6 +113,7 @@
                                 </div>
                                 <div class="card-inner-box">
                                     <div class="post-img">
+
                                         <img src=
                                         <?php 
                                             if (startsWith($row['img_path'],"./"))
@@ -168,6 +170,7 @@
                                                     <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary"> Read more</button>
                                                     <small>
                                                         <?php
+
                                                              date_default_timezone_set('Asia/Kolkata');
                                                              $datetime2 = strtotime($row['posted_at']);
                                                              $datetime1 = strtotime(date("y-m-d H:i:s"));
@@ -236,6 +239,8 @@
                                                                  $time .= $min." mins ";
                                                              }
                                                              echo $time;
+
+                                                            
                                                         ?>
                                                     ago
                                                     </small>
