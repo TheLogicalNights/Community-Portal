@@ -100,7 +100,7 @@
             else 
             {
                 $present = true;
-                $query = "select * from user";
+                $query = "select * from user order by sr_no ASC";
                 $result = mysqli_query($conn, $query);
                 while ($row = $result->fetch_assoc()) 
                 {
@@ -1064,6 +1064,12 @@
             $result = mysqli_query($conn,$query);
             $row = $result->fetch_assoc();
             $seckey = $row['seckey'];
+            $query = "delete from reportuser where postid in (select postid from posts where username='$username')";
+            $result = mysqli_query($conn,$query);
+            $query = "delete from report where postid in (select postid from posts where username='$username')";
+            $result = mysqli_query($conn,$query);
+            $query = "delete from favourit where username='$username' or uname='$username'";
+            $result = mysqli_query($conn,$query);
             $query = "delete from reportuser where username = '$username'";
             $result = mysqli_query($conn,$query);
             $query = "delete from report where reportedby = '$username'";
