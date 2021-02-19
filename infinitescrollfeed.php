@@ -115,9 +115,12 @@
                                             }
                                         
                                     echo '</div>
+                                    
                                     <div>
+                                    
                                         <form class="post-meta" action="/Febina/Members-Portal/readmore" method="post">
                                             <input type="hidden" name="postid" value='.$row['postid'].' >
+                                            <a type="button" id=like'.$row['postid'].' onclick="Like(this.id)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up fa-2x" style="color: #FFAB01;"></span></a>
                                             <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary"> Read more</button>
                                             <small>';
                                                 

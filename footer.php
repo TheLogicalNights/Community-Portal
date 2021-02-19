@@ -109,6 +109,19 @@
             }
             });
         });
+        function Like(q)
+        {
+            id = q.replace('like','');
+            console.log(id);
+            if (document.getElementById(id).className == "fa fa-thumbs-up fa-2x")
+            {
+                document.getElementById(id).className = "fa fa-thumbs-o-up fa-2x";
+            }
+            else
+            {
+                document.getElementById(id).className = "fa fa-thumbs-up fa-2x";
+            }
+        }
     </script>
 </body>
 

@@ -148,6 +148,7 @@
         console.log(input);
         var result =new Sanitizer().sanitizeToString(input);
         document.getElementById('postdesc').innerHTML = result;
+        
     </script>
     
 <?php
