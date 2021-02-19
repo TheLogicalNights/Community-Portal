@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="col mb-3">
                                     <label for="password" class="form-label  ">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" required>
+                                    <input type="password" class="form-control" id="password" minlength="8" maxlength="16" name="password" required>
                                 </div>
                             </div>
                             
