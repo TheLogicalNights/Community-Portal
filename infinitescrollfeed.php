@@ -119,7 +119,7 @@
                                     <div>
                                     
                                         <form class="post-meta" action="/Febina/Members-Portal/readmore" method="GET">
-                                            <input type="hidden" name="postid" value='.$row['postid'].' >';
+                                            ';
                                             if (isset($_SESSION['username']))
                                             {
                                                 echo '<a type="button" style="padding:5px;border-radius:25%;border: solid 1px orange;" id=like'.$row['postid'].' onclick="Like(this.id)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up fa-2x" style="color: #FFAB01;"></span></a>';

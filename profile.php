@@ -240,7 +240,7 @@
                                             </div>
                                             <div>
                                                 <form class="post-meta" action="/Febina/Members-Portal/readmore" method="post">
-                                                    <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
+                                                    
                                                     <?php    
                                                         if (isset($_SESSION['username']))
                                                         {
