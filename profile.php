@@ -245,7 +245,10 @@
                                                         if (isset($_SESSION['username']))
                                                         {
                                                     ?>
-                                                            <a type="button" style="padding:5px;border-radius:25%;border: solid 1px orange;" id="like<?php echo $row['postid']; ?>" onclick="Like(this.id)"> <span id=<?php echo $row['postid']; ?> class="fa fa-thumbs-o-up fa-2x" style="color: #FFAB01;"></span></a>
+                                                            <a type="button" style="padding:5px;border-radius:25%;border: solid 1px orange;max-width: 41.55px;min-width: 41.55px;" id="like<?php echo $row['postid']; ?>" onclick="Like(this.id)"> 
+                                                            <span id=<?php echo $row['postid']; ?> class="fa fa-thumbs-o-up fa-2x" style="color: #FFAB01;font-size:1rem;">
+                                                            </span>
+                                                            </a>
                                                     <?php
                                                         }
                                                     ?>
