@@ -118,10 +118,13 @@
                                     
                                     <div>
                                     
-                                        <form class="post-meta" action="/Febina/Members-Portal/readmore" method="post">
-                                            <input type="hidden" name="postid" value='.$row['postid'].' >
-                                            <a type="button" id=like'.$row['postid'].' onclick="Like(this.id)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up fa-2x" style="color: #FFAB01;"></span></a>
-                                            <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary"> Read more</button>
+                                        <form class="post-meta" action="/Febina/Members-Portal/readmore" method="GET">
+                                            <input type="hidden" name="postid" value='.$row['postid'].' >';
+                                            if (isset($_SESSION['username']))
+                                            {
+                                                echo '<a type="button" style="padding:5px;border-radius:25%;border: solid 1px orange;" id=like'.$row['postid'].' onclick="Like(this.id)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up fa-2x" style="color: #FFAB01;"></span></a>';
+                                            }
+                                            echo '<a type="button" name="readmorefeed" href="readmore.php?postid='.$row['postid'].'" class="btn btn-primary"> Read more</a>
                                             <small>';
                                                 
                                                     date_default_timezone_set('Asia/Kolkata');
@@ -195,6 +198,7 @@
                                                 
                                             echo 'ago';
                                             echo '</small>
+                                            
                                         </form>
                                     </div>
                                 </div>

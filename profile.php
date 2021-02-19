@@ -241,7 +241,15 @@
                                             <div>
                                                 <form class="post-meta" action="/Febina/Members-Portal/readmore" method="post">
                                                     <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
-                                                    <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary"> Read more</button>
+                                                    <?php    
+                                                        if (isset($_SESSION['username']))
+                                                        {
+                                                    ?>
+                                                            <a type="button" style="padding:5px;border-radius:25%;border: solid 1px orange;" id="like<?php echo $row['postid']; ?>" onclick="Like(this.id)"> <span id=<?php echo $row['postid']; ?> class="fa fa-thumbs-o-up fa-2x" style="color: #FFAB01;"></span></a>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                    <a type="button" name="readmorefeed" href="readmore.php?postid=<?php echo $row['postid']; ?>" class="btn btn-primary"> Read more</a>
                                                     <small>
                                                         <?php
 

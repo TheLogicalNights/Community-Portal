@@ -1,14 +1,14 @@
 <?php
     session_start();
-    if (!isset($_SESSION['status']))
-    {
-        header('Location: signin.php');
-    }
+    // if (!isset($_SESSION['status']))
+    // {
+    //     header('Location: signin.php');
+    // }
     include('./database/db.php');
     include('header.php');
-    if (isset($_POST['readmorefeed']))
+    if (isset($_GET['postid']))
     {
-        $query = "select * from posts where postid='".$_POST['postid']."'";
+        $query = "select * from posts where postid='".$_GET['postid']."'";
         $result = mysqli_query($conn,$query);
         if ($result)
         {
@@ -64,7 +64,7 @@
         }
         else
         {
-            header('Location: /Febina/Members-Portal/feed.php');
+            header('Location: /Febina/Members-Portal/feed');
         }
     }
     else
