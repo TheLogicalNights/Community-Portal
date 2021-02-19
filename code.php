@@ -100,7 +100,7 @@
             else 
             {
                 $present = true;
-                $query = "select * from user where username = '$username'";
+                $query = "select * from user";
                 $result = mysqli_query($conn, $query);
                 while ($row = $result->fetch_assoc()) 
                 {
