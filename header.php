@@ -65,12 +65,13 @@ date_default_timezone_set("Asia/Kolkata");
                     <li class="nav-item">
                         <a class="nav-link me-2 mt-2" aria-current="page" href="/Febina/Members-Portal/index">Home <i class="mdi mdi-home"></i></a>
                     </li>
+                    <li class="nav-item mt-2">
+                            <a class="nav-link" href="/Febina/Members-Portal/feed">Feed <i class="mdi mdi-television-guide"></i></a>
+                    </li>
                     <?php
                     if (isset($_SESSION['status'])) {
                     ?>
-                        <li class="nav-item mt-2">
-                            <a class="nav-link" href="/Febina/Members-Portal/feed">Feed <i class="mdi mdi-television-guide"></i></a>
-                        </li>
+                        
                         <li class="nav-item mt-2">
                             <a class="nav-link" href="/Febina/Members-Portal/addpost">Add Post <i class="mdi mdi-pen"></i></a>
                         </li>

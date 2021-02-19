@@ -1,23 +1,26 @@
 <?php
     session_start();
-    if (!isset($_SESSION['status']))
-    {
-        header('Location: signin.php');
-    }
+    // if (!isset($_SESSION['status']))
+    // {
+    //     header('Location: signin.php');
+    // }
     include('./database/db.php');
     $isBirthdate = false;
     $fname = "";
-    $query = "select * from profile where username='".$_SESSION['username']."'";
-    $result1 = mysqli_query($conn,$query);
-    if ($result1)
+    if (isset($_SESSION['username']))
     {
-        $row = mysqli_fetch_assoc($result1);
-        $birthDate = $row['birthdate'];
-        $fname = $row['name'];
-        $time = strtotime($birthDate);
-        if(date('m-d') == date('m-d', $time)) 
+        $query = "select * from profile where username='".$_SESSION['username']."'";
+        $result1 = mysqli_query($conn,$query);
+        if ($result1)
         {
-            $isBirthdate = true;
+            $row = mysqli_fetch_assoc($result1);
+            $birthDate = $row['birthdate'];
+            $fname = $row['name'];
+            $time = strtotime($birthDate);
+            if(date('m-d') == date('m-d', $time)) 
+            {
+                $isBirthdate = true;
+            }
         }
     }
     $query = "select * from posts order by posted_at desc";

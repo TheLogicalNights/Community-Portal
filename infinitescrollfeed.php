@@ -23,44 +23,47 @@
                             <a style="margin-right:auto;color:black;font-weight:700;text-decoration:none;" href="/Febina/Members-Portal/profile/'.$row['username'].'">'.$row['name'] .'</a>
                             <a  style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">';
-                            
-                                if ($_SESSION['username'] == $row['username'])
-                                {
-                            
-                                    echo'
-                                    <li>
-                                        <form action="/Febina/Members-Portal/editpost" method="post">
-                                            <input type="hidden" name="postid" value='.$row['postid'].' >
-                                            <input type="hidden" name="redirectto" value="feed">
-                                            <button class="dropdown-item" type="submit" name="editposts">Edit</button>
-                                        </form>
-                                    </li>
-                                    <li>
-                                        <form action="/Febina/Members-Portal/code" method="post">
-                                            <input type="hidden" name="postid" value='.$row['postid'].' >
-                                            <input type="hidden" name="redirectto" value="feed">
-                                            <button onclick="return confirm(\'Are you sure you want to delete this post ?\');" class="dropdown-item" type="submit" name="deletepost">Delete</button>
-                                        </form>
-                                    </li>
-                                    ';
-                                }
-                                else
-                                {
-                            
-                                    echo '<li>
-                                        <form action="/Febina/Members-Portal/code" method="POST">
-                                            <input type="hidden" name="reportedpostid" value='.$_SESSION['username'].' >
-                                            <input type="hidden" name="reportedpostid" value='.$row['postid'].' >
-                                            <button class="dropdown-item" type="submit">Report</button>
-                                        </form>
-                                    </li>
-                                    ';
-                                }
-                            
-                            echo '</ul>
-                        </div>
+                            </a>';
+                            if (isset($_SESSION['username']))
+                            {
+                                echo '<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">';
+                                
+                                    if ($_SESSION['username'] == $row['username'])
+                                    {
+                                
+                                        echo'
+                                        <li>
+                                            <form action="/Febina/Members-Portal/editpost" method="post">
+                                                <input type="hidden" name="postid" value='.$row['postid'].' >
+                                                <input type="hidden" name="redirectto" value="feed">
+                                                <button class="dropdown-item" type="submit" name="editposts">Edit</button>
+                                            </form>
+                                        </li>
+                                        <li>
+                                            <form action="/Febina/Members-Portal/code" method="post">
+                                                <input type="hidden" name="postid" value='.$row['postid'].' >
+                                                <input type="hidden" name="redirectto" value="feed">
+                                                <button onclick="return confirm(\'Are you sure you want to delete this post ?\');" class="dropdown-item" type="submit" name="deletepost">Delete</button>
+                                            </form>
+                                        </li>
+                                        ';
+                                    }
+                                    else
+                                    {
+                                
+                                        echo '<li>
+                                            <form action="/Febina/Members-Portal/code" method="POST">
+                                                <input type="hidden" name="reportedpostid" value='.$_SESSION['username'].' >
+                                                <input type="hidden" name="reportedpostid" value='.$row['postid'].' >
+                                                <button class="dropdown-item" type="submit">Report</button>
+                                            </form>
+                                        </li>
+                                        ';
+                                    }
+                                
+                                echo '</ul>';
+                            }
+                        echo '</div>
                         <div class="card-inner-box">
                             <div class="post-img">
                                 <img src="';
