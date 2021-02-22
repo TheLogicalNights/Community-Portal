@@ -19,6 +19,7 @@
         }
         }
     }
+
     function startsWith ($string, $startString) 
     { 
         $len = strlen($startString); 
