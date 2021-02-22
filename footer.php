@@ -116,7 +116,9 @@
             console.log(p.name);
             if (document.getElementById(id).className == "fa fa-thumbs-up")
             {
-                document.getElementById(id).className = "fa fa-thumbs-o-up";
+
+                
+
                 $.ajax({
                 type:"POST",
                 url:"http://localhost/Febina/Members-Portal/code.php",
@@ -124,14 +126,15 @@
                     'unlikedby':p.name,
                     'postid':id,
                 },
-                success:function(data){
+                success:function(data)
+                {
                     location.reload();
                 }
             });
             }
             else
             {
-                document.getElementById(id).className = "fa fa-thumbs-up";
+
                 $.ajax({
                 type:"POST",
                 url:"http://localhost/Febina/Members-Portal/code.php",
