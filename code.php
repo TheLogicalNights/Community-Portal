@@ -1201,10 +1201,10 @@
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
-        //         Like and unlike posts
+        //         Like posts
         //
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if(isset($_POST['likedby']))
+        if(isset($_POST['like']))
         {
             $username = $_POST['likedby'];
             $postid = $_POST['postid'];
@@ -1242,6 +1242,48 @@
                 }
                 $likedby .= ",".$srno;
                 $count += 1;
+                $query = "update postlikes set count = '$count', likedby = '$likedby' where postid = '$postid'";
+                $result = mysqli_query($conn,$query);
+                if($result)
+                {
+                    header("Location: /Febina/Members-Portal/feed");
+                }
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //         Unlike posts
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(isset($_POST['unlike']))
+        {
+            $username = $_POST['likedby'];
+            $postid = $_POST['postid'];
+            $srno = 0;
+            $query = "select * from user where username = '$username'";
+            $result = mysqli_query($conn,$query);
+            if($result)
+            {
+                $row = $result->fetch_assoc();
+                $srno = $row['sr_no'];
+            }
+            $query = "select * from postlikes where postid = '$postid'";
+            $result = mysqli_query($conn,$query);
+            if(mysqli_num_rows($result)!=0)
+            {
+                $row = $result->fetch_assoc();
+                $likedby = $row['likedby'];
+            }
+            if(preg_match("/{$srno}/i",$likedby))
+            {
+                str_replace($srno.",","",$likedby);
+                $query = "select * from postlikes where postid = '$postid'";
+                $result = mysqli_query($conn,$query);
+                if($row = $result->fetch_assoc())
+                {
+                    $count = $row['likedby'];
+                }
+                $count -= 1;
                 $query = "update postlikes set count = '$count', likedby = '$likedby' where postid = '$postid'";
                 $result = mysqli_query($conn,$query);
                 if($result)

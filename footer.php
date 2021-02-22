@@ -122,7 +122,8 @@
                 url:"http://localhost/Febina/Members-Portal/code.php",
                 data:{
                     'likedby':p.name,
-                    'postid':id
+                    'postid':id,
+                    'like': 1
                 },
                 success:function(data){
                     location.reload();
@@ -137,7 +138,8 @@
                 url:"http://localhost/Febina/Members-Portal/code.php",
                 data:{
                     'likedby':p.name,
-                    'postid':id
+                    'postid':id,
+                    'unlike': 1
                 },
                 success:function(data){
                     location.reload();
