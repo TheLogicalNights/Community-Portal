@@ -12,12 +12,16 @@
         $limit = $_POST['limit'];
         $query = "select * from posts order by posted_at DESC limit {$limit} offset {$offset} ";
         $res = mysqli_query($conn,$query);
-        
+        $count = 0;
         echo '<div class="container feed-cards">';
             if ($res)
             {
                 while ($row = mysqli_fetch_assoc($res))
                 {
+                    $query = "select count(postid) as count from postlikes where postid='".$row['postid']."'";
+                    $result = mysqli_query($conn,$query);
+                    $r = mysqli_fetch_assoc($result);
+                    $count = $r['count'];
                     echo '<div class="card post-card" data-aos="zoom-in">
                         <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
                             <a style="margin-right:auto;color:black;font-weight:700;text-decoration:none;" href="/Febina/Members-Portal/profile/'.$row['username'].'">'.$row['name'] .'</a>
@@ -138,7 +142,7 @@
                                             ';
                                             if (isset($_SESSION['username']))
                                             {
-                                                echo '<a type="button"  id=like'.$row['postid'].' onclick="Like(this.id)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="color: #FFAB01;font-size:20px;"> 20</span></a>';
+                                                echo '<a type="button"  id=like'.$row['postid'].' onclick="Like(this.id)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="color: #FFAB01;font-size:20px;"> <label style="font-family: Tahoma;font-size:18px;">'.$count.'</label></span></a>';
                                             }
                                             echo '<a type="button" name="readmorefeed" href="readmore.php?postid='.$row['postid'].'" class="btn btn-primary"> Read more</a>
                                             <small>';
