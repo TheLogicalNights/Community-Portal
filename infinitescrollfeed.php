@@ -18,7 +18,7 @@
             {
                 while ($row = mysqli_fetch_assoc($res))
                 {
-                    $query = "select count(postid) as count from postlikes where postid='".$row['postid']."'";
+                    $query = "select count from postlikes where postid='".$row['postid']."'";
                     $result = mysqli_query($conn,$query);
                     $r = mysqli_fetch_assoc($result);
                     $count = $r['count'];
@@ -143,7 +143,7 @@
                                             if (isset($_SESSION['username']))
                                             {
 
-                                                echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;border-radius:25%;border: solid 1px orange;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up fa-2x" style="color: #FFAB01;">'.$count.'</span></a>';
+                                                echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
 
                                             }
                                             echo '<a type="button" name="readmorefeed" href="readmore.php?postid='.$row['postid'].'" class="btn btn-primary"> Read more</a>
