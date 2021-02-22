@@ -1258,6 +1258,7 @@
             $username = $_POST['unlikedby'];
             $postid = $_POST['postid'];
             $srno = 0;
+            $count = 0;
             $query = "select * from user where username = '$username'";
             $result = mysqli_query($conn,$query);
             if($result)
@@ -1272,22 +1273,21 @@
                 $row = $result->fetch_assoc();
                 $likedby = $row['likedby'];
             }
-            if(preg_match("/{$srno}/i",$likedby))
+            str_replace($srno.",","",$likedby);
+            $query = "select * from postlikes where postid = '$postid'";
+            $result = mysqli_query($conn,$query);
+            if($row = $result->fetch_assoc())
             {
-                str_replace($srno.",","",$likedby);
-                $query = "select * from postlikes where postid = '$postid'";
-                $result = mysqli_query($conn,$query);
-                if($row = $result->fetch_assoc())
-                {
-                    $count = $row['count'];
-                }
-                $count -= 1;
-                $query = "update postlikes set count = '$count', likedby = '$likedby' where postid = '$postid'";
-                $result = mysqli_query($conn,$query);
-                if($result)
-                {
-                    header("Location: /Febina/Members-Portal/feed");
-                }
+
+                $count = $row['count'];
+            }
+            $count -= 1;
+            $query = "update postlikes set count = '$count', likedby = '$likedby' where postid = '$postid'";
+            $result = mysqli_query($conn,$query);
+            if($result)
+            {
+                header("Location: /Febina/Members-Portal/feed");
+
             }
         }
     }

@@ -138,7 +138,6 @@
                 data:{
                     'unlikedby':p.name,
                     'postid':id,
-                    'unlike': 1
                 },
                 success:function(data){
                     location.reload();
