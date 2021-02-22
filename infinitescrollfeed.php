@@ -18,10 +18,14 @@
             {
                 while ($row = mysqli_fetch_assoc($res))
                 {
+                    $count = 0;
                     $query = "select count from postlikes where postid='".$row['postid']."'";
                     $result = mysqli_query($conn,$query);
-                    $r = mysqli_fetch_assoc($result);
-                    $count = $r['count'];
+                    if (mysqli_num_rows($result) > 0)
+                    {
+                        $r = mysqli_fetch_assoc($result);
+                        $count = $r['count'];
+                    }
                     echo '<div class="card post-card" data-aos="zoom-in">
                         <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
                             <a style="margin-right:auto;color:black;font-weight:700;text-decoration:none;" href="/Febina/Members-Portal/profile/'.$row['username'].'">'.$row['name'] .'</a>
