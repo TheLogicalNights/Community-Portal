@@ -1211,8 +1211,6 @@
             $srno = 0;
             $likedby = "";
             $count = 0;
-            echo $_POST['postid'];
-            echo $_POST['likedby'];
             $query = "select * from user where username = '$username'";
             $result = mysqli_query($conn,$query);
             if($result)
@@ -1238,7 +1236,7 @@
                 if($row = $result->fetch_assoc())
                 {
                     $likedby = $row['likedby'];
-                    $count = $row['likedby'];
+                    $count = $row['count'];
                 }
                 $likedby .= ",".$srno;
                 $count += 1;
@@ -1255,7 +1253,7 @@
         //         Unlike posts
         //
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if(isset($_POST['unlike']))
+        if(isset($_POST['unlikedby']))
         {
             $username = $_POST['unlikedby'];
             $postid = $_POST['postid'];
@@ -1281,7 +1279,7 @@
                 $result = mysqli_query($conn,$query);
                 if($row = $result->fetch_assoc())
                 {
-                    $count = $row['likedby'];
+                    $count = $row['count'];
                 }
                 $count -= 1;
                 $query = "update postlikes set count = '$count', likedby = '$likedby' where postid = '$postid'";

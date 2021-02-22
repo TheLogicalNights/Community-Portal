@@ -121,7 +121,7 @@
                 type:"POST",
                 url:"http://localhost/Febina/Members-Portal/code.php",
                 data:{
-                    'unlikedby':p.name,
+                    'likedby':p.name,
                     'postid':id,
                 },
                 success:function(data){
@@ -136,7 +136,7 @@
                 type:"POST",
                 url:"http://localhost/Febina/Members-Portal/code.php",
                 data:{
-                    'likedby':p.name,
+                    'unlikedby':p.name,
                     'postid':id,
                     'unlike': 1
                 },
