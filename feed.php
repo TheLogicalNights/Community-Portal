@@ -138,11 +138,6 @@
             }
         ?>    
         <div class="container feed-cards" id="posts"></div>
-        <form action="/Febina/Members-Portal/code" id="likesform" method="POST">
-            <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
-            <input type="hidden" name="postid" value="<?php echo $row['username']; ?>">
-            <input type="hidden" name="name" value="<?php echo $row['name']; ?>">
-        </form>
     </main>
     <script>
         input = document.getElementById('postdesc').value;

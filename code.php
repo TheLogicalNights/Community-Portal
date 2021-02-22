@@ -1066,7 +1066,7 @@
             $seckey = $row['seckey'];
             $query = "delete from reportuser where postid in (select postid from posts where username='$username')";
             $result = mysqli_query($conn,$query);
-            $query = "delete from report where postid in (select postid from posts where username='$username')";
+            $query = "select * from report where postid in (select postid from posts where username='$username')";
             $result = mysqli_query($conn,$query);
             $query = "delete from favourit where username='$username' or uname='$username'";
             $result = mysqli_query($conn,$query);
@@ -1197,6 +1197,48 @@
             {
                 $_SESSION['adminreportedpostnotdeleted'] = "Post not deleted..";
                 header("Location: /Febina/Members-Portal/admin");
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //         Like and unlike posts
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(isset($_POST['likedby']))
+        {
+            $username = $_POST['likedby'];
+            $postid = $_POST['postid'];
+            $srno = 0;
+            $likedby = "";
+            echo $_POST['postid'];
+            echo $_POST['likedby'];
+            $query = "select * from user where username = '$username'";
+            $result = mysqli_query($conn,$query);
+            if($result)
+            {
+                $row = $result->fetch_assoc();
+                $srno = $row['sr_no'];
+            }
+            $query = "select * from postlikes where postid = '$postid'";
+            $result = mysqli_query($conn,$query);
+            if(mysqli_num_rows($result)==0)
+            {
+                $query = "insert into postlikes(likedby,postid,count) values('$srno','$postid','1')";
+                $result = mysqli_query($conn,$query);
+                if($result)
+                {
+                    header("Location: /Febina/Members-Portal/feed");
+                }
+            }
+            else
+            {
+                $query = "select * from postlikes where postid = '$postid'";
+                $result = mysqli_query($conn,$query);
+                if($row = $result->fetch_assoc())
+                {
+                    $likedby = $row['likedby'];
+                }
+                $likedby .= ",".$username;
             }
         }
     }

@@ -109,17 +109,40 @@
             }
             });
         });
-        function Like(q)
+        function Like(q,p)
         {
             id = q.replace('like','');
             console.log(id);
+            console.log(p.name);
             if (document.getElementById(id).className == "fa fa-thumbs-up fa-2x")
             {
                 document.getElementById(id).className = "fa fa-thumbs-o-up fa-2x";
+                $.ajax({
+                type:"POST",
+                url:"http://localhost/Febina/Members-Portal/code.php",
+                data:{
+                    'likedby':p.name,
+                    'postid':id
+                },
+                success:function(data){
+                    location.reload();
+                }
+            });
             }
             else
             {
                 document.getElementById(id).className = "fa fa-thumbs-up fa-2x";
+                $.ajax({
+                type:"POST",
+                url:"http://localhost/Febina/Members-Portal/code.php",
+                data:{
+                    'likedby':p.name,
+                    'postid':id
+                },
+                success:function(data){
+                    location.reload();
+                }
+            });
             }
         }
     </script>

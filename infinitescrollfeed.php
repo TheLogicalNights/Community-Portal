@@ -122,7 +122,7 @@
                                             <input type="hidden" name="postid" value='.$row['postid'].' >';
                                             if (isset($_SESSION['username']))
                                             {
-                                                echo '<a type="button" style="padding:5px;border-radius:25%;border: solid 1px orange;" id=like'.$row['postid'].' onclick="Like(this.id)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up fa-2x" style="color: #FFAB01;"></span></a>';
+                                                echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;border-radius:25%;border: solid 1px orange;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up fa-2x" style="color: #FFAB01;"></span></a>';
                                             }
                                             echo '<a type="button" name="readmorefeed" href="readmore.php?postid='.$row['postid'].'" class="btn btn-primary"> Read more</a>
                                             <small>';
