@@ -315,7 +315,7 @@
             } 
             else 
             {
-                $_SESSION['loginfailure'] = "Invalid username, please try again...";
+                $_SESSION['loginfailure'] = "Invalid username or password, please try again...";
                 header("Location: /Febina/Members-Portal/signin");
             }
         }
@@ -1273,7 +1273,8 @@
                 $row = $result->fetch_assoc();
                 $likedby = $row['likedby'];
             }
-            $likedby = str_replace($srno,"",$likedby);
+
+            $likedby = str_replace($srno,"",$likedby);  
             $query = "select * from postlikes where postid = '$postid'";
             $result = mysqli_query($conn,$query);
             if($row = $result->fetch_assoc())

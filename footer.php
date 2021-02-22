@@ -116,7 +116,9 @@
             console.log(p.name);
             if (document.getElementById(id).className == "fa fa-thumbs-up")
             {
+
                 
+
                 $.ajax({
                 type:"POST",
                 url:"http://localhost/Febina/Members-Portal/code.php",
@@ -132,6 +134,7 @@
             }
             else
             {
+
                 $.ajax({
                 type:"POST",
                 url:"http://localhost/Febina/Members-Portal/code.php",

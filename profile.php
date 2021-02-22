@@ -1,12 +1,31 @@
 <?php
     session_start();
-    if (!isset($_SESSION['status']))
+    include ('./database/db.php');
+    if(isset($_SESSION['username']))
     {
-        header('Location: signin.php');
+        $query = "select sr_no from user where username='".$_SESSION['username']."'";
+        $result = mysqli_query($conn,$query);
+        $r =mysqli_fetch_assoc($result);
+        $sr = $r['sr_no'];
+        $arr = array();
+        $query = "select * from postlikes";
+        $result = mysqli_query($conn,$query);
+        if ($result)
+        {
+            while ($row = mysqli_fetch_assoc($result))
+            {
+                $arr[$row['postid']] = $row['likedby'];
+            }
+        }
     }
+    function startsWith ($string, $startString) 
+    { 
+        $len = strlen($startString); 
+        return (substr($string, 0, $len) === $startString); 
+    }
+    $count = 0;
     date_default_timezone_set("Asia/Kolkata");
     include ('./header.php');
-    include ('./database/db.php');
     if(isset($_SESSION['postededitsuccessfully']))
     {
         echo '
@@ -76,11 +95,14 @@
                     <div class="profile-details" data-aos="zoom-out-left">
                         <h1 class="mt-4"><?php echo $row['name']; ?>
                         <?php
-                            if($_SESSION['username']==$row['username'])
+                            if(isset($_SESSION['username']))
                             {
-                                echo '<a href="/Febina/Members-Portal/editprofile">
-                                    <i class="fa fa-pencil-square-o fa-xs ms-3" aria-hidden="true"></i>
-                                </a>';
+                                if($_SESSION['username']==$row['username'])
+                                {
+                                    echo '<a href="/Febina/Members-Portal/editprofile">
+                                        <i class="fa fa-pencil-square-o fa-xs ms-3" aria-hidden="true"></i>
+                                    </a>';
+                                }
                             }
                         ?>
                         </h1>
@@ -89,34 +111,49 @@
                         <?php echo $row['about']; ?>
                         </p>
                         <p>
-                        <a href=
                         <?php 
+                            if(isset($_SESSION['username']))
+                            {
+                        ?>
+                                <a href=
+                            <?php 
                                 echo "/Febina/Members-Portal/favourite/".$row['username'];
                         ?>
                         class="link link-danger" style="text-decoration:none;">
                          Favourites <span class="badge badge-danger" style="border:1px solid black;color:black"><?php echo $cnt; ?></span>
                         </a>
                         </p>
+                        <?php
+                            }
+                        ?>
                         <a href="<?php echo $row['fblink']; ?>"> <span class="mdi mdi-facebook" style="color:black; font-size: 2em;"></span></a>
                         <a href="<?php echo $row['instalink']; ?>"> <span class="mdi mdi-instagram" style="color:black; font-size: 2em;"></span></a>
                         <?php
-                            if($_SESSION['username']!=$row['username'])
+                            if(isset($_SESSION['username']))
                             {
-                                
-                                if(mysqli_num_rows($result1)==0)
+                                if($_SESSION['username']!=$row['username'])
                                 {
-                                    echo '<a type="button" onclick="favourite(this.id)"> <span id="fav" class="fa fa-heart-o fa-2x" style="color:black; font-size: 2em;"></span></a>';
-                                }
-                                else
-                                {
-                                    echo '<a type="button" onclick="favourite(this.id)"> <span id="fav" class="fa fa-heart fa-2x" style="color:red; font-size: 2em;"></span></a>';
+
+                                    if(mysqli_num_rows($result1)==0)
+                                    {
+                                        echo '<a type="button" onclick="favourite(this.id)"> <span id="fav" class="fa fa-heart-o fa-2x" style="color:black; font-size: 2em;"></span></a>';
+                                    }
+                                    else
+                                    {
+                                        echo '<a type="button" onclick="favourite(this.id)"> <span id="fav" class="fa fa-heart fa-2x" style="color:red; font-size: 2em;"></span></a>';
+                                    }
                                 }
                             }
                         ?>
                         <!-- <a href="#"> <span class="mdi mdi-linkedin" style="color:black; font-size: 2em;"></span></a>
                         <a href="#"> <span class="mdi mdi-youtube" style="color:black; font-size: 2em; "></span></a> -->
                         <form action="/Febina/Members-Portal/code" id="favouritform" method="POST">
-                            <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
+                            <input type="hidden" name="username" value="<?php
+                            if(isset($_SESSION['username']))
+                            { 
+                             echo $_SESSION['username']; 
+                            } 
+                             ?>">
                             <input type="hidden" name="uname" value="<?php echo $row['username']; ?>">
                             <input type="hidden" name="name" value="<?php echo $row['name']; ?>">
                         </form>
@@ -153,13 +190,28 @@
                     {
                         while ($row = mysqli_fetch_assoc($result1))
                         {
+                            $count = 0;
+                            $query = "select count from postlikes where postid='".$row['postid']."'";
+                            $result = mysqli_query($conn,$query);
+                            if (mysqli_num_rows($result) > 0)
+                            {
+                                $r = mysqli_fetch_assoc($result);
+                                $count = $r['count'];
+                            }
                 ?>
                             <div class="card post-card" data-aos="zoom-in">
                                 <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
                                 <a style="margin-right:auto;color:black;font-weight:700;text-decoration:none;" href="/Febina/Members-Portal/profile/<?php echo $row['username']; ?>"><?php echo $row['name'];?></a>
+                                <?php 
+                                    if(isset($_SESSION['username']))
+                                    {
+                                ?>    
                                     <a style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                     </a>
+                                <?php
+                                    }
+                                ?>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                     <?php
                                         if ($_SESSION['username'] == $row['username'])
@@ -198,7 +250,7 @@
                                 </div>
                                 <div class="card-inner-box">
                                     <div class="post-img">
-                                        <img src=<?php echo $row['img_path']; ?> alt="Post Image">
+                                        <img src="<?php echo "/Febina/Members-Portal".ltrim($row['img_path'],"."); ?>" alt="Post Image">
                                     </div>
                                     <div class="">
                                         <div class="card-body">
@@ -252,14 +304,25 @@
                                                         if (isset($_SESSION['username']))
                                                         {
                                                     ?>
-                                                            <a type="button" style="padding:5px;border-radius:25%;border: solid 1px orange;" id="like<?php echo $row['postid']; ?>" onclick="Like(this.id)"> 
-                                                            <span id=<?php echo $row['postid']; ?> class="fa fa-thumbs-o-up fa-2x" style="color: #FFAB01;font-size:2rem;">
-                                                            </span>
-                                                            </a>
                                                     <?php
+                                                            if (isset($arr[$row['postid']]))
+                                                            {
+                                                                if (preg_match("/{$sr}/i", $arr[$row['postid']]))
+                                                                {
+                                                                    echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-up" style="font-size:20px;color: #FFAB01;"> <label style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
+                                                                }
+                                                                else
+                                                                {                                                   
+                                                                    echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                    echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';                                                    
+                                                            }
                                                         }
                                                     ?>
-                                                    <a type="button" name="readmorefeed" href="readmore.php?postid=<?php echo $row['postid']; ?>" class="btn btn-primary"> Read more</a>
+                                                    <a type="button" name="readmorefeed" href="/Febina/Members-Portal/readmore.php?postid=<?php echo $row['postid']; ?>" class="btn btn-primary"> Read more</a>
                                                     <small>
                                                         <?php
 
