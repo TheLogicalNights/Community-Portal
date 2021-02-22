@@ -1,6 +1,8 @@
 <?php
     include "./database/db.php";
     session_start();
+    if (isset($_SESSION['username']))
+    {
     $query = "select sr_no from user where username='".$_SESSION['username']."'";
     $result = mysqli_query($conn,$query);
     $r =mysqli_fetch_assoc($result);
@@ -15,7 +17,7 @@
         $arr[$row['postid']] = $row['likedby'];
     }
     }
-    
+    }
     function startsWith ($string, $startString) 
     { 
         $len = strlen($startString); 
