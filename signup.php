@@ -22,7 +22,7 @@
             </div>
             <div class="form-container " data-aos="fade-right">
             <div class="" data-aos="fade-right">
-                    <h1 class="mb-5 ms-2">Sign Up</h1>
+                    <h1 class="mb-5 ms-2" style="font-family:'Chicle', cursive;">Sign Up</h1>
                     <div class="container mb-5">
                         <?php
                     if (!isset($_SESSION['otpsuccess']) && !isset($_SESSION['otpverified']))

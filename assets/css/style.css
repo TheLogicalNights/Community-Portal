@@ -458,8 +458,7 @@ h6 {
     }
 }
 
-<<<<<<< HEAD
-=======
+
 .favourite-section
 {
     background: linear-gradient(33deg , rgb(11, 14, 224) , rgb(120, 248, 248));
@@ -477,5 +476,10 @@ h6 {
     overflow-y:scroll;
 }
 
-
->>>>>>> 5ea95d622ddf604226617d8d865c152bbd5ac3e0
+@media screen and (min-width: 1000px) 
+{
+    .mobileView
+    {
+        display : none;
+    }
+}

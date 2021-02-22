@@ -223,11 +223,18 @@
                                             </h5>
                                             <div class="post-desc-container" id="postdesc">   
                                                 <?php 
+                                                    $flag = 0;
                                                     $post = strip_tags($row['post']); 
                                                     if (strlen($post) > 80)
                                                     {
                                                         for ($i = 0; $i < 80; $i++)
                                                         {
+                                                            if ($post[$i] == ' ')
+                                                                $flag = 1;
+                                                            if ($i == 30 && $flag == 0)
+                                                                echo "<br>";
+                                                            if ($i == 60 && $flag == 0)
+                                                                echo "<br>";
                                                             echo $post[$i];
                                                         }
                                                         echo "...";
@@ -240,12 +247,15 @@
                                             </div>
                                             <div>
                                                 <form class="post-meta" action="/Febina/Members-Portal/readmore" method="post">
-                                                    <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
+                                                    
                                                     <?php    
                                                         if (isset($_SESSION['username']))
                                                         {
                                                     ?>
-                                                            <a type="button" style="padding:5px;border-radius:25%;border: solid 1px orange;" id="like<?php echo $row['postid']; ?>" onclick="Like(this.id)"> <span id=<?php echo $row['postid']; ?> class="fa fa-thumbs-o-up fa-2x" style="color: #FFAB01;"></span></a>
+                                                            <a type="button" style="padding:5px;border-radius:25%;border: solid 1px orange;" id="like<?php echo $row['postid']; ?>" onclick="Like(this.id)"> 
+                                                            <span id=<?php echo $row['postid']; ?> class="fa fa-thumbs-o-up fa-2x" style="color: #FFAB01;font-size:2rem;">
+                                                            </span>
+                                                            </a>
                                                     <?php
                                                         }
                                                     ?>

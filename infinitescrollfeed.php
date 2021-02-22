@@ -24,9 +24,10 @@
                             <a  style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                             </a>';
+                            echo '<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">';
                             if (isset($_SESSION['username']))
                             {
-                                echo '<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">';
+                               
                                 
                                     if ($_SESSION['username'] == $row['username'])
                                     {
@@ -61,7 +62,15 @@
                                         ';
                                     }
                                 
-                                echo '</ul>';
+                                echo '
+                                        <li>
+                                            <a href="https://web.whatsapp.com://send?text=http://localhost/Febina/Members-Portal/readmore?postid='.$row['postid'].'" class="dropdown-item mobileView">Share on <i style="color:rgb(37,211,102);" class="fa fa-whatsapp" aria-hidden="true"></i></a>        
+                                        </li>
+                                        <li>
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u=localhost/Febina/Members-Portal/readmore?postid='.$row['postid'].'" target="_blank" rel="noopener" class="dropdown-item mobileView">Share on <i style="color: #1877f2;" class="fa fa-facebook" aria-hidden="true"></i>
+                                            </a>
+                                        </li>
+                                </ul>';
                             }
                         echo '</div>
                         <div class="card-inner-box">
@@ -99,12 +108,19 @@
                                         
                                     echo '</h5>
                                     <div class="post-desc-container" id="postdesc">';   
-                                        
+                                            $flag = 0;
                                             $post = strip_tags($row['post']); 
                                             if (strlen($post) > 80)
                                             {
+                                                
                                                 for ($i = 0; $i < 80; $i++)
                                                 {
+                                                    if ($post[$i] == ' ')
+                                                        $flag = 1;
+                                                    if ($i == 30 && $flag == 0)
+                                                        echo "<br>";
+                                                    if ($i == 60 && $flag == 0)
+                                                        echo "<br>";
                                                     echo $post[$i];
                                                 }
                                                 echo "...";
@@ -119,7 +135,7 @@
                                     <div>
                                     
                                         <form class="post-meta" action="/Febina/Members-Portal/readmore" method="GET">
-                                            <input type="hidden" name="postid" value='.$row['postid'].' >';
+                                            ';
                                             if (isset($_SESSION['username']))
                                             {
                                                 echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;border-radius:25%;border: solid 1px orange;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up fa-2x" style="color: #FFAB01;"></span></a>';
