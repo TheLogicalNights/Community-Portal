@@ -20,7 +20,7 @@ Community Based Responsive Website Template
   -No need to add 1day 5hours etc (Done)
 - Wrong sigin attempts should alert with appropriate messages(swal) (Done)
 - optimize card image for all resolutions
-- add post author on card
+- add post author on card(Done)
 - after profile setup the profile page shows errors 
 
       Notice: Trying to access array offset on value of type null in E:\xampp\htdocs\Febina\Members-Portal\profile.php on line 66
