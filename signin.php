@@ -42,7 +42,7 @@
             </div>
             <div class="form-container" data-aos="fade-left">
                 <div>
-                    <h2 class="mb-5 ms-2">Sign In</h2>
+                    <h1 class="mb-5 ms-2" style="font-family:'Chicle', cursive;">Sign In</h1>
                     <div class="container mb-5">
                     <form action="/Febina/Members-Portal/code" class="mt-5" method="POST">
                         <div class="mb-3">
