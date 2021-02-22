@@ -1275,7 +1275,7 @@
                 $row = $result->fetch_assoc();
                 $likedby = $row['likedby'];
             }
-            str_replace($srno.",","",$likedby);
+            $likedby = str_replace($srno.",","",$likedby);
             $query = "select * from postlikes where postid = '$postid'";
             $result = mysqli_query($conn,$query);
             if($row = $result->fetch_assoc())
