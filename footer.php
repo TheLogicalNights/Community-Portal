@@ -121,9 +121,8 @@
                 type:"POST",
                 url:"http://localhost/Febina/Members-Portal/code.php",
                 data:{
-                    'likedby':p.name,
+                    'unlikedby':p.name,
                     'postid':id,
-                    'like': 1
                 },
                 success:function(data){
                     location.reload();

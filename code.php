@@ -1204,7 +1204,7 @@
         //         Like posts
         //
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if(isset($_POST['like']))
+        if(isset($_POST['likedby']))
         {
             $username = $_POST['likedby'];
             $postid = $_POST['postid'];
@@ -1257,7 +1257,7 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(isset($_POST['unlike']))
         {
-            $username = $_POST['likedby'];
+            $username = $_POST['unlikedby'];
             $postid = $_POST['postid'];
             $srno = 0;
             $query = "select * from user where username = '$username'";
