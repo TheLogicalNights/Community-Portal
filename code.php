@@ -1240,7 +1240,7 @@
                     $likedby = $row['likedby'];
                     $count = $row['likedby'];
                 }
-                $likedby .= ",".$username;
+                $likedby .= ",".$srno;
                 $count += 1;
                 $query = "update postlikes set count = '$count', likedby = '$likedby' where postid = '$postid'";
                 $result = mysqli_query($conn,$query);
