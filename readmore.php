@@ -51,6 +51,50 @@
                 POSTED AT : <?php echo $months[0]." ".$monthArray[$m-1]." ".$months[2]; ?>  ·  <?php echo $time; ?>
         </small>
     </div>
+    <div class="container ms-3 mt-1">
+        <small style="color:gray;font-weight:650;">
+                Liked by : <?php
+                    $users = array();
+                    $query = "select * from user";
+                    $result = mysqli_query($conn,$query);
+                    if ($result)
+                    {
+                        while ($r = mysqli_fetch_assoc($result))
+                        {
+                            $users[$r['sr_no']] = $r['username'];
+                        }
+                    }
+                     $query1 = "select * from postlikes where postid='".$_GET['postid']."'";
+                     $result1 = mysqli_query($conn,$query1);
+                     if ($result1)
+                     {
+                         $row = mysqli_fetch_assoc($result1);
+                         $userlikeby = explode(",",$row['likedby']);
+                         $cnt = 0;
+                        foreach ($userlikeby as $user) 
+                        {
+                            if (isset($users[$user]))
+                            {
+                                if ($cnt == 0)
+                                {
+            ?>
+                                    <a class="link-info" style="text-decoration:none;" href=<?php echo "/Febina/Members-Portal/profile/".$users[$user]; ?>><?php echo $users[$user]; ?></a>
+            <?php   
+                                }
+                                else
+                                {
+                                    echo " , ";
+            ?>
+                                    <a class="link-info" style="text-decoration:none;" href=<?php echo "/Febina/Members-Portal/profile/".$users[$user]; ?>><?php echo $users[$user]; ?></a>
+            <?php
+                                }
+                                $cnt++;
+                            }
+                        }
+                     }
+                 ?>
+        </small>
+    </div>
 
     <div class="d-flex justify-content-center mt-2">
         <p class="lead">

@@ -1,7 +1,20 @@
 <?php
     include "./database/db.php";
     session_start();
+<<<<<<< HEAD
+    if (isset($_SESSION['username']))
+    {
+    $query = "select sr_no from user where username='".$_SESSION['username']."'";
+    $result = mysqli_query($conn,$query);
+    $r =mysqli_fetch_assoc($result);
+    $sr = $r['sr_no'];
+    $arr = array();
+    $query = "select * from postlikes";
+    $result = mysqli_query($conn,$query);
+    if ($result)
+=======
     if(isset($_SESSION['username']))
+>>>>>>> b6b6bb12c1590ae49954c13a6353491d6fbb5285
     {
         $query = "select sr_no from user where username='".$_SESSION['username']."'";
         $result = mysqli_query($conn,$query);
@@ -18,6 +31,10 @@
         }
         }
     }
+<<<<<<< HEAD
+    }
+=======
+>>>>>>> b6b6bb12c1590ae49954c13a6353491d6fbb5285
     function startsWith ($string, $startString) 
     { 
         $len = strlen($startString); 
