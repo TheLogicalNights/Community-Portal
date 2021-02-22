@@ -1210,6 +1210,7 @@
             $postid = $_POST['postid'];
             $srno = 0;
             $likedby = "";
+            $count = 0;
             echo $_POST['postid'];
             echo $_POST['likedby'];
             $query = "select * from user where username = '$username'";
@@ -1237,8 +1238,16 @@
                 if($row = $result->fetch_assoc())
                 {
                     $likedby = $row['likedby'];
+                    $count = $row['likedby'];
                 }
                 $likedby .= ",".$username;
+                $count += 1;
+                $query = "update postlikes set count = '$count', likedby = '$likedby' where postid = '$postid'";
+                $result = mysqli_query($conn,$query);
+                if($result)
+                {
+                    header("Location: /Febina/Members-Portal/feed");
+                }
             }
         }
     }
