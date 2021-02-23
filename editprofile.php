@@ -1,6 +1,7 @@
 <?php
     session_start();
     include('header.php');
+    include "./config/config.php";
     include('./database/db.php');
     $dppath = "";
     $username = $_SESSION['username'];
@@ -15,7 +16,6 @@
         $fblink = $row['fblink'];
         $birthdate = $row['birthdate'];
     }
-    $dppath = "/Febina/Members-Portal".ltrim($dppath,".");
     if(isset($_SESSION['profileupdated']))
     {
         echo '
@@ -60,13 +60,13 @@
             <img src="<?php echo $dppath; ?>" height="150" width="150" class="rounded-circle mt-5" alt="Profile Picture">
         </div>
         <div class="d-flex justify-content-center mt-4 mb-5">
-            <form action="/Febina/Members-Portal/code" method="POST">
+            <form action="<?php echo $BASE_URL; ?>code" method="POST">
                 <input type="hidden" name="remove" value="<?php echo $_SESSION['username']; ?>">
                 <button type="submit" class="btn btn-primary btn-sm ms-3">Remove Profile Picture</button>
             </form>    
         </div>
         <div class="d-flex justify-content-center mb-5">
-            <form action="/Febina/Members-Portal/code"  method="POST" enctype="multipart/form-data">
+            <form action="<?php echo $BASE_URL; ?>code"  method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="formFileSm" class="form-label">Select Profile Picture</label>
                     <input type="hidden" name="uploadimg" value="<?php echo $_SESSION['username']; ?>">
@@ -78,7 +78,7 @@
         <hr>
         <h2 class="text-center mt-4 border-bottom-left-radius">Change Password</h2>
         <div class="container">
-            <form class="mt-5" action="/Febina/Members-Portal/code" method="POST">
+            <form class="mt-5" action="<?php echo $BASE_URL; ?>code" method="POST">
                 <input type="hidden" name="username" value="<?php echo $username; ?>">
                 <div class="mb-3">
                     <label for="newpassword" class="form-label">New Password</label>
@@ -96,7 +96,7 @@
         </div>
         <hr>
         <h2 class="text-center mt-4 border-bottom-left-radius">Update Username</h2>
-        <form action="/Febina/Members-Portal/code" id="updateusername" method="POST">
+        <form action="<?php echo $BASE_URL; ?>code" id="updateusername" method="POST">
             <div class="container mb-5">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
@@ -107,7 +107,7 @@
         </form>
         <hr>
         <h2 class="text-center mt-4 border-bottom-left-radius">Update Name</h2>
-        <form action="/Febina/Members-Portal/code" id="updatename" method="POST">
+        <form action="<?php echo $BASE_URL; ?>code" id="updatename" method="POST">
             <div class="container mb-5">
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
@@ -118,7 +118,7 @@
             </div>
         </form>
         <h2 class="text-center mt-4 border-bottom-left-radius">Update About</h2>
-        <form action="/Febina/Members-Portal/code" method="POST">
+        <form action="<?php echo $BASE_URL; ?>code" method="POST">
             <div class="container mb-5">
                 <div class="form-floating">
                     <input type="hidden" name="updateabout" value="<?php echo $_SESSION['username']; ?>">
@@ -131,7 +131,7 @@
         </form>
         <hr>
         <h2 class="text-center mt-4 border-bottom-left-radius">Update Birthdate</h2>
-        <form action="/Febina/Members-Portal/code" method="POST">
+        <form action="<?php echo $BASE_URL; ?>code" method="POST">
             <div class="container mb-5">
                     <label for="birthdate" class="form-label">Birthdate</label>
                     <input type="date" class="form-control outline" id="birthdate" name="birthdate" value="<?php echo $birthdate; ?>" required> 
@@ -140,7 +140,7 @@
             </div>
         </form>
         <h2 class="text-center mt-4 border-bottom-left-radius">Update Instagram Link</h2>
-        <form action="/Febina/Members-Portal/code" method="POST">
+        <form action="<?php echo $BASE_URL; ?>code" method="POST">
             <div class="container mb-5">
                     <label for="instalink" class="form-label">Instagram Link</label>
                     <input type="text" class="form-control outline" id="instalink" name="instalink" value="<?php echo $instalink; ?>" required> 
@@ -149,7 +149,7 @@
             </div>
         </form>
         <h2 class="text-center mt-4 border-bottom-left-radius">Update Facebook Link</h2>
-        <form action="/Febina/Members-Portal/code" method="POST">
+        <form action="<?php echo $BASE_URL; ?>code" method="POST">
             <div class="container mb-5">
                     <label for="instalink" class="form-label">Facebook Link</label>
                     <input type="text" class="form-control outline" id="fblink" name="fblink" value="<?php echo $fblink; ?>" required> 

@@ -4,6 +4,7 @@
     {
         header('Location: signin.php');
     }
+    include "./config/config.php";
     include ('header.php');
     include ('./database/db.php');
     if(isset($_SESSION['posteditfailure']))
@@ -27,7 +28,7 @@
 <main>
 <div class="container mt-5"  id="editPost">
         <h1 class="mt-2">Edit Post</h1>
-    <form action="/Febina/Members-Portal/code" method="POST" enctype="multipart/form-data">
+    <form action="<?php echo $BASE_URL; ?>code" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="redirectto" value="<?php echo $_POST['redirectto']; ?>">
             <input type="hidden" name="postid" value="<?php echo $row['postid']; ?>">
             <div class="mb-3">
@@ -53,7 +54,7 @@
           
             <hr>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a type="button" href="/Febina/Members-Portal/profile" class="btn btn-secondary">Close</a>
+                <a type="button" href="<?php echo $BASE_URL; ?>profile" class="btn btn-secondary">Close</a>
                 <button class="btn btn-primary" name="editpost" type="submit">Edit post</button>
             </div>
         </form>
@@ -64,12 +65,12 @@
         }
         else
         {
-            header('Location: /Febina/Members-Portal/'.$_POST['redirectto']);    
+            header('Location: ./'.$_POST['redirectto']);    
         }
     }
     else
     {
-        header('Location: /Febina/Members-Portal/'.$_POST['redirectto']);
+        header('Location: ./'.$_POST['redirectto']);
     }
     include ('footer.php');
 ?>

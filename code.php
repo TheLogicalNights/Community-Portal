@@ -1,9 +1,54 @@
 <?php
     session_start();
+    include "./config/config.php";
     include "./database/db.php";
+    require './PHPMailer/PHPMailerAutoload.php';
+    require './PHPMailer/class.phpmailer.php'; 
+    require './PHPMailer/class.smtp.php';
     date_default_timezone_set("Asia/Kolkata");
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    //          Mail Sender
+    //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function smtpMailer($to,$from,$from_name,$subject,$body)
+    {
+        $mail = new PHPMailer();
+        $mail->SMTPDebug = 3;                                   // Enable verbose debug output
+        
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->SMTPSecure = 'tls';
+        $mail->Mailer = "mail";
+        $mail->Host = 'mail.febinaevents.com';              // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = $from;                 // SMTP username
+        $mail->Password = '8446736267@123';                           // SMTP password
+        $mail->Port = 465;                                    // TCP port to connect to
+        
+        $mail->setFrom($from,$from_name);
+        $mail->addAddress($to);               // Name is optional
+        $mail->addReplyTo($from, 'Information');
+        
+        $mail->isHTML(true);                              // Set email format to HTML
+        
+        $mail->Subject = $subject;
+        $mail->Body    = $body;
+        
+        
+        if(!$mail->send()) {
+            echo 'Message could not be sent.';
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } 
+        else 
+        {
+            echo 'Message has been sent';
+        }
+        return true;
+    }
+    
     if($_SERVER['REQUEST_METHOD']=="POST")
     {
+           
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
         //          OTP Generation
@@ -17,7 +62,7 @@
             if(mysqli_num_rows($result)>0)
             {
                 $_SESSION['RegisterFailure'] = "This email address is already used please try another one.";
-                header('Location: /Febina/Members-Portal/signup');
+                header('Location: '.$BASE_URL.'signup');
             }
             else
             {
@@ -26,24 +71,24 @@
                 $_SESSION['email'] = $_POST['email'];
                 $subject = "Email Verification";
                 $message = "Hello sir/mam your OTP for email verifivation is ".$otptosend;
-                $headers = "From: swapnil.febina1@gmail.com";
+                $from = "fadmin@febinaevents.com";
+                $from_name = "Febina Jagriti Foundation";
                 
-                if(mail($to,$subject,$message,$headers))
+                if(smtpMailer($to,$from,$from_name,$subject,$message))
                 {
 
                     $_SESSION['otp'] = $otptosend;
                     $_SESSION['email'] = $to;
                     $_SESSION['otpsuccess'] = "success";
-                    header('Location: /Febina/Members-Portal/signup');
+                    header('Location: '.$BASE_URL.'signup');
                 }
                 else
                 {
                     $_SESSION['RegisterFailure'] = "OTP not send..! Please try again.";
-                    header('Location: /Febina/Members-Portal/signup');
+                    header('Location: '.$BASE_URL.'signup');
                 }
             }
         }
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
         //          OTP Verification
@@ -59,15 +104,14 @@
                 unset($_SESSION['otp']);
                
                 $_SESSION['otpverified'] = "success";
-                header("Location: /Febina/Members-Portal/signup.php");
+                header("Location: '.$BASE.'signup.php");
             }
             else
             {
                 $_SESSION['RegisterFailure'] = "Mismatch OTP..! Please try again.";
-                header('Location: /Febina/Members-Portal/signup');
+                header('Location: '.$BASE_URL.'signup');
             }
         }
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
         //          User Registration
@@ -95,7 +139,7 @@
             {
                 $_SESSION['RegisterFailure'] = "This VA key is not generated yet please contact admin.";
                 unset($_SESSION['email']);
-                header('Location: /Febina/Members-Portal/signup');
+                header('Location: '.$BASE_URL.'signup');
             } 
             else 
             {
@@ -116,7 +160,7 @@
                 {
                     $_SESSION['RegisterFailure'] = " This username already taken please try another one.";
                     unset($_SESSION['email']);
-                    header('Location: /Febina/Members-Portal/signup');
+                    header('Location: '.$BASE_URL.'signup');
                 }
                 else 
                 {
@@ -136,7 +180,7 @@
                         {
                             $_SESSION['RegisterFailure'] = "This VA key is used, you can use one VA ket at only once.";
                             unset($_SESSION['email']);
-                            header('Location: /Febina/Members-Portal/signup');
+                            header('Location: '.$BASE_URL.'signup');
                         } 
                         else 
                         {
@@ -155,7 +199,7 @@
                                     $_SESSION['RegisterationSuccess'] = "You have registered successfully, now you can login into community.";   
                                     unset($_SESSION['email']);
                                     unset($_SESSION['otpverified']);
-                                    header('Location: /Febina/Members-Portal/signin');   
+                                    header('Location: '.$BASE_URL.'signin');   
                                 } 
                             }
                         }
@@ -183,7 +227,8 @@
             $postid = $postid + 1;
             echo "postid :".$postid;
             $target_dir = "./postuploads/$postid/";
-            $target_file = $target_dir . basename($_FILES["postimg"]["name"]);
+            $target_file = $target_dir . $_FILES["postimg"]["name"];
+            echo $target_file;
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
             $posttitle = $_POST['posttitle'];
@@ -211,18 +256,19 @@
                 {
                     $_SESSION['notimage'] = "File is not an image, please select valid file";
                     $uploadOk = 0;
+                    echo "File is not an image, please select valid file";
                 }
                 // Allow certain file formats
                 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                 && $imageFileType != "gif" ) 
                 {
-                    // echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                     $uploadOk = 0;
                 }
                 // Check if $uploadOk is set to 0 by an error
                 if ($uploadOk == 0) 
                 {
-                    // echo "Sorry, your file was not uploaded.";
+                    echo "Sorry, your file was not uploaded.";
 
                 } 
                 // if everything is ok, try to upload file
@@ -235,21 +281,21 @@
                             if($result)
                             {
                                 $_SESSION['postedsuccessfully'] = "Your post is on feed, Stay connected with us..!";
-                                header('Location: /Febina/Members-Portal/feed');
+                                header('Location: '.$BASE_URL.'feed');
                                 
                             }     
                             else
                             {
                                 die("error".mysqli_error($conn));
                                 $_SESSION['postfailure'] = "We have error while posting your thoughts,sorry for inconvenience.";
-                                header('Location: /Febina/Members-Portal/addpost');
+                                header('Location: '.$BASE_URL.'addpost');
                             }
                             
                         } 
                         else 
                         {
                             $_SESSION['postfailure'] = "We have error while posting your thoughts, sorry for inconvenience.";
-                            header('Location: /Febina/Members-Portal/addpost');
+                            header('Location: '.$BASE_URL.'addpost');
                         }
                 }
             }
@@ -261,17 +307,16 @@
                 if($result)
                 {
                     $_SESSION['postedsuccessfully'] = "Your post is on feed, Stay connected with us..!";
-                    header('Location: /Febina/Members-Portal/feed');
+                    header('Location: '.$BASE_URL.'feed');
                     
                 }
                 else
                 {
                     $_SESSION['postfailure'] = "We have error while posting your thoughts, sorry for inconvenience.";
-                    header('Location: /Febina/Members-Portal/addpost');
+                    header('Location: '.$BASE_URL.'addpost');
                 }
             }
         }
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
         //          User Login
@@ -306,17 +351,17 @@
                 if($isset==0)
                 {
                     $_SESSION['setupprofile'] = "true";
-                    header("Location: /Febina/Members-Portal/setupprofile");
+                    header('Location: '.$BASE_URL.'setupprofile');
                 }
                 else
                 {
-                    header("Location: /Febina/Members-Portal/feed");
+                    header('Location: '.$BASE_URL.'feed');
                 }
             } 
             else 
             {
                 $_SESSION['loginfailure'] = "Invalid username or password, please try again...";
-                header("Location: /Febina/Members-Portal/signin");
+                header('Location: '.$BASE_URL.'signin');
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -329,7 +374,7 @@
             unset($_SESSION['status']);
             unset($_SESSION['username']);
             unset($_SESSION['name']);
-            header('Location: /Febina/Members-Portal/signin');
+            header('Location: '.$BASE_URL.'signin');
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
@@ -412,21 +457,21 @@
                                     }
                                 }
                                 $_SESSION['postededitsuccessfully'] = "Edited successfully";
-                                header('Location: /Febina/Members-Portal/'.$_POST['redirectto']);
+                                header('Location: '.$BASE_URL.''.$_POST['redirectto']);
                                 
                             }     
                             else
                             {
                                 die("error".mysqli_error($conn));
                                 $_SESSION['posteditfailure'] = "Post edit failure.";
-                                header('Location: /Febina/Members-Portal/editpost');
+                                header('Location: '.$BASE_URL.'editpost');
                             }
                             
                         } 
                         else 
                         {
                             $_SESSION['posteditfailure'] = "Post edit failure, sorry for inconvenience.";
-                            header('Location: /Febina/Members-Portal/editpost');
+                            header('Location: '.$BASE_URL.'editpost');
                         }
                 }
             }
@@ -445,14 +490,14 @@
                 if($result)
                 {
                     $_SESSION['postededitsuccessfully'] = "Edit successfully.";
-                    header('Location: /Febina/Members-Portal/'.$_POST['redirectto']);
+                    header('Location: '.$BASE_URL.''.$_POST['redirectto']);
                     
                 }
                 else
                 {
                     die("error".mysqli_error($conn));
                     $_SESSION['posteditfailure'] = "Post edit failure, sorry for inconvenience.";
-                    header('Location: /Febina/Members-Portal/editpost');
+                    header('Location: '.$BASE_URL.'editpost');
                 }
             }
         }
@@ -479,7 +524,7 @@
                 { 
                     if(unlink($target_file))
                     {
-                        rmdir('./postuploads/'.$postid);
+                        rmdir(''.$BASE_URL.'postuploads/'.$postid);
                     }
                 }
             }
@@ -488,20 +533,20 @@
             if ($res)
             {
                 $_SESSION['postdeleted'] = "Post deleted..";
-                header('Location: /Febina/Members-Portal/'.$_POST['redirectto']);
+                header('Location: '.$BASE_URL.''.$_POST['redirectto']);
             }
             else
             {
                $_SESSION['postnotdeleted'] = "Post not deleted..";
-                header('Location: /Febina/Members-Portal/'.$_POST['redirectto']);
+                header('Location: '.$BASE_URL.''.$_POST['redirectto']);
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
-        //          Upload profile picture
+        //          Setup Profile
         //
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if(isset($_POST['uploadprofilepicture']))
+        if(isset($_POST['setupprofile']))
         {
             $username = $_SESSION['username'];
             $name = $_SESSION['name'];
@@ -550,32 +595,42 @@
                             {
                                 $_SESSION['profilepictureuploaded'] = "Profile picture successfully uploaded..!";
                                 $_SESSION['profilepath'] = $target_file;
-                                header('Location: /Febina/Members-Portal/setupprofile');
+                                header('Location: '.$BASE_URL.'setupprofile');
                                 
                             }     
                             else
                             {
                                 die("error".mysqli_error($conn));
                                 $_SESSION['profilepictureuploadfailure'] = "We have error while uploading your profile picture";
-                                header('Location: /Febina/Members-Portal/setupprofile');
+                                header('Location: '.$BASE_URL.'setupprofile');
                             }
-                            
                         } 
                         else 
                         {
                             $_SESSION['profilepictureuploadfailure'] = "We have error while uploading your profile picture";
-                            header('Location: /Febina/Members-Portal/setupprofile');
+                            header('Location: '.$BASE_URL.'setupprofile');
                         }
                 }
             }
-        }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //
-        //          Setup Profile
-        //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if(isset($_POST['setupprofile']))
-        {
+            else
+            {
+                $target_file = "./img/user.png";
+                $query = "insert into profile(name,username,about,dppath,instalink,fblink,isset,birthdate) values('$name','$username','about','$target_file','insta','fb',1,0000-00-00)";
+                $result = mysqli_query($conn,$query);
+                if($result)
+                {
+                    $_SESSION['profilepictureuploaded'] = "Profile picture successfully uploaded..!";
+                    $_SESSION['profilepath'] = $target_file;
+                    header('Location: '.$BASE_URL.'setupprofile');
+                    
+                }     
+                else
+                {
+                    die("error".mysqli_error($conn));
+                    $_SESSION['profilepictureuploadfailure'] = "We have error while uploading your profile picture";
+                    header('Location: '.$BASE_URL.'setupprofile');
+                }
+            }
             $birthdate = $_POST['birthdate'];
             $about = $_POST['about'];
             $instalink = $_POST['insta'];
@@ -588,13 +643,13 @@
             {
                 $_SESSION['setupprofilsuccessfully'] = "Your profile set successfully";
                 unset($_SESSION['setupprofile']);
-                header("Location:/Febina/Members-Portal/feed");
+                header('Location:'.$BASE_URL.'feed');
             }
             else
             {
                 die("Error:".mysqli_error($conn));
                 $_SESSION['setupprofilefailure'] = "Unable to setup your profile please try again..";
-                header("Location:/Febina/Members-Portal/setupprofile");
+                header('Location:'.$BASE_URL.'setupprofile');
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -604,7 +659,7 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(isset($_POST['VisitMember']))
         {
-            header("Location:/Febina/Members-Portal/profile/".$_POST['username']);
+            header('Location:'.$BASE_URL.'profile/'.$_POST['username']);
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
@@ -650,7 +705,7 @@
                     else
                     {
                         $_SESSION['reportsuccess'] = "You have successfully reported this post.";
-                        header("Location:/Febina/Members-Portal/feed");
+                        header('Location:'.$BASE_URL.'feed');
                     }
                 }
                 else
@@ -669,14 +724,14 @@
                     else
                     {
                         $_SESSION['reportsuccess'] = "You have successfully reported this post.";
-                        header("Location:/Febina/Members-Portal/feed");
+                        header('Location:'.$BASE_URL.'feed');
                     }                  
                 }
             }
             else
             {
                 $_SESSION['reportfailure'] = "You have already reported this post you can't report it again.";
-                header("Location:/Febina/Members-Portal/feed");
+                header('Location:'.$BASE_URL.'feed');
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -706,7 +761,7 @@
             else
             {
                 $_SESSION['profileupdated'] = "Your profile picture successfully removed..!";
-                header("Location:/Febina/Members-Portal/editprofile");
+                header('Location:'.$BASE_URL.'editprofile');
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -749,7 +804,7 @@
                 $query = "update profile set dppath = '$folder' where username = '$username'";
                 $result = mysqli_query($conn,$query);
                 $_SESSION['profileupdated'] = "Your profile picture successfully updated..!";
-                header("Location:/Febina/Members-Portal/editprofile");
+                header('Location:'.$BASE_URL.'editprofile');
             }
         }
 
@@ -777,7 +832,7 @@
                     $arr = explode("/",$dppath);
                     $file = $arr[3];
                     $path = "./profilepictures/".$newusername."/".$file;
-                    $query = "update user set username='$newusername' where username='$username'";
+                    $path = "update user set username='$newusername' where username='$username'";
                     $res = mysqli_query($conn,$query);
                     $query = "update profile set username='$newusername',dppath='$path' where username='$username'";
                     $res = mysqli_query($conn,$query);
@@ -791,13 +846,13 @@
                     rename('./profilepictures/'.$username,'./profilepictures/'.$newusername);
                     $_SESSION['username'] = $newusername;
                     $_SESSION['profileupdated'] = "Your username successfully updated..!";
-                    header("Location:/Febina/Members-Portal/editprofile");
+                    header('Location:'.$BASE_URL.'editprofile');
                 }
             }
             else
             {
                 $_SESSION['profileupdatefailure'] = "Username already exists , try another username.";
-                header("Location:/Febina/Members-Portal/editprofile");
+                header('Location:'.$BASE_URL.'editprofile');
             }
 
         }
@@ -816,7 +871,7 @@
             $query = "update user set name = '$name' where username = '$username'";
             $result = mysqli_query($conn,$query);
             $_SESSION['profileupdated'] = "Your name successfully updated..!";
-            header("Location:/Febina/Members-Portal/editprofile");
+            header('Location:'.$BASE_URL.'editprofile');
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
@@ -830,15 +885,13 @@
             $query = "update profile set about = '$about' where username = '$username'";
             $result = mysqli_query($conn,$query);
             $_SESSION['profileupdated'] = "Your about successfully updated..!";
-            header("Location:/Febina/Members-Portal/editprofile");
+            header('Location:'.$BASE_URL.'editprofile');
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
         //          Update Birthdate
         //
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
         if (isset($_POST['updatebirthdate']))
         {
             $username = $_POST['username'];
@@ -846,7 +899,7 @@
             $query = "update profile set birthdate = '$birthdate' where username = '$username'";
             $result = mysqli_query($conn,$query);
             $_SESSION['profileupdated'] = "Your birthdate successfully updated..!";
-            header("Location:/Febina/Members-Portal/editprofile");
+            header('Location:'.$BASE_URL.'editprofile');
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -861,7 +914,7 @@
             $query = "update profile set instalink = '$instalink' where username = '$username'";
             $result = mysqli_query($conn,$query);
             $_SESSION['profileupdated'] = "Your instagram link successfully updated..!";
-            header("Location:/Febina/Members-Portal/editprofile");
+            header('Location:'.$BASE_URL.'editprofile');
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
@@ -875,7 +928,7 @@
             $query = "update profile set fblink = '$fblink' where username = '$username'";
             $result = mysqli_query($conn,$query);
             $_SESSION['profileupdated'] = "Your facebook link successfully updated..!";
-            header("Location:/Febina/Members-Portal/editprofile");
+            header('Location:'.$BASE_URL.'editprofile');
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
@@ -890,7 +943,7 @@
             if(mysqli_num_rows($result)==0)
             {
                 $_SESSION['forgetpasswordfailure'] = "This email address is not registered please try another one.";
-                header('Location: /Febina/Members-Portal/forgetpassword');
+                header('Location: '.$BASE_URL.'forgetpassword');
             }
             else
             {
@@ -899,20 +952,21 @@
                 $_SESSION['email'] = $_POST['email'];
                 $subject = "Email Verification";
                 $message = "Hello sir/mam your OTP for email verifivation is ".$otptosend;
-                $headers = "From: swapnil.febina1@gmail.com";
+                $from = "fadmin@febinaevents.com";
+                $from_name = "Febina Jagriti Foundation";
                 
-                if(mail($to,$subject,$message,$headers))
+                if(smtpMailer($to,$from,$from_name,$subject,$message))
                 {
 
                     $_SESSION['otp'] = $otptosend;
                     $_SESSION['email'] = $to;
                     $_SESSION['forgetpasswordotpsuccess'] = "success";
-                    header('Location: /Febina/Members-Portal/forgetpassword');
+                    header('Location: '.$BASE_URL.'forgetpassword');
                 }
                 else
                 {
                     $_SESSION['forgetpasswordfailure'] = "OTP not send..! Please try again.";
-                    header('Location: /Febina/Members-Portal/forgetpassword');
+                    header('Location: '.$BASE_URL.'forgetpassword');
                 }
             }
         }
@@ -930,12 +984,12 @@
             {
                 unset($_SESSION['otp']);
                 $_SESSION['forgotpasswordotpverified'] = "success";
-                header("Location: /Febina/Members-Portal/forgetpassword");
+                header('Location: '.$BASE_URL.'forgetpassword');
             }
             else
             {
                 $_SESSION['forgetpasswordfailure'] = "Mismatch OTP..! Please try again.";
-                header('Location: /Febina/Members-Portal/forgetpassword');
+                header('Location: '.$BASE_URL.'forgetpassword');
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -955,13 +1009,13 @@
                 {
                     $_SESSION['resetpasswordsuccess'] = "Your reset password successfully done. Now you can signin.";
                     unset($_SESSION['email']);
-                    header("Location:/Febina/Members-Portal/signin");
+                    header('Location:'.$BASE_URL.'signin');
                 }
                 else
                 {
                     $_SESSION['resetpasswordfailure'] = "Unable to reset password please try again.";
                     unset($_SESSION['email']);
-                    header("Location: /Febina/Members-Portal/forgetpassword");
+                    header('Location: '.$BASE_URL.'forgetpassword');
                 }
             }
             if(isset($_POST['username']))
@@ -973,12 +1027,12 @@
                 if($result)
                 {
                     $_SESSION['changepasswordsuccess'] = "Your password changed successfully.";
-                    header("Location:/Febina/Members-Portal/editprofile");
+                    header('Location:'.$BASE_URL.'editprofile');
                 }
                 else
                 {
                     $_SESSION['changepasswordfailure'] = "Unable to reset password please try again.";
-                    header("Location: /Febina/Members-Portal/editprofile");
+                    header('Location: '.$BASE_URL.'editprofile');
                 }
             }   
         }
@@ -998,12 +1052,12 @@
                 {
                     
                     $_SESSION['adminstatus'] = "login";
-                    header("Location: /Febina/Members-Portal/admin");
+                    header('Location: '.$BASE_URL.'admin');
                 } 
                 else 
                 {
                     $_SESSION['adminloginfailure'] = "Unable to login check your username or password";
-                    header("Location: /Febina/Members-Portal/adminlogin");
+                    header('Location: '.$BASE_URL.'adminlogin');
                 }
             }
         }
@@ -1015,7 +1069,7 @@
         if (isset($_POST['adminlogout']))
         {
             unset($_SESSION['adminstatus']);
-            header('Location: /Febina/Members-Portal/adminlogin');
+            header('Location: '.$BASE_URL.'adminlogin');
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
@@ -1037,19 +1091,20 @@
                     $_SESSION['email'] = $_POST['email'];
                     $subject = "VA key alert";
                     $message = "Hello sir/mam your VA for Febina community is ".$newadharno;
-                    $headers = "From: swapnil.febina1@gmail.com";
+                   $from = "fadmin@febinaevents.com";
+                $from_name = "Febina Jagriti Foundation";
                     
-                    if(mail($to,$subject,$message,$headers))
+                    if(smtpMailer($to,$from,$from_name,$subject,$message))
                     {
                         $_SESSION['newvakeysuccess'] = "New VA key added successfully..!";
-                        header('Location: /Febina/Members-Portal/admin');
+                        header('Location: '.$BASE_URL.'admin');
                     }
                 }
             }
             else
             {
                 $_SESSION['newadharnofailure'] = "This adhar number is already in use please enter another one";
-                header('Location: /Febina/Members-Portal/admin');
+                header('Location: '.$BASE_URL.'admin');
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1083,7 +1138,7 @@
             $query = "delete from adharno where adhar = '$seckey'";
             $result = mysqli_query($conn,$query);
             $_SESSION['userdeletedsuccess'] = "Member removed successfully...!";
-            header('Location: /Febina/Members-Portal/admin');
+            header('Location: '.$BASE_URL.'admin');
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
@@ -1101,13 +1156,13 @@
             {
                 $query = "insert into favourit(name,username,uname) values('$name','$username','$uname')";
                 $result = mysqli_query($conn,$query);
-                header("Location:/Febina/Members-Portal/profile/".$uname);
+                header('Location:'.$BASE_URL.'profile/'.$uname);
             }
             else
             {
                 $query = "delete from favourit where username='$username' and uname='$uname'";
                 $result = mysqli_query($conn,$query);
-                header("Location:/Febina/Members-Portal/profile/".$uname);
+                header('Location:'.$BASE_URL.'profile/'.$uname);
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1117,7 +1172,7 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(isset($_POST['adminVisitMember']))
         {
-            header("Location:/Febina/Members-Portal/adminprofilevisit/".$_POST['username']);
+            header('Location:'.$BASE_URL.'adminprofilevisit/'.$_POST['username']);
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
@@ -1151,12 +1206,12 @@
             if ($res)
             {
                 $_SESSION['adminpostdeleted'] = "Post deleted..";
-                header("Location:/Febina/Members-Portal/adminprofilevisit/".$_POST['username']);
+                header('Location:'.$BASE_URL.'adminprofilevisit/'.$_POST['username']);
             }
             else
             {
                 $_SESSION['adminpostnotdeleted'] = "Post not deleted..";
-                header("Location: /Febina/Members-Portal/adminprofilevisit/".$_POST['username']);
+                header('Location: '.$BASE_URL.'adminprofilevisit/'.$_POST['username']);
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1191,12 +1246,12 @@
             if ($res)
             {
                 $_SESSION['adminreportedpostdeleted'] = "Post deleted..";
-                header("Location:/Febina/Members-Portal/admin");
+                header('Location:'.$BASE_URL.'admin');
             }
             else
             {
                 $_SESSION['adminreportedpostnotdeleted'] = "Post not deleted..";
-                header("Location: /Febina/Members-Portal/admin");
+                header('Location: '.$BASE_URL.'admin');
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1226,7 +1281,7 @@
                 $result = mysqli_query($conn,$query);
                 if($result)
                 {
-                    header("Location: /Febina/Members-Portal/feed");
+                    header('Location: '.$BASE_URL.'feed');
                 }
             }
             else
@@ -1244,7 +1299,7 @@
                 $result = mysqli_query($conn,$query);
                 if($result)
                 {
-                    header("Location: /Febina/Members-Portal/feed");
+                    header('Location: '.$BASE_URL.'feed');
                 }
             }
         }
@@ -1287,7 +1342,7 @@
             $result = mysqli_query($conn,$query);
             if($result)
             {
-                header("Location: /Febina/Members-Portal/feed");
+                header('Location: '.$BASE_URL.'feed');
 
             }
         }
