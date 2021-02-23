@@ -1,6 +1,7 @@
 <?php
     session_start();
     include ('./database/db.php');
+    include "./config/config.php";
     if(isset($_SESSION['username']))
     {
         $query = "select sr_no from user where username='".$_SESSION['username']."'";
@@ -90,7 +91,7 @@
             <div class="container">
                 <div class="profile-section">
                     <div class="profile-img" data-aos="zoom-out-right">
-                        <img src="<?php echo "/Febina/Members-Portal".ltrim($row['dppath'],"."); ?>" class="rounded-circle" width="250" height="250" alt="Profile picture">
+                        <img src="<?php echo $row['dppath']; ?>" class="rounded-circle" width="250" height="250" alt="Profile picture">
                     </div>
                     <div class="profile-details" data-aos="zoom-out-left">
                         <h1 class="mt-4"><?php echo $row['name']; ?>
@@ -99,7 +100,7 @@
                             {
                                 if($_SESSION['username']==$row['username'])
                                 {
-                                    echo '<a href="/Febina/Members-Portal/editprofile">
+                                    echo '<a href="'.$BASE_URL.'editprofile">
                                         <i class="fa fa-pencil-square-o fa-xs ms-3" aria-hidden="true"></i>
                                     </a>';
                                 }
@@ -117,7 +118,7 @@
                         ?>
                                 <a href=
                             <?php 
-                                echo "/Febina/Members-Portal/favourite/".$row['username'];
+                                echo $BASE_URL."favourite/".$row['username'];
                         ?>
                         class="link link-danger" style="text-decoration:none;">
                          Favourites <span class="badge badge-danger" style="border:1px solid black;color:black"><?php echo $cnt; ?></span>
@@ -147,7 +148,7 @@
                         ?>
                         <!-- <a href="#"> <span class="mdi mdi-linkedin" style="color:black; font-size: 2em;"></span></a>
                         <a href="#"> <span class="mdi mdi-youtube" style="color:black; font-size: 2em; "></span></a> -->
-                        <form action="/Febina/Members-Portal/code" id="favouritform" method="POST">
+                        <form action="<?php echo $BASE_URL; ?>code" id="favouritform" method="POST">
                             <input type="hidden" name="username" value="<?php
                             if(isset($_SESSION['username']))
                             { 
@@ -201,7 +202,7 @@
                 ?>
                             <div class="card post-card" data-aos="zoom-in">
                                 <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
-                                <a style="margin-right:auto;color:black;font-weight:700;text-decoration:none;" href="/Febina/Members-Portal/profile/<?php echo $row['username']; ?>"><?php echo $row['name'];?></a>
+                                <a style="margin-right:auto;color:black;font-weight:700;text-decoration:none;" href="<?php echo $BASE_URL; ?>profile/<?php echo $row['username']; ?>"><?php echo $row['name'];?></a>
                                 <?php 
                                     if(isset($_SESSION['username']))
                                     {
@@ -218,14 +219,14 @@
                                         {
                                     ?>
                                             <li>
-                                                <form action="/Febina/Members-Portal/editpost" method="post">
+                                                <form action="<?php echo $BASE_URL; ?>editpost" method="post">
                                                 <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
                                                 <input type="hidden" name="redirectto" value="profile">
                                                 <button class="dropdown-item" type="submit" name="editposts">Edit</button>
                                                 </form>
                                             </li>
                                             <li>
-                                                <form action="/Febina/Members-Portal/code" method="post">
+                                                <form action="<?php echo $BASE_URL; ?>code" method="post">
                                                     <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
                                                     <input type="hidden" name="redirectto" value="profile">
                                                     <button onclick="return confirm('Are you sure you want to delete this post ?');" class="dropdown-item" type="submit" name="deletepost">Delete</button>
@@ -237,7 +238,7 @@
                                         {
                                     ?>
                                             <li>
-                                                <form action="/Febina/Members-Portal/code" method="POST">
+                                                <form action="<?php echo $BASE_URL; ?>code" method="POST">
                                                     <input type="hidden" name="reportedpostid" value=<?php echo $_SESSION['username']; ?>>
                                                     <input type="hidden" name="reportedpostid" value=<?php echo $row['postid']; ?>>
                                                     <button class="dropdown-item" type="submit">Report</button>
@@ -250,7 +251,7 @@
                                 </div>
                                 <div class="card-inner-box">
                                     <div class="post-img">
-                                        <img src="<?php echo "/Febina/Members-Portal".ltrim($row['img_path'],"."); ?>" alt="Post Image">
+                                        <img src="<?php echo $row['img_path']; ?>" alt="Post Image">
                                     </div>
                                     <div class="">
                                         <div class="card-body">
@@ -298,7 +299,7 @@
                                                 ?>
                                             </div>
                                             <div>
-                                                <form class="post-meta" action="/Febina/Members-Portal/readmore" method="post">
+                                                <form class="post-meta" action="<?php echo $BASE_URL; ?>readmore" method="post">
                                                     
                                                     <?php    
                                                         if (isset($_SESSION['username']))
@@ -322,7 +323,7 @@
                                                             }
                                                         }
                                                     ?>
-                                                    <a type="button" name="readmorefeed" href="/Febina/Members-Portal/readmore.php?postid=<?php echo $row['postid']; ?>" class="btn btn-primary"> Read more</a>
+                                                    <a type="button" name="readmorefeed" href="<?php echo $BASE_URL; ?>readmore.php?postid=<?php echo $row['postid']; ?>" class="btn btn-primary"> Read more</a>
                                                     <small>
                                                         <?php
 

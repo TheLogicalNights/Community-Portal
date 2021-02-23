@@ -1,6 +1,7 @@
 <?php
     session_start();
     include('header.php');
+    include "./config/config.php";
 ?>
     
     <main>
@@ -18,7 +19,7 @@
 
         <div class="jumbotron my-form login-form mb-0">
             <div class="form-illustration" data-aos="fade-left">
-                <img src="/Febina/Members-Portal/assets/img/illustrations/signup.png" width="500" alt="">
+                <img src="./assets/img/illustrations/signup.png" width="500" alt="">
             </div>
             <div class="form-container " data-aos="fade-right">
             <div class="" data-aos="fade-right">
@@ -29,7 +30,7 @@
                     {
                         ?>
 
-                        <form action="/Febina/Members-Portal/code.php" method="POST" id="EmailForm">
+                        <form action="<?php echo $BASE_URL; ?>code.php" method="POST" id="EmailForm">
                             <div class="mb-3">
                                 <label for="email" class="   form-label" >Email</label>
                                 <input type="email" class="form-control" name="email" id="email"
@@ -47,7 +48,7 @@
                         if (isset($_SESSION['otpsuccess']))
                         {
                     ?>
-                        <form action="/Febina/Members-Portal/code" method="POST" id="VerifyForm">
+                        <form action="<?php echo $BASE_URL; ?>code" method="POST" id="VerifyForm">
                             <div class="mb-3 mt-5">
                                 <label for="otp" class="  form-label" >Verify OTP</label>
                                 <input type="number" class="form-control" id="otp" name="otp">
@@ -63,7 +64,7 @@
                         {
                             unset($_SESSION['otpverified']);
                     ?>
-                        <form class="mt-5" action="/Febina/Members-Portal/code.php" method="POST">
+                        <form class="mt-5" action="<?php echo $BASE_URL; ?>code.php" method="POST">
                            
                             <div class="row">
                                 <div class="col">

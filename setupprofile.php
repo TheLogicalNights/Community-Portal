@@ -1,6 +1,7 @@
 <?php
     session_start();
     include('header.php');
+    include "./config/config.php";
     if(!isset($_SESSION['status']))
     {
         header("Location: /Febina/Members-Portal/signin");
@@ -72,17 +73,13 @@
                         }
                         else
                         {
-                            echo '<img src="./img/user.png" class="rounded-circle" height="100" width="100" alt="Profile picture">';
+                            echo '<img src="'.$BASE_URL.'/img/user.png" class="rounded-circle" height="100" width="100" alt="Profile picture">';
                         }
                     ?>
-                    <form action="/Febina/Members-Portal/code"  method="POST" enctype="multipart/form-data">
-                        <div class="mt-3">
-                            <label for="profileimg" class="col-form-label">Select profile picture:</label>
-                            <input class="form-control" type="file" id="profileimg" name="profileimg" required>
-                            <button type="submit" name="uploadprofilepicture" class="btn btn-primary mt-3">Upload</button>
-                        </div>
-                    </form>
-                    <form action="/Febina/Members-Portal/code" method="POST">
+                    
+                    <form action="/Febina/Members-Portal/code" method="POST" enctype="multipart/form-data">
+                        <label for="profileimg" class="col-form-label">Select profile picture:</label>
+                            <input class="form-control" type="file" id="profileimg" name="profileimg">
                         <div class="mt-3">
                         <label for="birthdate" class="col-form-label">Birthdate:</label>
                             <input class="form-control" type="date" id="birthdate" name="birthdate" required>

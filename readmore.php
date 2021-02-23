@@ -4,6 +4,7 @@
     // {
     //     header('Location: signin.php');
     // }
+    include "./config/config.php";
     include('./database/db.php');
     include('header.php');
     if (isset($_GET['postid']))
@@ -34,7 +35,7 @@
         </button>
 
         <p class="mt-1" style="font-size: 27px;"><?php echo $row['posttitle']; ?><p>
-        <a class="link-info" style="text-decoration:none;" href=<?php echo "/Febina/Members-Portal/profile/".$row['username']; ?>>- <?php echo $row['username']; ?></a>
+        <a class="link-info" style="text-decoration:none;" href=<?php echo $BASE_URL."profile/".$row['username']; ?>>- <?php echo $row['username']; ?></a>
     </div>
     <div class="d-flex justify-content-center mt-2 bg-light">
             <img class="img-fluid" src="<?php echo $row['img_path']; ?>" width="45%" height="20%"    alt="" srcset="">
@@ -78,14 +79,14 @@
                                 if ($cnt == 0)
                                 {
             ?>
-                                    <a class="link-info" style="text-decoration:none;" href=<?php echo "/Febina/Members-Portal/profile/".$users[$user]; ?>><?php echo $users[$user]; ?></a>
+                                    <a class="link-info" style="text-decoration:none;" href=<?php echo $BASE_URL."profile/".$users[$user]; ?>><?php echo $users[$user]; ?></a>
             <?php   
                                 }
                                 else
                                 {
                                     echo " , ";
             ?>
-                                    <a class="link-info" style="text-decoration:none;" href=<?php echo "/Febina/Members-Portal/profile/".$users[$user]; ?>><?php echo $users[$user]; ?></a>
+                                    <a class="link-info" style="text-decoration:none;" href=<?php echo $BASE_URL."profile/".$users[$user]; ?>><?php echo $users[$user]; ?></a>
             <?php
                                 }
                                 $cnt++;
@@ -98,7 +99,7 @@
 
     <div class="d-flex justify-content-center mt-2">
         <p class="lead">
-                <a class="btn btn-primary" href="/Febina/Members-Portal/feed" role="button">Back</a>
+                <a class="btn btn-primary" href="<?php echo $BASE_URL; ?>feed" role="button">Back</a>
         </p>
     </div>
 </div>
@@ -108,12 +109,12 @@
         }
         else
         {
-            header('Location: /Febina/Members-Portal/feed');
+            header('Location: ./feed');
         }
     }
     else
     {
-        header('Location: /Febina/Members-Portal/feed');
+        header('Location: ./feed');
     }
 ?>
 
