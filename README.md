@@ -19,21 +19,13 @@ Community Based Responsive Website Template
   -Eg 1min-1hour-12hour-1day-1week-2week-,1 month..11month...1yr to nyr ago...... (Done)
   -No need to add 1day 5hours etc (Done)
 - Wrong sigin attempts should alert with appropriate messages(swal) (Done)
-- optimize card image for all resolutions
+- optimize card image for all resolutions (Done)
 
 - add post author on card (Done)
 
-- after profile setup the profile page shows errors 
+- after profile setup the profile page shows errors (Done)
 
-      Notice: Trying to access array offset on value of type null in E:\xampp\htdocs\Febina\Members-Portal\profile.php on line 66
-
-      Notice: Trying to access array offset on value of type null in E:\xampp\htdocs\Febina\Members-Portal\profile.php on line 68
-
-      Notice: Trying to access array offset on value of type null in E:\xampp\htdocs\Febina\Members-Portal\profile.php on line 76
-
-      Notice: Trying to access array offset on value of type null in E:\xampp\htdocs\Febina\Members-Portal\profile.php on line 79
-
-- profile setup resolve mandatory 
+- profile setup resolve mandatory (Done)
 
 # For Refactoring 
 
