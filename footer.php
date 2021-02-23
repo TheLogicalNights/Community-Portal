@@ -21,7 +21,7 @@
 <!-- JQUERY  -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous"></script>
-<script src="/Febina/Members-Portal/assets/js/script.js"></script>
+<script src="./assets/js/script.js"></script>
 <!-- AOS  -->
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script type="text/javascript">
@@ -121,7 +121,7 @@
 
                 $.ajax({
                 type:"POST",
-                url:"http://localhost/Febina/Members-Portal/code.php",
+                url:"code.php",
                 data:{
                     'unlikedby':p.name,
                     'postid':id,
@@ -137,7 +137,7 @@
 
                 $.ajax({
                 type:"POST",
-                url:"http://localhost/Febina/Members-Portal/code.php",
+                url:"code.php",
                 data:{
                     'likedby':p.name,
                     'postid':id,

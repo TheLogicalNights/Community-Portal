@@ -5,13 +5,14 @@
         header('Location: signin.php');
     }
     include('header.php');
+    include "./config/config.php";
     include('./database/db.php');
     $query = "select * from favourit where username = '".$_GET['username']."'";
     $result = mysqli_query($conn,$query);
     $sno = 0;
 ?>
 
-<main style="background:url('./assets/img/banner.jpg')">
+<main style="background:url('<?php echo $BASE_URL; ?>assets/img/banner.jpg')">
     <div class="jumbotron usp-section" style="padding:80px 0 !important;">
         <div class="container">
             <center>
@@ -37,7 +38,7 @@
                                             <td><?php echo $row['name']; ?></td>
                                             <td><?php echo $row['uname']; ?></td>
                                             <td>
-                                                <form action='/Febina/Members-Portal/code' method='POST'>
+                                                <form action='<?php echo $BASE_URL; ?>code' method='POST'>
                                                     <input type='hidden' name='username' id='visit' value=<?php echo $row['uname']; ?>>
                                                     <button type='submit' name='VisitMember' class='visit btn btn-primary'>Visit</button>
                                                 </form>

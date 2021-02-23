@@ -1,6 +1,7 @@
 <?php
     session_start();
     include('header.php');
+    include "./config/config.php";
 ?>
     
     <main>
@@ -39,11 +40,11 @@
                 <?php 
                     if(isset($_SESSION['forgotpasswordotpverified']))
                     {
-                        echo '<img src="/Febina/Members-Portal/assets/img/illustrations/resetpassword.png" width="500" alt="">';
+                        echo '<img src="'.$BASE_URL.'assets/img/illustrations/resetpassword.png" width="500" alt="">';
                     }
                     else
                     {
-                       echo '<img src="/Febina/Members-Portal/assets/img/illustrations/forogotpassword.png" width="500" alt="">';
+                       echo '<img src="'.$BASE_URL.'assets/img/illustrations/forogotpassword.png" width="500" alt="">';
                     }    
                 ?>
             </div>
@@ -56,7 +57,7 @@
                     {
                         ?>
 
-                        <form action="/Febina/Members-Portal/code" method="POST" id="EmailForm">
+                        <form action="<?php echo $BASE_URL; ?>code" method="POST" id="EmailForm">
                             <div class="mb-3">
                                 <label for="email" class="   form-label" >Email</label>
                                 <input type="email" class="form-control" name="email" id="email"
@@ -74,7 +75,7 @@
                         if (isset($_SESSION['forgetpasswordotpsuccess']))
                         {
                     ?>
-                        <form action="/Febina/Members-Portal/code" method="POST" id="VerifyForm">
+                        <form action="<?php echo $BASE_URL; ?>code" method="POST" id="VerifyForm">
                             <div class="mb-3 mt-5">
                                 <label for="otp" class="  form-label" >Verify OTP</label>
                                 <input type="number" class="form-control" id="otp" name="otp">
@@ -90,7 +91,7 @@
                         {
                             unset($_SESSION['forgotpasswordotpverified']);
                     ?>
-                        <form class="mt-5" action="/Febina/Members-Portal/code" method="POST">
+                        <form class="mt-5" action="<?php echo $BASE_URL; ?>code" method="POST">
 
                             <div class="mb-3">
                                 <label for="newpassword" class="form-label">New Password</label>
