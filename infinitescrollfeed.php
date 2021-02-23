@@ -1,5 +1,6 @@
 <?php
     include "./database/db.php";
+    include "./config/config.php";
     session_start();
 
     if(isset($_SESSION['username']))
@@ -47,7 +48,7 @@
                     }
                     echo '<div class="card post-card" data-aos="zoom-in">
                         <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
-                            <a style="margin-right:auto;color:black;font-weight:700;text-decoration:none;" href="/Febina/Members-Portal/profile/'.$row['username'].'">'.$row['name'] .'</a>
+                            <a style="margin-right:auto;color:black;font-weight:700;text-decoration:none;" href="'.$BASE_URL.'profile/'.$row['username'].'">'.$row['name'] .'</a>
                             <a  style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                             </a>';
@@ -61,14 +62,14 @@
                                 
                                         echo'
                                         <li>
-                                            <form action="/Febina/Members-Portal/editpost" method="post">
+                                            <form action="'.$BASE_URL.'editpost" method="post">
                                                 <input type="hidden" name="postid" value='.$row['postid'].' >
                                                 <input type="hidden" name="redirectto" value="feed">
                                                 <button class="dropdown-item" type="submit" name="editposts">Edit</button>
                                             </form>
                                         </li>
                                         <li>
-                                            <form action="/Febina/Members-Portal/code" method="post">
+                                            <form action="'.$BASE_URL.'code" method="post">
                                                 <input type="hidden" name="postid" value='.$row['postid'].' >
                                                 <input type="hidden" name="redirectto" value="feed">
                                                 <button onclick="return confirm(\'Are you sure you want to delete this post ?\');" class="dropdown-item" type="submit" name="deletepost">Delete</button>
@@ -80,7 +81,7 @@
                                     {
                                 
                                         echo '<li>
-                                            <form action="/Febina/Members-Portal/code" method="POST">
+                                            <form action="'.$BASE_URL.'code" method="POST">
                                                 <input type="hidden" name="reportedpostid" value='.$_SESSION['username'].' >
                                                 <input type="hidden" name="reportedpostid" value='.$row['postid'].' >
                                                 <button class="dropdown-item" type="submit">Report</button>
@@ -91,10 +92,10 @@
                                 
                                 echo '
                                         <li>
-                                            <a href="https://web.whatsapp.com://send?text=http://localhost/Febina/Members-Portal/readmore?postid='.$row['postid'].'" class="dropdown-item mobileView">Share on <i style="color:rgb(37,211,102);" class="fa fa-whatsapp" aria-hidden="true"></i></a>        
+                                            <a href="https://web.whatsapp.com://send?text='.$BASE_URL.'readmore?postid='.$row['postid'].'" class="dropdown-item mobileView">Share on <i style="color:rgb(37,211,102);" class="fa fa-whatsapp" aria-hidden="true"></i></a>        
                                         </li>
                                         <li>
-                                            <a href="https://www.facebook.com/sharer/sharer.php?u=localhost/Febina/Members-Portal/readmore?postid='.$row['postid'].'" target="_blank" rel="noopener" class="dropdown-item mobileView">Share on <i style="color: #1877f2;" class="fa fa-facebook" aria-hidden="true"></i>
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u='.$BASE_URL.'readmore?postid='.$row['postid'].'" target="_blank" rel="noopener" class="dropdown-item mobileView">Share on <i style="color: #1877f2;" class="fa fa-facebook" aria-hidden="true"></i>
                                             </a>
                                         </li>
                                 </ul>';
@@ -105,7 +106,7 @@
                                 <img src="';
                                 if (startsWith($row['img_path'],"./"))
                                 {
-                                    echo "/Febina/Members-Portal".ltrim($row['img_path'],".");
+                                    echo $row['img_path'];
                                 } 
                                 else
                                 {
@@ -161,7 +162,7 @@
                                     
                                     <div>
                                     
-                                        <form class="post-meta" action="/Febina/Members-Portal/readmore" method="GET">
+                                        <form class="post-meta" action="'.$BASE_URL.'readmore" method="GET">
                                             ';
                                             if (isset($_SESSION['username']))
                                             {

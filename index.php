@@ -1,6 +1,7 @@
 <?php
     session_start();
     include('header.php');
+    include "./config/config.php";
 ?>    
     <main>        
         <div class="slick-go">
@@ -9,7 +10,7 @@
                     <div class="hero-text col-lg-5" data-aos="fade-right">
                         <h1>Grow Learn Think Share and Prosper With Us Together</h1>
                         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non molestiae temporibus voluptatibus fugit eius aut accusamus officia porro aliquam placeat vitae quod, quisquam, magnam quas quaerat voluptatum. Labore, beatae placeat.</p>
-                        <a href="/Febina/Members-Portal/signup" class="btn btn-primary">Sign Up</a>
+                        <a href="<?php echo $BASE_URL; ?>signup" class="btn btn-primary">Sign Up</a>
                     </div>
                 </div>
             </div>
@@ -17,14 +18,14 @@
                 <div class="hero-text col-lg-5" data-aos="fade-right">
                     <h1>Grow Learn Think Share and Prosper With Us Together</h1>
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non molestiae temporibus voluptatibus fugit eius aut accusamus officia porro aliquam placeat vitae quod, quisquam, magnam quas quaerat voluptatum. Labore, beatae placeat.</p>
-                    <a href="/Febina/Members-Portal/signup" class="btn btn-primary">Sign Up</a>
+                    <a href="<?php echo $BASE_URL; ?>signup" class="btn btn-primary">Sign Up</a>
                 </div>
             </div>
             <div class="banner" style="background:url(https://images.pexels.com/photos/862848/pexels-photo-862848.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);">
                 <div class="hero-text col-lg-5" data-aos="fade-right">
                     <h1>Grow Learn Think Share and Prosper With Us Together</h1>
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non molestiae temporibus voluptatibus fugit eius aut accusamus officia porro aliquam placeat vitae quod, quisquam, magnam quas quaerat voluptatum. Labore, beatae placeat.</p>
-                    <a href="/Febina/Members-Portal/signup" class="btn btn-primary">Sign Up</a>
+                    <a href="<?php echo $BASE_URL; ?>signup" class="btn btn-primary">Sign Up</a>
                 </div>
             </div>
         </div>        

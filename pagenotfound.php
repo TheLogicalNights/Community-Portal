@@ -1,3 +1,6 @@
+<?php
+    include "./config/config.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +33,7 @@ body {
                 <span class="display-1 d-block">4<i class="far fa-question-circle fa-spin 2x"></i>4</span>
                 <div class="mb-4 lead">The page you are looking for was not found.</div>
                 <hr>
-                <a href="/Febina/Members-Portal/index" class="btn btn-link">Back to Home</a>
+                <a href="<?php echo $BASE_URL; ?>index" class="btn btn-link">Back to Home</a>
             </div>
         </div>
     </div>
