@@ -1,10 +1,12 @@
 <?php
     session_start();
+    include "./config/config.php";
+    include "./config/config.php";
     if (!isset($_SESSION['status']))
     {
         header('Location: signin.php');
     }
-    include('./database/db.php');
+    include $BASE_URL."database/db.php" ;
     include('header.php'); 
     if(isset($_SESSION['postfailure']))
     {
@@ -19,7 +21,7 @@
 <main>
 <div class="container mt-3">
     <h2 class="mb-3">Add Post</h2>
-    <form action="/Febina/Members-Portal/code" method="POST" enctype="multipart/form-data">
+    <form action="<?php echo $BASE_URL; ?>code" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="posttitle" class="col-form-label">Post title:</label>
             <input type="text" class="form-control" id="posttitle" name="posttitle" required>
@@ -34,7 +36,7 @@
         </div>
         <hr>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a type="button" class="btn btn-secondary" href="./feed.php" data-bs-dismiss="modal">Close</a>
+            <a type="button" class="btn btn-secondary" href="<?php echo $BASE_URL; ?>feed.php" data-bs-dismiss="modal">Close</a>
             <button class="btn btn-primary" name="addpost" type="submit">Add new post</button>
         </div>
     </form>

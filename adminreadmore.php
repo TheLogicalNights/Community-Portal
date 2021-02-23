@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include "./config/config.php";
     if (!isset($_SESSION['adminstatus']))
     {
         header('Location: adminlogin.php');
@@ -36,7 +37,7 @@
         </button>
 
         <p class="mt-1" style="font-size: 27px;"><?php echo $row['posttitle']; ?><p>
-        <a class="link-info" style="text-decoration:none;" href=<?php echo "/Febina/Members-Portal/profile/".$row['username']; ?>>- <?php echo $row['username']; ?></a>
+        <a class="link-info" style="text-decoration:none;" href=<?php echo $BASE_URL."profile/".$row['username']; ?>>- <?php echo $row['username']; ?></a>
     </div>
     <div class="d-flex justify-content-center mt-2 bg-light">
             <img class="img-fluid" src="<?php echo $row['img_path']; ?>" width="45%" height="20%"    alt="" srcset="">
@@ -56,7 +57,7 @@
 
     <div class="d-flex justify-content-center mt-2">
         <p class="lead">
-                <a class="btn btn-primary" href="/Febina/Members-Portal/admin" role="button">Back</a>
+                <a class="btn btn-primary" href="<?php echo $BASE_URL; ?>admin" role="button">Back</a>
         </p>
     </div>
 </div>
@@ -65,12 +66,12 @@
         }
         else
         {
-            header('Location: /Febina/Members-Portal/admin');
+            header('Location: ./admin');
         }
     }
     else
     {
-        header('Location: /Febina/Members-Portal/admin');
+        header('Location: ./admin');
     }
 }
 ?>

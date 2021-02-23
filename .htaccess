@@ -23,6 +23,6 @@ RewriteRule ^pagenotfound$ pagenotfound.php [L]
 RewriteRule profile/([0-9a-zA-Z_.@]+) profile.php?username=$1 [NC,L]
 RewriteRule favourite/([0-9a-zA-Z_.@]+) favourite.php?username=$1 [NC,L]
 RewriteRule adminprofilevisit/([0-9a-zA-Z_.@]+) adminprofilevisit.php?username=$1 [NC,L]
-ErrorDocument 404 http://localhost/Febina/Members-Portal/pagenotfound
+ErrorDocument 404 https://www.febinaevents.com/pagenotfound
 
 

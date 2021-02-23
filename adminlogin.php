@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include "./config/config.php";
     if (isset($_SESSION['adminstatus']))
     {
         header('Location: admin.php');
@@ -18,13 +19,13 @@
 <main class="bg-light">
     <div class="jumbotron my-form login-form mb-0" data-aos="fade-right">
         <div class="form-illustration " data-aos="fade-right">
-                <img src="/Febina/Members-Portal/assets/img/illustrations/admin.png" width="500" alt="">
+                <img src="<?php echo $BASE_URL; ?>assets/img/illustrations/admin.png" width="500" alt="">
         </div>
         <div class="form-container" data-aos="fade-left">
                 <div>
                     <h2 class="mb-5 ms-2">Sign In</h2>
                     <div class="container mb-5">
-                    <form action="/Febina/Members-Portal/code" method="POST">
+                    <form action="<?php echo $BASE_URL; ?>code" method="POST">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
                             <input type="username" class="form-control" id="username" name="username" required>

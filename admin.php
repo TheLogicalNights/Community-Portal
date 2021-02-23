@@ -1,10 +1,11 @@
 <?php
     session_start();
+    include "./config/config.php";
     include "./database/db.php";
     include('adminheader.php');
     if (!isset($_SESSION['adminstatus']))
     {
-        header('Location: /Febina/Members-Portal/adminlogin');
+        header('Location: '.$BASE_URL.'adminlogin');
     }
     if(isset($_SESSION['newadharnofailure']))
     {
@@ -54,7 +55,7 @@
 ?>
 <div class="jumbotron usp-section mt-5">
     <div class="container mt-5">
-        <form class="mt-5" action="/Febina/Members-Portal/code" method="POST">
+        <form class="mt-5" action="<?php echo $BASE_URL ?>code" method="POST">
             <div class="mb-3">
                 <label for="email" class="form-label">Member's email address</label>
                 <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
@@ -92,13 +93,13 @@
                                 <td>".$row['name']."</td>
                                 <td>".$row['username']."</td>
                                 <td>
-                                    <form action=\"/Febina/Members-Portal/code\" method=\"POST\">
+                                    <form action=\"".$BASE_URL."code\" method=\"POST\">
                                         <input type=\"hidden\" name=\"username\" value=\"".$row['username']."\">
                                         <button type=\"submit\" name=\"removeuser\" class=\"remove btn btn-primary btn-sm\">Remove</button>
                                     </form>
                                 </td>
                                 <td>
-                                <form action='/Febina/Members-Portal/code' method='POST'>
+                                <form action='".$BASE_URL."code' method='POST'>
                                     <input type='hidden' name='username' id='visit' value=".$row['username'].">
                                     <button type='submit' name='adminVisitMember' class='visit btn btn-primary'>Visit</button>
                                 </form>
@@ -135,13 +136,13 @@
                                     <td hidden>".$row['post']."</td>
                                     <td>".$row['reportcount']."</td>
                                     <td>
-                                        <form action='/Febina/Members-Portal/adminreadmore' method='post'>
+                                        <form action='".$BASE_URL."adminreadmore' method='post'>
                                             <input type='hidden' name='postid' value=".$row['postid'].">
                                             <button type='submit' name='readmorefeed' href='readmore.php' class='btn btn-primary btn-sm'> Read more</button>
                                         </form>        
                                     </td>
                                     <td>
-                                        <form action='/Febina/Members-Portal/code' method='post'>
+                                        <form action='".$BASE_URL."code' method='post'>
                                             <input type='hidden' name='postid' value=".$row['postid'].">
                                             <button onclick='return confirm('Are you sure you want to delete this post ?');' class='btn btn-primary btn-sm' type='submit' name='admindeletereportedpost'>Delete</button>
                                         </form>

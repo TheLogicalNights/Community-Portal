@@ -1,5 +1,8 @@
 <?php
     session_start();
+    include "./config/config.php";
+    include ('./adminheader.php');
+    include ('./database/db.php');
     if (!isset($_SESSION['adminstatus']))
     {
         header('Location: adminlogin.php');
@@ -11,8 +14,6 @@
     } 
 
     date_default_timezone_set("Asia/Kolkata");
-    include ('./adminheader.php');
-    include ('./database/db.php');
     $result = "";
     if(isset($_SESSION['adminpostdeleted']))
     {
@@ -50,7 +51,7 @@
             <div class="container">
                 <div class="profile-section">
                     <div class="profile-img" data-aos="zoom-out-right">
-                        <img src="<?php echo "/Febina/Members-Portal".ltrim($row['dppath'],"."); ?>" class="rounded-circle" width="250" height="250" alt="Profile picture">
+                        <img src="<?php echo $row['dppath'];?>" class="rounded-circle" width="250" height="250" alt="Profile picture">
                     </div>
                     <div class="profile-details" data-aos="zoom-out-left">
                         <h1 class="mt-4"><?php echo $row['name']; ?>
@@ -100,7 +101,7 @@
                                         {
                                     ?>
                                             <li>
-                                                <form action="/Febina/Members-Portal/code" method="post">
+                                                <form action="<?php echo $BASE_URL; ?>code" method="post">
                                                     <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
                                                     <input type="hidden" name="username" value=<?php echo $row['username']; ?>>
                                                     <button onclick="return confirm('Are you sure you want to delete this post ?');" class="dropdown-item" type="submit" name="admindeletepost">Delete</button>
@@ -118,7 +119,7 @@
                                         <?php 
                                             if (startsWith($row['img_path'],"./"))
                                             {
-                                                echo "/Febina/Members-Portal".ltrim($row['img_path'],".");
+                                                echo $row['img_path'];
                                             } 
                                             else
                                             {
@@ -166,7 +167,7 @@
                                                 ?>
                                             </div>
                                             <div>
-                                                <form class="post-meta" action="/Febina/Members-Portal/adminreadmore" method="post">
+                                                <form class="post-meta" action="<?php echo $BASE_URL; ?>adminreadmore" method="post">
                                                     <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
                                                     <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary"> Read more</button>
                                                     <small>

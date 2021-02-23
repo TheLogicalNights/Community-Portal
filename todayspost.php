@@ -4,6 +4,7 @@
     {
         header('Location: signin.php');
     }
+    include "./config/config.php";
     include('./database/db.php');
     $date = date("Y-m-d");
     $query = "select * from posts where DATE(posted_at)='$date' order by posted_at desc";
@@ -25,7 +26,7 @@
                 ?>
                             <div class="card post-card" data-aos="zoom-in">
                                 <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
-                                    <a style="margin-right:auto;color:black;font-weight:700;text-decoration:none;" href="/Febina/Members-Portal/profile/<?php echo $row['username']; ?>"><?php echo $row['name']; ?></a>
+                                    <a style="margin-right:auto;color:black;font-weight:700;text-decoration:none;" href="<?php echo $BASE_URL; ?>profile/<?php echo $row['username']; ?>"><?php echo $row['name']; ?></a>
                                     <a  style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                     </a>
@@ -35,7 +36,7 @@
                                             {
                                         ?>
                                                 <li>
-                                                    <form action="/Febina/Members-Portal/code" method="post">
+                                                    <form action="<?php echo $BASE_URL; ?>code" method="post">
                                                         <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
                                                         <input type="hidden" name="username" value=<?php echo $row['username']; ?>>
                                                         <button onclick="return confirm('Are you sure you want to delete this post ?');" class="dropdown-item" type="submit" name="admindeletepost">Delete</button>
@@ -89,7 +90,7 @@
                                                 ?>
                                             </div>
                                             <div>
-                                                <form class="post-meta" action="/Febina/Members-Portal/adminreadmore" method="post">
+                                                <form class="post-meta" action="./adminreadmore" method="post">
                                                     <input type="hidden" name="postid" value=<?php echo $row['postid']; ?>>
                                                     <button type="submit" name="readmorefeed" href="readmore.php" class="btn btn-primary"> Read more</button>
                                                     <small>
