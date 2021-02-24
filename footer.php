@@ -92,7 +92,7 @@
 
             $(window).scroll(function()
             {
-                if($(window).scrollTop() >= $(document).height() - $(window).height())
+                if($(window).scrollTop() >= $(document).height() - $(window).height()-0.99)
                 {
                     $.ajax({
                     type:"POST",
@@ -116,9 +116,6 @@
             console.log(p.name);
             if (document.getElementById(id).className == "fa fa-thumbs-up")
             {
-
-                
-
                 $.ajax({
                 type:"POST",
                 url:"code.php",
@@ -128,13 +125,13 @@
                 },
                 success:function(data)
                 {
-                    location.reload();
+                    document.getElementById('count'+id).innerHTML = data;
+                    document.getElementById(id).className = "fa fa-thumbs-o-up";
                 }
             });
             }
             else
             {
-
                 $.ajax({
                 type:"POST",
                 url:"code.php",
@@ -143,7 +140,45 @@
                     'postid':id,
                 },
                 success:function(data){
-                    location.reload();
+                    document.getElementById('count'+id).innerHTML = data;
+                    document.getElementById(id).className = "fa fa-thumbs-up";
+                }
+            });
+            }
+        }
+        function Like1(q,p)
+        {
+            id = q.replace('like','');
+            console.log(id);
+            console.log(p.name);
+            if (document.getElementById(id).className == "fa fa-thumbs-up")
+            {
+                $.ajax({
+                type:"POST",
+                url:"../code.php",
+                data:{
+                    'unlikedby':p.name,
+                    'postid':id,
+                },
+                success:function(data)
+                {
+                    document.getElementById('count'+id).innerHTML = data;
+                    document.getElementById(id).className = "fa fa-thumbs-o-up";
+                }
+            });
+            }
+            else
+            {
+                $.ajax({
+                type:"POST",
+                url:"../code.php",
+                data:{
+                    'likedby':p.name,
+                    'postid':id,
+                },
+                success:function(data){
+                    document.getElementById('count'+id).innerHTML = data;
+                    document.getElementById(id).className = "fa fa-thumbs-up";
                 }
             });
             }

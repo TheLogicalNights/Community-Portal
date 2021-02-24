@@ -482,4 +482,9 @@ h6 {
     {
         display : none;
     }
+    .mobileimg
+    {
+        height : 35%;
+        width : 80%;
+    }
 }

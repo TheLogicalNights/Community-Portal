@@ -104,7 +104,7 @@
                 unset($_SESSION['otp']);
                
                 $_SESSION['otpverified'] = "success";
-                header("Location: '.$BASE.'signup.php");
+                header('Location: '.$BASE_URL.'signup.php');
             }
             else
             {
@@ -256,20 +256,21 @@
                 {
                     $_SESSION['notimage'] = "File is not an image, please select valid file";
                     $uploadOk = 0;
-                    echo "File is not an image, please select valid file";
+                    $_SESSION['postfailure'] .= "File is not an image, please select valid file.";
+                    
                 }
                 // Allow certain file formats
                 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                 && $imageFileType != "gif" ) 
                 {
-                    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                    $_SESSION['postfailure'] .= "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                     $uploadOk = 0;
                 }
                 // Check if $uploadOk is set to 0 by an error
                 if ($uploadOk == 0) 
                 {
-                    echo "Sorry, your file was not uploaded.";
-
+                    $_SESSION['postfailure'] .= "Sorry, your file was not uploaded.";
+                    header('Location: '.$BASE_URL.'addpost');
                 } 
                 // if everything is ok, try to upload file
                 else  
@@ -643,13 +644,13 @@
             {
                 $_SESSION['setupprofilsuccessfully'] = "Your profile set successfully";
                 unset($_SESSION['setupprofile']);
-                header('Location:'.$BASE_URL.'feed');
+                header('Location: '.$BASE_URL.'feed');
             }
             else
             {
                 die("Error:".mysqli_error($conn));
                 $_SESSION['setupprofilefailure'] = "Unable to setup your profile please try again..";
-                header('Location:'.$BASE_URL.'setupprofile');
+                header('Location: '.$BASE_URL.'setupprofile');
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1147,7 +1148,7 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(isset($_POST['uname']))
         {
-            $username = $_POST['username'];
+            $username = $_SESSION['username'];
             $uname = $_POST['uname'];
             $name = $_POST['name'];
             $query = "select * from favourit where username='$username' and uname='$uname'";
@@ -1156,13 +1157,13 @@
             {
                 $query = "insert into favourit(name,username,uname) values('$name','$username','$uname')";
                 $result = mysqli_query($conn,$query);
-                header('Location:'.$BASE_URL.'profile/'.$uname);
+                // header('Location:'.$BASE_URL.'profile/'.$uname);
             }
             else
             {
                 $query = "delete from favourit where username='$username' and uname='$uname'";
                 $result = mysqli_query($conn,$query);
-                header('Location:'.$BASE_URL.'profile/'.$uname);
+                // header('Location:'.$BASE_URL.'profile/'.$uname);
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1281,7 +1282,12 @@
                 $result = mysqli_query($conn,$query);
                 if($result)
                 {
-                    header('Location: '.$BASE_URL.'feed');
+                    $count = 1;
+                    echo $count;
+                }
+                else
+                {
+                    die("Error : ".mysqli_error($conn));
                 }
             }
             else
@@ -1299,7 +1305,11 @@
                 $result = mysqli_query($conn,$query);
                 if($result)
                 {
-                    header('Location: '.$BASE_URL.'feed');
+                    echo $count;
+                }
+                else
+                {
+                    die("Error : ".mysqli_error($conn));
                 }
             }
         }
@@ -1314,10 +1324,13 @@
             $postid = $_POST['postid'];
             $srno = 0;
             $count = 0;
+            $ajax .= $username;
+            $ajax .= $postid; 
             $query = "select * from user where username = '$username'";
             $result = mysqli_query($conn,$query);
             if($result)
             {
+                
                 $row = $result->fetch_assoc();
                 $srno = $row['sr_no'];
             }
@@ -1334,7 +1347,6 @@
             $result = mysqli_query($conn,$query);
             if($row = $result->fetch_assoc())
             {
-
                 $count = $row['count'];
             }
             $count -= 1;
@@ -1342,8 +1354,11 @@
             $result = mysqli_query($conn,$query);
             if($result)
             {
-                header('Location: '.$BASE_URL.'feed');
-
+                echo $count;
+            }
+            else
+            {
+                die("Error : ".mysqli_error($conn));
             }
         }
     }

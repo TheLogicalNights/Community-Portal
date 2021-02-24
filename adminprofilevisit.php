@@ -51,7 +51,7 @@
             <div class="container">
                 <div class="profile-section">
                     <div class="profile-img" data-aos="zoom-out-right">
-                        <img src="<?php echo $row['dppath'];?>" class="rounded-circle" width="250" height="250" alt="Profile picture">
+                        <img src="<?php echo $BASE_URL.ltrim($row['dppath'],"."); ?>" class="rounded-circle" width="250" height="250" alt="Profile picture">
                     </div>
                     <div class="profile-details" data-aos="zoom-out-left">
                         <h1 class="mt-4"><?php echo $row['name']; ?>
@@ -119,7 +119,7 @@
                                         <?php 
                                             if (startsWith($row['img_path'],"./"))
                                             {
-                                                echo $row['img_path'];
+                                                echo $BASE_URL.ltrim($row['img_path'],".");
                                             } 
                                             else
                                             {
