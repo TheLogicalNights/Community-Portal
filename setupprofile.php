@@ -77,7 +77,7 @@
                         }
                     ?>
                     
-                    <form action="/Febina/Members-Portal/code" method="POST" enctype="multipart/form-data">
+                    <form action="<?php echo $BASE_URL; ?>code" method="POST" enctype="multipart/form-data">
                         <label for="profileimg" class="col-form-label">Select profile picture:</label>
                             <input class="form-control" type="file" id="profileimg" name="profileimg">
                         <div class="mt-3">
