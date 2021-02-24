@@ -14,7 +14,7 @@ include "./config/config.php";
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" integrity="sha512-6lLUdeQ5uheMFbWm3CP271l14RsX1xtx+J5x2yeIDkkiBpeVTNhTqijME7GgRKKi6hCqovwCoBTlRBEC20M8Mg==" crossorigin="anonymous" />
     <link rel="icon" href="<?php echo $BASE_URL; ?>assets/img/logo.png" type="image/png" sizes="16x16">
-    <title>Febina Community Members</title>
+    <title>Febina Jagriti Foundation</title>
     <!-- AOS  -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!-- MDI  -->
@@ -46,8 +46,7 @@ include "./config/config.php";
 <link href="https://fonts.googleapis.com/css2?family=Chicle&display=swap" rel="stylesheet"> 
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap" rel="stylesheet">  
-    </head>
-<script>
+    <script>
     function validate(obj) {
         var newpassword = document.getElementById('newpassword').value;
         if (newpassword != obj.value) {
@@ -57,7 +56,9 @@ include "./config/config.php";
 
         }
     }
-</script>
+</script>    
+</head>
+
 
 <body>
     <!-- Here is another comment -->

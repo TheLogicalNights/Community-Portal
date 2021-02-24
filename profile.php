@@ -2,6 +2,13 @@
     session_start();
     include ('./database/db.php');
     include "./config/config.php";
+    if(!(isset($_SESSION['username'])))
+    {
+        if(!(isset($_GET['username'])))
+        {
+            header("Location: signin");
+        }
+    }
     if(isset($_SESSION['username']))
     {
         $query = "select sr_no from user where username='".$_SESSION['username']."'";
@@ -79,6 +86,20 @@
         $query = "select * from favourit where username='".$_GET['username']."'";
         $result2 = mysqli_query($conn,$query);
         $cnt = mysqli_num_rows($result2);
+        $query3 = "select sr_no from user where username='".$_SESSION['username']."'";
+        $result3 = mysqli_query($conn,$query3);
+        $r =mysqli_fetch_assoc($result3);
+        $sr = $r['sr_no'];
+        $arr = array();
+        $query3 = "select * from postlikes";
+        $result3 = mysqli_query($conn,$query3);
+        if ($result3)
+        {
+            while ($row3 = mysqli_fetch_assoc($result3))
+            {
+                $arr[$row3['postid']] = $row3['likedby'];
+            }
+        }
     }
 ?>
     <main>
@@ -91,7 +112,7 @@
             <div class="container">
                 <div class="profile-section">
                     <div class="profile-img" data-aos="zoom-out-right">
-                        <img src="<?php echo $row['dppath']; ?>" class="rounded-circle" width="250" height="250" alt="Profile picture">
+                        <img src="<?php echo $BASE_URL.ltrim($row['dppath'],"."); ?>" class="rounded-circle" width="250" height="250" alt="Profile picture">
                     </div>
                     <div class="profile-details" data-aos="zoom-out-left">
                         <h1 class="mt-4"><?php echo $row['name']; ?>
@@ -137,11 +158,11 @@
 
                                     if(mysqli_num_rows($result1)==0)
                                     {
-                                        echo '<a type="button" onclick="favourite(this.id)"> <span id="fav" class="fa fa-heart-o fa-2x" style="color:black; font-size: 2em;"></span></a>';
+                                        echo '<a type="button" name="'.$row['username'].'" id="'.$row['name'].'" onclick="favourite(this)"> <span id="fav" class="fa fa-heart-o fa-2x" style="color:black; font-size: 2em;"></span></a>';
                                     }
                                     else
                                     {
-                                        echo '<a type="button" onclick="favourite(this.id)"> <span id="fav" class="fa fa-heart fa-2x" style="color:red; font-size: 2em;"></span></a>';
+                                        echo '<a type="button" name="'.$row['username'].'" id="'.$row['name'].'" onclick="favourite(this)"> <span id="fav" class="fa fa-heart fa-2x" style="color:red; font-size: 2em;"></span></a>';
                                     }
                                 }
                             }
@@ -251,7 +272,23 @@
                                 </div>
                                 <div class="card-inner-box">
                                     <div class="post-img">
-                                        <img src="<?php echo $row['img_path']; ?>" alt="Post Image">
+                                        <img 
+                                    <?php
+                                        if(startsWith($row['img_path'],"./"))
+                                        {
+                                    ?>                                     
+                                            src="<?php echo $BASE_URL.ltrim($row['img_path'],"."); ?>" 
+                                    <?php
+                                        }
+                                        else
+                                        {
+                                    ?>
+                                            src="<?php echo $row['img_path']; ?>"
+                                    <?php
+                                        }    
+                                    ?>    
+                                        alt="Post Image">
+
                                     </div>
                                     <div class="">
                                         <div class="card-body">
@@ -306,20 +343,41 @@
                                                         {
                                                     ?>
                                                     <?php
-                                                            if (isset($arr[$row['postid']]))
+                                                            if(isset($_GET['username']))
                                                             {
-                                                                if (preg_match("/{$sr}/i", $arr[$row['postid']]))
+                                                                if (isset($arr[$row['postid']]))
                                                                 {
-                                                                    echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-up" style="font-size:20px;color: #FFAB01;"> <label style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
+                                                                    if (preg_match("/{$sr}/i", $arr[$row['postid']]))
+                                                                    {
+                                                                        echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like1(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
+                                                                    }
+                                                                    else
+                                                                    {                                                   
+                                                                        echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like1(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
+                                                                    }
                                                                 }
                                                                 else
-                                                                {                                                   
-                                                                    echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
+                                                                {
+                                                                        echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like1(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';                                                    
                                                                 }
                                                             }
                                                             else
                                                             {
-                                                                    echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';                                                    
+                                                                if (isset($arr[$row['postid']]))
+                                                                {
+                                                                    if (preg_match("/{$sr}/i", $arr[$row['postid']]))
+                                                                    {
+                                                                        echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
+                                                                    }
+                                                                    else
+                                                                    {                                                   
+                                                                        echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                        echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';                                                    
+                                                                }
                                                             }
                                                         }
                                                     ?>
@@ -416,21 +474,50 @@
 
     </main>
     <script type="text/javascript">
-        function favourite(id)
+        function favourite(obj)
         {
+            console.log(obj.name);
+            console.log(obj.id);
             if (document.getElementById('fav').className == "fa fa-heart-o fa-2x")
             {
-                document.getElementById('fav').className = "fa fa-heart fa-2x"
-                document.getElementById('fav').style.color = "red";  
-                document.getElementById("favouritform").submit();  
+                
+                  
+                // document.getElementById("favouritform").submit();
+                $.ajax({
+                    type:"POST",
+                    url:"../code.php",
+                    data:
+                    {
+                    'uname': obj.name,
+                    'name': obj.id,
+                    },
+                    success:function(data)
+                    {
+                        document.getElementById('fav').className = "fa fa-heart fa-2x";
+                        document.getElementById('fav').style.color = "red";
+                    }  
+                });
             }
             else if (document.getElementById('fav').className == "fa fa-heart fa-2x")
             {
-                document.getElementById('fav').className = "fa fa-heart-o fa-2x";
-                document.getElementById('fav').style.color = "black";
-                document.getElementById("favouritform").submit(); 
+                // document.getElementById("favouritform").submit(); 
+                $.ajax({
+                    type:"POST",
+                    url:"../code.php",
+                    data:
+                    {
+                        'uname': obj.name,
+                        'name': obj.id,
+                    },
+                    success:function(data)
+                    {
+                        document.getElementById('fav').className = "fa fa-heart-o fa-2x";
+                        document.getElementById('fav').style.color = "black";
+                    }
+                });
             }
         }
+       
     </script>
 
 <?php

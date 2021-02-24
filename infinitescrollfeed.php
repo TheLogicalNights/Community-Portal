@@ -48,14 +48,15 @@
                     }
                     echo '<div class="card post-card" data-aos="zoom-in">
                         <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
-                            <a style="margin-right:auto;color:black;font-weight:700;text-decoration:none;" href="'.$BASE_URL.'profile/'.$row['username'].'">'.$row['name'] .'</a>
-                            <a  style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                            </a>';
-                            echo '<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">';
+                            <a class="ms-3" style="margin-right:auto;color:black;text-decoration:none;font-size:15px;" href="'.$BASE_URL.'profile/'.$row['username'].'"><strong>'.$row['username'] .'</strong></a>';
                             if (isset($_SESSION['username']))
                             {
-                               
+                                echo '<a  style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                            </a>';
+                            
+                            
+                               echo '<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">';
                                 
                                     if ($_SESSION['username'] == $row['username'])
                                     {
@@ -92,10 +93,10 @@
                                 
                                 echo '
                                         <li>
-                                            <a href="https://web.whatsapp.com://send?text='.$BASE_URL.'readmore?postid='.$row['postid'].'" class="dropdown-item mobileView">Share on <i style="color:rgb(37,211,102);" class="fa fa-whatsapp" aria-hidden="true"></i></a>        
+                                            <a href="whatsapp://send?text='.$BASE_URL.'readmore?postid='.$row['postid'].'" class="dropdown-item mobileView">Share on <i style="color:rgb(37,211,102);" class="fa fa-whatsapp" aria-hidden="true"></i></a>        
                                         </li>
                                         <li>
-                                            <a href="https://www.facebook.com/sharer/sharer.php?u='.$BASE_URL.'readmore?postid='.$row['postid'].'" target="_blank" rel="noopener" class="dropdown-item mobileView">Share on <i style="color: #1877f2;" class="fa fa-facebook" aria-hidden="true"></i>
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u='.$BASE_URL.'readmore?postid='.$row['postid'].'" target="_blank" rel="noopener" class="dropdown-item">Share on <i style="color: #1877f2;" class="fa fa-facebook" aria-hidden="true"></i>
                                             </a>
                                         </li>
                                 </ul>';
@@ -170,16 +171,16 @@
                                                 {
                                                     if (preg_match("/{$sr}/i", $arr[$row['postid']]))
                                                     {
-                                                        echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-up" style="font-size:20px;color: #FFAB01;"> <label style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
+                                                        echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
                                                     }
                                                     else
                                                     {                                                   
-                                                        echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
+                                                        echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
                                                     }
                                                 }
                                                 else
                                                 {
-                                                    echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';                                                    
+                                                    echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';                                                    
                                                 }
                                             }
                                             echo '<a type="button" name="readmorefeed" href="readmore.php?postid='.$row['postid'].'" class="btn btn-primary"> Read more</a>
