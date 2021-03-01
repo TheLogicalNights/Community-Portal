@@ -1,21 +1,10 @@
 <?php
     session_start();
-    include('header.php');
     include "./config/config.php";
+    include('header.php');
     include('./database/db.php');
     $dppath = "";
     $username = $_SESSION['username'];
-    $query = "select * from profile where username = '$username'";
-    $result = mysqli_query($conn,$query);
-    while($row = $result->fetch_assoc())
-    {
-        $name = $row['name'];
-        $dppath = $row['dppath'];
-        $about = $row['about'];
-        $instalink = $row['instalink'];
-        $fblink = $row['fblink'];
-        $birthdate = $row['birthdate'];
-    }
     if(isset($_SESSION['profileupdated']))
     {
         echo '
@@ -51,6 +40,17 @@
         </script>
         ';
         unset($_SESSION['changepasswordsuccess']);
+    }
+    $query = "select * from profile where username = '$username'";
+    $result = mysqli_query($conn,$query);
+    while($row = $result->fetch_assoc())
+    {
+        $name = $row['name'];
+        $dppath = $BASE_URL.ltrim($row['dppath'],"./");
+        $about = $row['about'];
+        $instalink = $row['instalink'];
+        $fblink = $row['fblink'];
+        $birthdate = $row['birthdate'];
     }
 ?>
 <main>

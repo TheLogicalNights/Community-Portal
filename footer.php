@@ -26,8 +26,9 @@
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script type="text/javascript">
     CKEDITOR.replace('postbody', {
-        removePlugins: 'uploadimage,tabletools,tableselection,table,save,pastefromgdocs,pastefromlibreoffice,pastefromword,removeformat,copyformatting,clipboard,image,newpage,preview,scayt,forms,blockquote,div,language,flash,smiley,pagebreak,iframe'
+        // removePlugins: 'uploadimage,tabletools,tableselection,table,save,pastefromgdocs,pastefromlibreoffice,pastefromword,removeformat,copyformatting,clipboard,image,newpage,preview,scayt,forms,blockquote,div,language,flash,smiley,pagebreak',
     });
+    
 </script>
 
 <script>

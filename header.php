@@ -1,7 +1,7 @@
 <?php
-//session_start();
+
 date_default_timezone_set("Asia/Kolkata");
-include "./config/config.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,15 +13,16 @@ include "./config/config.php";
     <link rel="stylesheet" href="<?php echo $BASE_URL; ?>assets/css/style.css"> <!-- SLICK SLIDER  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" integrity="sha512-6lLUdeQ5uheMFbWm3CP271l14RsX1xtx+J5x2yeIDkkiBpeVTNhTqijME7GgRKKi6hCqovwCoBTlRBEC20M8Mg==" crossorigin="anonymous" />
-    <link rel="icon" href="<?php echo $BASE_URL; ?>assets/img/logo.png" type="image/png" sizes="16x16">
     <title>Febina Jagriti Foundation</title>
+    <link rel="icon" href="<?php echo $BASE_URL; ?>assets/img/logo.png" sizes="32X32" type="image/png"> 
     <!-- AOS  -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!-- MDI  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.9.55/css/materialdesignicons.min.css" integrity="sha512-vIgFb4o1CL8iMGoIF7cYiEVFrel13k/BkTGvs0hGfVnlbV6XjAA0M0oEHdWqGdAVRTDID3vIZPOHmKdrMAUChA==" crossorigin="anonymous" />
     <!-- CkEditor -->
     <script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
-
+    <!-- CkEditor Local -->
+    <!--<script src="<?php echo $BASE_URL; ?>assets/ck/ckeditor/ckeditor.js"></script>-->
 
     <!-- sweet alert cdn -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

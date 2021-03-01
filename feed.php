@@ -1,5 +1,7 @@
 <?php
     session_start();
+    include "./config/config.php";
+    include "./config/userexist.php";
     // if (!isset($_SESSION['status']))
     // {
     //     header('Location: signin.php');
@@ -27,6 +29,16 @@
     $res = mysqli_query($conn,$query);
     $row = $res->fetch_assoc();
     include('header.php');
+    
+    if(isset($_SESSION['posteditfailure']))
+    {
+        echo '
+        <script>
+            swal("Error..!", "'.$_SESSION['posteditfailure'].'", "error");
+        </script>
+        ';
+        unset($_SESSION['posteditfailure']);
+    }
     if(isset($_SESSION['postedsuccessfully']))
     {
         echo '
