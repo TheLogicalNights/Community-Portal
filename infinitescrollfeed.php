@@ -1,26 +1,18 @@
 <?php
+    session_start();
     include "./database/db.php";
     include "./config/config.php";
-    session_start();
-
+    include "./config/userexist.php";
+    $sr = 0;
     if(isset($_SESSION['username']))
     {
         $query = "select sr_no from user where username='".$_SESSION['username']."'";
         $result = mysqli_query($conn,$query);
         $r =mysqli_fetch_assoc($result);
         $sr = $r['sr_no'];
-        $arr = array();
-        $query = "select * from postlikes";
-        $result = mysqli_query($conn,$query);
-        if ($result)
-        {
-        while ($row = mysqli_fetch_assoc($result))
-        {
-            $arr[$row['postid']] = $row['likedby'];
-        }
-        }
+        
     }
-
+    $cnt = 0;
     function startsWith ($string, $startString) 
     { 
         $len = strlen($startString); 
@@ -38,20 +30,20 @@
             {
                 while ($row = mysqli_fetch_assoc($res))
                 {
-                    $count = 0;
-                    $query = "select count from postlikes where postid='".$row['postid']."'";
+                    $cnt = 0;
+                    $query = "select * from postlikes where postid='".$row['postid']."'";
                     $result = mysqli_query($conn,$query);
                     if (mysqli_num_rows($result) > 0)
                     {
-                        $r = mysqli_fetch_assoc($result);
-                        $count = $r['count'];
+                        $cnt = mysqli_num_rows($result);
                     }
+                                
                     echo '<div class="card post-card" data-aos="zoom-in">
                         <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
                             <a class="ms-3" style="margin-right:auto;color:black;text-decoration:none;font-size:15px;" href="'.$BASE_URL.'profile/'.$row['username'].'"><strong>'.$row['username'] .'</strong></a>';
                             if (isset($_SESSION['username']))
                             {
-                                echo '<a  style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                echo '<a  style ="font-size :10px;border:solid grey 1px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                             </a>';
                             
@@ -102,6 +94,7 @@
                                 </ul>';
                             }
                         echo '</div>
+                        
                         <div class="card-inner-box">
                             <div class="post-img">
                                 <img src="';
@@ -118,6 +111,7 @@
                             </div>
                             <div class="">
                                 <div class="card-body">
+                                
                                     <h5 class="card-title">';
                                        
                                             $title = strip_tags($row['posttitle']);
@@ -160,28 +154,25 @@
                                             }
                                         
                                     echo '</div>
-                                    
+                                    <hr>
                                     <div>
                                     
                                         <form class="post-meta" action="'.$BASE_URL.'readmore" method="GET">
                                             ';
                                             if (isset($_SESSION['username']))
                                             {
-                                                if (isset($arr[$row['postid']]))
-                                                {
-                                                    if (preg_match("/{$sr}/i", $arr[$row['postid']]))
+                                                $pid = $row['postid'];
+                                                $query5 = "select * from postlikes where postid = '$pid' and likedby = '$sr'";
+                                                $result5 = mysqli_query($conn,$query5);
+                                                    if (mysqli_num_rows($result5)>0)
                                                     {
-                                                        echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
+                                                        echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$cnt.'</label></span></a>';
                                                     }
                                                     else
                                                     {                                                   
-                                                        echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
+                                                        echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$cnt.'</label></span></a>';
                                                     }
-                                                }
-                                                else
-                                                {
-                                                    echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';                                                    
-                                                }
+                                               
                                             }
                                             echo '<a type="button" name="readmorefeed" href="readmore.php?postid='.$row['postid'].'" class="btn btn-primary"> Read more</a>
                                             <small>';

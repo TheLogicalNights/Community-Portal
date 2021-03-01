@@ -1,39 +1,66 @@
 <?php
     session_start();
-    include ('./database/db.php');
     include "./config/config.php";
-    if(!(isset($_SESSION['username'])))
-    {
-        if(!(isset($_GET['username'])))
-        {
-            header("Location: signin");
-        }
-    }
-    if(isset($_SESSION['username']))
+    include ('./database/db.php');
+    include "./config/userexist.php";
+    $sr = 0;
+    $count = 0;
+    $result = "";
+    $cnt = 0;
+    $isBirthdate = false;
+    $fname = "";
+    date_default_timezone_set("Asia/Kolkata");
+    if(isset($_SESSION['username']) && !(isset($_GET['username'])))
     {
         $query = "select sr_no from user where username='".$_SESSION['username']."'";
         $result = mysqli_query($conn,$query);
         $r =mysqli_fetch_assoc($result);
         $sr = $r['sr_no'];
-        $arr = array();
-        $query = "select * from postlikes";
+        $query = "select * from profile where username='".$_SESSION['username']."'";
         $result = mysqli_query($conn,$query);
-        if ($result)
-        {
-            while ($row = mysqli_fetch_assoc($result))
-            {
-                $arr[$row['postid']] = $row['likedby'];
-            }
-        }
+        $query = "select * from favourit where username='".$_SESSION['username']."'";
+        $result1 = mysqli_query($conn,$query);
+        $cnt = mysqli_num_rows($result1);
     }
+    else if((isset($_GET['username'])) && (!(isset($_SESSION['username'])) || (isset($_SESSION['username']))))
+    {
+        $query = "select * from profile where username = '".$_GET['username']."'";
+        $result = mysqli_query($conn,$query);
+        if(mysqli_num_rows($result)==0)
+        {
+            header("Location: https://www.febinaevents.com/pagenotfound");
+        }
+        $query = "select * from profile where username='".$_GET['username']."'";
+        $result = mysqli_query($conn,$query);
+        $query1 = "select * from favourit where uname='".$_GET['username']."' and username='".$_SESSION['username']."'";
+        $result1 = mysqli_query($conn,$query1);
+        $query = "select * from favourit where username='".$_GET['username']."'";
+        $result2 = mysqli_query($conn,$query);
+        $cnt = mysqli_num_rows($result2);
+        $query3 = "select sr_no from user where username='".$_SESSION['username']."'";
+        $result3 = mysqli_query($conn,$query3);
+        $r =mysqli_fetch_assoc($result3);
+        $sr = $r['sr_no'];
+    }
+    else
+    {
+        header("Location: signin");
+    }
+    include ('./header.php');
     function startsWith ($string, $startString) 
     { 
         $len = strlen($startString); 
         return (substr($string, 0, $len) === $startString); 
     }
-    $count = 0;
-    date_default_timezone_set("Asia/Kolkata");
-    include ('./header.php');
+    if(isset($_SESSION['posteditfailure']))
+    {
+        echo '
+        <script>
+            swal("Error..!", "'.$_SESSION['posteditfailure'].'", "error");
+        </script>
+        ';
+        unset($_SESSION['posteditfailure']);
+    }
     if(isset($_SESSION['postededitsuccessfully']))
     {
         echo '
@@ -60,46 +87,6 @@
         </script>
         ';
         unset($_SESSION['postnotdeleted']);
-    }
-    $result = "";
-    $cnt = 0;
-    $isBirthdate = false;
-    $fname = "";
-    if(!isset($_GET['username']))
-    {
-        if(isset($_SESSION['username']))
-        {
-          
-            $query = "select * from profile where username='".$_SESSION['username']."'";
-            $result = mysqli_query($conn,$query);
-            $query = "select * from favourit where username='".$_SESSION['username']."'";
-            $result1 = mysqli_query($conn,$query);
-            $cnt = mysqli_num_rows($result1);
-        }
-    }
-    if(isset($_GET['username']))
-    {
-        $query = "select * from profile where username='".$_GET['username']."'";
-        $result = mysqli_query($conn,$query);
-        $query1 = "select * from favourit where uname='".$_GET['username']."' and username='".$_SESSION['username']."'";
-        $result1 = mysqli_query($conn,$query1);
-        $query = "select * from favourit where username='".$_GET['username']."'";
-        $result2 = mysqli_query($conn,$query);
-        $cnt = mysqli_num_rows($result2);
-        $query3 = "select sr_no from user where username='".$_SESSION['username']."'";
-        $result3 = mysqli_query($conn,$query3);
-        $r =mysqli_fetch_assoc($result3);
-        $sr = $r['sr_no'];
-        $arr = array();
-        $query3 = "select * from postlikes";
-        $result3 = mysqli_query($conn,$query3);
-        if ($result3)
-        {
-            while ($row3 = mysqli_fetch_assoc($result3))
-            {
-                $arr[$row3['postid']] = $row3['likedby'];
-            }
-        }
     }
 ?>
     <main>
@@ -167,8 +154,8 @@
                                 }
                             }
                         ?>
-                        <!-- <a href="#"> <span class="mdi mdi-linkedin" style="color:black; font-size: 2em;"></span></a>
-                        <a href="#"> <span class="mdi mdi-youtube" style="color:black; font-size: 2em; "></span></a> -->
+                        <!-- <a href="#"> <span class="mdi mdi-linkedin" style="color:black; font-size: 2em;"></span></a>-->
+                        <!--<a href="#"> <span class="mdi mdi-youtube" style="color:black; font-size: 2em; "></span></a> -->
                         <form action="<?php echo $BASE_URL; ?>code" id="favouritform" method="POST">
                             <input type="hidden" name="username" value="<?php
                             if(isset($_SESSION['username']))
@@ -213,22 +200,21 @@
                         while ($row = mysqli_fetch_assoc($result1))
                         {
                             $count = 0;
-                            $query = "select count from postlikes where postid='".$row['postid']."'";
+                            $query = "select * from postlikes where postid='".$row['postid']."'";
                             $result = mysqli_query($conn,$query);
-                            if (mysqli_num_rows($result) > 0)
+                            if (mysqli_num_rows($result) >= 0)
                             {
-                                $r = mysqli_fetch_assoc($result);
-                                $count = $r['count'];
+                                $count = mysqli_num_rows($result);
                             }
                 ?>
-                            <div class="card post-card" data-aos="zoom-in">
+                            <div class="card post-card" data-aos="zoom-in" style="background-color:rgb(204,255,255,0.4);">
                                 <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
                                 <a style="margin-right:auto;color:black;font-weight:700;text-decoration:none;" href="<?php echo $BASE_URL; ?>profile/<?php echo $row['username']; ?>"><?php echo $row['name'];?></a>
                                 <?php 
                                     if(isset($_SESSION['username']))
                                     {
                                 ?>    
-                                    <a style ="font-size :10px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a style ="font-size :10px;border:solid orange 1px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                     </a>
                                 <?php
@@ -345,9 +331,10 @@
                                                     <?php
                                                             if(isset($_GET['username']))
                                                             {
-                                                                if (isset($arr[$row['postid']]))
-                                                                {
-                                                                    if (preg_match("/{$sr}/i", $arr[$row['postid']]))
+                                                                $pid = $row['postid'];
+                                                                $query5 = "select * from postlikes where postid = '$pid' and likedby = '$sr'";
+                                                                $result5 = mysqli_query($conn,$query5);
+                                                                    if (mysqli_num_rows($result5)>0)
                                                                     {
                                                                         echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like1(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
                                                                     }
@@ -355,17 +342,13 @@
                                                                     {                                                   
                                                                         echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like1(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
                                                                     }
-                                                                }
-                                                                else
-                                                                {
-                                                                        echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like1(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';                                                    
-                                                                }
                                                             }
                                                             else
                                                             {
-                                                                if (isset($arr[$row['postid']]))
-                                                                {
-                                                                    if (preg_match("/{$sr}/i", $arr[$row['postid']]))
+                                                                $pid = $row['postid'];
+                                                                $query5 = "select * from postlikes where postid = '$pid' and likedby = '$sr'";
+                                                                $result5 = mysqli_query($conn,$query5);
+                                                                    if (mysqli_num_rows($result5)>0)
                                                                     {
                                                                         echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
                                                                     }
@@ -373,11 +356,6 @@
                                                                     {                                                   
                                                                         echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';
                                                                     }
-                                                                }
-                                                                else
-                                                                {
-                                                                        echo '<a type="button" name="'.$_SESSION['username'].'" style="padding:5px;" id=like'.$row['postid'].' onclick="Like(this.id,this)"> <span id='.$row['postid'].' class="fa fa-thumbs-o-up" style="font-size:20px;color: #FFAB01;"> <label id="count'.$row['postid'].'" style="font-family:Tahoma;font-size:18px;"> '.$count.'</label></span></a>';                                                    
-                                                                }
                                                             }
                                                         }
                                                     ?>

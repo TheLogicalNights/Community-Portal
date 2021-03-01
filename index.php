@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include "./config/userexist.php";
     include('header.php');
     include "./config/config.php";
 ?>    
