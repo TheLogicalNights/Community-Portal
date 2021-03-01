@@ -1,10 +1,11 @@
 <?php
     session_start();
+    include "./config/config.php";
     if (!isset($_SESSION['adminstatus']))
     {
         header('Location: signin.php');
     }
-    include "./config/config.php";
+    
     include('./database/db.php');
     $date = date("Y-m-d");
     $query = "select * from posts where DATE(posted_at)='$date' order by posted_at desc";

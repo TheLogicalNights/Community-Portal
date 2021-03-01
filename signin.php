@@ -2,6 +2,16 @@
     session_start();
     include('header.php');
     include "./config/config.php";
+    $uname = "";
+    $pass = "";
+    if(isset($_COOKIE['fpass']))
+    {
+        $pass = $_COOKIE['fpass'];
+    }
+    if(isset($_COOKIE['funame']))
+    {
+        $uname = $_COOKIE['funame'];
+    }
 ?>
 
 <main>
@@ -45,20 +55,25 @@
                     <h1 class="mb-5 ms-2" style="font-family:'Chicle', cursive;">Sign In</h1>
                     <div class="container mb-5">
                     <form action="<?php echo $BASE_URL; ?>code" class="mt-5" method="POST">
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="username" class="form-control" id="username" name="username" aria-describedby="emailHelp" required>
+                        <label for="username" class="form-label">Username</label>
+                        <div class="input-group mb-3">
+                            <input type="username" class="form-control" id="username" name="username" value="<?php echo $uname; ?>" aria-describedby="emailHelp" required>
+                            <a class="btn btn-outline-secondary text-dark" role="button" onclick="showfocus()"><i class="fa fa-user" id="user" aria-hidden="true"></i></a>
                         </div>
                         <label for="password" class="form-label">Password</label>
                         <div class="input-group mb-3">
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" class="form-control" id="password" name="password" value="<?php echo $pass; ?>" required>
                             <a class="btn btn-outline-secondary text-dark" role="button" onclick="showpass()"><i class="fa fa-eye" id="eye" aria-hidden="true"></i></a>
                             </button>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberme" name = "rememberme">
+                            <label class="form-check-label" for="rememberme">Remember me</label>
                         </div>
                         <div>
                             <small><a href="<?php echo $BASE_URL; ?>forgetpassword" class="text-dark">forget password?</a></small>    
                         </div>
-                        <button type="submit" name="login" class="btn btn-primary mt-3">Submit</button>
+                        <button type="submit" name="login" class="btn btn-primary mt-3">signin <i class="fa fa-sign-in ms-1" aria-hidden="true"></i></button>
                     </form>
                     </div>
                 </div>
@@ -76,6 +91,11 @@
                 document.getElementById('eye').className = "fa fa-eye";
                 document.getElementById('password').type = "password";
             }
+        }
+        function showfocus()
+        {
+            var x = document.getElementById('username');
+            x.focus();
         }
     </script>
 <?php

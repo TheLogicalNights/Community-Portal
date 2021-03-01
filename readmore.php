@@ -5,6 +5,7 @@
     //     header('Location: signin.php');
     // }
     include "./config/config.php";
+    include "./config/userexist.php";
     include('./database/db.php');
     include('header.php');
     if (isset($_GET['postid']))
@@ -59,55 +60,40 @@
                     <?php
                         $query1 = "select * from postlikes where postid='".$_GET['postid']."'";
                         $result1 = mysqli_query($conn,$query1);
-                        if ($result1)
+                        if (mysqli_num_rows($result1) >=0 )
                         {
-                            $row = mysqli_fetch_assoc($result1);
-                            echo $row['count'];
+                            echo mysqli_num_rows($result1);
                         }
+                        
                     ?>
                     </span></a></h6>
                 <div class="collapse" id="collapseExample">
                     <?php
-                    $users = array();
-                    $query = "select * from user";
-                    $result = mysqli_query($conn,$query);
-                    if ($result)
-                    {
-                        while ($r = mysqli_fetch_assoc($result))
-                        {
-                            $users[$r['sr_no']] = $r['username'];
-                        }
-                    }
-                     $query1 = "select * from postlikes where postid='".$_GET['postid']."'";
-                     $result1 = mysqli_query($conn,$query1);
+                    $cnt = 0;
+                    $query1 = "select * from user where sr_no in (select likedby from postlikes where postid ='".$_GET['postid']."')";
+                    $result1 = mysqli_query($conn,$query1);
                      if ($result1)
                      {
-                         $row = mysqli_fetch_assoc($result1);
-                         $userlikeby = explode(",",$row['likedby']);
-                         $cnt = 0;
-                         $count = 0;
-                        foreach ($userlikeby as $user) 
+                         
+                        while($row = $result1->fetch_assoc())
                         {
-                            if (isset($users[$user]))
-                            {
-                                if ($cnt == 0)
-                                {
-            ?>
-                                    <a class="link-info" style="text-decoration:none;" href=<?php echo $BASE_URL."profile/".$users[$user]; ?>><?php echo $users[$user]; ?></a>
-            <?php   
-                                }
-                                else
-                                {
-                                    if($count<=3)
+                                    if ($cnt == 0)
                                     {
-                                        echo " , ";
-            ?>
-                                    <a class="link-info" style="text-decoration:none;" href=<?php echo $BASE_URL."profile/".$users[$user]; ?>><?php echo $users[$user]; ?></a>
-            <?php
+                ?>
+                                        <a class="link-info" style="text-decoration:none;" href=<?php echo $BASE_URL."profile/".$row['username']; ?>><?php echo $row['username']; ?></a>
+                <?php   
                                     }
-                                }
-                                $cnt++;
-                            }
+                                    else
+                                    {
+                                        if($cnt<=3)
+                                        {
+                                            echo " , ";
+                ?>
+                                        <a class="link-info" style="text-decoration:none;" href=<?php echo $BASE_URL."profile/".$row['username']; ?>><?php echo $row['username']; ?></a>
+                <?php
+                                        }
+                                    }
+                                    $cnt++;
                         }
                     }
                  ?>      
