@@ -1,8 +1,14 @@
 <?php
     session_start();
-    include "./config/config.php";
-    include ('./adminheader.php');
     include ('./database/db.php');
+    include "./config/config.php";
+    $query = "select * from profile where username = '".$_GET['username']."'";
+    $result = mysqli_query($conn,$query);
+    if(mysqli_num_rows($result)==0)
+    {
+        header("Location: https://www.febinaevents.com/pagenotfound");
+    }
+    
     if (!isset($_SESSION['adminstatus']))
     {
         header('Location: adminlogin.php');
@@ -12,7 +18,7 @@
         $len = strlen($startString); 
         return (substr($string, 0, $len) === $startString); 
     } 
-
+     include ('./adminheader.php');
     date_default_timezone_set("Asia/Kolkata");
     $result = "";
     if(isset($_SESSION['adminpostdeleted']))
@@ -35,6 +41,8 @@
     }
     if(isset($_GET['username']))
     {
+        $query = "select * from profile where username = '".$_GET['username']."'";
+        $result = mysqli_query($conn,$query);
         $query = "select * from profile where username='".$_GET['username']."'";
         $result = mysqli_query($conn,$query);
         $query1 = "select * from favourit where uname='".$_GET['username']."' and username='".$_SESSION['username']."'";
@@ -43,7 +51,7 @@
 ?>
     <main>
         <?php
-        if ($result)
+        if (mysqli_num_rows($result)>0)
         {
             $row = mysqli_fetch_assoc($result);
         ?>

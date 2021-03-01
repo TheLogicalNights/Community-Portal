@@ -1,11 +1,13 @@
 <?php
     session_start();
     include "./config/config.php";
+
     include "./database/db.php";
     require './PHPMailer/PHPMailerAutoload.php';
     require './PHPMailer/class.phpmailer.php'; 
     require './PHPMailer/class.smtp.php';
     date_default_timezone_set("Asia/Kolkata");
+    $from = "admin@febinaevents.com";
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //
     //          Mail Sender
@@ -71,7 +73,6 @@
                 $_SESSION['email'] = $_POST['email'];
                 $subject = "Email Verification";
                 $message = "Hello sir/mam your OTP for email verifivation is ".$otptosend;
-                $from = "fadmin@febinaevents.com";
                 $from_name = "Febina Jagriti Foundation";
                 
                 if(smtpMailer($to,$from,$from_name,$subject,$message))
@@ -124,7 +125,7 @@
             $email = $_SESSION['email'];
             $address = $_POST['address'];
             $username = $_POST['username'];
-            $password = $_POST['password'];
+            $password = md5($_POST['password']);
             $key = $_POST['key'];
             $present = false;
             $invalidkey = false;
@@ -302,7 +303,7 @@
             }
             else
             {
-                $target_file = "https://images.pexels.com/photos/1680172/pexels-photo-1680172.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
+                $target_file = "https://images.pexels.com/photos/1527934/pexels-photo-1527934.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
                 $query = "insert into posts(name,username,posttitle,post,posted_at,img_path,postid) values('$name','$username','$posttitle','$postbody','$date','$target_file','$postid')";
                 $result = mysqli_query($conn,$query);
                 if($result)
@@ -326,7 +327,7 @@
         if (isset($_POST['login']))
         {
             $username = $_POST['username'];
-            $password = $_POST['password'];
+            $password = md5($_POST['password']);
             $name = "";
             $isset = 0;
             $matched = true;
@@ -348,7 +349,12 @@
                 }
                 $_SESSION['status'] = "login";
                 $_SESSION['name'] = $name;
-                $_SESSION['username'] = $username; 
+                $_SESSION['username'] = $username;
+                if(isset($_POST['rememberme']))
+                {
+                    setcookie("funame",$_POST['username'], time() + (86400 * 30), "/");
+                    setcookie("fpass",$_POST['password'], time() + (86400 * 30), "/");
+                }
                 if($isset==0)
                 {
                     $_SESSION['setupprofile'] = "true";
@@ -412,21 +418,21 @@
                 } 
                 else 
                 {
-                    // echo "File is not an image.";
+                    $_SESSION['posteditfailure'] .= "File is not an image.";
                     $uploadOk = 0;
                 }
                 // Allow certain file formats
                 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                 && $imageFileType != "gif" ) 
                 {
-                    // echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                    $_SESSION['posteditfailure'] .= "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                     $uploadOk = 0;
                 }
                 // Check if $uploadOk is set to 0 by an error
                 if ($uploadOk == 0) 
                 {
-                    // echo "Sorry, your file was not uploaded.";
-
+                    $_SESSION['posteditfailure'] .= "Sorry, your file was not uploaded.";
+                    header('Location: '.$BASE_URL.''.$_POST['redirectto']);
                 } 
                 // if everything is ok, try to upload file
                 else  
@@ -465,14 +471,14 @@
                             {
                                 die("error".mysqli_error($conn));
                                 $_SESSION['posteditfailure'] = "Post edit failure.";
-                                header('Location: '.$BASE_URL.'editpost');
+                                header('Location: '.$BASE_URL.''.$_POST['redirectto']);
                             }
                             
                         } 
                         else 
                         {
                             $_SESSION['posteditfailure'] = "Post edit failure, sorry for inconvenience.";
-                            header('Location: '.$BASE_URL.'editpost');
+                            header('Location: '.$BASE_URL.''.$_POST['redirectto']);
                         }
                 }
             }
@@ -480,7 +486,7 @@
             {
                 if ($_POST['removeimage'])
                 {
-                    $target_file = "https://images.pexels.com/photos/1680172/pexels-photo-1680172.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
+                    $target_file = "https://images.pexels.com/photos/1527934/pexels-photo-1527934.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
                     $query = "update posts set name='$name',username='$username',posttitle='$posttitle',post='$postbody',posted_at='$date',img_path='$target_file' where postid='$postid'";
                 }
                 else
@@ -498,7 +504,7 @@
                 {
                     die("error".mysqli_error($conn));
                     $_SESSION['posteditfailure'] = "Post edit failure, sorry for inconvenience.";
-                    header('Location: '.$BASE_URL.'editpost');
+                    header('Location: '.$BASE_URL.''.$_POST['redirectto']);
                 }
             }
         }
@@ -819,11 +825,12 @@
         {
             $username = $_SESSION['username'];
             $newusername = $_POST['username'];
-            $path ="";
+            
             $query = "select username from user where username='$newusername'";
-            $res = mysqli_query($conn,$query);
-            if (mysqli_num_rows($res) == 0)
+            $result = mysqli_query($conn,$query);
+            if(mysqli_num_rows($result) == 0)
             {
+                
                 $query = "select dppath from profile where username='$username'";
                 $res= mysqli_query($conn,$query);
                 if ($res)
@@ -832,20 +839,32 @@
                     $dppath = $row['dppath'];
                     $arr = explode("/",$dppath);
                     $file = $arr[3];
-                    $path = "./profilepictures/".$newusername."/".$file;
-                    $path = "update user set username='$newusername' where username='$username'";
+                    if($arr[2]=="user.png")
+                    {
+                       $path = $dppath; 
+                    }
+                    else
+                    {
+                        $path = "./profilepictures/".$newusername."/".$file;   
+                    }
+                    $query = "update favourit set uname='$newusername' where uname='$username'";
+                    $res = mysqli_query($conn,$query);
+                    $query = "update user set username='$newusername' where username='$username'";
                     $res = mysqli_query($conn,$query);
                     $query = "update profile set username='$newusername',dppath='$path' where username='$username'";
                     $res = mysqli_query($conn,$query);
                     $query = "update posts set username='$newusername' where username='$username'";
                     $res = mysqli_query($conn,$query);
-                    $query = "update report set username='$newusername' where username='$username'";
+                    $query = "update report set reportedby='$newusername' where reportedby='$username'";
                     $res = mysqli_query($conn,$query);
                     $query = "update reportuser set username='$newusername' where username='$username'";
                     $res = mysqli_query($conn,$query);
-                
                     rename('./profilepictures/'.$username,'./profilepictures/'.$newusername);
                     $_SESSION['username'] = $newusername;
+                    if(isset($_COOKIE['funame']))
+                    {
+                        setcookie("funame",$newusername, time() + (86400 * 30), "/");
+                    }
                     $_SESSION['profileupdated'] = "Your username successfully updated..!";
                     header('Location:'.$BASE_URL.'editprofile');
                 }
@@ -855,9 +874,7 @@
                 $_SESSION['profileupdatefailure'] = "Username already exists , try another username.";
                 header('Location:'.$BASE_URL.'editprofile');
             }
-
         }
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
         //          Update Name
@@ -883,6 +900,7 @@
         {
             $username = $_POST['updateabout'];
             $about = $_POST['about'];
+            $about = nl2br($about);
             $query = "update profile set about = '$about' where username = '$username'";
             $result = mysqli_query($conn,$query);
             $_SESSION['profileupdated'] = "Your about successfully updated..!";
@@ -950,11 +968,11 @@
             {
                 $otptosend = rand(99999,999999);
                 $to = $_POST['email'];
-                $_SESSION['email'] = $_POST['email'];
-                $subject = "Email Verification";
+                $subject = "VA key alert";
                 $message = "Hello sir/mam your OTP for email verifivation is ".$otptosend;
-                $from = "fadmin@febinaevents.com";
+                
                 $from_name = "Febina Jagriti Foundation";
+                    
                 
                 if(smtpMailer($to,$from,$from_name,$subject,$message))
                 {
@@ -1002,7 +1020,7 @@
         {
             if(isset($_SESSION['email']))
             {
-                $newpassword = $_POST['newpassword'];
+                $newpassword = md5($_POST['newpassword']);
                 $email =  $_SESSION['email'];
                 $query = "update user set password = '$newpassword' where email = '$email'";
                 $result = mysqli_query($conn,$query);
@@ -1010,6 +1028,8 @@
                 {
                     $_SESSION['resetpasswordsuccess'] = "Your reset password successfully done. Now you can signin.";
                     unset($_SESSION['email']);
+                    setcookie("funame", "", time() - 3600);
+                    setcookie("fupass", "", time() - 3600);
                     header('Location:'.$BASE_URL.'signin');
                 }
                 else
@@ -1021,13 +1041,18 @@
             }
             if(isset($_POST['username']))
             {
-                $newpassword = $_POST['newpassword'];
+                $newpassword = md5($_POST['newpassword']);
                 $username = $_POST['username'];
                 $query = "update user set password = '$newpassword' where username = '$username'";
                 $result = mysqli_query($conn,$query);
                 if($result)
                 {
                     $_SESSION['changepasswordsuccess'] = "Your password changed successfully.";
+                    if(isset($_COOKIE['fpass']))
+                    {
+                        setcookie("fpass",$_POST['newpassword'], time() + (86400 * 30), "/");
+                    }
+                   
                     header('Location:'.$BASE_URL.'editprofile');
                 }
                 else
@@ -1091,7 +1116,7 @@
                     $to = $_POST['email'];
                     $_SESSION['email'] = $_POST['email'];
                     $subject = "VA key alert";
-                    $message = "Hello sir/mam your VA for Febina community is ".$newadharno;
+                    $message = "<h2 style='color:black;font-size: 18px;'>Hello sir/mam welcome to <a href='https://febinaevents.com'>Febina Community</a></h2><p style='color:black;font-size: 18px;'>Your VA key for registration is : ".$newadharno."  Don't share this key with anyone else.</p><h2 style='color:red;'>Steps to follow to join us...</h2><br><ol style='color:blue;font-size: 18px;'><li>Visit <a href='https://febinaevents.com/signup'>signup link</a></li><li>Enter your email id and generate OTP</li><li>Check inbox or spam for the OTP and verify it.</li><li>After vefification of OTP you will redirect to next page.</li><li>fill all the personal details and in the section VA key fill above VA key.</li><li>Once you get registered visit <a href='https://febinaevents.com/signin'>signin</a> to SIGNIN</li><li>After successfull signin setup your profile and enjoy our community...!</li></ol>";
                    $from = "fadmin@febinaevents.com";
                 $from_name = "Febina Jagriti Foundation";
                     
@@ -1120,6 +1145,13 @@
             $result = mysqli_query($conn,$query);
             $row = $result->fetch_assoc();
             $seckey = $row['seckey'];
+            
+            $query = "delete from postlikes where likedby in (select sr_no from user where username = '$username')";
+            $result = mysqli_query($conn,$query);
+            
+            $query = "delete from postlikes where postid in (select postid from posts where username = '$username')";
+            $result = mysqli_query($conn,$query);
+            
             $query = "delete from reportuser where postid in (select postid from posts where username='$username')";
             $result = mysqli_query($conn,$query);
             $query = "select * from report where postid in (select postid from posts where username='$username')";
@@ -1140,7 +1172,7 @@
             $result = mysqli_query($conn,$query);
             $_SESSION['userdeletedsuccess'] = "Member removed successfully...!";
             header('Location: '.$BASE_URL.'admin');
-        }
+         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
         //          Add or Remove favourit
@@ -1274,43 +1306,26 @@
                 $row = $result->fetch_assoc();
                 $srno = $row['sr_no'];
             }
-            $query = "select * from postlikes where postid = '$postid'";
+            $query = "select * from postlikes where postid = '$postid' and likedby = '$srno'";
             $result = mysqli_query($conn,$query);
             if(mysqli_num_rows($result)==0)
             {
-                $query = "insert into postlikes(likedby,postid,count) values('$srno','$postid','1')";
+                $query = "insert into postlikes(likedby,postid) values('$srno','$postid')";
                 $result = mysqli_query($conn,$query);
                 if($result)
                 {
                     $count = 1;
-                    echo $count;
                 }
                 else
                 {
                     die("Error : ".mysqli_error($conn));
                 }
             }
-            else
+            $query = "select * from postlikes where postid = '$postid'";
+            $result = mysqli_query($conn,$query);
+            if(mysqli_num_rows($result) >= 0)
             {
-                $query = "select * from postlikes where postid = '$postid'";
-                $result = mysqli_query($conn,$query);
-                if($row = $result->fetch_assoc())
-                {
-                    $likedby = $row['likedby'];
-                    $count = $row['count'];
-                }
-                $likedby .= ",".$srno;
-                $count += 1;
-                $query = "update postlikes set count = '$count', likedby = '$likedby' where postid = '$postid'";
-                $result = mysqli_query($conn,$query);
-                if($result)
-                {
-                    echo $count;
-                }
-                else
-                {
-                    die("Error : ".mysqli_error($conn));
-                }
+                echo mysqli_num_rows($result);   
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1323,9 +1338,6 @@
             $username = $_POST['unlikedby'];
             $postid = $_POST['postid'];
             $srno = 0;
-            $count = 0;
-            $ajax .= $username;
-            $ajax .= $postid; 
             $query = "select * from user where username = '$username'";
             $result = mysqli_query($conn,$query);
             if($result)
@@ -1334,32 +1346,27 @@
                 $row = $result->fetch_assoc();
                 $srno = $row['sr_no'];
             }
-            $query = "select * from postlikes where postid = '$postid'";
+            $query = "select * from postlikes where postid = '$postid' and likedby = '$srno'";
             $result = mysqli_query($conn,$query);
             if(mysqli_num_rows($result)!=0)
             {
-                $row = $result->fetch_assoc();
-                $likedby = $row['likedby'];
-            }
-
-            $likedby = str_replace($srno,"",$likedby);  
-            $query = "select * from postlikes where postid = '$postid'";
-            $result = mysqli_query($conn,$query);
-            if($row = $result->fetch_assoc())
-            {
-                $count = $row['count'];
-            }
-            $count -= 1;
-            $query = "update postlikes set count = '$count', likedby = '$likedby' where postid = '$postid'";
-            $result = mysqli_query($conn,$query);
-            if($result)
-            {
-                echo $count;
+                $query = "delete from postlikes where postid = '$postid' and likedby = '$srno'";
+                $result = mysqli_query($conn,$query);
+                    
             }
             else
             {
                 die("Error : ".mysqli_error($conn));
             }
+            $query = "select * from postlikes where postid = '$postid'";
+            $result = mysqli_query($conn,$query);
+            if(mysqli_num_rows($result) >= 0)
+            {
+                echo mysqli_num_rows($result);   
+            }                                        
+            
+            
+            
         }
     }
 ?>
