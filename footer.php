@@ -95,6 +95,7 @@
             {
                 if($(window).scrollTop() >= $(document).height() - $(window).height()-0.99)
                 {
+                    
                     $.ajax({
                     type:"POST",
                     url:"infinitescrollfeed.php",
