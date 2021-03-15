@@ -17,7 +17,7 @@
     <div class="jumbotron usp-section" style="padding:80px 0 !important;">
         <div class="container">
             <center>
-                <h1>Favourites</h1>
+                <h1 style="font-family: 'Concert One', cursive;">Favourites</h1>
                 <br>
             </center>
             <div>

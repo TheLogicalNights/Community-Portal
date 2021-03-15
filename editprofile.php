@@ -55,7 +55,7 @@
 ?>
 <main>
     <div class="jumbotron usp-section">
-        <h2 class="text-center mt-4 border-bottom-left-radius">Update Profile Picture</h2>
+        <h2 class="text-center mt-4 border-bottom-left-radius" style="font-family: 'Concert One', cursive;">Update Profile Picture</h2>
         <div class="d-flex justify-content-center">
             <img src="<?php echo $dppath; ?>" height="150" width="150" class="rounded-circle mt-5" alt="Profile Picture">
         </div>
@@ -76,7 +76,7 @@
             </form>
         </div>
         <hr>
-        <h2 class="text-center mt-4 border-bottom-left-radius">Change Password</h2>
+        <h2 class="text-center mt-4 border-bottom-left-radius" style="font-family: 'Patrick Hand', cursive;">Change Password</h2>
         <div class="container">
             <form class="mt-5" action="<?php echo $BASE_URL; ?>code" method="POST">
                 <input type="hidden" name="username" value="<?php echo $username; ?>">
@@ -95,7 +95,7 @@
             </form>
         </div>
         <hr>
-        <h2 class="text-center mt-4 border-bottom-left-radius">Update Username</h2>
+        <h2 class="text-center mt-4 border-bottom-left-radius" style="font-family: 'Patrick Hand', cursive;">Update Username</h2>
         <form action="<?php echo $BASE_URL; ?>code" id="updateusername" method="POST">
             <div class="container mb-5">
                 <div class="mb-3">
@@ -106,7 +106,7 @@
             </div>
         </form>
         <hr>
-        <h2 class="text-center mt-4 border-bottom-left-radius">Update Name</h2>
+        <h2 class="text-center mt-4 border-bottom-left-radius" style="font-family: 'Patrick Hand', cursive;">Update Name</h2>
         <form action="<?php echo $BASE_URL; ?>code" id="updatename" method="POST">
             <div class="container mb-5">
                 <div class="mb-3">
@@ -117,7 +117,7 @@
                 </div>
             </div>
         </form>
-        <h2 class="text-center mt-4 border-bottom-left-radius">Update About</h2>
+        <h2 class="text-center mt-4 border-bottom-left-radius" style="font-family: 'Patrick Hand', cursive;">Update About</h2>
         <form action="<?php echo $BASE_URL; ?>code" method="POST">
             <div class="container mb-5">
                 <div class="form-floating">
@@ -125,12 +125,12 @@
                     <textarea class="form-control outline" name="about" id="floatingTextarea2" style="height: 100px" maxlength="200" onkeyup="limit(this);" required><?php echo $about; ?></textarea>
                     <label for="floatingTextarea2">About</label>
                     <small id="limit">200/200</small><br>
-                    <button type="submit" class="btn btn-primary btn-sm mt-3">Update About</button>
+                    <button type="submit" class="btn btn-primary btn-sm mt-3" >Update About</button>
                 </div>
             </div>
         </form>
         <hr>
-        <h2 class="text-center mt-4 border-bottom-left-radius">Update Birthdate</h2>
+        <h2 class="text-center mt-4 border-bottom-left-radius" style="font-family: 'Patrick Hand', cursive;">Update Birthdate</h2>
         <form action="<?php echo $BASE_URL; ?>code" method="POST">
             <div class="container mb-5">
                     <label for="birthdate" class="form-label">Birthdate</label>
@@ -139,7 +139,7 @@
                     <button type="submit" name="updatebirthdate" class="btn btn-primary btn-sm mt-3">Update Birthdate</button>
             </div>
         </form>
-        <h2 class="text-center mt-4 border-bottom-left-radius">Update Instagram Link</h2>
+        <h2 class="text-center mt-4 border-bottom-left-radius" style="font-family: 'Patrick Hand', cursive;">Update Instagram Link</h2>
         <form action="<?php echo $BASE_URL; ?>code" method="POST">
             <div class="container mb-5">
                     <label for="instalink" class="form-label">Instagram Link</label>
@@ -148,7 +148,7 @@
                     <button type="submit" class="btn btn-primary btn-sm mt-3">Update Instagram Link</button>
             </div>
         </form>
-        <h2 class="text-center mt-4 border-bottom-left-radius">Update Facebook Link</h2>
+        <h2 class="text-center mt-4 border-bottom-left-radius" style="font-family: 'Patrick Hand', cursive;">Update Facebook Link</h2>
         <form action="<?php echo $BASE_URL; ?>code" method="POST">
             <div class="container mb-5">
                     <label for="instalink" class="form-label">Facebook Link</label>
