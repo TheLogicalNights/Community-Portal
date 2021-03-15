@@ -25,7 +25,6 @@
         $query = "select * from posts order by posted_at DESC limit {$limit} offset {$offset} ";
         $res = mysqli_query($conn,$query);
         $count = 0;
-        echo '<div class="container feed-cards">';
             if ($res)
             {
                 while ($row = mysqli_fetch_assoc($res))
@@ -37,14 +36,13 @@
                     {
                         $cnt = mysqli_num_rows($result);
                     }
-                                
                     echo '<div class="card post-card" data-aos="zoom-in">
                         <div class="dropdown d-flex justify-content-end" style="display:flex; justify-content:flex-end; margin-right:10px ;width:100%; padding:5px;">
                             <a class="ms-3" style="margin-right:auto;color:black;text-decoration:none;font-size:15px;" href="'.$BASE_URL.'profile/'.$row['username'].'"><strong>'.$row['username'] .'</strong></a>';
                             if (isset($_SESSION['username']))
                             {
-                                echo '<a  style ="font-size :10px;border:solid grey 1px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                echo '<a  style ="font-size :10px;border:solid rgb(205,178,102) 1px;" class="btn btn-secondary mr-0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-ellipsis-v" style="font-size:14px;color:black;" aria-hidden="true"></i>
                             </a>';
                             
                             
@@ -259,6 +257,5 @@
                 }
             }
         
-            echo '</div>';
     }
 ?>
