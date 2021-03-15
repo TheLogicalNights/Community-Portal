@@ -39,36 +39,42 @@
                     <div class="card usp-card" data-aos="fade-up">
                         <img src="https://cdn2.iconfinder.com/data/icons/free-version/128/workplace-256.png" class="card-img-top" alt="...">
                         <div class="card-body">
+                            <h5>Lorem Ipsum</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         </div>
                     </div>
                     <div class="card usp-card" data-aos="fade-up" data-aos-delay="100">
                         <img src="https://cdn2.iconfinder.com/data/icons/free-version/128/workplace-256.png" class="card-img-top" alt="...">
                         <div class="card-body">
+                            <h5>Lorem Ipsum</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         </div>
                     </div>
                     <div class="card usp-card" data-aos="fade-up" data-aos-delay="200">
                         <img src="https://cdn2.iconfinder.com/data/icons/free-version/128/workplace-256.png" class="card-img-top" alt="...">
                         <div class="card-body">
+                            <h5>Lorem Ipsum</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         </div>
                     </div>
                     <div class="card usp-card" data-aos="fade-up" data-aos-delay="300">
                         <img src="https://cdn2.iconfinder.com/data/icons/free-version/128/workplace-256.png" class="card-img-top" alt="...">
                         <div class="card-body">
+                            <h5>Lorem Ipsum</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         </div>
                     </div>
                     <div class="card usp-card" data-aos="fade-up" data-aos-delay="400">
                         <img src="https://cdn2.iconfinder.com/data/icons/free-version/128/workplace-256.png" class="card-img-top" alt="...">
                         <div class="card-body">
+                            <h5>Lorem Ipsum</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         </div>
                     </div>
                     <div class="card usp-card" data-aos="fade-up" data-aos-delay="500">
                         <img src="https://cdn2.iconfinder.com/data/icons/free-version/128/workplace-256.png" class="card-img-top" alt="...">
                         <div class="card-body">
+                            <h5>Lorem Ipsum</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         </div>
                     </div>                </div>
