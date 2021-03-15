@@ -439,7 +439,7 @@
                 {
                         if (move_uploaded_file($_FILES["editeduploadpic"]["tmp_name"], $target_file)) 
                         {
-                            $query = "update posts set name='$name',username='$username',posttitle='$posttitle',post='$postbody',posted_at='$date',img_path='$target_file' where postid='$postid'";
+                            $query = "update posts set name='$name',username='$username',posttitle='$posttitle',post='$postbody',img_path='$target_file' where postid='$postid'";
                             $result = mysqli_query($conn,$query);
                             if($result)
                             {
@@ -487,11 +487,11 @@
                 if ($_POST['removeimage'])
                 {
                     $target_file = "https://images.pexels.com/photos/1527934/pexels-photo-1527934.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
-                    $query = "update posts set name='$name',username='$username',posttitle='$posttitle',post='$postbody',posted_at='$date',img_path='$target_file' where postid='$postid'";
+                    $query = "update posts set name='$name',username='$username',posttitle='$posttitle',post='$postbody',img_path='$target_file' where postid='$postid'";
                 }
                 else
                 {
-                    $query = "update posts set name='$name',username='$username',posttitle='$posttitle',post='$postbody',posted_at='$date' where postid='$postid'";
+                    $query = "update posts set name='$name',username='$username',posttitle='$posttitle',post='$postbody' where postid='$postid'";
                 }
                 $result = mysqli_query($conn,$query);
                 if($result)

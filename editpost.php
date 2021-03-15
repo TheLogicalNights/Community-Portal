@@ -28,16 +28,17 @@
 ?>
 <main>
 <div class="container mt-5"  id="editPost">
-        <h1 class="mt-2">Edit Post</h1>
+        <h1 class="mt-2" style="font-family: 'Concert One', cursive;">Edit Post</h1>
+        <br>
     <form action="<?php echo $BASE_URL; ?>code" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="redirectto" value="<?php echo $_POST['redirectto']; ?>">
             <input type="hidden" name="postid" value="<?php echo $row['postid']; ?>">
             <div class="mb-3">
-                <label for="recipient-name" class="col-form-label">Post title:</label>
+                <label for="recipient-name" class="col-form-label" style="font-family: 'Patrick Hand', cursive;">Post title:</label>
                 <input type="text" class="form-control" id="posttitleEdit" name="posttitleEdit" value="<?php echo $row['posttitle']; ?>" required>
             </div>
             <div class="mb-3">
-                <label for="message-text" class="col-form-label">Post Description:</label>
+                <label for="message-text" class="col-form-label" style="font-family: 'Patrick Hand', cursive;">Post Description:</label>
                 <textarea name="postbodyEdit" id="postbodyEdit"><?php echo $row['post']; ?>
                 </textarea>
                 <script>
@@ -45,18 +46,18 @@
                 </script>
             </div>
             <div class="mb-3">
-                <label for="formFileSm" class="form-label">Select Picture (Optional)</label>
+                <label for="formFileSm" class="form-label" style="font-family: 'Patrick Hand', cursive;">Select Picture (Optional)</label>
                 <input class="form-control" type="file" id="formFile" name="editeduploadpic" >
             </div>
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" name="removeimage" id="removeimage">
-                <label class="form-check-label" for="removeimage">Remove image</label>
+                <label class="form-check-label" for="removeimage" style="font-family: 'Patrick Hand', cursive;">Remove image</label>
             </div>
           
             <hr>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a type="button" href="<?php echo $BASE_URL; ?>profile" class="btn btn-secondary">Close</a>
-                <button class="btn btn-primary" name="editpost" type="submit">Edit post</button>
+                <a type="button" href="<?php echo $BASE_URL; ?>profile" class="btn btn-secondary" style="font-family: 'Patrick Hand', cursive;">Close</a>
+                <button class="btn btn-primary" name="editpost" type="submit" style="font-family: 'Patrick Hand', cursive;">Edit post</button>
             </div>
         </form>
 </div>
