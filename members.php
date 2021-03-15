@@ -17,8 +17,9 @@
     <div class="jumbotron usp-section" style="padding:80px 0 !important;">
         <div class="container">
             <center>
-                <h1>Members</h1>
+                <h1 style="font-family: 'Concert One', cursive;">Members</h1>
             </center>
+            <br>
             <div>
                 <div class="container">
             
