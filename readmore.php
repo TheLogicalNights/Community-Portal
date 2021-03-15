@@ -50,13 +50,18 @@
         <hr class="my-2">
     </div>
     <div class="container ms-3 mt-1">
+        <i class="fa fa-calendar" aria-hidden="true" style="font-size:20px;color:rgb(0,255,255);"> </i>
         <small style="color:gray;font-weight:650;">
-                POSTED AT : <?php echo $months[0]." ".$monthArray[$m-1]." ".$months[2]; ?>  ·  <?php echo $time; ?>
+             <?php echo $months[0]." ".$monthArray[$m-1]." ".$months[2]; ?>  ·
+                
+              <?php echo $time; ?>
         </small>
     </div>
     <div class="container ms-3 mt-1">
         <small style="color:gray;font-weight:650;">
-                <h6 class="mt-2"><a style="color:rgb(253, 89, 30);font-weight:650;" data-bs-toggle="collapse" href="#collapseExample" rel="noopener noreferrer">Liked by <span class="badge bg-dark text-white rounded-circle ms-1">
+                <h6 class="mt-2"><a style="color:rgb(253, 89, 30);font-weight:650;text-decoration:none;" data-bs-toggle="collapse" href="#collapseExample" rel="noopener noreferrer">
+                    <i class="fa fa-thumbs-up ms-2" aria-hidden="true"></i>
+                     Liked by <span class="badge bg-dark text-white rounded-circle ms-1">
                     <?php
                         $query1 = "select * from postlikes where postid='".$_GET['postid']."'";
                         $result1 = mysqli_query($conn,$query1);
