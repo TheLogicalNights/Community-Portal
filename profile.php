@@ -98,25 +98,27 @@
         <div class="jumbotron profile-jumbotron">
             <div class="container">
                 <div class="profile-section">
+                
                     <div class="profile-img" data-aos="zoom-out-right">
                         <img src="<?php echo $BASE_URL.ltrim($row['dppath'],"."); ?>" class="rounded-circle" width="250" height="250" alt="Profile picture">
                     </div>
+                    
                     <div class="profile-details" data-aos="zoom-out-left">
-                        <h1 class="mt-4"><?php echo $row['name']; ?>
+                        <h1 class="mt-4" style="font-family: 'Lora', serif;"><?php echo $row['name']; ?>
                         <?php
                             if(isset($_SESSION['username']))
                             {
                                 if($_SESSION['username']==$row['username'])
                                 {
                                     echo '<a href="'.$BASE_URL.'editprofile">
-                                        <i class="fa fa-pencil-square-o fa-xs ms-3" aria-hidden="true"></i>
+                                        <i class="fa fa-pencil-square-o fa-xs ms-3" style="color:brown;" aria-hidden="true"></i>
                                     </a>';
                                 }
                             }
                         ?>
                         </h1>
-                        <small><a href=""><?php echo $row['username']; ?></a></small>
-                        <p class="mt-2">
+                        <a href="" class="ms-2" style="font-family: 'RocknRoll One', sans-serif;font-size:15px;">- <?php echo $row['username']; ?></a>
+                        <p class="mt-2 shadow" style="border-left:3px solid orange !important;padding:7px 10px !important;border-bottom:3px solid orange;border-top:3px solid black;border-right:3px solid black;">
                         <?php echo $row['about']; ?>
                         </p>
                         <p>
@@ -135,8 +137,11 @@
                         <?php
                             }
                         ?>
-                        <a href="<?php echo $row['fblink']; ?>"> <span class="mdi mdi-facebook" style="color:black; font-size: 2em;"></span></a>
-                        <a href="<?php echo $row['instalink']; ?>"> <span class="mdi mdi-instagram" style="color:black; font-size: 2em;"></span></a>
+                        <div style="display:flex; justify-content:center; align-items:center;">
+                            <span style="font-size:1.2rem;font-weight:bold;">Social Media Links :</span>
+                            <a href="<?php echo $row['fblink']; ?>"> <span class="mdi mdi-facebook" style="color: #3b5998 ; font-size: 2em;"></span></a>
+                            <a href="<?php echo $row['instalink']; ?>"> <span class="mdi mdi-instagram" style="color: #e1306c ; font-size: 2em;"></span></a>
+                        </div>
                         <?php
                             if(isset($_SESSION['username']))
                             {
@@ -176,7 +181,7 @@
         <div class="jumbotron feed-body-section">
             
             <center>
-                <h1 style="padding: 30px 0;">Your Posts </h1>
+                <h1 style="padding: 30px 0;font-family: 'Concert One', cursive;">Your Posts </h1>
             </center>
 
             <div class="container feed-cards" >
