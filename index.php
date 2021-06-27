@@ -1,8 +1,8 @@
 <?php
     session_start();
-    include "./config/userexist.php";
-    include('header.php');
+    //include "./config/userexist.php";
     include "./config/config.php";
+    include('header.php');
 ?>    
     <main>        
         <div class="slick-go">
