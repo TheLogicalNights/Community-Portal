@@ -5,7 +5,6 @@
     //     header('Location: signin.php');
     // }
     include "./config/config.php";
-    include "./config/userexist.php";
     include('./database/db.php');
     include('header.php');
     if (isset($_GET['postid']))
