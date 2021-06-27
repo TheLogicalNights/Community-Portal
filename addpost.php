@@ -1,12 +1,11 @@
 <?php
     session_start();
     include "./config/config.php";
-    include "./config/userexist.php";
     if (!isset($_SESSION['status']))
     {
         header('Location: signin.php');
     }
-    include $BASE_URL."database/db.php" ;
+    include "./database/db.php";
     include('header.php'); 
     if(isset($_SESSION['postfailure']))
     {
