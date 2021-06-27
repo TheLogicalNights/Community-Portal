@@ -2,7 +2,6 @@
     session_start();
     include "./config/config.php";
     include ('./database/db.php');
-    include "./config/userexist.php";
     $sr = 0;
     $count = 0;
     $result = "";
