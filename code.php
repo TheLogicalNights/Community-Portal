@@ -7,7 +7,7 @@
     require './PHPMailer/class.phpmailer.php'; 
     require './PHPMailer/class.smtp.php';
     date_default_timezone_set("Asia/Kolkata");
-    $from = "admin@febinaevents.com";
+    $from = "swapniladhav560@gmail.com";
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //
     //          Mail Sender
@@ -16,16 +16,16 @@
     function smtpMailer($to,$from,$from_name,$subject,$body)
     {
         $mail = new PHPMailer();
-        $mail->SMTPDebug = 3;                                   // Enable verbose debug output
+        $mail->SMTPDebug = 1;                                   // Enable verbose debug output
         
         $mail->isSMTP();                                      // Set mailer to use SMTP
         $mail->SMTPSecure = 'tls';
-        $mail->Mailer = "mail";
-        $mail->Host = 'mail.febinaevents.com';              // Specify main and backup SMTP servers
+        $mail->Mailer = "smtp";
+        $mail->Host = 'smtp.gmail.com';              // Specify main and backup SMTP servers
         $mail->SMTPAuth = true;                               // Enable SMTP authentication
         $mail->Username = $from;                 // SMTP username
-        $mail->Password = '8446736267@123';                           // SMTP password
-        $mail->Port = 465;                                    // TCP port to connect to
+        $mail->Password = '8446736267';                           // SMTP password
+        $mail->Port = 587;                                    // TCP port to connect to
         
         $mail->setFrom($from,$from_name);
         $mail->addAddress($to);               // Name is optional
@@ -1116,9 +1116,9 @@
                     $to = $_POST['email'];
                     $_SESSION['email'] = $_POST['email'];
                     $subject = "VA key alert";
-                    $message = "<h2 style='color:black;font-size: 18px;'>Hello sir/mam welcome to <a href='https://febinaevents.com'>Febina Community</a></h2><p style='color:black;font-size: 18px;'>Your VA key for registration is : ".$newadharno."  Don't share this key with anyone else.</p><h2 style='color:red;'>Steps to follow to join us...</h2><br><ol style='color:blue;font-size: 18px;'><li>Visit <a href='https://febinaevents.com/signup'>signup link</a></li><li>Enter your email id and generate OTP</li><li>Check inbox or spam for the OTP and verify it.</li><li>After vefification of OTP you will redirect to next page.</li><li>fill all the personal details and in the section VA key fill above VA key.</li><li>Once you get registered visit <a href='https://febinaevents.com/signin'>signin</a> to SIGNIN</li><li>After successfull signin setup your profile and enjoy our community...!</li></ol>";
-                   $from = "fadmin@febinaevents.com";
-                $from_name = "Febina Jagriti Foundation";
+                    $message = "<h2 style='color:black;font-size: 18px;'>Hello sir/mam welcome to <a href='https://febinaevents.com'>Febina Community</a></h2><p style='color:black;font-size: 18px;'>Your VA key for registration is : ".$newadharno."  Don't share this key with anyone else.</p><h2 style='color:red;'>Steps to follow to join us...</h2><br><ol style='color:blue;font-size: 18px;'><li>Visit <a href='#'>signup link</a></li><li>Enter your email id and generate OTP</li><li>Check inbox or spam for the OTP and verify it.</li><li>After vefification of OTP you will redirect to next page.</li><li>fill all the personal details and in the section VA key fill above VA key.</li><li>Once you get registered visit <a href='#'>signin</a> to SIGNIN</li><li>After successfull signin setup your profile and enjoy our community...!</li></ol>";
+                   $from = "swapniladhav560@gmail.com";
+                $from_name = "Swapnil Ramesh Adhav";
                     
                     if(smtpMailer($to,$from,$from_name,$subject,$message))
                     {
