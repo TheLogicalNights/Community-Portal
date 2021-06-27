@@ -2,7 +2,6 @@
     session_start();
     include "./database/db.php";
     include "./config/config.php";
-    include "./config/userexist.php";
     $sr = 0;
     if(isset($_SESSION['username']))
     {
