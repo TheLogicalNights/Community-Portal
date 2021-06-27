@@ -1,7 +1,7 @@
 <?php
     session_start();
-    include('header.php');
     include "./config/config.php";
+    include('header.php');
     $uname = "";
     $pass = "";
     if(isset($_COOKIE['fpass']))
