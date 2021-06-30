@@ -1,7 +1,7 @@
 <?php
 
 date_default_timezone_set("Asia/Kolkata");
-
+include "./config/config.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,7 @@ date_default_timezone_set("Asia/Kolkata");
     <link rel="stylesheet" href="<?php echo $BASE_URL; ?>assets/css/style.css"> <!-- SLICK SLIDER  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" integrity="sha512-6lLUdeQ5uheMFbWm3CP271l14RsX1xtx+J5x2yeIDkkiBpeVTNhTqijME7GgRKKi6hCqovwCoBTlRBEC20M8Mg==" crossorigin="anonymous" />
-    <title>Febina Jagriti Foundation</title>
+    <title>MEMBERS PORTAL</title>
     <link rel="icon" href="<?php echo $BASE_URL; ?>assets/img/logo.png" sizes="32X32" type="image/png"> 
     <!-- AOS  -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -80,7 +80,7 @@ date_default_timezone_set("Asia/Kolkata");
     <nav class="navbar sticky navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="index">
-                <img src="<?php echo $BASE_URL; ?>assets/img/logo.png" alt="" width="60" height="60" class="d-inline-block align-top"> <span style="font-weight:800;">Febina Community</span> </a>
+                <img src="<?php echo $BASE_URL; ?>assets/img/logo.png" alt="" width="60" height="60" class="d-inline-block align-top me-3"> <span style="font-weight:800;"> MEMBERS PORTAL</span> </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

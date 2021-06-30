@@ -62,12 +62,14 @@
                         <img src="<?php echo $BASE_URL.ltrim($row['dppath'],"."); ?>" class="rounded-circle" width="250" height="250" alt="Profile picture">
                     </div>
                     <div class="profile-details" data-aos="zoom-out-left">
-                        <h1 class="mt-4"><?php echo $row['name']; ?>
+                    <h1 class="mt-4" style="font-family: 'Lora', serif;"><?php echo $row['name']; ?>
                         </h1>
-                        <small><a href=""><?php echo $row['username']; ?></a></small>
+                        <small><a href="" class="ms-2" style="font-family: 'RocknRoll One', sans-serif;font-size:15px;">- <?php echo $row['username']; ?></a></small>
                         <p>
                         <br>
+                        <p class="mt-2 shadow" style="border-left:3px solid orange !important;padding:7px 10px !important;border-bottom:3px solid orange;border-top:3px solid black;border-right:3px solid black;">
                         <?php echo $row['about']; ?>
+                        </p>
                         </p>
                         <a href="<?php echo $row['fblink']; ?>"> <span class="mdi mdi-facebook" style="color:black; font-size: 2em;"></span></a>
                         <a href="<?php echo $row['instalink']; ?>"> <span class="mdi mdi-instagram" style="color:black; font-size: 2em;"></span></a>
